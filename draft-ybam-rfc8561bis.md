@@ -19,17 +19,17 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Updates to YANG Data Model for Microwave Radio Link"
+abbrev: "rfc8561bis"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-ybam-rfc8561bis
 v: 3
-area: AREA
-workgroup: WG Working Group
+area: RTG
+workgroup: CCAMP
 keyword: Internet-Draft
 venue:
-  group: WG
+  group: CCAMP
   type: Working Group
   mail: WG@example.com
   arch: https://example.com/WG
@@ -38,9 +38,9 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: Scott Mansfield
+    organization: Ericsson
+    email: scott.mansfield@ericsson.com
 
 normative:
 
