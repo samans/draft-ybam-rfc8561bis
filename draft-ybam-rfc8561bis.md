@@ -2,8 +2,8 @@
 title: "Updates to YANG Data Model for Microwave Radio Link"
 abbrev: "rfc8561bis"
 category: info
-
 docname: draft-ybam-rfc8561bis-latest
+ipr:  trust200902
 v: 3
 area: RTG
 workgroup: CCAMP
