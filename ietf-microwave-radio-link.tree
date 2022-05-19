@@ -29,11 +29,20 @@ module: ietf-microwave-radio-link
 
   augment /if:interfaces/if:interface:
     +--rw id?                     string
-    +--rw mode                    identityref
+    +--rw (mode-option)
+    |  x--:(mode)
+    |  |  x--rw mode              identityref
+    |  +--:(rlt-mode)
+    |     +--rw rlt-mode
+    |        +--rw num-bonded-carriers        uint32
+    |        +--rw num-protecting-carriers    uint32
     +--rw carrier-terminations*   if:interface-ref
-    +--rw rlp-groups*             -> /radio-link-protection-groups/protection-group/name
-    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name {xpic}?
-    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name {mimo}?
+    +--rw rlp-groups*
+    |       -> /radio-link-protection-groups/protection-group/name
+    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name
+    |       {xpic}?
+    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
+    |       {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
        +--rw tdm-type           identityref
        +--rw tdm-connections    uint16
@@ -98,3 +107,4 @@ module: ietf-microwave-radio-link
        +--ro max-rltm?   power
        +--ro min-tltm?   power
        +--ro max-tltm?   power
+
