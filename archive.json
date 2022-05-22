@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-19T01:28:00.642947+00:00",
+  "timestamp": "2022-05-22T01:14:02.137034+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -95,7 +95,7 @@
       "labels": [],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2022-05-06T11:11:42Z",
+      "updatedAt": "2022-05-19T17:08:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -111,6 +111,20 @@
           "body": "The model for Microwave radio link supports aggregation/bonding of different carrier terminations that can be configured for different frequencies/bands, channel spacing, modulation, output power, etc, It also includes additional constructs to describe XPIC, MIMO and protection configurations used, if applicable.\r\nBased on the definition of BCA in ETSI GR mWT 015, my view is that the current YANG Data model for microwave radio link already supports BCA in full, providing a way to configure/represent the BCA concept \"enabling an efficient use of the spectrum through a smart aggregation, over a single physical link, of multiple frequency channels (in the same or different frequency bands)\". ",
           "createdAt": "2022-05-06T11:11:42Z",
           "updatedAt": "2022-05-06T11:11:42Z"
+        },
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "As a support for the discussion extension to the multi-NE BCA use cases, I upload the picture shown in the meeting. It is work in progress, by no means a modeling proposal (and may contain mistakes).\r\n\r\n![image](https://user-images.githubusercontent.com/58425168/169280895-4503eadd-53f1-492c-9129-e933ddb9d735.png)\r\n",
+          "createdAt": "2022-05-19T11:16:54Z",
+          "updatedAt": "2022-05-19T11:16:54Z"
+        },
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "**After some thought, there may be a solution like shown below:**\r\n\r\n![image](https://user-images.githubusercontent.com/58425168/169356960-1c2b524f-0441-4690-98b5-56d0fb39b7f7.png)\r\n\r\n- no BCA-group\r\n- use the hierarchy between RLT - CT and ETH interfaces to represent the connection to the external NE (see indent level in the picture above)\r\n- there are two options for managing the \"special nature\" of the RLT in NE3 (and NE4):\r\n   - the RLT is present, but the rule is that no ethernet service can be set up on it\r\n   - the RLT is not present",
+          "createdAt": "2022-05-19T17:08:00Z",
+          "updatedAt": "2022-05-19T17:08:00Z"
         }
       ]
     },
@@ -215,6 +229,25 @@
       "body": "o\tCalculated how?  Consumption per link?  Per carrier? Or Aggregate for the node?\r\no\tSuggestion: A system is modular, the modules are chassis that take power, so power consumption is measured at the granularity of the chassis.  Take this to the carriers to determine if this provides the power consumption information needed.\r\no\tAction: proposal for electrical power consumption model (and granularity of measurement)\r\no\tAction: Can carriers agree that chassis-level measurement is sufficient.\r\n",
       "createdAt": "2022-05-06T07:55:50Z",
       "updatedAt": "2022-05-06T07:55:50Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOHLTwws5KAMEP",
+      "title": "mode option",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/9",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "samans",
+        "italobusi"
+      ],
+      "labels": [],
+      "body": "Create a proposal to deprecate leaf mode in the augment to the interface model and the augment to microwave-topology and create a container that provides flexible assignment of number of bonded carriers and number of protecting carriers.\r\n\r\nexample:\r\n```\r\n   augment \"/if:interfaces/if:interface\" {\r\n      description \"Augment to provide example of new mode option for microwave radio link\";\r\n      container mode-option {\r\n         description \"Container that provides flexible definition of number of bonded carriers and protecting carriers\";\r\n         leaf num-bonded-carriers {\r\n            type uint32;\r\n            description \"Number of bonded carriers\";\r\n         }\r\n         leaf num-protecting-carriers {\r\n            type uint32;\r\n            description \"Number of protecting carriers\";\r\n         }\r\n      }\r\n   }\r\n```\r\n\r\n\r\nDetermine where to put the above code, in a types file wrapped in a grouping for example, then create a choice that deprecates mode and adds a uses that includes the new mode-option.",
+      "createdAt": "2022-05-19T10:27:05Z",
+      "updatedAt": "2022-05-19T10:31:52Z",
       "closedAt": null,
       "comments": []
     }
