@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-02T01:23:30.581850+00:00",
+  "timestamp": "2022-06-05T01:23:12.894430+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -237,7 +237,7 @@
       "id": "I_kwDOHLTwws5KAMEP",
       "title": "mode option",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -247,9 +247,17 @@
       "labels": [],
       "body": "Create a proposal to deprecate leaf mode in the augment to the interface model and the augment to microwave-topology and create a container that provides flexible assignment of number of bonded carriers and number of protecting carriers.\r\n\r\nexample:\r\n```\r\n   augment \"/if:interfaces/if:interface\" {\r\n      description \"Augment to provide example of new mode option for microwave radio link\";\r\n      container mode-option {\r\n         description \"Container that provides flexible definition of number of bonded carriers and protecting carriers\";\r\n         leaf num-bonded-carriers {\r\n            type uint32;\r\n            description \"Number of bonded carriers\";\r\n         }\r\n         leaf num-protecting-carriers {\r\n            type uint32;\r\n            description \"Number of protecting carriers\";\r\n         }\r\n      }\r\n   }\r\n```\r\n\r\n\r\nDetermine where to put the above code, in a types file wrapped in a grouping for example, then create a choice that deprecates mode and adds a uses that includes the new mode-option.",
       "createdAt": "2022-05-19T10:27:05Z",
-      "updatedAt": "2022-05-19T10:31:52Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-06-03T19:12:31Z",
+      "closedAt": "2022-06-03T19:10:57Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Discussed the following use of \"choice\" as described in [https://datatracker.ietf.org/doc/html/draft-ietf-netmod-yang-module-versioning-05#appendix-B.2](url).\r\n\r\nThe following works.  However, in the case of deprecating a leaf and replacing it with another leaf/container is considered a non-backward-compatible change by YANG versioning.  The pyang tooling points this out.  However, the implementation provides the ability to use old schema instance data with the new schema.\r\n\r\nThe following needs to be implemented in both ietf-microwave-radio-link and ietf-microwave-topology\r\n```\r\nmodule mw-option {\r\n  yang-version 1.1;\r\n  namespace \"urn:test:mw-option\";\r\n  prefix mwo;\r\n\r\n  organization\r\n    \"Test\";\r\n  contact\r\n    \"Test contact\";\r\n  description\r\n    \"Option Backward Compatible Change Example\";\r\n\r\n  revision 2022-05-26 {\r\n    description\r\n      \"Change the way rlt mode is defined\";\r\n    reference\r\n      \"mw-option test\";\r\n  }\r\n  revision 2022-04-01 {\r\n    description\r\n      \"Initial revision.\";\r\n    reference\r\n      \"mw-option test\";\r\n  }\r\n\r\n  identity rlt-mode {\r\n    status deprecated;\r\n    description\r\n      \"Radio Link Terminal mode\";\r\n  }\r\n\r\n  identity one-plus-zero {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  identity one-plus-one {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  identity two-plus-zero {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  container rlt-db {\r\n    description\r\n      \"Radio Link Terminal\";\r\n    choice mode-option {\r\n      mandatory true;\r\n      leaf mode {\r\n        status deprecated;\r\n        type identityref {\r\n          base rlt-mode;\r\n        }\r\n      }\r\n      container rlt-mode {\r\n        description\r\n          \"mode configuration\";\r\n        leaf num-bonded-carriers {\r\n          type uint32;\r\n          mandatory true;\r\n          description\r\n            \"Number of bonded carriers\";\r\n        }\r\n        leaf num-protecting-carriers {\r\n          type uint32;\r\n          mandatory true;\r\n          description\r\n            \"Number of protecting carriers\";\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n```",
+          "createdAt": "2022-06-03T19:10:57Z",
+          "updatedAt": "2022-06-03T19:12:31Z"
+        }
+      ]
     }
   ],
   "pulls": []
