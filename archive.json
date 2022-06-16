@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-14T01:42:39.245415+00:00",
+  "timestamp": "2022-06-16T01:19:32.155775+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -95,7 +95,7 @@
       "labels": [],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2022-05-19T17:08:00Z",
+      "updatedAt": "2022-06-15T06:37:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -125,6 +125,13 @@
           "body": "**After some thought, there may be a solution like shown below:**\r\n\r\n![image](https://user-images.githubusercontent.com/58425168/169356960-1c2b524f-0441-4690-98b5-56d0fb39b7f7.png)\r\n\r\n- no BCA-group\r\n- use the hierarchy between RLT - CT and ETH interfaces to represent the connection to the external NE (see indent level in the picture above)\r\n- there are two options for managing the \"special nature\" of the RLT in NE3 (and NE4):\r\n   - the RLT is present, but the rule is that no ethernet service can be set up on it\r\n   - the RLT is not present",
           "createdAt": "2022-05-19T17:08:00Z",
           "updatedAt": "2022-05-19T17:08:00Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi all,\r\nI've thought about an alternative way of handling BCA over multiple nodes. It only adds a new type of interface and leaves the existing parts untouched which means that there will be no issue with backward compatibility. The new interface type is also only used when there is a need to model multi-node configurations, which also would simplify the compatibility with the existing model/implementations. See attached slide pack.\r\nThe example is not making use of the new way of representing mode. So far, the new interface type only includes the relationships to other interfaces. If there is a need to add additional leafs, in additions to those available in the generic interface model, then that could be looked into as a second step\r\n[Key Concepts - Bonding & BCA.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/8906436/Key.Concepts.-.Bonding.BCA.pptx)\r\n.",
+          "createdAt": "2022-06-15T06:37:40Z",
+          "updatedAt": "2022-06-15T06:37:40Z"
         }
       ]
     },
