@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-07-07T01:39:30.212917+00:00",
+  "timestamp": "2022-07-10T01:46:05.440378+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -267,5 +267,32 @@
       ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 10,
+      "id": "PR_kwDOHLTwws47AVdN",
+      "title": "RLT mode",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/10",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Proposed changes to allow a more flexible RLT mode definition: fix #9",
+      "createdAt": "2022-07-07T09:48:07Z",
+      "updatedAt": "2022-07-07T09:48:07Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "1d9f52c43b53f8e75872124731fc53ef7d5d4d4b",
+      "headRepository": "italobusi/draft-ybam-rfc8561bis",
+      "headRefName": "bca",
+      "headRefOid": "cb3459feb9d39478882b9f250b5e13080dc68c0a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
