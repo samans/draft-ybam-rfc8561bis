@@ -98,13 +98,10 @@ module: ietf-microwave-radio-link
     |     +--ro profile-coding-modulation-id     identityref
     |     +--ro profile-channel-separation-id    string
     |     +--ro modulation-scheme?               uint8
-    |     +--ro code-rate?                       uint8
-    |     +--ro symbol-rate-reduction?           uint8
+    |     +--ro nominal-tx-capacity?             uint8
     |     +--ro support-as-fixed-modulation?     boolean
     |     +--ro max-tx-power?                    power
     |     +--ro min-tx-power?                    power
-    |     +--ro upshift-threshold?               power
-    |     +--ro downshift-threshold?             power
     |     +--ro lower-acm-profile-ptr
     |     |  +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
     |     |  +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
