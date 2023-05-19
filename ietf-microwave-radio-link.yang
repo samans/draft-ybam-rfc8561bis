@@ -55,6 +55,13 @@ module ietf-microwave-radio-link {
      This version of this YANG module is part of RFC 8561
      (); see the RFC itself for full legal notices.";
 
+  revision 2023-05-19 {
+    description
+      "git Issue #13 and #16 and discussion updates for acm-profile";
+    reference
+      "TBD";
+  }
+
   revision 2022-05-19 {
     description
       "Updated with proposal for BCA.";
@@ -693,6 +700,45 @@ module ietf-microwave-radio-link {
         description
           "Maximum coding-modulation possible to use.";
       }
+      list acm-profile-list {
+        key "profile-coding-modulation-id profile-channel-separation-id";
+
+        leaf profile-coding-modulation-id {
+          type identityref {
+            base mw-types:coding-modulation;
+          }
+        }
+        leaf profile-channel-separation-id {
+          type string;
+        }
+
+        uses acm-profile;
+
+        container lower-acm-profile-ptr {
+          leaf profile-coding-modulation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list/profile-coding-modulation-id";
+            }
+          }
+          leaf profile-channel-separation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id";
+            }
+          }
+        }
+        container upper-acm-profile-ptr {
+          leaf profile-coding-modulation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list/profile-coding-modulation-id";
+            }
+          }
+          leaf profile-channel-separation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id";
+            }
+          }
+        }
+      }
     }
     container error-performance-statistics {
       config false;
@@ -930,5 +976,23 @@ module ietf-microwave-radio-link {
            link terminal.";
       }
     }
+  }
+  grouping acm-profile {
+     description "acm-profile";
+     leaf modulation-scheme {
+        type uint8;
+     }
+     leaf nominal-tx-capacity {
+        type uint8;
+     }
+     leaf support-as-fixed-modulation {
+        type boolean;
+     }
+     leaf max-tx-power {
+        type power;
+     }
+     leaf min-tx-power {
+        type power;
+     }
   }
 }

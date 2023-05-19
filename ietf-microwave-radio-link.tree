@@ -37,12 +37,9 @@ module: ietf-microwave-radio-link
     |        +--rw num-bonded-carriers        uint32
     |        +--rw num-protecting-carriers    uint32
     +--rw carrier-terminations*   if:interface-ref
-    +--rw rlp-groups*
-    |       -> /radio-link-protection-groups/protection-group/name
-    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name
-    |       {xpic}?
-    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
-    |       {mimo}?
+    +--rw rlp-groups*             -> /radio-link-protection-groups/protection-group/name
+    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name {xpic}?
+    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
        +--rw tdm-type           identityref
        +--rw tdm-connections    uint16
@@ -97,6 +94,23 @@ module: ietf-microwave-radio-link
     |  +--ro maximum-available-power?   power
     |  +--ro available-min-acm?         identityref
     |  +--ro available-max-acm?         identityref
+    |  +--ro acm-profile-list* [profile-coding-modulation-id profile-channel-separation-id]
+    |     +--ro profile-coding-modulation-id     identityref
+    |     +--ro profile-channel-separation-id    string
+    |     +--ro modulation-scheme?               uint8
+    |     +--ro code-rate?                       uint8
+    |     +--ro symbol-rate-reduction?           uint8
+    |     +--ro support-as-fixed-modulation?     boolean
+    |     +--ro max-tx-power?                    power
+    |     +--ro min-tx-power?                    power
+    |     +--ro upshift-threshold?               power
+    |     +--ro downshift-threshold?             power
+    |     +--ro lower-acm-profile-ptr
+    |     |  +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
+    |     |  +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
+    |     +--ro upper-acm-profile-ptr
+    |        +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
+    |        +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
     +--ro error-performance-statistics
     |  +--ro bbe?   yang:counter32
     |  +--ro es?    yang:counter32
@@ -107,4 +121,3 @@ module: ietf-microwave-radio-link
        +--ro max-rltm?   power
        +--ro min-tltm?   power
        +--ro max-tltm?   power
-

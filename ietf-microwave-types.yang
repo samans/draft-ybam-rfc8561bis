@@ -31,6 +31,13 @@ module ietf-microwave-types {
      This version of this YANG module is part of RFC 8561; see
      the RFC itself for full legal notices.";
 
+  revision 2023-05-19 {
+    description
+      "Updated for 8PSK.";
+    reference
+      "TBD";
+  }
+
   revision 2022-05-19 {
     description
       "Updated with proposal for BCA.";
@@ -130,6 +137,12 @@ module ietf-microwave-types {
     base coding-modulation;
     description
       "QPSK coding and modulation scheme.";
+  }
+
+  identity cm-8-psk {
+    base coding-modulation;
+    description
+      "8PSK coding and modulation scheme.";
   }
 
   identity qam-4 {
