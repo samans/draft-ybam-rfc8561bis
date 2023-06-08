@@ -1,0 +1,23 @@
+Attendees: Scott, Jonas, Daniela, Danilo, Leo, Jean
+
+Agenda:
+Review issues list
+
+Issues closed:
+* Fade Margin: https://github.com/samans/draft-ybam-rfc8561bis/issues/3
+* BER/Outage Intensity: https://github.com/samans/draft-ybam-rfc8561bis/issues/4
+* Maximum Link/Carrier Utilization %: https://github.com/samans/draft-ybam-rfc8561bis/issues/6
+* Latency: https://github.com/samans/draft-ybam-rfc8561bis/issues/7
+* Electrical Power Consumption: https://github.com/samans/draft-ybam-rfc8561bis/issues/8
+The issues listed above were primarily closed because they were deemed out of scope for CCAMP or were considered to be objects that do not belong in the Radio Link model.
+
+Issue provisionally closed:
+* Band & Carrier Aggregation: https://github.com/samans/draft-ybam-rfc8561bis/issues/2 
+* Implementation in YANG is TBD
+
+Issues Open:
+* https://github.com/samans/draft-ybam-rfc8561bis/issues
+
+Next week review the updated YANG module (especially related to issue #2) and discuss how to get the text written in the I-D.
+
+Next Meeting is 15 June 2023
