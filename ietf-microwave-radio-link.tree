@@ -94,11 +94,11 @@ module: ietf-microwave-radio-link
     |  +--ro maximum-available-power?   power
     |  +--ro available-min-acm?         identityref
     |  +--ro available-max-acm?         identityref
-    |  +--ro acm-profile-list* [profile-coding-modulation-id profile-channel-separation-id]
+    |  +--ro acm-profile-list* [profile-channel-separation-id profile-coding-modulation-id]
+    |     +--ro profile-channel-separation-id    uint32
     |     +--ro profile-coding-modulation-id     identityref
-    |     +--ro profile-channel-separation-id    string
     |     +--ro modulation-scheme?               uint8
-    |     +--ro nominal-tx-capacity?             uint8
+    |     +--ro nominal-tx-capacity?             uint32
     |     +--ro support-as-fixed-modulation?     boolean
     |     +--ro max-tx-power?                    power
     |     +--ro min-tx-power?                    power
