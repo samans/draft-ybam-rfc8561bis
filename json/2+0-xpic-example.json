@@ -1,0 +1,57 @@
+"interface": [
+  {
+    "name": "RLT-A",
+    "description": "Radio Link Terminal A",
+    "type": "microwaveRadioLinkTerminal",
+    "id": "RLT-A",
+    "mode": "two-plus-zero",
+    "carrier-terminations": [
+      "RLT-A:CT-1",
+      "RLT-A:CT-2"
+    ],
+    "xpic-pairs": [
+      "RLT-A:CT-1",
+      "RLT-A:CT-2"
+    ],
+    "tdm-connections": [
+      "tdm-type": "E1",
+      "tdm-connections": "4"
+    ]
+  },
+
+  {
+    "name": "RLT-A:CT-1",
+    "description": "Carrier Termination 1",
+    "type": "microwaveCarrierTermination",
+    "carrier-id": "A",
+    "tx-enabled": true,
+    "tx-frequency": 10728000,
+    "duplex-distance": 644000,
+    "channel-separation": 28000,
+    "polarization": not-specified,
+    "rtpc": {
+      "maximum-nominal-power": 20
+    },
+    "single": {
+      "selected-cm": "qam-512"
+    }
+  },
+  {
+    "name": "RLT-A:CT-2",
+    "description": "Carrier Termination 2",
+    "type": "microwaveCarrierTermination",
+    "carrier-id": "B",
+    "tx-enabled": true,
+    "tx-oper-status": on,
+    "tx-frequency": 10618000,
+    "duplex-distance": 644000,
+    "channel-separation": 28000,
+    "polarization": not-specified,
+    "rtpc": {
+      "maximum-nominal-power": 20
+    },
+    "single": {
+      "selected-cm": "qam-512"
+    }
+  }
+]

@@ -31,25 +31,23 @@ module ietf-microwave-types {
      This version of this YANG module is part of RFC 8561; see
      the RFC itself for full legal notices.";
 
-  revision 2023-06-13 {
-    description
-      "Changed name for 8PSK.";
-    reference
-      "TBD";
-  }
+// RFC Ed.: replace XXXX with actual RFC number and remove
+// this note
 
-  revision 2023-05-19 {
-    description
-      "Updated for 8PSK.";
-    reference
-      "TBD";
-  }
+// replace the revision date with the module publication date
+// the format is (year-month-day)
 
-  revision 2022-05-19 {
+  revision 2023-10-06 {
     description
-      "Updated with proposal for BCA.";
+      "To add the summary of the changes in this revision:
+      
+      - Changed name for 8PSK.
+      
+      - Updated for 8PSK
+      
+      - Updated with proposal for BCA.";
     reference
-      "TBD";
+      "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
 
   revision 2019-06-19 {
