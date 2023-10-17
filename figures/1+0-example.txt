@@ -1,0 +1,19 @@
+                    /--------- Radio Link ---------\
+                     Near End              Far End
+
+              +---------------+           +---------------+
+              |  Radio Link   |           | Radio Link    |
+              |  Terminal A   |           | Terminal B    |
+              |               |           |               |
+              |               |           |               |
+              | +-----------+ |           | +-----------+ |
+              | |           | | Carrier A | |           | |
+              | |  Carrier  | |<--------->| |  Carrier  | |
+              | |Termination| |           | |Termination| |
+              | |     1     | |           | |     1     | |
+              | +-----------+ |           | +-----------+ |
+              |               |           |               |
+              |               |           |               |
+              +---------------+           +---------------+
+
+        \--- Microwave Node ---/          \--- Microwave Node ---/
