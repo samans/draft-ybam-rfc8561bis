@@ -4,12 +4,13 @@ coding: utf-8
 title: "A YANG Data Model for Microwave Radio Link"
 abbrev: "Microwave Radio Link YANG"
 category: std
-docname: draft-ybam-ccamp-rfc8561-bis-latest
+docname: draft-ybam-rfc8561bis-latest
 obsoletes: 8561
 ipr:  trust200902
 submissiontype: IETF
+consensus: true
 v: 3
-area: RTG
+area: Routing
 workgroup: CCAMP Working Group
 keyword: Internet-Draft
 venue:
@@ -19,6 +20,7 @@ venue:
   arch: https://example.com/WG
   github: USER/REPO
   latest: https://example.com/LATEST
+pi: [toc, sortrefs, symrefs]
 
 author:
  -
@@ -149,7 +151,6 @@ informative:
       organization: ITU-T
     date:  December 2002
     seriesinfo: ITU-T Recommendation G.826
-  MICROWAVE-RADIO-LINK: I-D.ahlberg-ccamp-microwave-radio-link
   ONF-model:
     title: Microwave Information Model
     author:
@@ -200,7 +201,7 @@ and established models to support the specified use cases and
 requirements, and based on that, it recommends how the gaps should be
 filled with the development of the new model.  According to the
 conclusion of the gap analysis, the structure of the data model is
-based on the structure defined in {{MICROWAVE-RADIO-LINK}}, and it
+based on the structure defined in {{!RFC8561}}, and it
 augments {{!RFC8343}} to align with the same structure for management of
 the packet interfaces.  More specifically, the model will include
 interface layering to manage the capacity provided by a radio link
@@ -213,7 +214,7 @@ module in order to make it also available for other interface types.
 
 The designed YANG data model uses established microwave equipment and
 radio standards, such as ETSI EN 302 217-2; the IETF Radio Link Model
-{{MICROWAVE-RADIO-LINK}}; and the ONF Microwave Model {{ONF-model}}, as
+{{!RFC8561}}; and the ONF Microwave Model {{ONF-model}}, as
 the basis for the definition of the detailed leafs/parameters, and it
 proposes new ones to cover identified gaps, which are analyzed in
 {{?RFC8432}}.
@@ -322,9 +323,9 @@ diagrams is defined in {{?RFC8340}}.
 ## YANG Tree
 
 ~~~~ ascii-art
-{::include ietf-microwave-radio-link.tree.txt}
+{::include ./trees/ietf-microwave-radio-link.tree}
 ~~~~
-{: artwork-name="ietf-microwave-radio-link.tree.txt"}
+{: artwork-name="ietf-microwave-radio-link.tree"}
 
 ## Explanation of the Microwave Data Model
 
