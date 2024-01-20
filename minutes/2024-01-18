@@ -1,0 +1,28 @@
+Attendees: Scott, Jonas, Danilo, Daniela, Italo, Jean, Alex, Leo
+
+Status of draft-ietf-ccamp-mw-topo:
+New draft has been completed and submitted to the datatracker.  Note sent to Acting AD.
+- https://datatracker.ietf.org/doc/draft-ietf-ccamp-mw-topo-yang/
+
+Radio Link Discussion:
+IEEE Interaction Issue #19: https://github.com/samans/draft-ybam-rfc8561bis/issues/19 has been closed, and the resolution documented in the comments on the issue.
+
+air-interface:alic-is-on #27 (https://github.com/samans/draft-ybam-rfc8561bis/issues/27) was closed because consensus indicated that this was a vendor specific feature and no standardization is indicated.
+
+air-interface:receiver-is-on #26 (https://github.com/samans/draft-ybam-rfc8561bis/issues/26) as long as the rx features added are optional, the meeting agreed.
+
+Next Meetings:
+- 25 Jan: Continue Issues discussion
+
+Useful links:
+datatracker status:
+- https://datatracker.ietf.org/doc/draft-ietf-ccamp-mw-topo-yang/
+- https://datatracker.ietf.org/doc/draft-ietf-ccamp-if-ref-topo-yang/
+- https://datatracker.ietf.org/doc/draft-ietf-ccamp-bwa-topo-yang/
+- https://datatracker.ietf.org/doc/draft-ybam-rfc8561bis/
+
+githubs:
+- https://github.com/samans/draft-ybam-rfc8561bis/tree/main
+- https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-mw-topo-yang
+- https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-if-ref-topo-yang
+- https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-bwa-topo-yang
