@@ -24,7 +24,7 @@ module ietf-interface-protection {
     "This is a module for the entities in
      a generic interface protection mechanism.
 
-     Copyright (c) 2019 IETF Trust and the persons identified as
+     Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -37,19 +37,23 @@ module ietf-interface-protection {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-// RFC Ed.: replace XXXX with actual RFC number and remove
-// this note
+  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // this note
+  // replace the revision date with the module publication date
+  // the format is (year-month-day)
 
-// replace the revision date with the module publication date
-// the format is (year-month-day)
-
+  revision 2024-03-03 {
+    description
+      "Updating reference to RFC XXXX. - pretty printing";
+    reference
+      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+  }
   revision 2020-10-06 {
     description
       "Updating reference to RFC XXXX.";
     reference
       "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
-
   revision 2019-06-19 {
     description
       "Initial revision.";
@@ -129,6 +133,64 @@ module ietf-interface-protection {
       description
         "List of protected groups of interfaces
          in a higher-layer interface.";
+      action manual-switch-working {
+        description
+          "A switch action initiated by an operator command.
+           It switches a normal traffic signal to the working
+           transport entity.";
+        reference
+          "ITU-T G.808.1";
+      }
+      action manual-switch-protection {
+        description
+          "A switch action initiated by an operator command.
+           It switches a normal traffic signal to the protection
+           transport entity.";
+        reference
+          "ITU-T G.808.1";
+      }
+      action forced-switch {
+        description
+          "A switch action initiated by an operator command.
+           It switches a normal traffic signal to the protection
+           transport entity and forces it to remain on that
+           entity even when criteria for switching back to
+           the original entity are fulfilled.";
+        reference
+          "ITU-T G.808.1";
+      }
+      action lockout-of-protection {
+        description
+          "A switch action temporarily disables access to the
+           protection transport entity for all signals.";
+        reference
+          "ITU-T G.808.1";
+      }
+      action freeze {
+        description
+          "A switch action temporarily prevents any switch action
+           to be taken and, as such, freezes the current state.
+           Until the freeze is cleared, additional near-end external
+           commands are rejected, and fault condition changes and
+           received Automatic Protection-Switching (APS) messages
+           are ignored.";
+        reference
+          "ITU-T G.808.1";
+      }
+      action exercise {
+        description
+          "A switch action to test if the APS communication is
+           operating correctly.  It is lower priority than any 'real'
+           switch request.";
+        reference
+          "ITU-T G.808.1";
+      }
+      action clear {
+        description
+          "An action clears all switch commands.";
+        reference
+          "ITU-T G.808.1";
+      }
       leaf name {
         type string;
         description
@@ -142,7 +204,6 @@ module ietf-interface-protection {
         description
           "The type of protection architecture used, e.g., one
            interface protecting one or several other interfaces.";
-
         reference
           "ITU-T G.808.1";
       }
@@ -216,64 +277,6 @@ module ietf-interface-protection {
         description
           "Status of the protection in a group of interfaces
            configured in a protection mode.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action manual-switch-working {
-        description
-          "A switch action initiated by an operator command.
-           It switches a normal traffic signal to the working
-           transport entity.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action manual-switch-protection {
-        description
-          "A switch action initiated by an operator command.
-           It switches a normal traffic signal to the protection
-           transport entity.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action forced-switch {
-        description
-          "A switch action initiated by an operator command.
-           It switches a normal traffic signal to the protection
-           transport entity and forces it to remain on that
-           entity even when criteria for switching back to
-           the original entity are fulfilled.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action lockout-of-protection {
-        description
-          "A switch action temporarily disables access to the
-           protection transport entity for all signals.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action freeze {
-        description
-          "A switch action temporarily prevents any switch action
-           to be taken and, as such, freezes the current state.
-           Until the freeze is cleared, additional near-end external
-           commands are rejected, and fault condition changes and
-           received Automatic Protection-Switching (APS) messages
-           are ignored.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action exercise {
-        description
-          "A switch action to test if the APS communication is
-           operating correctly.  It is lower priority than any 'real'
-           switch request.";
-        reference
-          "ITU-T G.808.1";
-      }
-      action clear {
-        description
-          "An action clears all switch commands.";
         reference
           "ITU-T G.808.1";
       }

@@ -1,54 +1,51 @@
-"interface": [
-  {
-    "name": "RLT-A",
-    "description": "Radio Link Terminal A",
-    "type": "microwaveRadioLinkTerminal",
-    "id": "RLT-A",
-    "mode": "two-plus-zero",
-    "carrier-terminations": [
-      "RLT-A:CT-1",
-      "RLT-A:CT-2"
-    ],
-    "tdm-connections": [
-      "tdm-type": "E1",
-      "tdm-connections": "4"
+{
+  "ietf-interfaces:interfaces": {
+    "interface": [
+      {
+        "name": "RLT-A",
+        "description": "Radio Link Terminal A",
+        "type": "iana-if-type:microwaveRadioLinkTerminal",
+        "ietf-microwave-radio-link:mode":
+          "ietf-microwave-types:two-plus-zero",
+        "ietf-microwave-radio-link:carrier-terminations": [
+          "RLT-A:CT-1",
+          "RLT-A:CT-2"
+        ]
+      },
+      {
+        "name": "RLT-A:CT-1",
+        "description": "Carrier Termination 1",
+        "type": "iana-if-type:microwaveCarrierTermination",
+        "ietf-microwave-radio-link:carrier-id": "A",
+        "ietf-microwave-radio-link:tx-enabled": true,
+        "ietf-microwave-radio-link:tx-frequency": 10728000,
+        "ietf-microwave-radio-link:duplex-distance": 644000,
+        "ietf-microwave-radio-link:channel-separation": 28000,
+        "ietf-microwave-radio-link:polarization": "not-specified",
+        "ietf-microwave-radio-link:rtpc": {
+          "maximum-nominal-power": "20.0"
+        },
+        "ietf-microwave-radio-link:single": {
+          "selected-cm": "ietf-microwave-types:qam-512"
+        }
+      },
+      {
+        "name": "RLT-A:CT-2",
+        "description": "Carrier Termination 2",
+        "type": "iana-if-type:microwaveCarrierTermination",
+        "ietf-microwave-radio-link:carrier-id": "B",
+        "ietf-microwave-radio-link:tx-enabled": true,
+        "ietf-microwave-radio-link:tx-frequency": 10618000,
+        "ietf-microwave-radio-link:duplex-distance": 644000,
+        "ietf-microwave-radio-link:channel-separation": 28000,
+        "ietf-microwave-radio-link:polarization": "not-specified",
+        "ietf-microwave-radio-link:rtpc": {
+          "maximum-nominal-power": "20.0"
+        },
+        "ietf-microwave-radio-link:single": {
+          "selected-cm": "ietf-microwave-types:qam-512"
+        }
+      }
     ]
-  },
-
-  {
-    "name": "RLT-A:CT-1",
-    "description": "Carrier Termination 1",
-    "type": "microwaveCarrierTermination",
-    "carrier-id": "A",
-    "tx-enabled": true,
-    "tx-frequency": 10728000,
-    "duplex-distance": 644000,
-    "channel-separation": 28000,
-    "polarization": not-specified,
-    "rtpc": {
-      "maximum-nominal-power": 20
-    },
-    "single": {
-      "selected-cm": "qam-512"
-    }
-  },
-
-  {
-    "name": "RLT-A:CT-2",
-    "description": "Carrier Termination 2",
-    "type": "microwaveCarrierTermination",
-    "carrier-id": "B",
-    "tx-enabled": true,
-    "tx-oper-status": on,
-    "tx-frequency": 10618000,
-    "duplex-distance": 644000,
-    "channel-separation": 28000,
-    "polarization": not-specified,
-    "rtpc": {
-      "maximum-nominal-power": 20
-    },
-    "single": {
-      "selected-cm": "qam-512"
-    }
   }
-]
+}

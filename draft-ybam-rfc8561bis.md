@@ -44,14 +44,6 @@ author:
     country: China
     email: amy.yemin@huawei.com
  -
-    fullname: Xi Li
-    organization: NEC Laboratories Europe
-    street: Kurfursten-Anlage 36
-    city: Heidelberg
-    code: 69115
-    country: Germany
-    email: Xi.Li@neclab.eu
- -
     fullname: Daniela Spreafico
     organization: Nokia - IT
     street: Via Energy Park, 14
@@ -60,20 +52,16 @@ author:
     country: Italy
     email: daniela.spreafico@nokia.com
  -
-    fullname: Marko Vaupotic
-    organization: Aviat Networks
-    street: Motnica 9
-    city: Trzin-Ljubljana
-    code: 1236
-    country: Slovenia
-    email: Marko.Vaupotic@Aviatnet.com
+    fullname: Danilo Pala
+    organization: SIAE
+    email: danilo.pala@saiemic.com
 
 contributor:
-  -
+ -
     fullname: Italo Busi
     organization: Huawei Technologies
     email: italo.busi@huawei.com
-  -
+ -
     fullname: Koji Kawada
     organization: NEC Corporation
     street: 1753, Shimonumabe Nakahara-ku
@@ -81,7 +69,7 @@ contributor:
     code: 211-8666
     country: Japan
     email: k-kawada@ah.jp.nec.com
-  -
+ -
     fullname: Carlos J. Bernardos
     organization: Universidad Carlos III de Madrid
     street: Av. Universidad, 30
@@ -89,16 +77,31 @@ contributor:
     code: 28911
     country: Spain
     email: cjbc@it.uc3m.es
+ -
+    fullname: Marko Vaupotic
+    organization: Aviat Networks
+    street: Motnica 9
+    city: Trzin-Ljubljana
+    code: 1236
+    country: Slovenia
+    email: Marko.Vaupotic@Aviatnet.com
+ -
+    fullname: Xi Li
+    organization: NEC Laboratories Europe
+    street: Kurfursten-Anlage 36
+    city: Heidelberg
+    code: 69115
+    country: Germany
+    email: Xi.Li@neclab.eu
 
 normative:
-  IANA-SMI:
-    title: >
-      Structure of Management Information (SMI) Numbers (MIB Module Registrations)
+informative:
+  IANA-if-type-module:
+    title: iana-if-type YANG Module
     author:
       organization: IANA
-    target: https://www.iana.org/assignments/smi-numbers
-
-informative:
+    date:  January 2023
+    target: http://www.iana.or/assignments/iana-if-type
   EN301129:
     title: >
       Transmission and Multiplexing (TM); Digital Radio
@@ -234,81 +237,43 @@ microwave/millimeter wave link.
 
 The following acronyms are used in this document:
 
-  ACM:
+  ACM Adaptive Coding Modulation
 
-  > Adaptive Coding Modulation
+  ATPC Automatic Transmitter Power Control
 
-  ATPC:
+  BBE Background Block Error
 
-  > Automatic Transmitter Power Control
+  BER Bit Error Ratio
 
-  BBE:
+  BPSK Binary Phase-Shift Keying
 
-  > Background Block Error
+  CM Coding Modulation
 
-  BER:
+  CT Carrier Termination
 
-  > Bit Error Ratio
+  ES Errored Seconds
 
-  BPSK:
+  IF Intermediate Frequency
 
-  > Binary Phase-Shift Keying
+  MIMO Multiple Input Multiple Output
 
-  CM:
+  RF Radio Frequency
 
-  > Coding Modulation
+  RLT Radio Link Terminal
 
-  CT:
+  QAM Quadrature Amplitude Modulation
 
-  > Carrier Termination
+  QPSK Quadrature Phase-Shift Keying
 
-  ES:
+  RTPC Remote Transmit Power Control
 
-  > Errored Seconds
+  SES Severely Errored Seconds
 
-  IF:
+  TDM Time-Division Multiplexing
 
-  > Intermediate Frequency
+  UAS Unavailable Seconds
 
-  MIMO:
-
-  > Multiple Input Multiple Output
-
-  RF:
-
-  > Radio Frequency
-
-  RLT:
-
-  > Radio Link Terminal
-
-  QAM:
-
-  > Quadrature Amplitude Modulation
-
-  QPSK:
-
-  > Quadrature Phase-Shift Keying
-
-  RTPC:
-
-  > Remote Transmit Power Control
-
-  SES:
-
-  > Severely Errored Seconds
-
-  TDM:
-
-  > Time-Division Multiplexing
-
-  UAS:
-
-  > Unavailable Seconds
-
-  XPIC:
-
-  > Cross Polarization Interference Cancellation
+  XPIC Cross Polarization Interference Cancellation
 
 ## Tree Structure
 
@@ -316,6 +281,17 @@ A simplified graphical representation of the data model is used in
 {{tree}} of this document.  The meaning of the symbols in these
 diagrams is defined in {{?RFC8340}}.
 
+## Prefixes in Data Node Names
+In this document, names of data nodes and other data model objects are prefixed using the standard prefix associated with the corresponding YANG imported modules, as shown in {{tab-prefix}}.
+
+| Prefix   | YANG Module               | Reference
+| mrl      | ietf-microwave-radio-link | This document
+| yang     | ietf-yang-types           | {{!RFC6991}}
+| ianaift  | iana-if-type              | {{IANA-if-type-module}}
+| if       | ietf-interfaces           | {{!RFC8343}}
+| ifprot   | ietf-interface-protection | This document
+| mw-types | ietf-microwave-types      | This document
+{: #tab-prefix title="Prefixes for imported YANG modules"}
 # Microwave Radio Link YANG Data Model
 
 {: #tree}
@@ -351,7 +327,7 @@ and {{!RFC7224}}, and it references {{TR102311}}, {{EN302217-1}},
 ~~~~ yang
 {::include ./ietf-microwave-radio-link.yang}
 ~~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-microwave-radio-link@2023-10-06.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-microwave-radio-link@2024-03-03.yang"}
 
 # Interface Protection YANG Data Model
 
@@ -366,7 +342,7 @@ This module imports modules from {{!RFC8343}}, and it references
 ~~~~ yang
 {::include ./ietf-interface-protection.yang}
 ~~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-interface-protection@2023-10-06.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-interface-protection@2024-03-03.yang"}
 
 # Microwave Types YANG Data Model
 
@@ -377,7 +353,7 @@ imported by other modules defined in the microwave area.
 ~~~~ yang
 {::include ./ietf-microwave-types.yang}
 ~~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-microwave-types@2023-10-06.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-microwave-types@2024-03-03.yang"}
 
 # Security Considerations
 
@@ -504,59 +480,7 @@ The security considerations of {{!RFC8343}} also apply to this document.
 
 # IANA Considerations
 
-For the following URIs in the "IETF XML Registry" {{!RFC3688}}, IANA has updated the reference field to refer to this document:
-
-~~~~
-      URI: urn:ietf:params:xml:ns:yang:ietf-microwave-radio-link
-      Registrant Contact: The IESG
-      XML: N/A; the requested URI is an XML namespace.
-
-      URI: urn:ietf:params:xml:ns:yang:ietf-interface-protection
-      Registrant Contact: The IESG
-      XML: N/A; the requested URI is an XML namespace.
-
-      URI: urn:ietf:params:xml:ns:yang:ietf-microwave-types
-      Registrant Contact: The IESG
-      XML: N/A; the requested URI is an XML namespace.
-~~~~
-
-This document also adds updated YANG modules to the "YANG Module Names"
-registry {{!RFC6020}}:
-
-~~~~
-    Name: ietf-microwave-radio-link
-    Maintained by IANA?: N
-    Namespace: urn:ietf:params:xml:ns:yang:ietf-microwave-radio-link
-    Prefix: mrl
-    Reference: RFC XXXX
-
-    Name: ietf-interface-protection
-    Maintained by IANA?: N
-    Namespace: urn:ietf:params:xml:ns:yang:ietf-interface-protection
-    Prefix: ifprot
-    Reference: RFC XXXX
-
-    Name: ietf-microwave-types
-    Maintained by IANA?: N
-    Namespace: urn:ietf:params:xml:ns:yang:ietf-microwave-types
-    Prefix: mw-types
-    Reference: RFC XXXX
-~~~~
-
-RFC Editor: Please replace XXXX with the RFC number assigned to this document.
-
-Open issue: check if there is a need to update the IANA registration the following ifTypes in "ifType definitions" under {{IANA-SMI}}:
-
-~~~~
-Decimal  Name                         Description
--------  ------------                 -------------------------------
-295      microwaveCarrierTermination  air interface of a single
-                                      microwave carrier
-
-296      microwaveRadioLinkTerminal   radio link interface for one
-                                      or several aggregated microwave
-                                      carriers
-~~~~
+No IANA Considerations in this update.
 
 --- back
 
@@ -593,7 +517,7 @@ artwork-name="1+0-example.txt"}
 {{fig-2-plus-0-example}} shows a 2+0 example.
 
 ~~~~ ascii-art
-{::include ./figures/1+0-example.txt}
+{::include ./figures/2+0-example.txt}
 ~~~~
 {: #fig-2-plus-0-example title="2+0 Example"
 artwork-name="2+0-example.txt"}
@@ -615,3 +539,7 @@ node.
 {::include ./json/2+0-xpic-example.json}
 ~~~~
 {: artwork-name="2+0-xpic-example.json"}
+~~~~
+
+# Acknowledgments
+   This document was prepared using the kramdown RFC tool written and maintained by Carsten Bormann. Thanks to Martin Thomson for the github integration of the kramdown RFC tool and for the aasvg tool which is used for the ascii to SVG conversion.

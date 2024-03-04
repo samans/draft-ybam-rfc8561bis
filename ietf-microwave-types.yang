@@ -18,7 +18,7 @@ module ietf-microwave-types {
     "This module contains a collection of YANG data types
      considered generally useful for microwave interfaces.
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
+     Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -31,25 +31,29 @@ module ietf-microwave-types {
      This version of this YANG module is part of RFC 8561; see
      the RFC itself for full legal notices.";
 
-// RFC Ed.: replace XXXX with actual RFC number and remove
-// this note
+  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // this note
+  // replace the revision date with the module publication date
+  // the format is (year-month-day)
 
-// replace the revision date with the module publication date
-// the format is (year-month-day)
-
-  revision 2023-10-06 {
+  revision 2024-03-03 {
     description
-      "To add the summary of the changes in this revision:
-      
-      - Changed name for 8PSK.
-      
-      - Updated for 8PSK
-      
-      - Updated with proposal for BCA.";
+      "pretty printing";
     reference
       "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
+  revision 2023-10-06 {
+    description
+      "To add the summary of the changes in this revision:
 
+       - Changed name for 8PSK.
+
+       - Updated for 8PSK
+
+       - Updated with proposal for BCA.";
+    reference
+      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+  }
   revision 2019-06-19 {
     description
       "Initial revision.";
@@ -360,8 +364,8 @@ module ietf-microwave-types {
   grouping rlt-mode {
     description
       "This grouping provides a flexible definition of number
-      of bonded carriers and protecting carriers of a radio
-      link.";
+       of bonded carriers and protecting carriers of a radio
+       link.";
     leaf num-bonded-carriers {
       type uint32;
       mandatory true;

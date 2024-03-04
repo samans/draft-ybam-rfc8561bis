@@ -42,7 +42,7 @@ module ietf-microwave-radio-link {
     "This is a module for the entities in
      a generic microwave system.
 
-     Copyright (c) 2022 IETF Trust and the persons identified as
+     Copyright (c) 2024 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -52,28 +52,32 @@ module ietf-microwave-radio-link {
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC XXXX; 
+     This version of this YANG module is part of RFC XXXX;
      see the RFC itself for full legal notices.";
 
-// RFC Ed.: replace XXXX with actual RFC number and remove
-// this note
+  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // this note
+  // replace the revision date with the module publication date
+  // the format is (year-month-day)
 
-// replace the revision date with the module publication date
-// the format is (year-month-day)
-
-  revision 2023-10-06 {
+  revision 2024-03-03 {
     description
-      "To add the summary of the changes in this revision:
-      
-      - more updates related to git Issue #13 and #16.
-      
-      - git Issue #13 and #16 and discussion updates for acm-profile
-      
-      - Updated with proposal for BCA.";
+      "pretty printing";
     reference
       "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
+  revision 2023-10-06 {
+    description
+      "To add the summary of the changes in this revision:
 
+       - more updates related to git Issue #13 and #16.
+
+       - git Issue #13 and #16 and discussion updates for acm-profile
+
+       - Updated with proposal for BCA.";
+    reference
+      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+  }
   revision 2019-06-19 {
     description
       "Initial revision.";
@@ -122,36 +126,36 @@ module ietf-microwave-radio-link {
       "acm-profile";
     leaf modulation-scheme {
       type uint8;
-    description
-      "It is the logarithm base two of the number of points in the
-    transmitted constellation.  E.G.:  value would be 2 for 4QAM,
-    10 fo 1024QAM, and 12 for 4096QAM.";
+      description
+        "It is the logarithm base two of the number of points in the
+         transmitted constellation.  E.G.:  value would be 2 for
+         4QAM, 10 fo 1024QAM, and 12 for 4096QAM.";
     }
     leaf nominal-tx-capacity {
       type uint32;
-    description
-      "The nominal radio link capacity associated to this 
-      acm-profile.";
+      description
+        "The nominal radio link capacity associated to this
+         acm-profile.";
     }
     leaf support-as-fixed-modulation {
       type boolean;
-    description
-      "True when the profile can be used in single 
-      coding-modulation-mode.";
+      description
+        "True when the profile can be used in single
+         coding-modulation-mode.";
     }
     leaf max-tx-power {
       type power;
-    description
-      "The maximum transmitted power when the carrier termination is
-      operating this acm-profile.  Used to configure transmitted 
-      power.";
+      description
+        "The maximum transmitted power when the carrier termination
+         is operating this acm-profile.  Used to configure
+         transmitted power.";
     }
     leaf min-tx-power {
       type power;
-    description
-      "The minimum transmitted power when the carrier termination is
-      operating this acm-profile.  Used to configure transmitted 
-      power.";
+      description
+        "The minimum transmitted power when the carrier termination
+         is operating this acm-profile.  Used to configure
+         transmitted power.";
     }
   }
 
@@ -741,124 +745,121 @@ module ietf-microwave-radio-link {
           "Maximum coding-modulation possible to use.";
       }
       list acm-profile-list {
-        key "profile-channel-separation-id " +
-            "profile-coding-modulation-id";
+        key "profile-channel-separation-id "
+          + "profile-coding-modulation-id";
         description
           "A list of acm-profile.
            Each acm-profile is identified by a channel-separation and
-       coding-modulation values as supported by the carrier
-       termination and defines the parameter's values of each
-       transmission acm profile.
+           coding-modulation values as supported by the carrier
+           termination and defines the parameter's values of each
+           transmission acm profile.
            Basically, the list contains all acm profiles supported by
-       the device.  Profiles are organized into profile chains for
-       each different channel separation value available.  The
-       chains are formed by the lower-acm-profile-ptr and
-       upper-acm-profile-ptr pointers.  The sequence in the list
-       reflects the sequence of profiles that are operated by the
-       device according to the fading conditions, from the clear sky
-       down to the persistent rain, and vice versa. The
-       channel-separation and selected-cm configuration parameters
-       (or the selected-min-acm/selected-max-acm pair) must address
-       one of the profiles in the list.";
-       
+           the device.  Profiles are organized into profile chains
+           for each different channel separation value available. The
+           chains are formed by the lower-acm-profile-ptr and
+           upper-acm-profile-ptr pointers.  The sequence in the list
+           reflects the sequence of profiles that are operated by the
+           device according to the fading conditions, from the clear
+           sky down to the persistent rain, and vice versa. The
+           channel-separation and selected-cm configuration
+           parameters (or the selected-min-acm/selected-max-acm
+           pair) must address one of the profiles in the list.";
         leaf profile-channel-separation-id {
           type uint32;
-      description
-        "Uniquely identifies the acm profile (together with
-      'profile-coding-modulation-id').  It could be used to allow
-      the configuration of the channel-separation value.";
+          description
+            "Uniquely identifies the acm profile (together with
+             'profile-coding-modulation-id').  It could be used to
+             allow the configuration of the channel-separation
+             value.";
         }
         leaf profile-coding-modulation-id {
           type identityref {
             base mw-types:coding-modulation;
           }
-      description
+          description
             "Uniquely identifies the acm profile (together with
-      'profile-channel-separation-id').  It could be used to allow
-      the configuration of the selected-cm (single mode) or
-      selected-min-acm/selected-max-acm (adaptive mode).";
+             'profile-channel-separation-id').  It could be used to
+             allow the configuration of the selected-cm (single
+             mode) or selected-min-acm/selected-max-acm (adaptive
+             mode).";
         }
-    
         uses acm-profile;
-    
         container lower-acm-profile-ptr {
-      description
-        "Together with the upper-acm-profile-ptr parameters it
-      creates a chain of acm profiles related to a specific
-      channel separation value.  Specifically it references the
-      next lower acm-profile, while upper-acm-profile-ptr
-      references the next higher profile.  The lowest profile in
-      the chain, shall not instantiate this container.  The
-      acm-profile-list can contain multiple chains related to
-      different channel separation values supported by the
-      device.";
-
+          description
+            "Together with the upper-acm-profile-ptr parameters it
+             creates a chain of acm profiles related to a specific
+             channel separation value.  Specifically it references
+             the next lower acm-profile, while upper-acm-profile-ptr
+             references the next higher profile.  The lowest profile
+             in the chain, shall not instantiate this container.  The
+             acm-profile-list can contain multiple chains related to
+             different channel separation values supported by the
+             device.";
           leaf profile-coding-modulation-id-ref {
             type leafref {
               path "../../../acm-profile-list"
                  + "/profile-coding-modulation-id";
             }
-        description
+            description
               "A reference to an acm-profile to give an order in
-        acm-profile-list.  This is the reference to the
-        'profile-coding-modulation-id' key of the next lower
-        acm-profile in the list respect to the current one.";
+               acm-profile-list.  This is the reference to the
+               'profile-coding-modulation-id' key of the next lower
+               acm-profile in the list respect to the current one.";
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path "../../.."
-                 + "/acm-profile-list[profile-coding-modulation-id="
-                 + "current()/../profile-coding-modulation-id-ref]"
-                 + "/profile-channel-separation-id";
+              path
+                "../../.."
+              + "/acm-profile-list[profile-coding-modulation-id="
+              + "current()/../profile-coding-modulation-id-ref]"
+              + "/profile-channel-separation-id";
             }
-        description
+            description
               "A reference to an acm-profile to give an order in
-        acm-profile-list.  This is the reference to the
-        'profile-channel-separation-id' key of the next lower
-        acm-profile in the list respect to the current one.";
+               acm-profile-list.  This is the reference to the
+               'profile-channel-separation-id' key of the next lower
+               acm-profile in the list respect to the current one.";
           }
         }
-    
         container upper-acm-profile-ptr {
-      description
-        "Together with the lower-acm-profile-ptr parameters it
-      creates a chain of acm profiles related to a specific
-      channel separation value.  Specifically it references the
-      next higher acm-profile, while lower-acm-profile-ptr
-      references the next lower profile.  The highest profile in
-      the chain, shall not instantiate this container.  The
-      acm-profile-list can contain multiple chains related to
-      different channel separation values supported by the
-      device.";
-      
+          description
+            "Together with the lower-acm-profile-ptr parameters it
+             creates a chain of acm profiles related to a specific
+             channel separation value.  Specifically it references
+             the next higher acm-profile, while lower-acm-profile-ptr
+             references the next lower profile.  The highest profile
+             in the chain, shall not instantiate this container.  The
+             acm-profile-list can contain multiple chains related to
+             different channel separation values supported by the
+             device.";
           leaf profile-coding-modulation-id-ref {
             type leafref {
               path "../../../acm-profile-list"
                  + "/profile-coding-modulation-id";
             }
-        description
+            description
               "A reference to an acm-profile to give an order in
-        acm-profile-list.  This is the reference to the
-        'profile-coding-modulation-id' key of the next higher
-        acm-profile in the list respect to the current one.";
+               acm-profile-list.  This is the reference to the
+               'profile-coding-modulation-id' key of the next higher
+               acm-profile in the list respect to the current one.";
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path "../../.."
-                 + "/acm-profile-list[profile-coding-modulation-id="
-                 + "current()/../profile-coding-modulation-id-ref]"
-                 + "/profile-channel-separation-id";
+              path
+                "../../.."
+              + "/acm-profile-list[profile-coding-modulation-id="
+              + "current()/../profile-coding-modulation-id-ref]"
+              + "/profile-channel-separation-id";
             }
-        description
-          "A reference to an acm-profile to give an order in
-          acm-profile-list.  This is the reference to the
-          'profile-channel-separation-id' key of the next higher
-          acm-profile in the list respect to the current one.";
+            description
+              "A reference to an acm-profile to give an order in
+               acm-profile-list.  This is the reference to the
+               'profile-channel-separation-id' key of the next higher
+               acm-profile in the list respect to the current one.";
           }
         }
       }
     }
-  
     container error-performance-statistics {
       config false;
       description
@@ -917,7 +918,6 @@ module ietf-microwave-radio-link {
           "ITU-T G.826";
       }
     }
-  
     container radio-performance-statistics {
       config false;
       description
@@ -1056,7 +1056,6 @@ module ietf-microwave-radio-link {
       }
     }
   }
-  
   container mimo-groups {
     if-feature "mimo";
     description
