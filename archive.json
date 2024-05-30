@@ -1,0 +1,359 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-09-11T01:47:45.046298+00:00",
+  "repo": "samans/draft-ybam-rfc8561bis",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOHLTwws5ILBn1",
+      "title": "Make a recap of previous requirements/discussions about an updated version of RFC",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/1",
+      "state": "CLOSED",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "JonasAhl"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-04-21T10:43:21Z",
+      "updatedAt": "2022-05-12T10:06:41Z",
+      "closedAt": "2022-05-12T10:06:41Z",
+      "comments": [
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Assigned to Jonas",
+          "createdAt": "2022-04-21T10:46:49Z",
+          "updatedAt": "2022-04-21T10:46:49Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have sent a mail with the mail conversations about this topic from March to July 2021.",
+          "createdAt": "2022-04-25T07:18:33Z",
+          "updatedAt": "2022-04-25T07:18:33Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOHLTwws5ILDHJ",
+      "title": "Band & Carrier Aggregation",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/2",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
+      "createdAt": "2022-04-21T10:49:05Z",
+      "updatedAt": "2022-06-15T06:37:40Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "### Proposal discussed today\r\n\r\n```\r\nmodule: ietf-microwave-radio-link\r\n  +--rw BCA-groups {BCA}?\r\n     +--rw BCA-group* [name]\r\n       +--rw name                string\r\n       +--rw enabled?            boolean\r\n       +--rw members*            if:interface-ref\r\n       +--rw main-member?        if:interface-ref\r\naugment /if:interfaces/if:interface:\r\n  +--rw BCA-groups*              -> /BCA-groups/BCA-group/name\r\n           {BCA}?\r\n```\r\n\r\n1. This representation misses some details present in the YANG\r\n2. The main member is set optional, it\u2019s commonly used in load balancing groups \u2013 TBD\r\n3. This definition is agnostic about the physical composition of the MW Node by one or more NEs and their interconnection (if any)\r\n\r\n### Model reference\r\n![image](https://user-images.githubusercontent.com/58425168/166950861-6b577606-2c4d-46fa-acca-6133e6553fde.png)\r\n\r\n### ETSI definition of BCA\r\n[https://www.etsi.org/deliver/etsi_gr/mWT/001_099/015/01.01.01_60/gr_mwt015v010101p.pdf](url)",
+          "createdAt": "2022-05-05T14:54:26Z",
+          "updatedAt": "2022-05-05T14:54:26Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The model for Microwave radio link supports aggregation/bonding of different carrier terminations that can be configured for different frequencies/bands, channel spacing, modulation, output power, etc, It also includes additional constructs to describe XPIC, MIMO and protection configurations used, if applicable.\r\nBased on the definition of BCA in ETSI GR mWT 015, my view is that the current YANG Data model for microwave radio link already supports BCA in full, providing a way to configure/represent the BCA concept \"enabling an efficient use of the spectrum through a smart aggregation, over a single physical link, of multiple frequency channels (in the same or different frequency bands)\". ",
+          "createdAt": "2022-05-06T11:11:42Z",
+          "updatedAt": "2022-05-06T11:11:42Z"
+        },
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "As a support for the discussion extension to the multi-NE BCA use cases, I upload the picture shown in the meeting. It is work in progress, by no means a modeling proposal (and may contain mistakes).\r\n\r\n![image](https://user-images.githubusercontent.com/58425168/169280895-4503eadd-53f1-492c-9129-e933ddb9d735.png)\r\n",
+          "createdAt": "2022-05-19T11:16:54Z",
+          "updatedAt": "2022-05-19T11:16:54Z"
+        },
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "**After some thought, there may be a solution like shown below:**\r\n\r\n![image](https://user-images.githubusercontent.com/58425168/169356960-1c2b524f-0441-4690-98b5-56d0fb39b7f7.png)\r\n\r\n- no BCA-group\r\n- use the hierarchy between RLT - CT and ETH interfaces to represent the connection to the external NE (see indent level in the picture above)\r\n- there are two options for managing the \"special nature\" of the RLT in NE3 (and NE4):\r\n   - the RLT is present, but the rule is that no ethernet service can be set up on it\r\n   - the RLT is not present",
+          "createdAt": "2022-05-19T17:08:00Z",
+          "updatedAt": "2022-05-19T17:08:00Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi all,\r\nI've thought about an alternative way of handling BCA over multiple nodes. It only adds a new type of interface and leaves the existing parts untouched which means that there will be no issue with backward compatibility. The new interface type is also only used when there is a need to model multi-node configurations, which also would simplify the compatibility with the existing model/implementations. See attached slide pack.\r\nThe example is not making use of the new way of representing mode. So far, the new interface type only includes the relationships to other interfaces. If there is a need to add additional leafs, in additions to those available in the generic interface model, then that could be looked into as a second step\r\n[Key Concepts - Bonding & BCA.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/8906436/Key.Concepts.-.Bonding.BCA.pptx)\r\n.",
+          "createdAt": "2022-06-15T06:37:40Z",
+          "updatedAt": "2022-06-15T06:37:40Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOHLTwws5JKqhB",
+      "title": "Fade Margin",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/3",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "With adaptive modulation enabled, which modulation does this refer to?\r\nIt\u2019s a planning target\r\no\tat least for the lowest modulation allowed on the link (the other margins can be calculated by the controller)\r\no\twhat about the threshold degradation due to interference?\r\n        \uf0a7\tTo be managed between planning tool / optimization tool / SDN Controller, not in the equipment\r\n",
+      "createdAt": "2022-05-06T07:48:15Z",
+      "updatedAt": "2022-05-06T07:48:15Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOHLTwws5JKq4V",
+      "title": "BER, Errored block - EB, Mean Time between outages, Outage intesity",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/4",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "based on counters implemented within the equipment \r\n- See document about error performance evolution from ETSI ISG mWT [[https://www.etsi.org/committee/1426-mwt](https://protect2.fireeye.com/v1/url?k=0173bcb5-5ee885b3-0173fc2e-86ee86bd5107-f62c8968fe2cf6da&q=1&e=fb4b4542-3279-4095-8a0f-50aaa9f80c55&u=https%3A%2F%2Fwww.etsi.org%2Fcommittee%2F1426-mwt)] (WI 19)\r\n- To be discussed more in a later session",
+      "createdAt": "2022-05-06T07:50:06Z",
+      "updatedAt": "2022-05-06T07:50:06Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOHLTwws5JKrQi",
+      "title": "Current Alarm Specific Problem, Historical Alarm Specific Problem",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/5",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "o\tRefer to the existing alarm management module?\r\no\tWhat\u2019s the \u201cSpecific Problem\u201d?\r\n        \uf0a7 exists in the IETF alarm modeling [to be double checked by both sides (see bullets below)]\r\no\tComment: information abundance is going to be important to feed future AI algorithms\r\no\tSpecific problems.\r\n        o\tThis parameter, when present, identifies further refinements to the Probable cause of the alarm. This parameter qualifies the chosen Probable cause and may be used by the managed object class definer to specify a set of identifiers for use in managed object classes.\u201d according to ITU (X.733-1992 X.733 : Information technology - Open Systems Interconnection - Systems Management: Alarm reporting function (itu.int))\r\no\tRFC8632 is the alarms IETF RFC https://datatracker.ietf.org/doc/html/rfc8632\r\no\tAction: To Everyone, review RFC 8632 against the definition in X.733 and provide input of information that needs to be considered for probable cause.\r\n",
+      "createdAt": "2022-05-06T07:51:58Z",
+      "updatedAt": "2022-05-06T07:52:32Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi all,\r\nas Action Point for vendors, my side I checked on RFC8632 the concept of alarm \u2018specific problem\u2019 as defined on ITU X.733 .\r\nI found it using the following leaf attribute of \u2018alarm-list\u2019 to identify an alarm instance (added to \u2018resource\u2019 and 'alarm-type-id')\r\n\r\nleaf alarm-type-qualifier {\r\n        type alarm-type-qualifier;\r\n\r\n        description\r\n          \"This leaf is used when the 'alarm-type-id' leaf cannot\r\n           uniquely identify the alarm type.  Normally, this is not the\r\n           case, and this leaf is the empty string.\u201d\r\n\r\ntypedef alarm-type-qualifier {\r\n      type string;\r\n      description\r\n        \"If an alarm type cannot be fully specified at design time by\r\n         'alarm-type-id', this string qualifier is used in addition to\r\n         fully define a unique alarm type.\r\n\r\nTake into account that 'alarm-type-id' corresponds to the Probable cause of the alarm\r\n\r\nBR, Daniela",
+          "createdAt": "2022-05-06T07:52:31Z",
+          "updatedAt": "2022-05-06T07:52:31Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOHLTwws5JKr1P",
+      "title": "Maximum Link/Carrier Utilization %",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/6",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "o\toriginal intent was to support the power consumption optimization, based on actual link traffic load\r\n        \uf0a7\tPer carrier and per link (bundled)\r\no\tInterval?\r\n        \uf0a7\tAction:  everyone to consider and bring proposals/thoughts on measurement interval granularity\r\n        \uf0a7\tcurrent 15 minute integration time is too long for advanced applications\r\n                \u2022\tFor non-continuous transmission (packet transmission) the integration time should not be too short\r\n                        o\tIntegration time could be much shorter than 15 minutes, reporting max and min could be on a 15 minutes interval\r\no\tPercentage relative to what?\r\n        \uf0a7\tmaximum and minimum modulation (static)\r\n        \uf0a7\tAction: everyone to consider and bring contributions that provide clarity on the interaction between electrical power consumption and traffic\r\n",
+      "createdAt": "2022-05-06T07:54:46Z",
+      "updatedAt": "2022-05-06T07:54:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOHLTwws5JKr7n",
+      "title": "Latency",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/7",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "o\tLatency of what?  Link? Service? Defined on Ethernet traffic, any requirements on interval for measurement of latency?\r\no\tRequirements related to supporting configuration of L2 or L3 service based on latency, availability, and capacity.\r\no\tDifferentiate between what needs to be stored/retrieved/measured from the equipment, or supported by an end-to-end protocol like TWAMP.\r\no\tEthernet OAM IEEE CFM (current CFM YANG found here: yang/standard/ieee/published/802.1 at master \u00b7 YangModels/yang \u00b7 GitHub), ITU-T work on G.8052.1 (G.8052.1 : Operation, administration, maintenance (OAM) management information and data models for the Ethernet-transport network element (itu.int))\r\no\tApplicability of current tools to the given requirements based on new features like slicing.\r\no\tAction: to the equipment vendors to propose what support is available on the equipment (capabilities may be beyond the microwave modeling work, more related to system-level OAM measurement/management).\r\no\tAction: identify the YANG models that identify the latency measurement\r\n",
+      "createdAt": "2022-05-06T07:55:14Z",
+      "updatedAt": "2022-05-06T07:55:14Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOHLTwws5JKsFj",
+      "title": "Electrical Power Consumption",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/8",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "o\tCalculated how?  Consumption per link?  Per carrier? Or Aggregate for the node?\r\no\tSuggestion: A system is modular, the modules are chassis that take power, so power consumption is measured at the granularity of the chassis.  Take this to the carriers to determine if this provides the power consumption information needed.\r\no\tAction: proposal for electrical power consumption model (and granularity of measurement)\r\no\tAction: Can carriers agree that chassis-level measurement is sufficient.\r\n",
+      "createdAt": "2022-05-06T07:55:50Z",
+      "updatedAt": "2022-05-06T07:55:50Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOHLTwws5KAMEP",
+      "title": "mode option",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/9",
+      "state": "CLOSED",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "samans",
+        "italobusi"
+      ],
+      "labels": [],
+      "body": "Create a proposal to deprecate leaf mode in the augment to the interface model and the augment to microwave-topology and create a container that provides flexible assignment of number of bonded carriers and number of protecting carriers.\r\n\r\nexample:\r\n```\r\n   augment \"/if:interfaces/if:interface\" {\r\n      description \"Augment to provide example of new mode option for microwave radio link\";\r\n      container mode-option {\r\n         description \"Container that provides flexible definition of number of bonded carriers and protecting carriers\";\r\n         leaf num-bonded-carriers {\r\n            type uint32;\r\n            description \"Number of bonded carriers\";\r\n         }\r\n         leaf num-protecting-carriers {\r\n            type uint32;\r\n            description \"Number of protecting carriers\";\r\n         }\r\n      }\r\n   }\r\n```\r\n\r\n\r\nDetermine where to put the above code, in a types file wrapped in a grouping for example, then create a choice that deprecates mode and adds a uses that includes the new mode-option.",
+      "createdAt": "2022-05-19T10:27:05Z",
+      "updatedAt": "2022-06-03T19:12:31Z",
+      "closedAt": "2022-06-03T19:10:57Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Discussed the following use of \"choice\" as described in [https://datatracker.ietf.org/doc/html/draft-ietf-netmod-yang-module-versioning-05#appendix-B.2](url).\r\n\r\nThe following works.  However, in the case of deprecating a leaf and replacing it with another leaf/container is considered a non-backward-compatible change by YANG versioning.  The pyang tooling points this out.  However, the implementation provides the ability to use old schema instance data with the new schema.\r\n\r\nThe following needs to be implemented in both ietf-microwave-radio-link and ietf-microwave-topology\r\n```\r\nmodule mw-option {\r\n  yang-version 1.1;\r\n  namespace \"urn:test:mw-option\";\r\n  prefix mwo;\r\n\r\n  organization\r\n    \"Test\";\r\n  contact\r\n    \"Test contact\";\r\n  description\r\n    \"Option Backward Compatible Change Example\";\r\n\r\n  revision 2022-05-26 {\r\n    description\r\n      \"Change the way rlt mode is defined\";\r\n    reference\r\n      \"mw-option test\";\r\n  }\r\n  revision 2022-04-01 {\r\n    description\r\n      \"Initial revision.\";\r\n    reference\r\n      \"mw-option test\";\r\n  }\r\n\r\n  identity rlt-mode {\r\n    status deprecated;\r\n    description\r\n      \"Radio Link Terminal mode\";\r\n  }\r\n\r\n  identity one-plus-zero {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  identity one-plus-one {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  identity two-plus-zero {\r\n    base rlt-mode;\r\n    status deprecated;\r\n  }\r\n\r\n  container rlt-db {\r\n    description\r\n      \"Radio Link Terminal\";\r\n    choice mode-option {\r\n      mandatory true;\r\n      leaf mode {\r\n        status deprecated;\r\n        type identityref {\r\n          base rlt-mode;\r\n        }\r\n      }\r\n      container rlt-mode {\r\n        description\r\n          \"mode configuration\";\r\n        leaf num-bonded-carriers {\r\n          type uint32;\r\n          mandatory true;\r\n          description\r\n            \"Number of bonded carriers\";\r\n        }\r\n        leaf num-protecting-carriers {\r\n          type uint32;\r\n          mandatory true;\r\n          description\r\n            \"Number of protecting carriers\";\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n```",
+          "createdAt": "2022-06-03T19:10:57Z",
+          "updatedAt": "2022-06-03T19:12:31Z"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOHLTwws5Q-Vl9",
+      "title": "duplex-distance datatype",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/11",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Email from Daniela,\r\n\r\nI have a question (raised by our Sw development team) as a my understand confirmation:\r\n \r\nThe question from our Sw development team)\r\n\u2022\t(If we use a shifter, I assume the configuration value is should be a signed value relative to the TX value (i.e. TX > RX implies negative shifter).   Is this correct (the YANG shifter value is signed)?  Interestingly, the actual-duplex-distance value is unsigned.  \r\n \r\nMy reply:\r\nthe duplex-distance to configure (as an alternative of rx-frequency configuration) is int32 (so signed) to allow to have negative shifter for Rx < TX , but for actual-duplex-instance we report only the positive value.\r\n\r\nAction: validate the understanding of interpretation of duplex-distance\r\n",
+      "createdAt": "2022-09-01T09:14:01Z",
+      "updatedAt": "2022-09-01T09:14:01Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOHLTwws5Q-igh",
+      "title": "Clarify backward combability for the new RTL mode",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/12",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "After discussion with Netmod WG experts it is confirmed that the changes proposed in PR #10 will not break any existing client implementation based on RFC8561 but they are not backward compatible, according to the rules defined in section 11 of RFC7950, and that there are no alternatives to meet the rules defined in section 11 of RFC7950\r\n\r\nNeed to clarify this in the I-D text\r\n",
+      "createdAt": "2022-09-01T09:55:40Z",
+      "updatedAt": "2022-09-01T09:55:40Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 10,
+      "id": "PR_kwDOHLTwws47AVdN",
+      "title": "RLT mode",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/10",
+      "state": "MERGED",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Proposed changes to allow a more flexible RLT mode definition: fix #9",
+      "createdAt": "2022-07-07T09:48:07Z",
+      "updatedAt": "2022-09-08T08:58:03Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "d402291d3221e35c8643931ce0bd41ece91add9d",
+      "headRepository": "italobusi/draft-ybam-rfc8561bis",
+      "headRefName": "bca",
+      "headRefOid": "84507fc0014656b7e10036b80815142ce51fdc35",
+      "closedAt": "2022-09-08T08:58:03Z",
+      "mergedAt": "2022-09-08T08:58:03Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "fb078f7a08e73c2f70493645b695254a2df081fb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws5BLik9",
+          "commit": {
+            "abbreviatedOid": "84507fc"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-01T14:51:45Z",
+          "updatedAt": "2022-09-01T14:51:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHLTwws5Blhky",
+          "commit": {
+            "abbreviatedOid": "84507fc"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-08T08:57:48Z",
+          "updatedAt": "2022-09-08T08:57:48Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
