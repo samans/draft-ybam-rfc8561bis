@@ -327,6 +327,31 @@ module ietf-microwave-radio-link {
 
     uses mw-types:common-microwave-properties;
 
+    choice freq-or-distance {
+      mandatory true;
+      description
+        "A choice to configure rx-frequency directly or compute
+         it as duplex-distance subtracted from tx-frequency.";
+      leaf rx-frequency {
+        type uint32;
+        units "kHz";
+        description
+          "Selected receiver frequency.";
+      }
+      leaf duplex-distance {
+        type int32;
+        units "kHz";
+        description
+          "Distance between transmitter and receiver frequencies.";
+      }
+    }
+    leaf actual-duplex-distance {
+      type uint32;
+      units "kHz";
+      config false;
+      description
+        "Computed distance between Tx and Rx frequencies.";
+    }
     leaf polarization {
       type enumeration {
         enum horizontal {
@@ -379,9 +404,7 @@ module ietf-microwave-radio-link {
           units "dBm";
           mandatory true;
           description
-            "Selected maximum output power.  Minimum output
-             power is the same as the system capability,
-             minimum-power.";
+            "Maximum output power.";
           reference
             "ETSI EN 302 217-1";
         }
@@ -392,9 +415,9 @@ module ietf-microwave-radio-link {
           units "dBm";
           mandatory true;
           description
-            "Selected minimum output power.";
-          reference
-            "ETSI EN 302 217-1";
+            "Minimum output power.  By default, minimum output
+             power is the same as the system capability
+             minimum-power.";
         }
         leaf atpc-lower-threshold {
           type mw-types:power {

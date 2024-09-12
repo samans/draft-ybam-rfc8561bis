@@ -404,37 +404,12 @@ module ietf-microwave-types {
       description
         "Selected transmitter frequency.";
     }
-    choice freq-or-distance {
-      mandatory true;
-      description
-        "A choice to configure rx-frequency directly or compute
-         it as duplex-distance subtracted from tx-frequency.";
-      leaf rx-frequency {
-        type uint32;
-        units "kHz";
-        description
-          "Selected receiver frequency.";
-      }
-      leaf duplex-distance {
-        type int32;
-        units "kHz";
-        description
-          "Distance between transmitter and receiver frequencies.";
-      }
-    }
     leaf actual-rx-frequency {
       type uint32;
       units "kHz";
       config false;
       description
         "Computed receiver frequency.";
-    }
-    leaf actual-duplex-distance {
-      type uint32;
-      units "kHz";
-      config false;
-      description
-        "Computed distance between Tx and Rx frequencies.";
     }
     leaf channel-separation {
       type uint32;
