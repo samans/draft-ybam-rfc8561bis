@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 15 March 2025                                             M. Ye
+Expires: 13 April 2025                                             M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                       11 September 2024
+                                                         10 October 2024
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2025.
+   This Internet-Draft will expire on 13 April 2025.
 
 Copyright Notice
 
@@ -702,6 +702,31 @@ Table of Contents
 
        uses mw-types:common-microwave-properties;
 
+       choice freq-or-distance {
+         mandatory true;
+         description
+           "A choice to configure rx-frequency directly or compute
+            it as duplex-distance subtracted from tx-frequency.";
+         leaf rx-frequency {
+           type uint32;
+           units "kHz";
+           description
+             "Selected receiver frequency.";
+         }
+         leaf duplex-distance {
+           type int32;
+           units "kHz";
+           description
+             "Distance between transmitter and receiver frequencies.";
+         }
+       }
+       leaf actual-duplex-distance {
+         type uint32;
+         units "kHz";
+         config false;
+         description
+           "Computed distance between Tx and Rx frequencies.";
+       }
        leaf polarization {
          type enumeration {
            enum horizontal {
@@ -754,9 +779,7 @@ Table of Contents
              units "dBm";
              mandatory true;
              description
-               "Selected maximum output power.  Minimum output
-                power is the same as the system capability,
-                minimum-power.";
+               "Maximum output power.";
              reference
                "ETSI EN 302 217-1";
            }
@@ -767,9 +790,9 @@ Table of Contents
              units "dBm";
              mandatory true;
              description
-               "Selected minimum output power.";
-             reference
-               "ETSI EN 302 217-1";
+               "Minimum output power.  By default, minimum output
+                power is the same as the system capability
+                minimum-power.";
            }
            leaf atpc-lower-threshold {
              type mw-types:power {
@@ -2109,37 +2132,12 @@ Table of Contents
          description
            "Selected transmitter frequency.";
        }
-       choice freq-or-distance {
-         mandatory true;
-         description
-           "A choice to configure rx-frequency directly or compute
-            it as duplex-distance subtracted from tx-frequency.";
-         leaf rx-frequency {
-           type uint32;
-           units "kHz";
-           description
-             "Selected receiver frequency.";
-         }
-         leaf duplex-distance {
-           type int32;
-           units "kHz";
-           description
-             "Distance between transmitter and receiver frequencies.";
-         }
-       }
        leaf actual-rx-frequency {
          type uint32;
          units "kHz";
          config false;
          description
            "Computed receiver frequency.";
-       }
-       leaf actual-duplex-distance {
-         type uint32;
-         units "kHz";
-         config false;
-         description
-           "Computed distance between Tx and Rx frequencies.";
        }
        leaf channel-separation {
          type uint32;
