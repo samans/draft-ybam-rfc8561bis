@@ -36,9 +36,9 @@ module ietf-microwave-types {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2024-03-03 {
+  revision 2024-09-11 {
     description
-      "pretty printing";
+      "Draft - new grouping Issue #35";
     reference
       "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
@@ -357,6 +357,15 @@ module ietf-microwave-types {
       "STM-1 connection, 155.52 Mbit/s.";
   }
 
+  typedef power {
+    type decimal64 {
+      fraction-digits 1;
+    }
+    description
+      "Type used for the power values in the data nodes
+       for configuration or status.";
+  }
+
   /*
    * Radio-link-terminal mode grouping
    */
@@ -377,6 +386,71 @@ module ietf-microwave-types {
       mandatory true;
       description
         "Number of protecting carriers.";
+    }
+  }
+
+  /*
+   * Common microwave properties ode grouping
+   */
+
+  grouping common-microwave-properties {
+    description
+      "This grouping provides a reusable set of microwave
+       properties.";
+    leaf tx-frequency {
+      type uint32;
+      units "kHz";
+      mandatory true;
+      description
+        "Selected transmitter frequency.";
+    }
+    leaf actual-rx-frequency {
+      type uint32;
+      units "kHz";
+      config false;
+      description
+        "Computed receiver frequency.";
+    }
+    leaf channel-separation {
+      type uint32;
+      units "kHz";
+      mandatory true;
+      description
+        "The amount of bandwidth allocated to a carrier.  The
+         distance between adjacent channels in a radio
+         frequency channels arrangement";
+      reference
+        "ETSI EN 302 217-1";
+    }
+    leaf actual-transmitted-level {
+      type power {
+        range "-99..99";
+      }
+      units "dBm";
+      config false;
+      description
+        "Actual transmitted power level (0.1 dBm resolution).";
+      reference
+        "ETSI EN 301 129";
+    }
+    leaf actual-tx-cm {
+      type identityref {
+        base mw-types:coding-modulation;
+      }
+      config false;
+      description
+        "Actual coding/modulation in transmitting direction.";
+    }
+    leaf actual-snir {
+      type decimal64 {
+        fraction-digits 1;
+        range "0..99";
+      }
+      units "dB";
+      config false;
+      description
+        "Actual signal to noise plus the interference ratio
+         (0.1 dB resolution).";
     }
   }
 }

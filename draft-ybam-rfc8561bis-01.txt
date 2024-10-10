@@ -6,17 +6,17 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 15 March 2025                                             M. Ye
+Expires: 4 September 2024                                          M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                       11 September 2024
+                                                            3 March 2024
 
 
                A YANG Data Model for Microwave Radio Link
-                      draft-ybam-rfc8561bis-latest
+                        draft-ybam-rfc8561bis-01
 
 Abstract
 
@@ -48,6 +48,16 @@ Status of This Memo
    This Internet-Draft is submitted in full conformance with the
    provisions of BCP 78 and BCP 79.
 
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 1]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF).  Note that other groups may also distribute
    working documents as Internet-Drafts.  The list of current Internet-
@@ -58,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2025.
+   This Internet-Draft will expire on 4 September 2024.
 
 Copyright Notice
 
@@ -76,28 +86,36 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction
-     1.1.  Terminology and Definitions
-     1.2.  Tree Structure
-     1.3.  Prefixes in Data Node Names
-     1.4.  YANG Tree
-     1.5.  Explanation of the Microwave Data Model
-   2.  Microwave Radio Link YANG Data Model
-   3.  Interface Protection YANG Data Model
-   4.  Microwave Types YANG Data Model
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
-   Appendix A.  Changes from RFC 8561
-   Appendix B.  Example: 1+0 and 2+0 Configuration Instances
-     B.1.  1+0 Instance
-     B.2.  2+0 Instance
-     B.3.  2+0 XPIC Instance
-   Appendix C.  Acknowledgments
-   Contributors
-   Authors' Addresses
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Terminology and Definitions . . . . . . . . . . . . . . .   3
+     1.2.  Tree Structure  . . . . . . . . . . . . . . . . . . . . .   5
+     1.3.  Prefixes in Data Node Names . . . . . . . . . . . . . . .   5
+     1.4.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . .   5
+     1.5.  Explanation of the Microwave Data Model . . . . . . . . .   8
+   2.  Microwave Radio Link YANG Data Model  . . . . . . . . . . . .   8
+   3.  Interface Protection YANG Data Model  . . . . . . . . . . . .  31
+   4.  Microwave Types YANG Data Model . . . . . . . . . . . . . . .  37
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .  46
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  48
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  48
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  48
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  49
+   Appendix A.  Changes from RFC 8561  . . . . . . . . . . . . . . .  50
+   Appendix B.  Example: 1+0 and 2+0 Configuration Instances . . . .  51
+     B.1.  1+0 Instance  . . . . . . . . . . . . . . . . . . . . . .  51
+     B.2.  2+0 Instance  . . . . . . . . . . . . . . . . . . . . . .  52
+     B.3.  2+0 XPIC Instance . . . . . . . . . . . . . . . . . . . .  54
+   Appendix C.  Acknowledgments  . . . . . . . . . . . . . . . . . .  56
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 2]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
+   Contributors  . . . . . . . . . . . . . . . . . . . . . . . . . .  56
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  57
 
 1.  Introduction
 
@@ -142,6 +160,15 @@ Table of Contents
 1.1.  Terminology and Definitions
 
    The following terms are used in this document:
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 3]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
    Carrier Termination (CT) is an interface for the capacity provided
    over the air by a single carrier.  It is typically defined by its
@@ -192,6 +219,13 @@ Table of Contents
 
    XPIC Cross Polarization Interference Cancellation
 
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 4]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
 1.2.  Tree Structure
 
    A simplified graphical representation of the data model is used in
@@ -240,6 +274,14 @@ Table of Contents
     |   +---x manual-switch-working
     |   +---x manual-switch-protection
     |   +---x forced-switch
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 5]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
     |   +---x lockout-of-protection
     |   +---x freeze
     |   +---x exercise
@@ -288,6 +330,14 @@ Table of Contents
      +--ro actual-duplex-distance?     uint32
      +--rw channel-separation       uint32
      +--rw polarization?          enumeration
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 6]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
      +--rw (power-mode)
      | +--:(rtpc)
      | | +--rw rtpc
@@ -336,6 +386,14 @@ Table of Contents
      |   +--ro min-tx-power?          power
      |   +--ro lower-acm-profile-ptr
      |   | +--ro profile-coding-modulation-id-ref?  leafref
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 7]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
      |   | +--ro profile-channel-separation-id-ref?  leafref
      |   +--ro upper-acm-profile-ptr
      |    +--ro profile-coding-modulation-id-ref?  leafref
@@ -384,6 +442,14 @@ Table of Contents
          "RFC 6991";
      }
      import iana-if-type {
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 8]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
        prefix ianaift;
      }
      import ietf-interfaces {
@@ -432,6 +498,14 @@ Table of Contents
 
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note
+
+
+
+Mansfield, et al.       Expires 4 September 2024                [Page 9]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
@@ -480,6 +554,14 @@ Table of Contents
 
      feature tdm {
        description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 10]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
          "Indicates that the device supports TDM.";
      }
 
@@ -528,6 +610,14 @@ Table of Contents
        leaf min-tx-power {
          type power;
          description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 11]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            "The minimum transmitted power when the carrier termination
             is operating this acm-profile.  Used to configure
             transmitted power.";
@@ -576,6 +666,14 @@ Table of Contents
               This attribute has been deprecated: the rlt-mode container
               which provide flexible definitions of number of bonded
               carriers and protecting carriers should be used instead.";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 12]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
          }
          container rlt-mode {
            description
@@ -624,6 +722,14 @@ Table of Contents
        leaf-list mimo-groups {
          if-feature "mimo";
          type leafref {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 13]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            path "/mrl:mimo-groups/mrl:mimo-group/mrl:name";
          }
          description
@@ -672,6 +778,14 @@ Table of Contents
          type string;
          default "A";
          description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 14]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            "ID of the carrier (e.g., A, B, C, or D).
             Used in XPIC and MIMO configurations to check that
             the carrier termination is connected to the correct
@@ -720,6 +834,14 @@ Table of Contents
            "A choice to configure rx-frequency directly or compute
             it as duplex-distance subtracted from tx-frequency.";
          leaf rx-frequency {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 15]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            type uint32;
            units "kHz";
            description
@@ -768,6 +890,14 @@ Table of Contents
                "Vertical polarization.";
            }
            enum not-specified {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 16]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
              description
                "Polarization not specified.";
            }
@@ -816,6 +946,14 @@ Table of Contents
                "ETSI EN 302 217-1";
            }
            leaf atpc-lower-threshold {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 17]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
              type power {
                range "-99..-20";
              }
@@ -864,6 +1002,14 @@ Table of Contents
          reference
            "ETSI EN 301 129";
        }
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 18]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
        choice coding-modulation-mode {
          mandatory true;
          description
@@ -912,6 +1058,14 @@ Table of Contents
        }
        leaf actual-tx-cm {
          type identityref {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 19]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            base mw-types:coding-modulation;
          }
          config false;
@@ -960,6 +1114,14 @@ Table of Contents
              "ETSI EN 301 129";
          }
          leaf transmitted-level-alarm-threshold {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 20]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            type power {
              range "-99..99";
            }
@@ -1008,6 +1170,14 @@ Table of Contents
              enum 1e-1 {
                description
                  "Threshold at 1e-1 (10^-1).";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 21]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
              }
            }
            default "1e-6";
@@ -1056,6 +1226,14 @@ Table of Contents
          }
          default "disabled";
          description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 22]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            "Enable (client/radio) or disable (disabled)
             the RF loop, which loops the signal back to
             the client side or the radio side.";
@@ -1104,6 +1282,14 @@ Table of Contents
              "The maximum output power supported.";
            reference
              "ETSI EN 302 217-1";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 23]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
          }
          leaf available-min-acm {
            type identityref {
@@ -1152,6 +1338,14 @@ Table of Contents
                base mw-types:coding-modulation;
              }
              description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 24]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
                "Uniquely identifies the acm profile (together with
                 'profile-channel-separation-id').  It could be used to
                 allow the configuration of the selected-cm (single
@@ -1200,6 +1394,14 @@ Table of Contents
              description
                "Together with the lower-acm-profile-ptr parameters it
                 creates a chain of acm profiles related to a specific
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 25]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
                 channel separation value.  Specifically it references
                 the next higher acm-profile, while lower-acm-profile-ptr
                 references the next lower profile.  The highest profile
@@ -1248,6 +1450,14 @@ Table of Contents
               errored block not occurring as part of Severely Errored
               Seconds (SES).  Discontinuities in the value of this
               counter can occur at re-initialization of the management
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 26]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
               system and at other times as indicated by the value of
               'discontinuity-time' in ietf-interfaces.";
            reference
@@ -1296,6 +1506,14 @@ Table of Contents
        container radio-performance-statistics {
          config false;
          description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 27]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            "ETSI EN 301 129 radio physical interface statistics relevant
             for a carrier termination.";
          leaf min-rltm {
@@ -1344,6 +1562,14 @@ Table of Contents
            type power {
              range "-99..99";
            }
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 28]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            units "dBm";
            description
              "Maximum transmitted power level.  Discontinuities
@@ -1391,6 +1617,14 @@ Table of Contents
      /*
       * XPIC & MIMO groups - Configuration data nodes
       */
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 29]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
      container xpic-pairs {
        if-feature "xpic";
@@ -1440,6 +1674,14 @@ Table of Contents
          "ETSI TR 102 311";
        list mimo-group {
          key "name";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 30]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
          description
            "List of carrier terminations in MIMO mode.";
          leaf name {
@@ -1487,6 +1729,14 @@ Table of Contents
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-interface-protection";
      prefix ifprot;
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 31]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
      import ietf-interfaces {
        prefix if;
@@ -1536,6 +1786,14 @@ Table of Contents
      revision 2020-10-06 {
        description
          "Updating reference to RFC XXXX.";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 32]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
        reference
          "RFC XXX: A YANG Data Model for Microwave Radio Link";
      }
@@ -1584,6 +1842,14 @@ Table of Contents
          "Identities describing the status of the protection
           in a group of interfaces configured in
           a protection mode.";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 33]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
      }
 
      identity unprotected {
@@ -1632,6 +1898,14 @@ Table of Contents
               It switches a normal traffic signal to the protection
               transport entity.";
            reference
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 34]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
              "ITU-T G.808.1";
          }
          action forced-switch {
@@ -1680,6 +1954,14 @@ Table of Contents
            type string;
            description
              "Name used for identification of the protection group.";
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 35]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
          }
          leaf protection-architecture-type {
            type identityref {
@@ -1728,6 +2010,14 @@ Table of Contents
            type if:interface-ref;
            min-elements 1;
            description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 36]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
              "The interfaces that the traffic normally should
               be transported over when there is no need to use the
               protecting interface.";
@@ -1775,6 +2065,14 @@ Table of Contents
    This module defines a collection of common data types using the YANG
    data modeling language.  These common types are designed to be
    imported by other modules defined in the microwave area.
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 37]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
    <CODE BEGINS> file "ietf-microwave-types@2024-03-03.yang"
    module ietf-microwave-types {
@@ -1825,6 +2123,13 @@ Table of Contents
        description
          "To add the summary of the changes in this revision:
 
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 38]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
           - Changed name for 8PSK.
 
           - Updated for 8PSK
@@ -1873,6 +2178,14 @@ Table of Contents
        base rlt-mode;
        status deprecated;
        description
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 39]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
          "2 bonded carrier terminations.";
      }
 
@@ -1920,6 +2233,14 @@ Table of Contents
        description
          "BPSK light coding and modulation scheme.";
      }
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 40]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
      identity qpsk {
        base coding-modulation;
@@ -1969,6 +2290,14 @@ Table of Contents
          "16 QAM light coding and modulation scheme.";
      }
 
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 41]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
      identity qam-32 {
        base coding-modulation;
        description
@@ -2016,6 +2345,14 @@ Table of Contents
        description
          "128 QAM strong coding and modulation scheme.";
      }
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 42]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
      identity qam-128-light {
        base qam-128;
@@ -2065,6 +2402,14 @@ Table of Contents
          "1024 QAM coding and modulation scheme.";
      }
 
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 43]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
      identity qam-1024-strong {
        base qam-1024;
        description
@@ -2112,6 +2457,14 @@ Table of Contents
        description
          "4096 QAM light coding and modulation scheme.";
      }
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 44]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
      /*
       * TDM-type identities
@@ -2161,6 +2514,14 @@ Table of Contents
    }
    <CODE ENDS>
 
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 45]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
 5.  Security Considerations
 
    The YANG data models specified in this document define schemas for
@@ -2199,6 +2560,23 @@ Table of Contents
    these data nodes could interrupt the ability to forward traffic.
 
    Interfaces of type microwaveCarrierTermination:
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 46]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
          /if:interfaces/if:interface/carrier-id,
          /if:interfaces/if:interface/tx-enabled,
@@ -2245,6 +2623,16 @@ Table of Contents
    This data node represents the MIMO configuration of multiple
    carriers.  Unauthorized access to this data node could interrupt the
    ability to forward traffic.
+
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 47]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
    Some of the RPC operations in this YANG data model may be considered
    sensitive or vulnerable in some network environments.  It is thus
@@ -2293,6 +2681,15 @@ Table of Contents
               RFC 6991, DOI 10.17487/RFC6991, July 2013,
               <https://www.rfc-editor.org/rfc/rfc6991>.
 
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 48]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
    [RFC7224]  Bjorklund, M., "IANA Interface Type YANG Module",
               RFC 7224, DOI 10.17487/RFC7224, May 2014,
               <https://www.rfc-editor.org/rfc/rfc7224>.
@@ -2340,6 +2737,15 @@ Table of Contents
               essential requirements of article 3.2 of Directive
               2014/53/EU", EN 302 217-2 V3.1.1 , May 2017.
 
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 49]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
    [G.808.1]  ITU-T, "SERIES G: TRANSMISSION SYSTEMS AND MEDIA, DIGITAL
               SYSTEMS AND NETWORKS; Digital networks ; General aspects
               Generic protection switching ; Linear trail and subnetwork
@@ -2386,6 +2792,16 @@ Appendix A.  Changes from RFC 8561
 
    To be added in a future revision of this draft.
 
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 50]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
 Appendix B.  Example: 1+0 and 2+0 Configuration Instances
 
    This section gives simple examples of 1+0 and 2+0 instances using the
@@ -2418,6 +2834,29 @@ B.1.  1+0 Instance
 
    Figure 1 shows a 1+0 example.  The following instance shows the 1+0
    configuration of the Near End node.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 51]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
    {
      "ietf-interfaces:interfaces": {
@@ -2456,6 +2895,24 @@ B.1.  1+0 Instance
 B.2.  2+0 Instance
 
    Figure 2 shows a 2+0 example.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 52]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
 
                        /--------- Radio Link ---------\
                         Near End              Far End
@@ -2505,6 +2962,14 @@ B.2.  2+0 Instance
          {
            "name": "RLT-A:CT-1",
            "description": "Carrier Termination 1",
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 53]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            "type": "iana-if-type:microwaveCarrierTermination",
            "ietf-microwave-radio-link:carrier-id": "A",
            "ietf-microwave-radio-link:tx-enabled": true,
@@ -2553,6 +3018,14 @@ B.3.  2+0 XPIC Instance
            "description": "Radio Link Terminal A",
            "type": "iana-if-type:microwaveRadioLinkTerminal",
            "ietf-microwave-radio-link:mode":
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 54]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
               "ietf-microwave-types:two-plus-zero",
            "ietf-microwave-radio-link:carrier-terminations": [
              "RLT-A:CT-1",
@@ -2601,6 +3074,14 @@ B.3.  2+0 XPIC Instance
      "ietf-microwave-radio-link:xpic-pairs": {
        "xpic-pair": [
          {
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 55]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
            "name": "xpic-pair1",
            "members": [
              "RLT-A:CT-1",
@@ -2651,6 +3132,12 @@ Contributors
    Email: Marko.Vaupotic@Aviatnet.com
 
 
+
+Mansfield, et al.       Expires 4 September 2024               [Page 56]
+
+Internet-Draft          Microwave Radio Link YANG             March 2024
+
+
    Xi Li
    NEC Laboratories Europe
    Kurfursten-Anlage 36
@@ -2694,3 +3181,12 @@ Authors' Addresses
    Danilo Pala
    SIAE
    Email: danilo.pala@saiemic.com
+
+
+
+
+
+
+
+
+Mansfield, et al.       Expires 4 September 2024               [Page 57]

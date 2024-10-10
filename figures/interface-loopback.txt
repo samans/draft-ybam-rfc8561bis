@@ -1,0 +1,16 @@
+
+  Near-End Element                    Far-End Element
++-------+  +-------+   .--   --.   +-------+  +-------+
+| Modem |  | Radio |  |  . .    |  | Radio |  | Modem |
+| Unit  +--+ Unit  +--+   \|\   +--+ Unit  +--+ Unit  |
+|       |  |       |  |    ' '  |  |       |  |       |
++-------+  +-------+   '--   --'   +-------+  +-------+
+ if-loop    rf-loop                 rf-loop    if-loop
+
+-------.   -------.                ------.    ------.
+ client |   client |                radio |    radio |
+<------'   <------'                <-----'    <-----'
+
+ .------    .------                 .-------   .-------
+| radio    | radio                 | client   | client
+ '----->    '----->                 '------>   '------>

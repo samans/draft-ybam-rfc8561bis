@@ -1,0 +1,1 @@
+pyang -p ../imports *.yang

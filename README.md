@@ -1,6 +1,6 @@
-# Updates to YANG Data Model for Microwave Radio Link
+# A YANG Data Model for Microwave Radio Link
 
-This is the working area for the individual Internet-Draft, "Updates to YANG Data Model for Microwave Radio Link".
+This is the working area for the individual Internet-Draft, "A YANG Data Model for Microwave Radio Link".
 
 * [Editor's Copy](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-rfc8561bis.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ybam-rfc8561bis)
