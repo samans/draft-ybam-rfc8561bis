@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-09-11T01:47:45.046298+00:00",
+  "timestamp": "2024-10-13T01:52:09.365299+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -47,6 +47,61 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "proposed solution",
+      "description": "",
+      "color": "B75AE7"
+    },
+    {
+      "name": "Discussion Required",
+      "description": "",
+      "color": "AE8374"
+    },
+    {
+      "name": "update yang",
+      "description": "",
+      "color": "D9A620"
+    },
+    {
+      "name": "gap analysis",
+      "description": "",
+      "color": "8F23C7"
+    },
+    {
+      "name": "topology enhancement",
+      "description": "",
+      "color": "010683"
+    },
+    {
+      "name": "use case and examples",
+      "description": "",
+      "color": "B4C592"
+    },
+    {
+      "name": "agreed",
+      "description": "",
+      "color": "55C85A"
+    },
+    {
+      "name": "New ID?",
+      "description": "",
+      "color": "153761"
+    },
+    {
+      "name": "Move to interface extension draft",
+      "description": "",
+      "color": "8C8F47"
+    },
+    {
+      "name": "Review",
+      "description": "",
+      "color": "DE2A3C"
+    },
+    {
+      "name": "review - pull request",
+      "description": "",
+      "color": "CD8934"
     }
   ],
   "issues": [
@@ -92,10 +147,12 @@
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "proposed solution"
+      ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2022-06-15T06:37:40Z",
+      "updatedAt": "2024-06-26T09:39:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -132,6 +189,111 @@
           "body": "Hi all,\r\nI've thought about an alternative way of handling BCA over multiple nodes. It only adds a new type of interface and leaves the existing parts untouched which means that there will be no issue with backward compatibility. The new interface type is also only used when there is a need to model multi-node configurations, which also would simplify the compatibility with the existing model/implementations. See attached slide pack.\r\nThe example is not making use of the new way of representing mode. So far, the new interface type only includes the relationships to other interfaces. If there is a need to add additional leafs, in additions to those available in the generic interface model, then that could be looked into as a second step\r\n[Key Concepts - Bonding & BCA.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/8906436/Key.Concepts.-.Bonding.BCA.pptx)\r\n.",
           "createdAt": "2022-06-15T06:37:40Z",
           "updatedAt": "2022-06-15T06:37:40Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Proposed Solution includes:\r\n\r\nAdding a new augment to interface called \"HRLT\" (name to be discussed).\r\nNeed to complete the discussion on attributes to add to HRLT, see slide 6 of the pptx from above.",
+          "createdAt": "2023-06-15T09:53:46Z",
+          "updatedAt": "2023-06-15T09:53:46Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I add few slides to use the new interface HRTL also in one single node scenarios.\r\n\r\n[AnalysisProposalBondingBCA.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/11871135/AnalysisProposalBondingBCA.pptx)\r\n",
+          "createdAt": "2023-06-26T15:44:55Z",
+          "updatedAt": "2023-06-26T15:44:55Z"
+        },
+        {
+          "author": "niloda",
+          "authorAssociation": "NONE",
+          "body": "I add some additional radio link configurations in a single node (some configurations that require bandwidth aggregation):\r\n\r\n\r\n[IETF-MW-MODEL.pdf](https://github.com/samans/draft-ybam-rfc8561bis/files/11949421/IETF-MW-MODEL.pdf)\r\n",
+          "createdAt": "2023-07-04T12:49:10Z",
+          "updatedAt": "2023-07-04T12:49:10Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Here are some notes related to two options for the model.\r\n```\r\nOption 1: Using a new ianaift for hierarchical radio link terminal\r\n\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from-or-self(if:type,\"\r\n       + \"'ianaift:microwaveRadioLinkTerminal')\";\r\nand\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from-or-self(if:type,\"\r\n       + \"'ianaift:hierarchicalRadioLinkTerminal')\";\r\n\r\nThe augment for hierarchicalRadioLinkTerminal would be in a different module providing a different name space (hrt).\r\n\t   \r\nmodule: ietf-interfaces\r\n  +--rw interfaces\r\n  |  +--rw interface* [name]\r\n  ...\r\n    |     +--ro higher-layer-if*                    interface-ref\r\n    |     +--ro lower-layer-if*                     interface-ref\r\n  ...\t\r\n    |     +--rw mrl:id?                                 string\r\n    |     +--rw mrl:mode                            identityref\r\n    |     +--rw mrl:carrier-terminations*    if:interface-ref\r\n  ...\r\n    |     +--rw hrl:bca-members*              if:interface-ref\r\n\r\nNew attributes needed for hrl would be in the hrl namespace and only needed if the interface is hierarchical.  The existing mrl namespace doesn't need to change.\r\n\r\nOption 2: Using a new leaf in mrl to identify the role the interface plays\r\n\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from-or-self(if:type,\"\r\n       + \"'ianaift:microwaveRadioLinkTerminal')\";\r\n\t   \r\nmodule: ietf-interfaces\r\n  +--rw interfaces\r\n  |  +--rw interface* [name]\r\n  ...\r\n    |     +--ro higher-layer-if*                   interface-ref\r\n    |     +--ro lower-layer-if*                    interface-ref\r\n  ...\t\r\n    |     +--rw mrl:id?                                string\r\n    |     +--rw mrl:mode                           identityref\r\n    |     +--rw mrl:carrier-terminations*   if:interface-ref\r\n  ...\r\n    |     +--rw mrl:role            \t\t       identityref\r\n  ...\r\n    |     +--rw mrl:bca-members*             if:interface-ref\r\n  ...\r\n  \r\nAn identity ref could be created (or just an enumeration or even a boolean) that indicated if the mrl was \"terminating\" or \"not-terminating\". Other leafs for the \"non-terminating\" case would be in the same name space.\r\n```\r\n\r\n",
+          "createdAt": "2023-09-07T19:19:47Z",
+          "updatedAt": "2023-09-07T19:25:47Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Just a question somehow relevant to mulitple-NE BCAs, i.e. Aggregations of Carrier Terminals at different Elements. \r\nIs it in the scope of this feature to support also XPIC-Pair with Carrier Terminals located at different Elements?\r\nEg XPIC Pair with a Carrier Terminal at vertical polarization at Element A and with a second Carrier Terminal at horizontal polarization at Element B?",
+          "createdAt": "2023-09-08T10:01:39Z",
+          "updatedAt": "2023-09-08T10:01:39Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In priciple yes, it is possible but I think (I ned to check) not using and Ethernet cable between the 2 elements A and B.",
+          "createdAt": "2023-09-08T10:40:42Z",
+          "updatedAt": "2023-09-08T10:40:42Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this is an important point to clarify in terms of the scope of the proposal.\r\nThe proposal with a the new interface type hierarchical-RLT (HRLT), as described above, assumes that the two network elements are managed independently and that there is no control of the function in one network element from the other network element. This means that XPIC, MIMO, nor protection can be supported for the carriers across the two network elements. HRLT is just a function for aggregating traffic from multiple sources/interfaces, similar to LAG but smarter(?) without the limitations with hashing.\r\nIf there is a need to support XPIC, MIMO and protection across two network elements, then there is a need for a tighter integration where also control information needs to be exchanged and where one network element typically would act as a master and in that role control the functionality in the second network element. My assumption has been that in such a case the master network element would need to model the carriers (CTs) in the other network element as if it was part of the master and thereby from a model point of view already be supported by the current model as is. A possible extension could be if there is a need to indicate that a carrier is located physically in another network element.",
+          "createdAt": "2023-09-11T08:31:10Z",
+          "updatedAt": "2023-09-11T08:31:10Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": " I may be wrong but I thought that even the Carriers Aggregation of Carrier Terminals at different systems, not only XPIC etc, need some common management otherwise how the load balancing of the aggregation can be administered for example?\r\n\r\nRegarding to the statement:\r\n\r\n_\"...one network element typically would act as a master and in that role control the functionality in the second network element. My assumption has been that in such a case the master network element would need to model the carriers (CTs) in the other network element as if it was part of the master and thereby from a model point of view already be supported by the current model as is. \"_\r\n\r\nDoes this imply then that we need to remove the CT interface of the Slave System and add it as CT interface of the Master system when that CT interface is going to be grouped in a way (eg XPIC, MIMO)? When this CT interface is intended to operate again out of the group, we will need then to reverse this modelling and return it back to the original system.\r\n\r\n_\"A possible extension could be if there is a need to indicate that a carrier is located physically in another network element.\"_\r\nIf an interface is included in a system, is there a need to indicate its location from inventory point of view and for the need of troubleshooting?\r\n\r\n",
+          "createdAt": "2023-09-11T12:11:34Z",
+          "updatedAt": "2023-09-11T12:11:34Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I guess carrier aggregation across multiple nodes could be implemented in various ways, but one is to rely on the far-end to near-end relationship between the two HRLBs, with e.g. ping in-between to check status. You probably also need some kind of rate signaling from the constituent RLTs/interfaces, but I'm not sure that it should be seen as control signaling.\r\nOnce again, there are different ways in which you can implement a system where you support XPIC, MIMO & protection across multiple nodes. One is to view/implement it as one virtual node (one NE & one management interface) combining the two devices/nodes and another is have two separate NEs, but where one of them are in control over the other (active/stand-by). I think the manner in which this is set up is implementation specific. I.e. if you need to start up the node in a specific mode from the beginning or if you can re-configure it in run-time into a stand-alone node or into operating in combination with other nodes.\r\nAs far as possible, I think we should strive for a standardized model which is independent upon the specific implementations and accept that vendors might need to add vendor specific extensions to cover whatever might be specific for their product.",
+          "createdAt": "2023-09-11T16:00:06Z",
+          "updatedAt": "2023-09-11T16:00:06Z"
+        },
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'd like to introduce the idea of incorporating a Microwave-Domain-Controller perspective into our discussion. Currently, microwave networks already implement Band & Carrier Aggregation through multiple nodes, carrying live traffic. \r\nThe goal here is to propose a software update for all the involved nodes, supporting a new yang revision without disrupting Ethernet (ETH) services via the nodes. Failing to do so may result in these nodes not receiving the new software, and consequently missing out on the new features that come with the updated yang revision.\r\n\r\nIn my humble opinion, the current model already encompasses all the necessary attributes, relationships, and object classes. When considering what should be addressed by '...', my answer would be: no new attributes are truly mandatory. \r\n\r\nHowever a \"copy\" for configuration on the \"aggregation\" (or \"main\" or master\" or \"infrastructure\") node can be avoided by introducing an \"microwaveCarrierConnection\" interface type with just pointing to microwaveCarrierTermination or generic ietf-interfaces.\r\n\r\n[mw-bca-concept-model.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/12606735/mw-bca-concept-model.pptx)\r\n",
+          "createdAt": "2023-09-14T08:42:34Z",
+          "updatedAt": "2023-09-14T08:42:34Z"
+        },
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "We have a new proposal for a BCA model, that would allow all current and (hopefully ate least most of the) future implementations to be modeled, including especially hierarchical (as we think the model by Jonas lends itself to, if we're not wrong), i.e. for example a 4+0 implemented as a cascade of a 3+0 and a 2+0), and non-hierarchical (to keep that example, a single 4+0 with remote members).\r\nWe are also keeping with Martin's proposal of using a CC for remote carriers, that are implemented by one or more independent NEs (i.e. devices with their own IP address, managed independently).\r\nBy the way the proposed model is built, it is also possible to deduce the actual architecture (e.g. in non-hierarchical implementations, distinguish between the \"master\" and the \"slaves\"), associate CCs to individual CTs etc. without need of specific attributes.\r\nThe slides include an example JSON for a non-hierarchical 4+0 system, with 2 \"low band\" carriers and two independent full-outdoor e-band radios. \r\n\r\n[BCA Proposal for ccamp v01.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/15074732/BCA.Proposal.for.ccamp.v01.pptx)\r\n",
+          "createdAt": "2024-04-23T06:26:54Z",
+          "updatedAt": "2024-04-23T09:40:03Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The attached presentation shows how the original proposal can model the configurations described in \"BCA Proposal for ccamp v01.pptx\"\r\nI think it is important to define the functionality to be supported by the proposed extensions.\r\nIs it more than a function for managing the distribution of traffic across multiple interfaces/RLTs or not?\r\n \r\n[Key Concepts - Bonding BCA v2.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/15469096/Key.Concepts.-.Bonding.BCA.v2.pptx)\r\n",
+          "createdAt": "2024-05-28T11:50:41Z",
+          "updatedAt": "2024-05-28T11:50:41Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello Jonas. Hello all\r\nI may miss something but why the mode is 2+0 of the RLT-B1 and RLT-C1 at\r\nthe First Scenario and of RLT-B1 and RLT-B2 at the\r\nsecond scenario (although they aggregate locally at their nodes only a\r\nunique CT?\r\n\r\nBest Regards\r\n\r\n\r\n*Theodoros Kallimanis *Principal Engineer (Systems & SW)\r\n\r\nDepartment SSD\r\n______________________________________\r\nIntracom Telecom\r\n19.7 km Markopoulou Ave., Peania, GR 19002\r\n\r\nBuilding A3, 2nd floor\r\nt:   +30 2106671961\r\nf:   +30 2106671446\r\nm: +30 6941636679\r\n\r\n***@***.*** ***@***.***> *www.intracom-telecom.\r\ncom\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a4\u03c1\u03af 28 \u039c\u03b1\u0390 2024 \u03c3\u03c4\u03b9\u03c2 2:51\u202f\u03bc.\u03bc., \u03bf/\u03b7 JonasAhl ***@***.***>\r\n\u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> The attached presentation shows how the original proposal can model the\r\n> configurations described in \"BCA Proposal for ccamp v01.pptx\"\r\n> I think it is important to define the functionality to be supported by the\r\n> proposed extensions.\r\n> Is it more than a function for managing the distribution of traffic across\r\n> multiple interfaces/RLTs or not?\r\n>\r\n> Key Concepts - Bonding BCA v2.pptx\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/files/15469096/Key.Concepts.-.Bonding.BCA.v2.pptx>\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2135025221>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVNPKA5X42TNHZDDNFTZERVSNAVCNFSM5T62TEK2U5DIOJSWCZC7NNSXTN2JONZXKZKDN5WW2ZLOOQ5TEMJTGUYDENJSGIYQ>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-05-29T14:49:46Z",
+          "updatedAt": "2024-05-29T14:49:46Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for identifying the typo. Corrected in this new version.\r\n[Key.Concepts.-.Bonding.BCA.v3.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/15487036/Key.Concepts.-.Bonding.BCA.v3.pptx)\r\n",
+          "createdAt": "2024-05-29T15:51:36Z",
+          "updatedAt": "2024-05-29T15:51:36Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi all,\r\nI've added some more info in a version 4.\r\nSee slides 7 and onwards.\r\n[Key Concepts - Bonding BCA v4.pptx](https://github.com/user-attachments/files/15985835/Key.Concepts.-.Bonding.BCA.v4.pptx)\r\n",
+          "createdAt": "2024-06-26T09:39:25Z",
+          "updatedAt": "2024-06-26T09:39:25Z"
         }
       ]
     },
@@ -140,47 +302,81 @@
       "id": "I_kwDOHLTwws5JKqhB",
       "title": "Fade Margin",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Discussion Required"
+      ],
       "body": "With adaptive modulation enabled, which modulation does this refer to?\r\nIt\u2019s a planning target\r\no\tat least for the lowest modulation allowed on the link (the other margins can be calculated by the controller)\r\no\twhat about the threshold degradation due to interference?\r\n        \uf0a7\tTo be managed between planning tool / optimization tool / SDN Controller, not in the equipment\r\n",
       "createdAt": "2022-05-06T07:48:15Z",
-      "updatedAt": "2022-05-06T07:48:15Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-06-08T09:12:14Z",
+      "closedAt": "2023-06-08T09:12:14Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Installation and Commissioning time tool, traffic effecting.  Automated procedure that identifies interference issues at startup time.  Not related to ATPC which is something that can used during operation.  Fade Margin is calculated during the initial setup of a microwave device by reducing the remote-end power until the signal is lost.  The information is collected once and stored in the equipment (because it is radio terminal specific).  Fade Margin is collected per modulation, so that the SDN controller have the information related to S/N ratio per modulation for each radio terminal.  Keep this at the application level and not store per equipment.\r\nIs Fade Margin one number or multiple numbers?  One option is that Fade Margin is one number and calculated by the equipment.  There is not a different number per modulation.\r\nWhere do we want to store the number(s)?\r\n",
+          "createdAt": "2023-05-25T09:39:55Z",
+          "updatedAt": "2023-05-25T09:39:55Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Fade Margin is one number, calculated at installation time.  The margin comes from the planning tool and the test at installation time validates the number.\r\n\r\nNumber from testing is not stored.\r\nClose this requirement and reevaluate if a new contribution is brought.\r\n",
+          "createdAt": "2023-06-08T09:12:14Z",
+          "updatedAt": "2023-06-08T09:12:14Z"
+        }
+      ]
     },
     {
       "number": 4,
       "id": "I_kwDOHLTwws5JKq4V",
       "title": "BER, Errored block - EB, Mean Time between outages, Outage intesity",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Discussion Required"
+      ],
       "body": "based on counters implemented within the equipment \r\n- See document about error performance evolution from ETSI ISG mWT [[https://www.etsi.org/committee/1426-mwt](https://protect2.fireeye.com/v1/url?k=0173bcb5-5ee885b3-0173fc2e-86ee86bd5107-f62c8968fe2cf6da&q=1&e=fb4b4542-3279-4095-8a0f-50aaa9f80c55&u=https%3A%2F%2Fwww.etsi.org%2Fcommittee%2F1426-mwt)] (WI 19)\r\n- To be discussed more in a later session",
       "createdAt": "2022-05-06T07:50:06Z",
-      "updatedAt": "2022-05-06T07:50:06Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-06-08T18:28:15Z",
+      "closedAt": "2023-06-08T18:28:15Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "https://www.etsi.org/deliver/etsi_gr/mWT/001_099/019/01.01.01_60/gr_mWT019v010101p.pdf \r\nThere are performance metrics already in the device.  ETSI WT19 has composite metrics that are calculated by a controller application.  Need to understand the requirements.  Need to determine what needs to be stored on the equipment itself.  Understand what the objective is for this requirement and how they will be used.\r\n",
+          "createdAt": "2023-05-25T09:46:19Z",
+          "updatedAt": "2023-05-25T09:46:19Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "BER and related stats are not in the scope of CCAMP.  The Outage intensity and Mean Time between outages are examples of stats that are computed and are not specific to Radio Link models.",
+          "createdAt": "2023-06-08T18:28:15Z",
+          "updatedAt": "2023-06-08T18:28:15Z"
+        }
+      ]
     },
     {
       "number": 5,
       "id": "I_kwDOHLTwws5JKrQi",
       "title": "Current Alarm Specific Problem, Historical Alarm Specific Problem",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "o\tRefer to the existing alarm management module?\r\no\tWhat\u2019s the \u201cSpecific Problem\u201d?\r\n        \uf0a7 exists in the IETF alarm modeling [to be double checked by both sides (see bullets below)]\r\no\tComment: information abundance is going to be important to feed future AI algorithms\r\no\tSpecific problems.\r\n        o\tThis parameter, when present, identifies further refinements to the Probable cause of the alarm. This parameter qualifies the chosen Probable cause and may be used by the managed object class definer to specify a set of identifiers for use in managed object classes.\u201d according to ITU (X.733-1992 X.733 : Information technology - Open Systems Interconnection - Systems Management: Alarm reporting function (itu.int))\r\no\tRFC8632 is the alarms IETF RFC https://datatracker.ietf.org/doc/html/rfc8632\r\no\tAction: To Everyone, review RFC 8632 against the definition in X.733 and provide input of information that needs to be considered for probable cause.\r\n",
       "createdAt": "2022-05-06T07:51:58Z",
-      "updatedAt": "2022-05-06T07:52:32Z",
-      "closedAt": null,
+      "updatedAt": "2023-05-25T09:48:53Z",
+      "closedAt": "2023-05-25T09:48:53Z",
       "comments": [
         {
           "author": "JonasAhl",
@@ -188,6 +384,13 @@
           "body": "Hi all,\r\nas Action Point for vendors, my side I checked on RFC8632 the concept of alarm \u2018specific problem\u2019 as defined on ITU X.733 .\r\nI found it using the following leaf attribute of \u2018alarm-list\u2019 to identify an alarm instance (added to \u2018resource\u2019 and 'alarm-type-id')\r\n\r\nleaf alarm-type-qualifier {\r\n        type alarm-type-qualifier;\r\n\r\n        description\r\n          \"This leaf is used when the 'alarm-type-id' leaf cannot\r\n           uniquely identify the alarm type.  Normally, this is not the\r\n           case, and this leaf is the empty string.\u201d\r\n\r\ntypedef alarm-type-qualifier {\r\n      type string;\r\n      description\r\n        \"If an alarm type cannot be fully specified at design time by\r\n         'alarm-type-id', this string qualifier is used in addition to\r\n         fully define a unique alarm type.\r\n\r\nTake into account that 'alarm-type-id' corresponds to the Probable cause of the alarm\r\n\r\nBR, Daniela",
           "createdAt": "2022-05-06T07:52:31Z",
           "updatedAt": "2022-05-06T07:52:31Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Follow RFC 8632, and close this issue related to the radio-link YANG work.",
+          "createdAt": "2023-05-25T09:48:53Z",
+          "updatedAt": "2023-05-25T09:48:53Z"
         }
       ]
     },
@@ -196,48 +399,92 @@
       "id": "I_kwDOHLTwws5JKr1P",
       "title": "Maximum Link/Carrier Utilization %",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Discussion Required"
+      ],
       "body": "o\toriginal intent was to support the power consumption optimization, based on actual link traffic load\r\n        \uf0a7\tPer carrier and per link (bundled)\r\no\tInterval?\r\n        \uf0a7\tAction:  everyone to consider and bring proposals/thoughts on measurement interval granularity\r\n        \uf0a7\tcurrent 15 minute integration time is too long for advanced applications\r\n                \u2022\tFor non-continuous transmission (packet transmission) the integration time should not be too short\r\n                        o\tIntegration time could be much shorter than 15 minutes, reporting max and min could be on a 15 minutes interval\r\no\tPercentage relative to what?\r\n        \uf0a7\tmaximum and minimum modulation (static)\r\n        \uf0a7\tAction: everyone to consider and bring contributions that provide clarity on the interaction between electrical power consumption and traffic\r\n",
       "createdAt": "2022-05-06T07:54:46Z",
-      "updatedAt": "2022-05-06T07:54:46Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-06-08T18:29:33Z",
+      "closedAt": "2023-06-08T18:29:32Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Review the discussion here: https://github.com/ietf-ccamp-wg/draft-ietf-ccamp-mw-topo-yang/issues/3\r\nIs this a measurement that is done on the link layer or ethernet layer?\r\nWhat is the time-period used to calculate this utilization?  Can\u2019t be instantaneous but has to be over a period of time (so how long?).",
+          "createdAt": "2023-05-25T09:53:30Z",
+          "updatedAt": "2023-05-25T09:53:30Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "From the radio side there is no utilization, utilization is calculated by throughput and bandwidth utilization percentage at the application level.",
+          "createdAt": "2023-06-08T18:29:32Z",
+          "updatedAt": "2023-06-08T18:29:32Z"
+        }
+      ]
     },
     {
       "number": 7,
       "id": "I_kwDOHLTwws5JKr7n",
       "title": "Latency",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Discussion Required"
+      ],
       "body": "o\tLatency of what?  Link? Service? Defined on Ethernet traffic, any requirements on interval for measurement of latency?\r\no\tRequirements related to supporting configuration of L2 or L3 service based on latency, availability, and capacity.\r\no\tDifferentiate between what needs to be stored/retrieved/measured from the equipment, or supported by an end-to-end protocol like TWAMP.\r\no\tEthernet OAM IEEE CFM (current CFM YANG found here: yang/standard/ieee/published/802.1 at master \u00b7 YangModels/yang \u00b7 GitHub), ITU-T work on G.8052.1 (G.8052.1 : Operation, administration, maintenance (OAM) management information and data models for the Ethernet-transport network element (itu.int))\r\no\tApplicability of current tools to the given requirements based on new features like slicing.\r\no\tAction: to the equipment vendors to propose what support is available on the equipment (capabilities may be beyond the microwave modeling work, more related to system-level OAM measurement/management).\r\no\tAction: identify the YANG models that identify the latency measurement\r\n",
       "createdAt": "2022-05-06T07:55:14Z",
-      "updatedAt": "2022-05-06T07:55:14Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-06-08T18:30:41Z",
+      "closedAt": "2023-06-08T18:30:41Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Parameter inside each modulation mode, that provides information about the latency of the processing in the microwave device.  Could be used as input into calculating if a service is possible based on the equipment in the path.",
+          "createdAt": "2023-05-25T10:08:14Z",
+          "updatedAt": "2023-05-25T10:08:14Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Latency doesn't belong in the Radio Link model.  Something that is calculated at the application layer.",
+          "createdAt": "2023-06-08T18:30:41Z",
+          "updatedAt": "2023-06-08T18:30:41Z"
+        }
+      ]
     },
     {
       "number": 8,
       "id": "I_kwDOHLTwws5JKsFj",
       "title": "Electrical Power Consumption",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "Discussion Required"
+      ],
       "body": "o\tCalculated how?  Consumption per link?  Per carrier? Or Aggregate for the node?\r\no\tSuggestion: A system is modular, the modules are chassis that take power, so power consumption is measured at the granularity of the chassis.  Take this to the carriers to determine if this provides the power consumption information needed.\r\no\tAction: proposal for electrical power consumption model (and granularity of measurement)\r\no\tAction: Can carriers agree that chassis-level measurement is sufficient.\r\n",
       "createdAt": "2022-05-06T07:55:50Z",
-      "updatedAt": "2022-05-06T07:55:50Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2023-06-08T10:00:29Z",
+      "closedAt": "2023-06-08T10:00:29Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Have one number per chassis.  Information about power consumption is not microwave specific so, not needed here in the radio link model.",
+          "createdAt": "2023-06-08T10:00:29Z",
+          "updatedAt": "2023-06-08T10:00:29Z"
+        }
+      ]
     },
     {
       "number": 9,
@@ -271,30 +518,1157 @@
       "id": "I_kwDOHLTwws5Q-Vl9",
       "title": "duplex-distance datatype",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/11",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "DanielaSpreafico"
+      ],
       "labels": [],
       "body": "Email from Daniela,\r\n\r\nI have a question (raised by our Sw development team) as a my understand confirmation:\r\n \r\nThe question from our Sw development team)\r\n\u2022\t(If we use a shifter, I assume the configuration value is should be a signed value relative to the TX value (i.e. TX > RX implies negative shifter).   Is this correct (the YANG shifter value is signed)?  Interestingly, the actual-duplex-distance value is unsigned.  \r\n \r\nMy reply:\r\nthe duplex-distance to configure (as an alternative of rx-frequency configuration) is int32 (so signed) to allow to have negative shifter for Rx < TX , but for actual-duplex-instance we report only the positive value.\r\n\r\nAction: validate the understanding of interpretation of duplex-distance\r\n",
       "createdAt": "2022-09-01T09:14:01Z",
-      "updatedAt": "2022-09-01T09:14:01Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2022-11-30T16:13:38Z",
+      "closedAt": "2022-11-30T16:13:38Z",
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I cheched the involved attributes and clarified the correct behaviour:\r\n\r\nleaf duplex-distance {\r\n        type int32;\r\n        units \"kHz\";\r\n        description\r\n          \"Distance between transmitter and receiver frequencies.\r\n\r\nleaf actual-duplex-distance {\r\n      type uint32;\r\n      units \"kHz\";\r\n      config false;\r\n      description\r\n        \"Computed distance between Tx and Rx frequencies.\"\r\n\r\nThe 'duplex-distance' is used to define the 'rx-frequency' starting from 'tx-frequency' and could contains both negative (to have rx<tx) or positive values (to have rx>tx).\r\nThe 'actual-duplex-distance' report the distance between tx-frequency and rx-frequency  (already known and reported) so only positive values (unsigned) are reported.\r\n\r\nThis issue could be closed.",
+          "createdAt": "2022-11-30T16:13:38Z",
+          "updatedAt": "2022-11-30T16:13:38Z"
+        }
+      ]
     },
     {
       "number": 12,
       "id": "I_kwDOHLTwws5Q-igh",
       "title": "Clarify backward combability for the new RTL mode",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "After discussion with Netmod WG experts it is confirmed that the changes proposed in PR #10 will not break any existing client implementation based on RFC8561 but they are not backward compatible, according to the rules defined in section 11 of RFC7950, and that there are no alternatives to meet the rules defined in section 11 of RFC7950\r\n\r\nNeed to clarify this in the I-D text\r\n",
       "createdAt": "2022-09-01T09:55:40Z",
-      "updatedAt": "2022-09-01T09:55:40Z",
+      "updatedAt": "2023-06-15T09:57:31Z",
+      "closedAt": "2023-06-15T09:57:30Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Closed, there is a choice for the configuration so backward compatibility is not effected.",
+          "createdAt": "2023-06-15T09:57:30Z",
+          "updatedAt": "2023-06-15T09:57:30Z"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "I_kwDOHLTwws5hk2M_",
+      "title": "identityref coding-modulation does not cover all values ",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/13",
+      "state": "OPEN",
+      "author": "niloda",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "update yang"
+      ],
+      "body": "Having implemented the model in the 4th ETSI Plugtest for mw devices, we realized that the identityref coding-modulation does not provide all possible values. Some mw devices support 8 PSK modulation which is not included.\r\n\r\nThe use of identityrefs, even if it currently covers all values, also has the disadvantage of having to update the YANG model if new and more complex modulation schemes are standardized in the future.\r\n\r\nA different approach could be taken to overcome this limitation. Let the device declare the acm profiles it supports, making explicit the parameters of each transmission ACM profile, and point to one of these in selected-min-acm, selected-max-acm or selected-cm.\r\n  \r\nWhereas each ACM profile is basically described by\r\n   - bandwidth\r\n   - modulation\r\n   - code rate (ratio between net bandwidth and gross bandwidth\r\n   - a reduction factor of the symbol rate (usefull for half-bpsk)\r\n  to which generic parameters can be added, such as (for example) a descriptive name of the profile and a value to organize the profiles in ascending/descending order\r\n  \r\nthe following structure could be assumed as an ACM profile entry:\r\n\r\n    grouping acm-profile {\r\n     leaf acm-profile-name {\r\n          typestring;\r\n          ...\r\n         \"Eg: 4qam-strong\"\r\n     }\r\n     leaf acm-profile-order {\r\n       type int32;\r\n       ...\r\n       \"1 to N\"\r\n     }\r\n     leaf channel separation {\r\n       type int32;\r\n       units \"kHz\";\r\n       ...\r\n     }\r\n     leaf modulation-scheme {\r\n       type int16;\r\n       units \"symbols\";\r\n       ...\r\n       \"2=BSPK ... 10=1024qam ... 12=4096qam\"\r\n     }\r\n     leaf code rate {\r\n       type int8;\r\n       units \"%\";\r\n       ...\r\n     }\r\n     leaf symbol-rate-reduction-factor {\r\n       type int8;\r\n       default \"1\";\r\n        \"Reduction factor for the symbol rate. Example: value would be 2 for 1/2BPSK.\";\r\n     }\r\n     leaf supported-as-fixed-configuration {\r\n       type boolean;\r\n       defaults \"false\";\r\n        \"true = This acm profile is available for manual configuration when Adaptive Modulation is switched off.\";\r\n     }\r\n   }\r\n\r\nFrom which it would also be possible to obtain the available radio capacity with the simple formula:\r\ntx-capacity = channel-separation * log2(modulation-scheme) * code-rate / symbol-rate-reduction-factor / K ;\r\nK takes into account the rolloff (approx. 1.15).\r\n\r\nThe device could only show the profiles of the selected channel-separation, if one accepted that the list containing the ACM profiles is not invariant over time. In this case, acm-profile grouping might not include the channel-separation attribute.\r\n\r\nThe selected-min-acm, selected-max-acm or selected-cm attributes should become leafrefs pointing to one of the ACM profiles.\r\n\r\nWith this approach, although complex, it is not necessary to maintain the identityref in the future.\r\nEven the user who has to configure the ACM profiles would be facilitated in the setting, having the list of values supported by the device available.",
+      "createdAt": "2023-03-23T08:15:13Z",
+      "updatedAt": "2023-12-14T10:44:17Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "niloda",
+          "authorAssociation": "NONE",
+          "body": "After the discussion we had in the weekly meeting, the proposal could be changed as in the description below.\r\n\r\nA new data type is defined with the grouping \\<acm-profile\\> which is composed of the following attributes:\r\n\r\n![image](https://user-images.githubusercontent.com/13891296/232828667-7f1b8f2d-7617-4b0a-9b71-cdaf07ccd683.png)\r\n\r\nWhere:\r\n- **profile-id** uniquely identifies the acm profile.\r\n- **profile-name** is a short string describing the profile\r\n- **modulation-scheme** is the logarithm base two of the number of points in the transmitted constellation.  E.g.: value would be 2 for 4QAM, 10 for 1024QAM and 12 for 4096QAM\r\n- **code-rate** is the percentage of the ratio between net bandwidth and gross bandwidth\r\n- **symbol-rate-reduction** is the reduction factor for the symbol rate. E.g.: value would be 2 for 1/2BPSK.\r\n- **supported-as-fixed-modulation** is true when the profile can be used in a fixed modulation scheme.\r\n- **max-tx-power** is the maximum transmitted power when the radio link is operating this profile\r\n- **min-tx-power** is the minimum transmitted power when the radio link is operating this profile\r\n- **upshift-threshold** is the received power value, beyond which the next higher profile is activated\r\n- **downshift-threshold** is the received power value, under which the next lower profile is activated\r\n- **upper-profile** is the pointer to the next higher profile\r\n- **lower-profile** is the pointer to the next lower profile\r\n\r\nThe \\<acm-profile-list\\> list of acm profiles indexed by \\<profile-id\\> must be added to the \\<capabilities\\> container. The list contains the acm profiles operated by the radio link for the selected channel separation. In other words, every time you change the value of \\<channel-separation\\> the device rebuilds the list.\r\n\r\n![image](https://user-images.githubusercontent.com/13891296/232826209-42dfa596-5937-433e-b1ef-97750645b57a.png)\r\n\r\nThe elements of the acm profile list are doubly linked to each other via the \\<upper-profile\\> and \\<lower-profile\\> attributes. It is thus evident what will be the sequence of the profiles operated according to the fading conditions. The figure below shows these relationships.\r\n\r\n![image](https://user-images.githubusercontent.com/13891296/232828247-4dc9ff6c-d446-4b6b-90d6-266e6b284589.png)\r\n\r\nHaving chosen to keep the identityref \\<coding-modulation\\> type for \\<profile-id\\>, \\<available-min-acm\\> and \\<available-max-acm\\> would 'point' respectively to the lowest and highest profile present in \\<acm-profile -list\\>. Choosing the identityref \\<coding-modulation\\> type for \\<profile-id\\> means keeping this type in the model which is not future-proof, but would be a good compromise for backward compatibility (A better defined model would require changing the type of \\<available-min-acm\\> and \\<available-max-acm\\> to leafref).\r\n\r\nIn the /if:interfaces/if:interface augment, which contains the radio link configuration attributes, the \\<selected-min-acm\\> and \\<selected-max-acm\\> (or \\<selected-cm\\>) attributes must 'point ' to an element of the \\<acm-profile-list\\> list. Also for these attributes it is possible to maintain the type identityref \\<coding-modulation\\>.\r\n\r\n![image](https://user-images.githubusercontent.com/13891296/232828028-83f00e54-7a5a-4f14-804a-805d2d669db9.png)\r\n\r\nThe proposed solution would bring the following benefits:\r\n- list the acm profiles supported and operated by the radio link\r\n- provide a description of the characteristics of each value defined for the identityref \\<coding-modulation\\>\r\n- help user configure \\<selected-min-acm\\> and \\<selected-max-acm\\> (or \\<selected-cm\\>)\r\n- help the user configure the transmitted power (whose range is influenced by \\<selected-min-acm\\> or \\<selected-cm\\>)\r\n- facilitate the calculation of the nominal radio link capacity for every acm profile (if necessary)\r\n- help calculate radio link availability with \\<upshift-threshold\\> and \\<downshift-threshold\\>\r\n\r\n\r\n",
+          "createdAt": "2023-04-18T16:01:53Z",
+          "updatedAt": "2023-04-18T16:01:53Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Now I understood the proposal.\r\n\r\nI agree to add the capabilities with the list of acm-profile (used also for fixed modulation) . \r\nThis allow to know at client level the allowed values to use to configure `selected-min-acm/selected-max-acm` or `selected-acm.`\r\n\r\nUsing the `profile-id` as identityref `coding-modulation` the backward compatibility is maintained.\r\n\r\nFew comments: \r\n\r\n1. the list is related to the selected `channel-separation,` so each time this field is selected the list is needed to be reloaded from the node.\r\nI know the list is increasing adding also as a key the  `channel-separation` , but these values could be considered 'capabilities' or 'allowed values' from the node, helping further the selection of the configuration parameters. \r\n`channel-separation` , `selected-min-acm/selected-max-acm` or `selected-acm` remain the same.\r\nAt the end we can add a new key `(profile-channel-separation-id` ?) and change the `profile-id` to `profile-coding-modulation-id.`\r\n\r\n2. I propose to use a new attribute `tx-capacity` (or `nominal-tx-capacity)` instead of `code-rate` and `symbol-rate-reduction`\r\n\r\n3. related to `max-tx-power` and `min-tx-power` , I agree to add to the 'acm-profile' because the transmit power range is specific to each acm profile, but how to configure the associated value `maximum-nominal-power` ? Inside the minimum and maximum values of all acm instances ? How to add also the capabilities for `atpc-lower-threshold` and `atpc-upper-threshold` ?",
+          "createdAt": "2023-04-26T16:03:07Z",
+          "updatedAt": "2023-04-26T16:19:17Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Discussed on 4 May 2023 call:\r\nThis issue is related to #14 and #15 and if resolved, the other two issues can be closed.\r\n\r\nDiscussing Danilo's and Daniela's comments the following was decided to propose for the next draft of the YANG module:\r\n\r\nThe acm-profile-list is added to the capabilities container.  the acm-profile-list uses the grouping called acm-profile and is indexed by profile-coding-modulation-id and profile-channel-separation-id.\r\n\r\nUse a new attribute called nominal-tx-capacity, instead of code-rate and symbol-rate-reduction because the calculation of nominal-tx-capacity is derived from code-rate and symbol-rate-reduction by formulas that are not standardized and are specific to the equipment.  So the nominal-tx-capacity value should be provided to avoid confusion on how to calculate it.\r\n\r\nRename minimum-power to min-tx-power and maximum-available-power to max-tx-power.\r\n\r\nDiscussion on upshift and downshift with the ONF, it is unclear how to fill out those values.\r\n\r\nOther issues related to atpc, need to be made into new issues.",
+          "createdAt": "2023-05-04T19:44:54Z",
+          "updatedAt": "2023-05-04T19:44:54Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Update from 4 May:\r\nkeep minimum-power and maximum-available-power names because those are the names used in the ETSI documents.\r\nSuggestion to remove upshift and downshift from the proposal above.\r\n\r\nadd: 8 PSK modulation\r\n",
+          "createdAt": "2023-05-11T09:16:45Z",
+          "updatedAt": "2023-05-11T09:16:45Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Based on the latest proposal from Danilo the follwoing changes were suggested.\r\n- Change order of the key to make channel separation the first.\r\n- Change the type of profile-channel-separation-id to uint32, to align with the other related leafs in the module.\r\n- \"The channel-separation and selected-cm configuration parameters (or the selected-min-acm/selected-max-acm pair)              must address one of the profiles in the list.\" need to be reformulated to reflect that capabilities are optional leafs.",
+          "createdAt": "2023-06-01T09:19:05Z",
+          "updatedAt": "2023-06-01T09:19:05Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Implemented the first two bullets in Jonas' comment above.  Need more information about the third bullet.",
+          "createdAt": "2023-06-13T14:58:22Z",
+          "updatedAt": "2023-06-13T14:58:22Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "For \"The channel-separation and selected-cm configuration parameters\r\n\t\t   (or the selected-min-acm/selected-max-acm pair) must address\r\n\t\t   one of the profiles in the list.\";\r\n\r\nAdd:  \"If acm-profile-list is supported then the channel-separation and ...\r\n\r\nUpdate:  Change acm-profile-list to be a YANG feature.  And propose yang.\r\n\r\nAction to team:  Check the list of coding-modulations to validate completeness.",
+          "createdAt": "2023-06-15T09:42:26Z",
+          "updatedAt": "2023-06-15T09:42:26Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "A few additional comments:\r\n- We have similar tables/profiles for our nodes, but channel-separation is not part or impacting those profiles.\r\n- Reference spectrum efficiency class, RSEC, is on the other hand a deciding factor for us.\r\n- supported-as-fixed-modulation means that the same profile values could apply also for fixed modulations. In our systems max-tx-power might be different depending on if it is fixed or adaptive. How would that be handled in the suggested model construct?\r\n- Is this really modelling an industry standard or is this perhaps something more system specific & proprietary and if so should be modelled as such?\r\n- I'm still struggling to understand how this information is supposed to be used by a PNC (microwave domain controller).\r\nIs is possible to provide a set of example data and a description of how that could be used by a PNC?",
+          "createdAt": "2023-07-03T06:29:51Z",
+          "updatedAt": "2023-07-03T06:29:51Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOHLTwws5hvHcc",
+      "title": " Capabilities for tx power are not so explanatory",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/14",
+      "state": "CLOSED",
+      "author": "niloda",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In mw devices that support Adaptive Coding and Modulation (ACM) the transmit power range is specific to each ACM. Typically the output power is dependent to the geometry of the transmitted constellation, therefore the output power decreases as the complexity of the modulation increases. The _minimum-power_ and _maximum-available-power_ values currently available in capabilities do not model this characteristic well enough.\r\n\r\nThe valid power ranges should be shown by the device in a sorted list indexed by modulation (_coding-modulation_). For this purpose, the acm-profile list proposed in [issue #13](https://github.com/samans/draft-ybam-rfc8561bis/issues/13) could be used, including the minimum and maximum tx power values in the acm-profile grouping.\r\n\r\n```\r\ngrouping acm-profile {\r\n   ...\r\n    leaf tx-power-min {\r\n       int8;\r\n       units \"dbm\";\r\n       ...\r\n      \"Eg: 4qam-strong\"\r\n    }\r\n    leaf tx-power-max {\r\n       int8;\r\n       units \"dbm\";\r\n       ...\r\n      \"Eg: 4qam-strong\"\r\n    }\r\n}\r\n```\r\n\r\nWith these values available, a user is able to set a valid output power value after selecting the single Coding Modulation value (_selected-cm_) or the Adaptive Coding Modulation range (_selected-min-acm_ and _selected-max-acm_).\r\n\r\nTo maintain backward compatibility, the currently modeled _minimum-power_ and _maximum-available-power_ attributes could show the minimum tx power value for _available-max-acm_ and the maximum tx power value for _available-min-acm_, respectively",
+      "createdAt": "2023-03-24T16:58:29Z",
+      "updatedAt": "2023-06-15T09:55:39Z",
+      "closedAt": "2023-06-15T09:55:38Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Close because covered by #13",
+          "createdAt": "2023-06-15T09:55:38Z",
+          "updatedAt": "2023-06-15T09:55:38Z"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOHLTwws5j16XY",
+      "title": "Supported channel-separation not provided by capabilities",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/15",
+      "state": "CLOSED",
+      "author": "niloda",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "To help configure an acceptable value in \\<channel-separation\\> it may be useful to list in the \\<capabilities\\> container the channel separation supported by the device.",
+      "createdAt": "2023-04-19T14:51:03Z",
+      "updatedAt": "2023-06-15T09:56:13Z",
+      "closedAt": "2023-06-15T09:56:12Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Close because covered by issue #13",
+          "createdAt": "2023-06-15T09:56:12Z",
+          "updatedAt": "2023-06-15T09:56:12Z"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOHLTwws5ldx9R",
+      "title": "reference coding modulation in acm mode to be selected",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/16",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "update yang"
+      ],
+      "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
+      "createdAt": "2023-05-09T15:49:11Z",
+      "updatedAt": "2023-12-14T10:44:46Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On ETSI EN 302 217-1 V3.2.2 (2020-02)\r\nSection 3.1 (Definition) we can found the following:\r\n\r\n **reference mode** (reference equipment class and channel separation): \r\nin mixed-mode systems, it identifies the operative mode which characteristics (i.e. system capacity, spectral efficiency class over a given channel separation) are used (i.e. declared in the licensing process) in the link per link coordination analysis (see note)\r\n\r\n**NOTE**: It provides the reference availability objective commonly used for the whole network (i.e. the typical 99,99 % or any other generally used by the administration concerned for the frequency coordination of licensed P-P links). When also bandwidth adaptive operation is active, the reference mode is always related to the widest channel separation used.\r\n",
+          "createdAt": "2023-05-10T10:22:06Z",
+          "updatedAt": "2023-05-10T10:22:06Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "In addition to the referenced-cm attribute in the coding-modulation,\r\nneed an attribute in the acm-profile:  supported-as-reference-modulation: boolean ro.\r\nIdentifies the operative mode which characteristics are used.",
+          "createdAt": "2023-05-11T09:33:56Z",
+          "updatedAt": "2023-05-11T09:33:56Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "1) What to call referenced-cm\r\n2) Where to put referenced-cm\r\n3) Discuss supported-as-reference-modulation: boolean ro.\r\n\r\n",
+          "createdAt": "2023-06-15T09:21:14Z",
+          "updatedAt": "2023-06-15T09:21:14Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Had another internal discussion and realized that I'm not able to explain how the referenced-cm is supposed to be used.\r\n- Should it be possible to configure? In that case what would happen in the node when you set it to a particular value?\r\n- If read-only, is it only \"reminder\" of how the carrier was planned and if so how it is supposed to be used?",
+          "createdAt": "2023-06-29T08:09:57Z",
+          "updatedAt": "2023-06-29T08:09:57Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Jonas,\r\nthe reference  modulation could be configured .\r\nI\u2019m not sure to explain what happens in the node when it is set to a specific value (experts on that are in vacation in these days)\r\nWhat I know is that it is used to set other parameters (like tx-power).\r\n\r\nBR, Daniela\r\n\r\nFrom: JonasAhl ***@***.***>\r\nSent: Thursday, June 29, 2023 10:10 AM\r\nTo: samans/draft-ybam-rfc8561bis ***@***.***>\r\nCc: Daniela Spreafico (Nokia) ***@***.***>; Author ***@***.***>\r\nSubject: Re: [samans/draft-ybam-rfc8561bis] reference coding modulation in acm mode to be selected (Issue #16)\r\n\r\n\r\nHad another internal discussion and realized that I'm not able to explain how the referenced-cm is supposed to be used.\r\n\r\n  *   Should it be possible to configure? In that case what would happen in the node when you set it to a particular value?\r\n  *   If read-only, is it only \"reminder\" of how the carrier was planned and if so how it is supposed to be used?\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/samans/draft-ybam-rfc8561bis/issues/16#issuecomment-1612601786>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AINMCNR3LVHYS5HETFHYGL3XNUZ6BANCNFSM6AAAAAAX3PYHOA>.\r\nYou are receiving this because you authored the thread.Message ID: ***@***.***>\r\n",
+          "createdAt": "2023-06-29T08:15:30Z",
+          "updatedAt": "2023-06-29T08:15:30Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "> 1. What to call referenced-cm\r\n> 2. Where to put referenced-cm\r\n> 3. Discuss supported-as-reference-modulation: boolean ro.\r\n\r\nPoint 1 and 2:\r\nreferenced-cm:  below this number the transmit power can not increase.  Related to the interference calculation.  If referenced-cm is not available, the minimum value is used.\r\nNeed to clarify how this works and how it is related to ATPC.  Need to check internally and provide a suggestion.\r\n\r\nFor point 3, add this as a capability that can be retrieved. ",
+          "createdAt": "2023-06-29T10:13:34Z",
+          "updatedAt": "2023-06-29T10:13:34Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm not sure about the reference to ETSI reference mode. It talks about reference equipment class and channel separation, whereas we mean reference to a specific coding/modulation, which I believe is closer to what ETSI defines as spectrum efficiency class.",
+          "createdAt": "2023-07-03T07:35:17Z",
+          "updatedAt": "2023-07-03T07:35:17Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm trying to answer to Jonas's question.\r\n\r\nThere is an association between \"spectrum efficiency class\" (which roughly corresponds to modulation) and spectral mask to be respected. All in ETSI 302-217 standards:\r\n![Etsi-image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/464c144b-67c3-427d-acfd-5ae9ad08c4f3)\r\n\r\nFor this reason selecting a Reference modulation as coding/modulation a spectrum efficiency class is selected.\r\n\r\nReference modulation is the one for which compliance with masks and other ETSI requirements is declared.\r\nFor example if I declare that my reference modulation is QPSK then it is enough for me to respect the class 2 mask and I can push the transmitted power .. then if I go up in modulation with ACM I manage by myself to guarantee functioning but I have no regulatory restrictions on emissions.\r\nInstead if I declare reference modulation =128QAM I must ALWAYS respect the class 5b mask; even if in ACM during fading I go down to QPSK.\r\nIt could be used to ensure compatibility with adjacent channels that have already been allocated to other operators.\r\nYou can apply for a class 2 license and get it refused because that channel is adjacent to another which cannot be disturbed.\r\nYou may always have to comply with a more stringent mask because in that area and on that channel you cannot afford to disturb the neighbors (perhaps allocated to another operator) who -for example- use a higher spectral efficiency class (higher modulation).\r\n\r\n",
+          "createdAt": "2023-07-13T12:32:32Z",
+          "updatedAt": "2023-07-13T12:32:32Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with Daniela's description above, with one exception. \r\nI don't think the choice of coding (strong/light) has an impact on the compliance with the masks.\r\nTherefore, we refer to this information as Reference Spectrum Efficiency Class and exclude the choice of coding in list of possible options and in line with the list in your description above.\r\nDoes choice of coding has a meaning in your system/case?",
+          "createdAt": "2023-07-14T08:45:36Z",
+          "updatedAt": "2023-07-14T08:45:36Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Jonas, what does it mean 'choice of coding (strong/light)' ? \r\nDo you mean that the 'strong' or 'light' modulation options are excluded to be selected as Reference Modulation?\r\nIf this is the case, yes , I agree and for that we are proposing the boolean 'supported-as-reference-modulation' in the acm-list capabilities.",
+          "createdAt": "2023-07-14T10:07:29Z",
+          "updatedAt": "2023-07-14T10:07:29Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My understanding is that the type of referenced-cm is identityref based on mw-types:coding-modulation.\r\nThat list of identityrefs is a combination of selected modulation and selected coding, whereas referenced SEC or referenced-cm (according to your description) only relates to selected modulation.\r\nI guess we could add a new list of identityrefs for reference-cm which excludes the coding and only includes what is in table 0, in your earlier comment.",
+          "createdAt": "2023-07-14T12:14:25Z",
+          "updatedAt": "2023-07-14T12:14:25Z"
+        },
+        {
+          "author": "leonida-macciotta",
+          "authorAssociation": "NONE",
+          "body": "Dear all,\r\n\r\nI checked and, on our equipment, the \u201clight\u201d and \u201cstrong\u201d modulations happen to be in the same class as the base modulation \u2013 but this is not mandatory by itself (we\u2019d need a modem expert here to see if this may even happen, since the code change usually improves the total throughput by a relatively small fraction of the base modulation\u2019s throughput)\r\n\r\nBut I don\u2019t see why a \u201clight\u201d or \u201cstrong\u201d mode (modulation + coding) may not be used as a reference mode\u2026 the combination has an assigned spectral efficiency class (from the table that Daniela showed), whatever it is, that is declared by the manufacturer and will be used in the planning\r\n\r\nWe are using the combination of modulation + coding explicitly, and it should be regarded as an entity by itself, not as a \u201creal\u201d modulation with a differentiator applied to it, if you see my point\r\n\r\nCheers\r\n\r\nLeo\r\n\r\nFrom: DanielaSpreafico ***@***.***>\r\nSent: venerd\u00ec 14 luglio 2023 12:08\r\nTo: samans/draft-ybam-rfc8561bis ***@***.***>\r\nCc: Subscribed ***@***.***>\r\nSubject: Re: [samans/draft-ybam-rfc8561bis] reference coding modulation in acm mode to be selected (Issue #16)\r\n\r\n\r\nJonas, what does it mean 'choice of coding (strong/light)' ?\r\nDo you mean that the 'strong' or 'light' modulation options are excluded to be selected as Reference Modulation?\r\nIf this is the case, yes , I agree and for that we are proposing the boolean 'supported-as-reference-modulation' in the acm-list capabilities.\r\n\r\n\u2014\r\nReply to this email directly, view it on GitHub<https://github.com/samans/draft-ybam-rfc8561bis/issues/16#issuecomment-1635627185>, or unsubscribe<https://github.com/notifications/unsubscribe-auth/AN5X6UCAE3VZMS4ZKIDKV63XQEK6XANCNFSM6AAAAAAX3PYHOA>.\r\nYou are receiving this because you are subscribed to this thread.Message ID: ***@***.***>\r\n",
+          "createdAt": "2023-07-17T07:39:48Z",
+          "updatedAt": "2023-07-17T07:39:48Z"
+        },
+        {
+          "author": "niloda",
+          "authorAssociation": "NONE",
+          "body": "Our devices allow the selection of the reference modulation in two different ways depending on whether ACM is enabled or not.\r\n\r\nWhen the transmitted modulation is fixed, i.e. with ACM disabled, referenced-cm is assumed to be equal to selected-cm. Only ACM profiles with supported-as-fixed-modulation=true can be operated by the transmitter.\r\n\r\nWhen ACM is enabled, the value of referenced-cm must be between selected-min-acm and selected-max-acm. In this case the \"acm-profile:supported-as-reference-modulation: boolean:ro\" attribute would declare whether the modulation (regardless of the \"strong\" or \"light\" coding value) of an ACM profile can be used as a \"referenced-cm \" or not.",
+          "createdAt": "2023-09-11T09:52:33Z",
+          "updatedAt": "2023-09-11T09:52:33Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "To summarize the new attributes to add to the actual model:\r\n\r\n1. on coding-modulation-mode:adaptive:referenced-cm identityref\r\n2. on capability section , acm-profile: supported-as-reference-modulation: boolean ro.\r\n",
+          "createdAt": "2023-09-29T13:40:23Z",
+          "updatedAt": "2023-09-29T13:40:23Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Just a question, regarding to \"supported-as-reference-modulation boolean.\r\nIt seems to me that finally only the \"spectral-efficiency\" characteristic has been described in the previous comments in relation to reference-cm. All other possible characteristics, eg system-capacity mentioned originally by Daniela, have not been mentioned yet and are vague.\r\nIs the referenced-cm is actually needed for other characteristics? What happens in practice? Is there such a need?\r\n\r\nAnother point is that it is better to avoid the cm at referenced-cm that refers directly to mw-types:coding-modulation, which includes also coding light/strong.\r\nIs it more clear to name this new leaf as reference-modulation without a reference to \"coding\"?",
+          "createdAt": "2023-10-06T11:09:49Z",
+          "updatedAt": "2023-10-06T11:09:49Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree to name the new configuration leaf as reference-modulation",
+          "createdAt": "2023-10-12T09:00:51Z",
+          "updatedAt": "2023-10-12T09:00:51Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "       +--rw (coding-modulation-mode)\r\n       |  +--:(single)\r\n       |  |  +--rw single\r\n       |  |     +--rw selected-cm    identityref\r\n       |  +--:(adaptive)\r\n       |     +--rw adaptive\r\n       |        +--rw selected-min-acm    identityref\r\n       |        +--rw selected-max-acm    identityref\r\n\r\nadd a +--rw reference-modulation identityref\r\ndescription?\r\n\r\n   |     +--ro nominal-tx-capacity?             uint32\r\n       |     +--ro support-as-fixed-modulation?     boolean\r\n\r\nadd a +--ro support-as reference-modulation? boolean\r\ndescription?  Reference Modulation cannot be configured but can be set by the system when support-as-reference-modulation is false.\r\n\r\n",
+          "createdAt": "2023-12-14T10:32:06Z",
+          "updatedAt": "2023-12-14T10:32:06Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "reference-modulation description:\r\nreference-modulation is a reference to a coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'.",
+          "createdAt": "2023-12-14T10:37:24Z",
+          "updatedAt": "2023-12-14T10:37:24Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDOHLTwws5peulr",
+      "title": "WG Last call : comments from Tom Petch to be addressed",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/17",
+      "state": "CLOSED",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Here the comments  to be addressed (and replayed to) :\r\n\r\n--\r\nA follow up to an earlier comment of mine relating to\r\n       leaf actual-transmitted-level {\r\n          type decimal64 {\r\n            fraction-digits 1;\r\n            range \"0..99\";\r\nI was unsure if the maximum value was then 99.9 or 99.0 so I asked on the NETMOD list and the answer is 99.0.  I note that the same construct is used in RFC8561 so I assume that 99.0 is a magic number in microwave.\r\n\r\n--\r\nOne more thought.  The Appendices would benefit from a reference to RFC8792.\r\n\r\n--\r\n8561 is an import so must be a Normative reference\r\n\r\n  \"ETSI EN 302 217-1 -\r\n  \"ETSI EN 301 129   -\r\nneed adding as references as a URL so I can see if they are accessible\r\n\r\n1.1\r\nshould include\r\nctp\r\nrlt\r\nrltp\r\nsnir\r\nIMHO\r\n\r\ncarries, in various configurations/modes.  T perhaps 'carriers'\r\n\r\n.  The supporting carriers are identified by its termination points /its/their/\r\n\r\ns.3.3\r\nL2 ethernet\r\nIs there an Ethernet that is a different layer?\r\n\r\ns.3.4\r\naugmented by the microwave topology model a reference would be useful\r\n\r\nmodule\r\nsnir\r\n            fraction-digits 1;\r\n            range \"0..99\";\r\nI imagine that that excludes 99.9 or 99.1 etc\r\n\r\nactual transmitted level\r\nditto\r\n\r\nwhen choices specify mw-tp mw-link is one of the choice mandatory?\r\n\r\napply only for networks with an          microwave network topology type\r\n/an/a/\r\n\r\nA.1\r\n10.10.10.1\r\nis not an address for documentation use\r\n\r\nA.2\r\ndirro\r\n\r\nB.1\r\nditto\r\n\r\n\r\n   The authors would like to thank ...\r\n",
+      "createdAt": "2023-06-22T13:18:36Z",
+      "updatedAt": "2023-06-23T14:50:27Z",
+      "closedAt": "2023-06-23T14:50:26Z",
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I close this issue because the correct repository is the draft-ietf-ccamp-mw-topo-yang, not the microwave-radio-link",
+          "createdAt": "2023-06-23T14:50:26Z",
+          "updatedAt": "2023-06-23T14:50:26Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOHLTwws5vJEH3",
+      "title": "Add 'scope' to the yang description.",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/18",
+      "state": "OPEN",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "update yang"
+      ],
+      "body": "Currently the yang module has the following description. \r\n\r\n  description\r\n    \"This is a module for the entities in\r\n     a generic microwave system.\r\n\r\nBased on the discussion from 2023-08-17 (https://github.com/samans/draft-ybam-rfc8561bis/blob/main/minutes/2023-08-17.md) we may want to add a kind of 'scope' to the description. \r\n\r\nProposal for discussion:\r\n\r\n  description\r\n    \"This module pertains to the components within a microwave system ([sko] network function ??). \r\n      Its purpose is to establish the specific configurations associated with radio links. \r\n     Configurations that concern the management of faults, performance, security, synchronization, \r\n     as well as packet and Ethernet management within a microwave system ([sko] network function ??), \r\n     are encompassed by distinct yang modules.\"\r\n\r\n",
+      "createdAt": "2023-08-24T08:16:07Z",
+      "updatedAt": "2023-12-14T10:45:08Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Align the YANG module description with the Abstract from RFC 8561 (as modified by the contributors based on the gap analysis).\r\n\r\nCurrently the wording would be...\r\nThis YANG module defines a YANG data model for control and management of\r\n   radio link interfaces and their connectivity to packet (typically\r\n   Ethernet) interfaces in a microwave/millimeter wave node.  The data\r\n   nodes for management of the interface protection functionality is\r\n   broken out into a separate and generic YANG data model in order to\r\n   make it available for other interface types as well.\r\n",
+          "createdAt": "2023-08-24T09:27:34Z",
+          "updatedAt": "2023-08-24T09:27:34Z"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOHLTwws5vKylG",
+      "title": "Interaction with ieee-dot1q-bridge model, when microwave is used as VLAN bridge",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/19",
+      "state": "CLOSED",
+      "author": "jrebiffe",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Discussion Required"
+      ],
+      "body": "During the [4th mWT plugtest](https://wiki.plugtests.net/mWT-Plugtests-Programme/index.php?title=12th_call_for_4th_mWT_Plugtests), we see there were a challenge between our `ietf-microwave-radio-link` module and the model involved in the Bridging logic, the `ieee-dot1q-bridge` module. That relates to framework described in RFC8432.\r\n\r\nThe ieee-dot1q-bridge model can perform bridging between ethernet interfaces only (those with \"type\": \"ianaift:ethernetCsmacd\"). Not Microwave (neither thoses \"type\" are \"ianaift:microwaveCarrierTermination\" nor \"ianaift:microwaveRadioLinkTerminal  \"). That is caused by a `when` cause of the `ieee-dot1q-bridge`.\r\n\r\nThe resulting stack: \"virtual Ethernet\" over the RadioLinkTerminal over the CarrierTermination (see diagram below). I am calling \"virtual Ethernet\" as opposed as real 802.3 interfaces (which really cares about duplex, negotiation, etc...).\r\n\r\nThat introduce 2 challenges:\r\n- The \"virtual Ethernet\" interface implements the `ieee802-ethernet-interface` module, with leaves of `<negotiation-status>`, `<duplex>`, `<speed>` and other physical parameters which are meaningless because that layer is virtual.\r\n- That also adds a new \"virtual Ethernet\" interface in the configuration and data: We need to model the relation netween \"virtual Ethernet\" and RadioLinkTerminal. During the plugtest, it was decided to be \"internal mapping\" on 12th call and each vendors provided the interface <name> and <port-ref> to the script.\r\n\r\n![EthernetMicrowave](https://github.com/samans/draft-ybam-rfc8561bis/assets/118449612/1e426439-b033-45bf-8b7d-92eb6f279e3d)\r\n\r\nFew questions I wonder:\r\n- Are we still comfortable with that?\r\n- How can we known which \"virtual Ethernet\" corresponds to a microwaveRadioLinkTerminal? And the other way around?\r\n- Do we have the same challenge if a Microwave equipment is performing IP routing instead of Ethernet bridging?\r\n\r\nPlease, tell me is there is anything wrong or incomplete with my interpretation of the challenge.\r\n\r\nReferences:\r\n- [ieee802-dot1q-bridge](https://github.com/YangModels/yang/blob/main/standard/ieee/published/802.1/ieee802-dot1q-bridge.yang)\r\n- [ieee802-ethernet-interface](https://github.com/YangModels/yang/blob/main/standard/ieee/published/802.3/ieee802-ethernet-interface.yang)\r\n- [\"Figure 1: Relationship between Interfaces in a Node\" page 4 of RFC8432](https://datatracker.ietf.org/doc/html/rfc8432#page-4)\r\n- [Minutes of meeting of the 12th call for 4th mWT Plugtests](https://wiki.plugtests.net/mWT-Plugtests-Programme/index.php?title=12th_call_for_4th_mWT_Plugtests#Actions_points_from_the_last_meeting)",
+      "createdAt": "2023-08-24T12:55:24Z",
+      "updatedAt": "2024-01-21T13:41:29Z",
+      "closedAt": "2024-01-20T20:36:18Z",
+      "comments": [
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "The paragraph of the RFC8432 that is related to the ietf mw interface hierarchy is the following one:\r\n\r\n_\u201cThe relationship/connectivity between interfaces\r\n   could be given by the physical equipment configuration.  For example,\r\n   the slot where the Radio Link Terminal (modem) is plugged in could be\r\n   associated with a specific Ethernet port due to the wiring in the\r\n   backplane of the system, or it could be flexible and therefore\r\n   configured via a management system or controller.\u201d_\r\n\r\nSo, RFC8432 framework, indicates 2 alternatives, a fixed one and a flexible / configurable one.\r\n\r\nWhen the relationship between the ethernet interface and the mw RLT interface is based on the Physical Equipment configuration, eg mwaveX ethernet port is a backplane port or an internal connection to the RLT-X port of the Radio Unit or Radio module then this is a fixed hw association.\r\n\r\nI do not think that this Ethernet Interface, that is connected to the RLT interface in this way , is a virtual Ethernet port.  It can be a real Ethernet port (ethernetCsmacd type) with a specific MAC address of its own and all other attributes configured.\r\nIt can be an ethernet interface at forced-mode (autoneg is disabled \u2013 it gets speed as the highest capacity of the traffic flow,  that is intended to be conveyed through radio).\r\nThis ethernet interface can be used either as bridged or as routed port.\r\n\r\nSo at this first alternative way indicated at RFC8432, there is no need of modelling of the relationship between the ethernet port of the RFC8432 interface hierarchy and the RLT interface, but instead a HW fixed association exists. I.e. mwave1 eth port  (let's name it so) is fixed to be connected to rlt1 etc.\r\n\r\nWhat needs some further modelling at RFC8561 to my opinion, is the 2nd alternative indicated at RFC8432, i.e.\r\n\r\n_\u201c\u2026or it could be flexible and therefore\r\n   configured via a management system or controller\u201d_\r\n\r\nThis alternative needs a configurable association in the model, that will indicate which ethernet port should be connected to a specific RLT port.\r\nI assume that this alternative needs some kind of multiplexer in the system that can change connections between internal ethernet ports and rlt ports of the Radio Units / Radio Modules of the system.\r\nFurthermore, there may be cases of separate Base Units systems in the network with Ethernet ports and  separate Radio Units systems with RLT ports, used to connect them to their corresponding Base Unit systems and these connections are the ones that are managed by a manager or a controller, indicated at RFC8432.\r\nI have not a practical view of this alternative but I assume that we may need then to configure RLTs and Ethernet ports in a non-fixed way and this configuration / association may be missed currently from RFC8561 yang model.\r\n",
+          "createdAt": "2023-08-24T14:32:24Z",
+          "updatedAt": "2023-08-24T14:32:24Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think the configuration of  RLTs and Ethernet ports in a non-fixed way is not a matter of RFC8561 yang model, but of the equipment model (RFC 8348 \u201cA YANG Data Model for Hardware Management\u201d ) and then the interfaces association could be reported on the  higher-layer-if/lower-layer-if (RFC 8343 \"A YANG Data Model for Interface Management\").\r\nThis is also reported on the minute of the 4th mWT Plugtest mentioned by Jean:\r\n\r\n_\"..it\u2019s an internal mapping that can be represented in high-layer-if and lower-layer-if relationships attributes (of ietf-interfaces model).\"_\r\n\r\nBut I let everyone discuss about this point.",
+          "createdAt": "2023-09-04T14:55:22Z",
+          "updatedAt": "2023-09-04T14:55:22Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "The not-hardwired relationship of interfaces, described at RFC8432 (\u201c\u2026flexible and therefore configured via a management system or controller\u201d) may be configured through the Equipment Model (RFC8438) by setting a read-write node of the model. In this model, to my understanding, the only relevant leaf for such a configuration is the leaf \u201cparent\u201d :\r\n\r\n        leaf parent {\r\n          type leafref {\r\n            path \"../../component/name\";\r\n            require-instance false;\r\n          }\r\n          description\r\n            \"The name of the component that physically contains this\r\n             component.\r\n\r\n             If this leaf is not instantiated, it indicates that this\r\n             component is not contained in any other component.\r\n\r\n            In the event that a physical component is contained by\r\n             more than one physical component (e.g., double-wide\r\n             modules), this node contains the name of one of these\r\n             components.  An implementation MUST use the same name\r\n             every time this node is instantiated.\";\r\n          reference\r\n            \"[RFC 6933](https://datatracker.ietf.org/doc/html/rfc6933): Entity MIB (Version 4) - entPhysicalContainedIn\";\r\n        }\r\n\r\nNote however that the relationship described at RFC8432 between \u201cEthernet port\u201d and \u201cRadio Link Terminal\u201d is not a contained-in or parent-child relationship, that can fit exactly to the \u201cparent\u201d leaf of the Equipment Model. It is more likely to describe the relationship of these interfaces as a relationship of peer interfaces.\r\n\r\nAt the RFC8343 interfaces model, the leaf-lists higher-layer-if and lower-layer-if, are read-only nodes, that can be used just to show the interfaces relationships (as it has been mentioned by Daniela too).\r\nBesides this, the RFC8343 has the following relevant statement:\r\n\r\n\u201c   While the interface layering is configured in interface-type-specific\r\n   models, two generic state data leaf-lists, \"higher-layer-if\" and\r\n   \"lower-layer-if\", represent a read-only view of the interface\r\n   layering hierarchy.\u201d",
+          "createdAt": "2023-09-08T09:50:27Z",
+          "updatedAt": "2023-09-08T09:50:27Z"
+        },
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This issue was mentioned during the [YANGsters meeting in IEEE](https://1.ieee802.org/yangsters-electronic-meeting-agenda-october-24-2023/). Similar issue may appears in other technologies which act as Ethernet bridges: Ethernet-over-OTN and FlexE (is there Ethernet inside Tunnel interfaces?).\r\n\r\nIEEE prefers to avoid increasing the `when` to include our `ianaift:microwaveRadioLinkTerminal`.\r\nThe proposal was to not modify the `ieee-dot1q-bridge` module and keep the [`when` clause as it is now](https://github.com/YangModels/yang/blob/bb8269aa263e0564ba475fffc4c3174f8994f2b6/standard/ieee/draft/802.1/Qcw/ieee802-dot1q-bridge.yang#L1141) (4 interfaces types).\r\nOur `ianaift:microwaveRadioLinkTerminal` may inherit from `ianaift:ethernetCsmacd` in order to accommodate the `when` clause. That enables the bridge to use it.\r\n\r\n```yang\r\n  identity microwaveRadioLinkTerminal {\r\n    base ethernetCsmacd;\r\n    description\r\n      \"radio link interface for one or several aggregated microwave carriers.\";\r\n    reference\r\n      \"RFC XXXX - A YANG Data Model for Microwave Radio Link\";\r\n  }\r\n```\r\nMost of the leaves of the `ianaift:ethernetCsmacd` will be irrelevant: `auto-negotiation`, `speed`, `flow-control`, ...\r\nIt was said that \"It's not unusual to have irrelevant leaves in models.\"\r\n\r\nI am also asking to my Orange colleagues if we have another option. ",
+          "createdAt": "2023-10-24T15:38:45Z",
+          "updatedAt": "2023-10-24T15:38:45Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "           +--ro higher-layer-if*            interface-ref\r\n           +--ro lower-layer-if*             interface-ref\r\n\r\nThe attributes above are read-only and cannot be configured via the NBI.\r\nThe question is if it needs to be, or if these attributes can be set by the system itself, when the RLT is created, given by the HW configuration.\r\nThe type of the interface can however be configured.",
+          "createdAt": "2023-11-16T10:40:36Z",
+          "updatedAt": "2023-11-16T10:40:36Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello\r\nIt seems to me that there is no need to augment the RLT interface to be\r\nspecified as bridge port.\r\nThe RLT interface is not a bridge port and we do not need to consider it as\r\nbridge port.\r\nThere is no Bridging to the RLT port itself actually but to the Ethernet\r\nport that is the peer interface of the RLT interface.\r\nI.e . to the Ethernet port, that we want to specify alternatively (as\r\nmentioned in the RFC8432) in some non-fixed way its association to the RLT\r\ninterface and not only\r\nin a hardwired way.\r\nThere is only a cross-connection between the Ethernet port and the RLT\r\ninterface and this is what is needed to be configured.\r\n\r\nI think that this issue has been discussed  due to the RFC8432 statement\r\nthat follows (see bold letters):\r\n\r\n\"the slot where the Radio Link Terminal (modem) is plugged in could be\r\n   associated with a specific Ethernet port due to the wiring in the\r\n   backplane of the system,\r\n*or it could be flexible and therefore   configured via a management system\r\nor controller.*\"\r\n\r\nIf we want to realize this cross-connection in a non-fixed way then I\r\nassume that the Element should have the\r\nHW capability to support the flexible configuration of RLT and Ethernet\r\nPort, eg  be configured to connect the\r\nRLT1 to either EthPort1 or EthPort2 etc.\r\nHowever this connection is not through the Bridge instance of the Element\r\nto my understanding.\r\n\r\nAnyway, it is clear that reading this association of Ethernet port and its\r\npeer RLT interface can be done by means of :\r\n\r\n       +--ro higher-layer-if*            interface-ref\r\n       +--ro lower-layer-if*             interface-ref\r\n\r\nNow the configuration of this association to be flexible, may be\r\nfinally not a point to be standardized\r\nbut finally related to specific Element HW capabilities.\r\n\r\nBEST REGARDS\r\nTheodoros Kallimanis\r\nPrincipal Engineer (Systems & SW)\r\nDepartment SSD\r\n______________________________________\r\nIntracom Telecom\r\n19.7 km Markopoulou Ave., Peania, GR 19002\r\nBuilding A3, 2nd floor\r\nt:   +30 2106671961\r\nf:   +30 2106671446\r\nm: +30 6941636679\r\n***@***.***\r\nwww.intracom-telecom.com\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a0\u03ad\u03bc 16 \u039d\u03bf\u03b5 2023 \u03c3\u03c4\u03b9\u03c2 12:40\u202f\u03bc.\u03bc., \u03bf/\u03b7 JonasAhl ***@***.***>\r\n\u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n>        +--ro higher-layer-if*            interface-ref\r\n>        +--ro lower-layer-if*             interface-ref\r\n>\r\n> The attributes above are read-only and cannot be configured via the NBI.\r\n> The question is if it needs to be, or if these attributes can be set by\r\n> the system itself, when the RLT is created, given by the HW configuration.\r\n> The type of the interface can however be configured.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1814190960>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVKDDGP7M3VFJGXAVD3YEXUS5AVCNFSM6AAAAAA347MZ26VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQMJUGE4TAOJWGA>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2023-11-16T12:00:38Z",
+          "updatedAt": "2023-11-16T12:00:38Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "IEEE 802.1 will not add more iftypes to the when statement for the interface augmentation.\r\nSuggest (if desired) to add an informative appendix with instructions on how to augment the Interfaces table.\r\n\r\nOption to create a new augmentation of ianaift.\r\n",
+          "createdAt": "2023-12-14T10:49:58Z",
+          "updatedAt": "2023-12-14T10:52:27Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "two options:\r\n1) Add a new ianaift (called microwaveRadioLinkTerminalBridged) that is for bridged microwaveRadioLinkTerminal (do this in the iana module, or in our module)\r\n2) Update ianaift in iana to add the base of Bridge to the microwaveRadioLinkTerminal Identity.\r\n3) Add a new identity to our module that is called microwaveRadioLinkTerminalBridged with base of Bridge.\r\n4) create a new module or container in the existing rlt module that ties the microwaveRadioLinkTerminal interface to a bridge port.\r\n\r\nAI:  determine the process to update the iana module with the solution from bullet 2 above.  Then report back.",
+          "createdAt": "2024-01-11T11:03:18Z",
+          "updatedAt": "2024-01-11T11:03:18Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with the comment from Jonas:\r\n\r\nhttps://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1814190960\r\n\r\nThere are no gaps if the configuration of the virtual ETH interface setup over an RLT interface is provided by the system. The system can instantiate an virtual ETH interface (type = 'ianaift:ethernetCsmacd') and an RLT interface (type = 'ianaift:microwaveRadioLinkTerminal') and provide the association between them using the `higher-layer-if` and `lower-layer-if` leaves, as defined in RFC8343.\r\n\r\nThere is a gap only in the case where the client needs to configure  virtual ETH interface setup over an RLT interface because the `higher-layer-if` and `lower-layer-if` leaves, as defined in RFC8343, are read-only.\r\n\r\nFrom my notes taken during the call with IEEE, I have taken a look at this I-D [draft-ietf-netmod-intf-ext-yang-12](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-intf-ext-yang-12) and noted that the following attribute could be useful to address this gap:\r\n\r\n```\r\nmodule: ietf-if-extensions\r\n  augment /if:interfaces/if:interface:\r\n    +--rw parent-interface if:interface-ref {sub-interfaces}?\r\n\r\n```\r\n\r\nThe only concern is that, in the current YANG model, there is a when statement which is not allowing us to use this attribute with 'ianaift:ethernetCsmacd' interfaces:\r\n\r\n```\r\n  /*\r\n   * Add generic support for sub-interfaces.\r\n   *\r\n   * This should be extended to cover all interface types that are\r\n   * child interfaces of other interfaces.\r\n   */\r\n  augment \"/if:interfaces/if:interface\" {\r\n    when \"derived-from(if:type, 'sub-interface') or\r\n          derived-from-or-self(if:type, 'ianaift:l2vlan') or\r\n          derived-from-or-self(if:type, 'ianaift:atmSubInterface') or\r\n          derived-from-or-self(if:type, 'ianaift:frameRelay')\"  {\r\n      description\r\n        \"Any ianaift:types that explicitly represent sub-interfaces\r\n         or any types that derive from the sub-interface identity.\";\r\n    }\r\n    if-feature \"sub-interfaces\";\r\n\r\n    description\r\n      \"Adds a parent interface field to interfaces that model\r\n       sub-interfaces.\";\r\n    leaf parent-interface {\r\n\r\n      type if:interface-ref;\r\n\r\n      mandatory true;\r\n      description\r\n        \"This is the reference to the parent interface of this\r\n         sub-interface.\";\r\n      reference \"RFC XXXX, Section 2.6 Sub-interface\";\r\n    }\r\n  }\r\n\r\n```\r\n\r\n However, looking at the comment, it seems worthwhile removing the `when` statement to cover any interface type which can potentially be a child interface of other interfaces:\r\n\r\n```\r\n   * This should be extended to cover all interface types that are\r\n   * child interfaces of other interfaces.\r\n\r\n```\r\n\r\nMy proposal is to propose Netmod WG to remove the `when` statement and, if the proposal is accepted, to use this model to resolve this gap\r\n",
+          "createdAt": "2024-01-17T11:03:13Z",
+          "updatedAt": "2024-01-17T11:03:13Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Most of the leaves of the `ianaift:ethernetCsmacd` will be irrelevant: `auto-negotiation`, `speed`, `flow-control`, ... It was said that \"It's not unusual to have irrelevant leaves in models.\"\r\n> \r\n> I am also asking to my Orange colleagues if we have another option.\r\n\r\nLet's review one by one\r\n \r\n### Autonegotiation\r\n\r\nAlso not all the 802.3 interfaces support auto-negotiation. The IEEE YANG model defines the `auto-negotiation` as a presence container:\r\n\r\nhttps://github.com/YangModels/yang/blob/398d5f579fd281a812226450c44fb1566fc18d3d/standard/ieee/published/802.3/ieee802-ethernet-interface.yang#L146-L149\r\n\r\nThis container must not be present for virtual ETH interfaces setup over an RTL interface.\r\n\r\nThe IEEE 802.3 YANG model also describes the behavior to be implemented if the auto-negotiation is configured for an interface that does not support auto-negotiation:\r\n\r\nhttps://github.com/YangModels/yang/blob/398d5f579fd281a812226450c44fb1566fc18d3d/standard/ieee/published/802.3/ieee802-ethernet-interface.yang#L188-L189\r\n\r\nThis requirement also applies to virtual ETH interfaces setup over an RTL interface.\r\n\r\nWithin the `capabilities` container, the system must report to the client that auto-negotiation is not supported by the virtual ETH interfaces setup over an RTL interface.\r\n\r\n### Duplex\r\n\r\nMy understanding is that virtual ETH interfaces setup over an RTL interface are always full duplex.\r\n\r\nIf this is the case, this attribute can always be set to 'full' and any configuration ignored.\r\n\r\nIMHO, it would be nice to have some other leaf (e.g., within the `capabilities` container) reporting to the client the duplex modes supported by a given ETH interface. We might discuss this with IEEE people since this would be useful also for 802.3 interfaces.\r\n\r\n### Flow Control\r\n\r\nMy understanding is that virtual ETH interfaces setup over an RTL interface do not support any 802.3 flow control mechanism.\r\n\r\nFlow control attributes are defined under a couple of features so it is quite straightforward not to support them if they are not supported by all the Ethernet interfaces (including all the local 802.3 ETH interfaces) on the system.\r\n\r\nIf instead, flow control mechanisms are supported for some local 802.3 ETH interfaces, the features must be supported by the system.\r\n\r\nIn this case, the configuration of the flow control mechanisms can be always disabled and any configuration ignored.\r\n\r\nIMHO, it would be nice to have some other leaf (e.g., within the `capabilities` container) reporting to the client the flow control supported by a given ETH interface. We might discuss this with IEEE people since this would be useful also for 802.3 interfaces.\r\n\r\n### Statistics\r\n\r\nAll the counters are defined as optional RO attributes. The system can report only the counters which are supported.",
+          "createdAt": "2024-01-17T11:38:36Z",
+          "updatedAt": "2024-01-17T11:38:36Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello all\r\nLooking at RFC8432, I see the RLT definition as follows:\r\n\r\nRadio Link Terminal: an interface providing Ethernet capacity\r\n         and/or Time Division Multiplexing (TDM) capacity to the\r\n         associated Ethernet and/or TDM interfaces in a node.  It is\r\n         used for setting up a transport service over a microwave radio\r\n         link.\r\n\r\nThis implies that the interface type of the RLT can have either\r\nEthernet capacity or TDM capacity.\r\n\r\nFor the TDM capacity the mw-radio-link YANG model has the list per RLT:\r\n    list tdm-connections {\r\n      if-feature \"tdm\";\r\n      key \"tdm-type\";\r\n      description\r\n        \"A list stating the number of active TDM connections\r\n         of a specified tdm-type that is configured to be\r\n         supported by the RLT.\";\r\n      leaf tdm-type {\r\n        type identityref {\r\n          base mw-types:tdm-type;\r\n        }\r\n        description\r\n          \"The type of TDM connection, which also indicates\r\n           the supported capacity.\";\r\n      }\r\n      leaf tdm-connections {\r\n        type uint16;\r\n        mandatory true;\r\n        description\r\n          \"Number of connections of the specified type.\";\r\n      }\r\n    }\r\n\r\n(which to my opinion misses to identify the exact tdm lines and\r\nspecifies instead just the number of the connected to the RLT TDM\r\nlines, but this is a separate issue).\r\n\r\nI have always understood that the issue, that we discuss, concerns\r\nonly with the sentence of the RFC8432, that indicates user management\r\nflexible configuration of the ethernet port connectivity to the RLT:\r\n\r\n\r\n\"the slot where the Radio Link Terminal (modem) is plugged in could be\r\n   associated with a specific Ethernet port due to the wiring in the\r\n   backplane of the system,\r\n*or it could be flexible and therefore   configured via a management\r\nsystem or controller.*\"\r\n\r\nI.e. not be based at a fixed hard-wired connection to the backplane of\r\nthe system but allow the user to specify / activate such a connection\r\nof the RLTx to\r\nvarious different Ethernet Ports of the system, eg ETHx or ETHy or ETHz.\r\n\r\nBridging etc are issues concerning with the associated Ethernet port\r\nof the system, not RLT itself. We just need to indicate in some way\r\nthe association of the RLT interface to that Ethernet port.\r\n\r\nThis association / connectivity may not need to consider the RLT i/f\r\nas a Subinterface of a Virtual Ethernet Interface but may need instead\r\nto *extend the ietf-microwave-radio-link.yang to include an\r\nethernet-connection leaf at RLT interface with the interface-ref (name\r\nof the ethernet interface).*\r\nThis association is adequate to my opinion and there is no other need\r\nto be specified because the ethernet connection is managed by\r\nconfiguring the associated ethernet interface, not the rlt interface\r\n(autoneg, speed, duplex etc).\r\nThis additional leaf can be also used in the case of the fixed\r\nhard-wired ethernet connection to return the hard-wired connected\r\nbackplane ethernet port to this rlt interface.\r\n\r\nThe proposal of Italo may be also reasonable, i.e. specifying the rlt\r\ninterface as a subinterface of an etherlike virtual interface but this\r\nhigher-level interface is not actually the peer connected ethernet\r\ninterface to rlt but a higher-level interface, parent of the rlt, that\r\nis connected to the peer interface (eg the backplane port) and we\r\nstill need to provide configuration of this virtual  interface to the\r\npeer backplane ethernet port (that's why Italo correctly studies the\r\nconfiguration attributes of this virtual interface).\r\nIn this way, I think that we still need more things to add for the\r\nstated at RFC8432 flexible configuration of RLT to a specific Ethernet\r\nport (real, not virtual) via the mng system or the controller.\r\n\r\nBest Regards\r\n\r\n\r\n\r\nTheodoros Kallimanis\r\nPrincipal Engineer (Systems & SW)\r\nDepartment SSD\r\n______________________________________\r\nIntracom Telecom\r\n19.7 km Markopoulou Ave., Peania, GR 19002\r\nBuilding A3, 2nd floor\r\nt:   +30 2106671961\r\nf:   +30 2106671446\r\nm: +30 6941636679\r\n***@***.***\r\nwww.intracom-telecom.com\r\n\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a4\u03b5\u03c4 17 \u0399\u03b1\u03bd 2024 \u03c3\u03c4\u03b9\u03c2 1:38\u202f\u03bc.\u03bc., \u03bf/\u03b7 italobusi ***@***.***>\r\n\u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> Most of the leaves of the ianaift:ethernetCsmacd will be irrelevant:\r\n> auto-negotiation, speed, flow-control, ... It was said that \"It's not\r\n> unusual to have irrelevant leaves in models.\"\r\n>\r\n> I am also asking to my Orange colleagues if we have another option.\r\n>\r\n> Let's review one by one\r\n> Autonegotiation\r\n>\r\n> Also not all the 802.3 interfaces support auto-negotiation. The IEEE YANG\r\n> model defines the auto-negotiation as a presence container:\r\n>\r\n>\r\n> https://github.com/YangModels/yang/blob/398d5f579fd281a812226450c44fb1566fc18d3d/standard/ieee/published/802.3/ieee802-ethernet-interface.yang#L146-L149\r\n>\r\n> This container must not be present for virtual ETH interfaces setup over\r\n> an RTL interface.\r\n>\r\n> The IEEE 802.3 YANG model also describes the behavior to be implemented if\r\n> the auto-negotiation is configured for an interface that does not support\r\n> auto-negotiation:\r\n>\r\n>\r\n> https://github.com/YangModels/yang/blob/398d5f579fd281a812226450c44fb1566fc18d3d/standard/ieee/published/802.3/ieee802-ethernet-interface.yang#L188-L189\r\n>\r\n> This requirement also applies to virtual ETH interfaces setup over an RTL\r\n> interface.\r\n>\r\n> Within the capabilities container, the system must report to the client\r\n> that auto-negotiation is not supported by the virtual ETH interfaces setup\r\n> over an RTL interface.\r\n> Duplex\r\n>\r\n> My understanding is that virtual ETH interfaces setup over an RTL\r\n> interface are always full duplex.\r\n>\r\n> If this is the case, this attribute can always be set to 'full' and any\r\n> configuration ignored.\r\n>\r\n> IMHO, it would be nice to have some other leaf (e.g., within the\r\n> capabilities container) reporting to the client the duplex modes\r\n> supported by a given ETH interface. We might discuss this with IEEE people\r\n> since this would be useful also for 802.3 interfaces.\r\n> Flow Control\r\n>\r\n> My understanding is that virtual ETH interfaces setup over an RTL\r\n> interface do not support any 802.3 flow control mechanism.\r\n>\r\n> Flow control attributes are defined under a couple of features so it is\r\n> quite straightforward not to support them if they are not supported by all\r\n> the Ethernet interfaces (including all the local 802.3 ETH interfaces) on\r\n> the system.\r\n>\r\n> If instead, flow control mechanisms are supported for some local 802.3 ETH\r\n> interfaces, the features must be supported by the system.\r\n>\r\n> In this case, the configuration of the flow control mechanisms can be\r\n> always disabled and any configuration ignored.\r\n>\r\n> IMHO, it would be nice to have some other leaf (e.g., within the\r\n> capabilities container) reporting to the client the flow control\r\n> supported by a given ETH interface. We might discuss this with IEEE people\r\n> since this would be useful also for 802.3 interfaces.\r\n> Statistics\r\n>\r\n> All the counters are defined as optional RO attributes. The system can\r\n> report only the counters which are supported.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1895632354>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVPCNADXQANMDNI4HH3YO6Z4NAVCNFSM6AAAAAA347MZ26VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQOJVGYZTEMZVGQ>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-01-17T16:16:05Z",
+          "updatedAt": "2024-01-17T16:16:05Z"
+        },
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "[Comment 1895580348](https://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1895580348): \r\n> My proposal is to propose Netmod WG to remove the `when` statement and, if the proposal is accepted, to use this model to resolve this gap\r\n\r\nOne of the 4 proposals from @samans is to change/add the base of our microwaveRadioLinkTerminal identity (see [comment 1886882213](https://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1886882213)). All of the proposition assume that IEEE will not change the ieee802-dot1q-bridge module. Do we have 5 options?",
+          "createdAt": "2024-01-18T08:35:13Z",
+          "updatedAt": "2024-01-18T08:35:13Z"
+        },
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In [comment 1895632354](https://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1895632354) \"Let's review one by one\": I understand that the first challenge (I mentionned on top) does not exist and that you are confortable with the diagram. Is that correct?\r\n\r\nTherefore, the only point to takle is the creation of this association \"virtual Eth\" <=>RTL (because high-layer-if and lower-layer-if are read-only). Correct?",
+          "createdAt": "2024-01-18T08:54:21Z",
+          "updatedAt": "2024-01-18T08:54:21Z"
+        },
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Following this [morning meeting](https://github.com/samans/draft-ybam-rfc8561bis/blob/main/minutes/2024-01-18), I belive that issue can be closed. The 3 questions are replied:\r\n- Yes, we are confortable with.\r\n- The controller know the relation which \"virtual Eth\" corresponds to which microwaveRadioLinkTerminal, using high-layer-if and lower-layer-if leaf-lists.\r\n- If a microwave equipement act as an IP router, \"virtual Eth\" will be implemented with type as ianaift:ethernetCsmacd and perform IP routing & forwarding on it (so, there is the 3 same layers: VirtualEth, RTL, CT).\r\n\r\nAs a side effect, both the \"virtual Eth\" and a real Ethernet 802.3 will be represented using ianaift:ethernetCsmacd.",
+          "createdAt": "2024-01-18T14:59:29Z",
+          "updatedAt": "2024-01-21T13:41:29Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Thanks for the update.\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a0\u03ad\u03bc, 18 \u0399\u03b1\u03bd 2024, 4:59 \u03bc.\u03bc. \u03bf \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7\u03c2 jrebiffe <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> Following this morning meeting, I belive that issue can be closed. The 3\r\n> questions are replied:\r\n>\r\n>    - Yes, we are confortable with.\r\n>    - The controller know the relation which \"virtual Eth\" corresponds to\r\n>    which microwaveRadioLinkTerminal, using high-layer-if and lower-layer-if\r\n>    leaf-lists.\r\n>    - If a microwave equipement act as an IP router, \"virtual Eth\" will be\r\n>    implemented with type as ianaift:ethernetCsmacd and perform IP routing &\r\n>    forwarding on it (so, there is the 3 same layers: VirtualEth, RTL, CT).\r\n>\r\n> As a side effect, both the \"virtual Eth\" and a real Ethernet 802.3 will be\r\n> represented using ianaift:ethernetCsmacd.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/19#issuecomment-1898643117>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVPDUYO5V6HQSFMGDLLYPE2FXAVCNFSM6AAAAAA347MZ26VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTQOJYGY2DGMJRG4>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-01-18T15:18:14Z",
+          "updatedAt": "2024-01-18T15:18:14Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Based on the discussion during the call on the 18th of January, this issue will be closed.\r\nThere is work underway in the IETF that will help.  See https://datatracker.ietf.org/doc/html/draft-ietf-netmod-intf-ext-yang-12 (Interface Extensions).",
+          "createdAt": "2024-01-20T20:36:18Z",
+          "updatedAt": "2024-01-20T20:36:18Z"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOHLTwws5zB2Vb",
+      "title": "Potential usage of a coding modulation profile list",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/20",
+      "state": "OPEN",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "use case and examples"
+      ],
+      "body": "This issues is an add on on the discussion around #13 and #16.\r\nIn this issues it should be discussed if a list of coding-modulation-profiles (cm-profile) should be modelled and how it could be used. \r\nBasically what is the value of such profiles.\r\n\r\nCurrent understanding - to be challenged :) \r\n- A CM-profile does not group a set of configuration parameters and its values. So it must not be used as a kind of bulk configuration.\r\n- A CM-profile describes the constrains of depending parameters \r\n  - Example: **parameter-value-a** must not exceed value x if **parameter-value-b** is equals to y.\r\n  - Therefore a coding-modulation-profile can be used for validating the configuration.\r\n- A CM-profile describes the \"behaviour\" of a device and includes information of a technical description in a machine readable way.\r\n\r\nBase on the understanding above a use case could be that the SDN Controller validates the configuration to the device against a selected profile. \r\n\r\n![usage-of-coding-modulation-profile](https://github.com/samans/draft-ybam-rfc8561bis/assets/9154981/512020d2-910b-43ac-a889-7fee5b2084d1)\r\n\r\nSource code - feel free to modify [ietf-microwave-usage-of-coding-modulation-profile.puml.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/12829955/ietf-microwave-usage-of-coding-modulation-profile.puml.txt)\r\n\r\n\r\n",
+      "createdAt": "2023-10-06T10:24:16Z",
+      "updatedAt": "2023-12-14T10:57:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "niloda",
+          "authorAssociation": "NONE",
+          "body": "ACM profiles are useful for some microwave network control/automation applications. They are applications that typically operate in a closed loop in order to continuously maximize network efficiency and functionality, i.e. applications that use a feedback value to configure the output.\r\n\r\nTwo very simplified use-case examples are described below, which can however clarify the usefulness of the ACM profile list.\r\n\r\n**Use-case 1: interference reduction**\r\nSuppose we want to implement an application that minimizes interference between radio links in a specific geographical area. This application would need to know the SNR value of the radio links and would act on the transmitted power value, according to a specific control algorithm. To correctly configure transmitted power, the application must know the transmitted power ranges allowed by each ACM profile. The transmitted power ranges are provided by the _max-tx-power_ and _min-tx-power_ parameters\r\n\r\n**Use-case2: Shaping**\r\nSuppose we want to implement an application that reduces the throughput of the routers at the ends of a chain of one or more radio links, in order to avoid packet loss by exploiting the buffering capacity of the router. This application would need to know the current transmitted capacity available on the radio links in order to appropriately configure the router shaper. The current transmitted capacity is a function of the ACM profile that the link is operating at a given moment (which depends on atmospheric events). The current capacity is provided by the _nominal-tx-capacity_ parameter included in the ACM profile list.",
+          "createdAt": "2023-10-23T15:46:09Z",
+          "updatedAt": "2023-10-23T15:46:09Z"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOHLTwws53AMHa",
+      "title": "ONF Gap Analysis",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/22",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "gap analysis"
+      ],
+      "body": "Link to excel sheet with a comparison between ONF & IETF related fragments for the microwave domain. \r\nThe focus for this issue is the content in air-interface.\r\nNext step is to walk through the sheets in order to understand the gaps identified.\r\n\r\nhttps://oranalliance.atlassian.net/wiki/pages/viewpageattachments.action?pageId=2796486759&preview=%2F2796486759%2F2830729250%2Fietf-vs-onf-microwave%26ethernetwired-v03.xlsx&search_id=750a7e3a-bf9a-45a2-8fd8-2aa07a574880\r\n",
+      "createdAt": "2023-11-16T10:25:38Z",
+      "updatedAt": "2023-12-14T10:53:17Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "https://github.com/samans/draft-ybam-rfc8561bis/blob/main/presentations/ietf-vs-onf-microwave%26ethernetwired-v03.xlsx",
+          "createdAt": "2023-11-16T13:59:36Z",
+          "updatedAt": "2023-11-16T13:59:36Z"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOHLTwws54F5k1",
+      "title": "actual-received-level power is absent in topology module",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/23",
+      "state": "CLOSED",
+      "author": "jrebiffe",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "topology enhancement"
+      ],
+      "body": "I read the [ietf-microwave-topology](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-mw-topo-yang-07#name-yang-tree) and I wonder why the `actual-received-level` power is absent : If the NMS have the SNIR it probably also known the received power. I believe that you discussed that and I am not sure if an \"issue\" is an appropriate section for such question.\r\n\r\n```yang\r\n        +--:(microwave-carrier)\r\n           +--rw microwave-carrier!\r\n              +--rw tx-frequency?               uint32\r\n              +--rw rx-frequency?               uint32\r\n              +--rw channel-separation?         uint32\r\n              +--ro actual-tx-cm?               identityref\r\n              +--ro actual-snir?                decimal64\r\n              +--ro actual-transmitted-level?   decimal64\r\n              +--ro actual-received-level?      decimal64  /* This line does not exist. */\r\n```\r\n\r\nIn addition, I see that the module ietf-microwave-radio-link use a type `power` whereas [ietf-microwave-topology](https://datatracker.ietf.org/doc/html/rfc8561#section-2.1) directly uses type `decimal64` for power levels.",
+      "createdAt": "2023-11-28T16:17:54Z",
+      "updatedAt": "2024-10-10T09:37:11Z",
+      "closedAt": "2024-10-10T09:37:11Z",
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Answering to the first question (actual-received-level not present on Topology model): we identified the main attributes to use to report to NBI interface and RSL was not included.\r\n\r\nSecond question (different type for SNIR/TSL on Topology and Interface models) : at the end the  type `power`  is defined as a `decimal64`, but on the second case there is an external module (included on Interface model) where all types are listed and used for more attributes, instead in case of Topology no other attributes use it and we haven't foresee to include the same external module.",
+          "createdAt": "2023-11-30T13:51:17Z",
+          "updatedAt": "2023-11-30T13:51:17Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Wait for mw-topo to publish, then work on a bis.",
+          "createdAt": "2023-12-14T10:56:53Z",
+          "updatedAt": "2023-12-14T10:56:53Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Move discussion to CCAMP list for topology enhancement.",
+          "createdAt": "2024-10-10T09:37:11Z",
+          "updatedAt": "2024-10-10T09:37:11Z"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOHLTwws54F8a4",
+      "title": "Duplication of link information in topology model",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/24",
+      "state": "CLOSED",
+      "author": "jrebiffe",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "topology enhancement"
+      ],
+      "body": "The example of [B.1. Instance data for 2+0 mode](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-mw-topo-yang-07#name-instance-data-for-20-mode) includes JSON data from the ietf-interfaces and ietf-microwave-radio-link. If I understand properly, the module [ietf-tp-interface-reference-topology](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-if-ref-topo-yang-01) enables all information of ietf-interfaces to be reported in topology models.\r\n\r\nMicrowave information are reported twice: the example highlight this copy for `channel-separation`, `tx-frequency` and `rx-frequency`/`duplex-distance`.\r\n**Do you also perceive this as duplication? How can we avoid that duplication?**\r\n\r\nSide note: Interestingly, L2Interface1 and L2Interface2 have a type of ethernetCsmacd discussed in issue #19.",
+      "createdAt": "2023-11-28T16:23:54Z",
+      "updatedAt": "2024-10-10T09:37:00Z",
+      "closedAt": "2024-10-10T09:37:00Z",
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The attributes that seems to be duplicated on Topology model respect to the Interface model are the attributes selected to be useful to be reported on NBI interface.\r\nThe [ietf-tp-interface-reference-topology](https://datatracker.ietf.org/doc/html/draft-ietf-ccamp-if-ref-topo-yang-01) is an optional attribute that could be not supported on the MDSC layer , so the attributes on Interface model are not reported in this case.\r\n",
+          "createdAt": "2023-11-30T11:32:02Z",
+          "updatedAt": "2023-11-30T11:32:02Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Wait for mw-topo to publish, then work on a bis.",
+          "createdAt": "2023-12-14T10:56:39Z",
+          "updatedAt": "2023-12-14T10:56:39Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Move discussion to CCAMP list for topology enhancement.",
+          "createdAt": "2024-10-10T09:37:00Z",
+          "updatedAt": "2024-10-10T09:37:00Z"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOHLTwws54THDI",
+      "title": "Feature: radio-signal-id (Trail trace identifier (TTI))",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
+      "state": "OPEN",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "samans"
+      ],
+      "labels": [
+        "Review"
+      ],
+      "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "createdAt": "2023-11-30T09:55:44Z",
+      "updatedAt": "2024-10-10T09:31:06Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "for further discussion a \"working-document-yang-model\" should be created -> AP: Martin for 2023-12-07",
+          "createdAt": "2023-11-30T10:32:43Z",
+          "updatedAt": "2023-11-30T10:32:43Z"
+        },
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Proposed solution:\r\n\r\n```\r\nmodule: ietf-onf-gab-discussion\r\n\r\n  augment /if:interfaces/if:interface:\r\n    +--rw trail-trace-identifier {trail-trace-identifier}?\r\n       +--rw receiver\r\n       |  +--rw trail-trace-identifier-expected\r\n       |  |  +--rw source-access-point-identifier         access-point-identifier\r\n       |  |  +--rw destination-access-point-identifier    access-point-identifier\r\n       |  |  +--rw operator-specific                      string\r\n       |  +--ro trail-trace-identifier-received\r\n       |  |  +--ro source-access-point-identifier         access-point-identifier\r\n       |  |  +--ro destination-access-point-identifier    access-point-identifier\r\n       |  |  +--ro operator-specific                      string\r\n       |  +--ro status?                            enumeration\r\n       +--rw transmitter\r\n          +--rw trail-trace-identifier-transmitted\r\n             +--rw source-access-point-identifier         access-point-identifier\r\n             +--rw destination-access-point-identifier    access-point-identifier\r\n             +--rw operator-specific                      string\r\n```\r\n\r\nPlease see: ietf-onf-gab-discussion.yang\r\n[ietf-onf-gab-discussion.yang.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/14049972/ietf-onf-gab-discussion.yang.txt)\r\n",
+          "createdAt": "2024-01-25T09:50:24Z",
+          "updatedAt": "2024-01-25T10:00:00Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Review the models from ITU-T Q14.  Suggest moving this feature to if-ext draft.\r\n\r\nHow does this apply to microwave?  Is there an example that could be added in the Radio Link Draft?\r\nIn microwave, this feature would be used to determine if the radio on one side is talking to the expected radio on the other side.\r\n\r\nFurther discussion on the formatting of the ids is needed.\r\n\r\n",
+          "createdAt": "2024-02-08T10:49:03Z",
+          "updatedAt": "2024-02-08T10:49:03Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "For microwave links (point to point connections)  the source-access-point-identifier and destination-access-point-identifier are not needed.",
+          "createdAt": "2024-02-15T09:22:43Z",
+          "updatedAt": "2024-02-15T09:22:43Z"
+        },
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed almost 2 weeks ago we can simplify the TTIs like this:\r\n\r\n```\r\n  augment /if:interfaces/if:interface:\r\n    +--rw trail-trace-identifier {trail-trace-identifier}?\r\n       +--rw receiver\r\n       |  +--rw trail-trace-identifier-expected?   trail-trace-identifier-type\r\n       |  +--ro trail-trace-identifier-received?   trail-trace-identifier-type\r\n       |  +--ro status?                            enumeration\r\n       +--rw transmitter\r\n       |  +--rw trail-trace-identifier-transmitted?   trail-trace-identifier-type\r\n       +--rw rx-enabled?         boolean\r\n       +--ro rx-oper-status?     oper-status\r\n       +--rw cryptographic {cryptographic}?\r\n       |  +--rw enabled?             boolean\r\n       |  +--rw symmetric-key-ref    ks:central-symmetric-key-ref\r\n```\r\n\r\nwith a typedef like this:\r\n\r\n```\r\n  typedef trail-trace-identifier-type {\r\n    type union {\r\n      type string {\r\n        length \"1..64\";\r\n      }\r\n      type uint32;\r\n    }\r\n    description\r\n      \"An up to 64 byte string representing the trail trace identifier\r\n       value, inspired by ITU-T. \";\r\n    reference\r\n      \"ITU-T G709\";\r\n  }\r\n```\r\nIt combines the needs of a string but also of a uint.\r\n\r\nIn any case such model should be part of the ietf-if-extension and should not be part of ietf-microwave-radio-link.\r\n\r\n\r\n[ietf-onf-gab-discussion.yang.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/14436065/ietf-onf-gab-discussion.yang.txt)\r\n",
+          "createdAt": "2024-02-28T15:19:04Z",
+          "updatedAt": "2024-02-28T15:20:10Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Move this to the issue list of the ietf interface extensions work (netmod).\r\nhttps://datatracker.ietf.org/doc/html/draft-ietf-netmod-intf-ext-yang",
+          "createdAt": "2024-04-04T09:35:48Z",
+          "updatedAt": "2024-04-04T09:35:48Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Review this again, and add as microwave specific extension.",
+          "createdAt": "2024-10-10T09:31:05Z",
+          "updatedAt": "2024-10-10T09:31:05Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOHLTwws58V2He",
+      "title": "air-interface:receiver-is-on",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/26",
+      "state": "OPEN",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Discussion Required",
+        "gap analysis"
+      ],
+      "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "createdAt": "2024-01-17T12:35:30Z",
+      "updatedAt": "2024-02-15T09:28:57Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "alexandrustancu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Description of the parameters:\r\n\r\n- rx-enabled:\r\nMaintenance Feature. Activation of the receiver inside the radio shall be expressed as a 'true'. Attribute shall also be used for RX main and RX diversity squelches in case of diversity configurations. The attribute is optional.\r\n- rx-oper-status:\r\nShows the operative status of the receiver.\r\nOFF/ON\r\nThis attribute is optional.",
+          "createdAt": "2024-01-18T19:52:07Z",
+          "updatedAt": "2024-01-18T19:52:07Z"
+        },
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Please see: \r\n[ietf-onf-gab-discussion.yang.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/14066868/ietf-onf-gab-discussion.yang.txt)\r\n",
+          "createdAt": "2024-01-26T15:59:36Z",
+          "updatedAt": "2024-01-26T15:59:36Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Use tx-oper-status as template for rx-oper-status.  Create a type for txrx-oper-status...?  naming tbd.\r\n\r\nAdd a grouping to the augmentation for tx like was done for rx.\r\n",
+          "createdAt": "2024-02-08T10:56:57Z",
+          "updatedAt": "2024-02-08T10:56:57Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My proposal is to use the receiver attributes (grouping receiver) in a list to allow 2 receivers (Rx main and Rx diversity) on the same CT ('microwaveCarrierTermination' interface).",
+          "createdAt": "2024-02-15T09:28:56Z",
+          "updatedAt": "2024-02-15T09:28:56Z"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOHLTwws58V4fZ",
+      "title": "air-interface:alic-is-on",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/27",
+      "state": "CLOSED",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "ALIC: Adjacent Link Interference Cancelation\r\n\r\nThe ALIC feature is not a common microwave device feature.\r\n// @all: is this statement true?\r\n\r\nTherefore the model should not support ALIC related configuration. \r\nThe issue can be 'rejected'. ",
+      "createdAt": "2024-01-17T12:40:57Z",
+      "updatedAt": "2024-01-20T20:39:09Z",
+      "closedAt": "2024-01-20T20:39:09Z",
+      "comments": [
+        {
+          "author": "alexandrustancu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Decision on the call from 2024-01-18 was to reject this feature, since it is not supported by many vendors. The configuration can be added by vendors who support it as a proprietary augmentation.",
+          "createdAt": "2024-01-18T19:53:37Z",
+          "updatedAt": "2024-01-18T19:53:37Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Closed at 2024-01-18 meeting.",
+          "createdAt": "2024-01-20T20:39:09Z",
+          "updatedAt": "2024-01-20T20:39:09Z"
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOHLTwws59GR0D",
+      "title": "MW-Link encryption",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/28",
+      "state": "OPEN",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Review"
+      ],
+      "body": "In the excel spreadsheet line 97 and98 is documented that the ONF air interface supports encryption related configurations.\r\n\r\n```\r\n     |  |     |  +--rw air-interface:encryption-is-on?                   boolean\r\n     |  |     |  +--rw air-interface:cryptographic-key?                  string\r\n```\r\n\r\n**Discussion:**\r\n\r\nI would prefer that such feature is handled by\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/28/\r\n\r\nBut this module is still a draft - how can we deal with it?",
+      "createdAt": "2024-01-24T17:54:18Z",
+      "updatedAt": "2024-10-10T09:52:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "copy yangs from ietf github:\r\n```\r\nwget https://raw.githubusercontent.com/netconf-wg/crypto-types/master/ietf-crypto-types.yang\r\nwget https://raw.githubusercontent.com/netconf-wg/keystore/master/ietf-keystore.yang\r\n```\r\n\r\nPlease see: \r\n[ietf-onf-gab-discussion.yang.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/14109478/ietf-onf-gab-discussion.yang.txt)\r\n\r\nselected yang tree:\r\n\r\n```\r\n  augment /if:interfaces/if:interface:\r\n       [...]\r\n       +--rw cryptographic {cryptographic}?\r\n          +--rw enabled?             boolean\r\n          +--rw symmetric-key-ref    ks:central-symmetric-key-ref\r\n```",
+          "createdAt": "2024-01-31T09:07:08Z",
+          "updatedAt": "2024-01-31T09:19:42Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "https://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/34/\r\nand\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-keystore/\r\nAre in the RFC Editor's queue.  So will be RFCs before the radio-link bis is finished.\r\n\r\nValidate that the new modules are sufficient for radio-link-bis\r\n\r\n",
+          "createdAt": "2024-10-10T09:52:07Z",
+          "updatedAt": "2024-10-10T09:52:07Z"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOHLTwws59GfC6",
+      "title": "air-interface:loop-back-kind-on",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/29",
+      "state": "CLOSED",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "gap analysis"
+      ],
+      "body": "In the excel spreadsheet line 99 is documented that the ONF air interface supports the configuration of a loopback.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:loop-back-kind-on?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 loop-back-type\r\n```\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following attribute\r\n\r\n```\r\n  |\u00a0 +--rw mrl:loopback?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 loopback with if-feature loopback\r\n```\r\n\r\nAttribute description:\r\n        \"Maintenance Feature. The loopback function according to the chosen value. The default value is 'NONE'.\";\r\n\r\nFeature definition:\r\n\r\n```\r\nfeature loopback {\r\n  description \r\n    \"Supports a maintenance feature maintenance feature to loop back local or remote signals\";\r\n}\r\n```\r\n\r\nThe 'loopback' type should be defined as:\r\n\r\n```\r\ntypedef loopback {\r\n  type enumeration {\r\n\r\n    enum NONE {\r\n      description\r\n        \"The loopback function is disabled.\";\r\n    }\r\n\r\n    enum REMOTE {\r\n      description\r\n        \"Returning the signal of the remote site back to the remote site.\";\r\n    }\r\n\r\n    enum LOCAL {\r\n      description\r\n        \"Returning the signal of the local site back to the local site.\";\r\n    }\r\n\r\n  }\r\n  description \r\n    \"Values describing the loopback function.\";\r\n}\r\n```\r\n\r\n",
+      "createdAt": "2024-01-24T18:29:36Z",
+      "updatedAt": "2024-02-08T10:23:58Z",
+      "closedAt": "2024-02-08T10:23:58Z",
+      "comments": [
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "copy yang from ietf git hub:\r\n```\r\nwget https://raw.githubusercontent.com/netmod-wg/interface-extensions-yang/master/ietf-if-extension@02023-01-26.yang\r\n```\r\n\r\nThe yang feature loopback should be implemented by microwave devices. \r\nA model for loopback exists (ietf-if-extension@02023-01-26.yang) , no need to modify RFC8561 yang itself, but the support of ietf-if-extension should be mentioned.",
+          "createdAt": "2024-01-31T09:23:48Z",
+          "updatedAt": "2024-01-31T09:29:59Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In the ietf-microwave-radio-link there are the mrl:if-loop and mrl:rf-loop attributes, both with direction informations (`client`, `radio`) as `local `or `remote `\r\nWhat is the new requirement?",
+          "createdAt": "2024-01-31T17:54:22Z",
+          "updatedAt": "2024-01-31T17:54:22Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Here is an SVG of the diagram we were talking about.  See if I got it right and if you like the formatting.  I started with ascii art and used aasvg to generate the SVG, so this will work in text and html/pdf versions.\r\n\r\n![loopback](https://github.com/samans/draft-ybam-rfc8561bis/assets/8321265/7df1cb48-96c0-4535-b3b4-7651dc2f5534)\r\n\r\nTo resolve the use of ietf-if-extensions, we can evaluate the use of the loopback, but we need two loopbacks for one interface and the extension draft doesn't currently support that.",
+          "createdAt": "2024-02-01T19:31:46Z",
+          "updatedAt": "2024-02-01T19:31:46Z"
+        },
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@samans : Many thanks for the drawing, very helpful!!! - Just a small remark/question: would it make sense to draw a box around Radio Unit and Modem Unit and label it with \"ietf-interface\"? This would clarify the fact that ietf-if-extension cannot be used.\r\n",
+          "createdAt": "2024-02-02T12:17:19Z",
+          "updatedAt": "2024-02-02T12:17:52Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "I think I see your point.  The point is there is one ietf-interface that has more than one loopback.  That might be a different picture, there is only so much room with 72 character ascii.  I propose something that shows the lines like Jonas put in his sketch.",
+          "createdAt": "2024-02-02T12:33:54Z",
+          "updatedAt": "2024-02-02T12:33:54Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> To resolve the use of ietf-if-extensions, we can evaluate the use of the loopback, but we need two loopbacks for one interface and the extension draft doesn't currently support that.\r\n\r\nWhile it is true that `ietf-if-extensions` does not support two loopbacks for one interface, IMHO, it would be possible to either:\r\n1. update `ietf-if-extensions` to fix the issue in a generic way; \r\n2. provide some augmentations to the `ietf-if-extensions` in RFC8561-bis to resolve the gap for RLT interfaces\r\n\r\nWhile exploring these options would have been my preference if we were defining the first version of RFC8561, considering that the `rf-loop` and `if-loop` are already defined in RFC8561, I think that before exploring these options, we need to check whether we agree on the value of deprecating the current solution in RFC8561-bis to reuse the `ietf-if-extensions`.\r\n\r\nIf there is no agreement to deprecate the current solution in RFC8561, IMHO, we simply focus this issue on providing more clarification text in RFC8561-bis on how to use these two attributes and forget about the loopback definition in `ietf-if-extensions`.\r\n\r\nMy 2 cents\r\n\r\nItalo",
+          "createdAt": "2024-02-02T21:03:17Z",
+          "updatedAt": "2024-02-02T21:05:45Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "I think it might be worth fixing ietf-if-extensions anyway.  I can talk to\r\nRob Wilton (the other author).  Then we can decide if we want to deprecate\r\nrf-loop and if-loop.   Although, we will still need some kind of diagram.\r\n\r\n\r\nOn Fri, Feb 2, 2024 at 4:03\u202fPM italobusi ***@***.***> wrote:\r\n\r\n> To resolve the use of ietf-if-extensions, we can evaluate the use of the\r\n> loopback, but we need two loopbacks for one interface and the extension\r\n> draft doesn't currently support that.\r\n>\r\n> While it is true that ietf-if-extensions does not support two loopbacks\r\n> for one interface, IMHO, it would be possible to either:\r\n>\r\n>    1. update ietf-if-extensions to fix the issue in a generic way;\r\n>    2. provide some augmentations to the ietf-if-extensions in RFC8561-bis\r\n>    to resolve the gap for RLT interfaces\r\n>\r\n> While exploring these options would have been my preference if we were\r\n> defining the first version of RFC8561, considering that the rf-loop and\r\n> if-loop are already defined in RFC8561, I think that before exploring\r\n> these options, we need to check whether we agree on the value of\r\n> deprecating the current solution in RFC8561-bis to reuse the\r\n> ietf-if-extensions.\r\n>\r\n> If there is no agreement to deprecate the current solution in RFC8561,\r\n> IMHO, we can close the issue since the rf-loop and if-loop data nodes\r\n> defined in RFC8561 are fulfilling the requirements.\r\n>\r\n> My 2 cents\r\n>\r\n> Italo\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/29#issuecomment-1924692842>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB7PR4JRLOMSNZS4ST76ITTYRVICDAVCNFSM6AAAAABCJHJMVCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTSMRUGY4TEOBUGI>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-02-02T21:23:37Z",
+          "updatedAt": "2024-02-02T21:23:37Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My side I prefer to take as it is the the current solution in RFC8561. The loopback is correct and enough.",
+          "createdAt": "2024-02-05T10:55:17Z",
+          "updatedAt": "2024-02-05T10:55:17Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Adding the documentation will make the if-loop and rf-loop easier to\r\nunderstand.\r\n\r\nOn Mon, Feb 5, 2024 at 5:55\u202fAM DanielaSpreafico ***@***.***>\r\nwrote:\r\n\r\n> My side I prefer to take as it is the the current solution in RFC8561. The\r\n> loopback is correct and enough.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/29#issuecomment-1926711913>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB7PR4L3EI2QWBRNZS7455LYSC3CBAVCNFSM6AAAAABCJHJMVCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMYTSMRWG4YTCOJRGM>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-02-05T11:14:48Z",
+          "updatedAt": "2024-02-05T11:14:48Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Add documentation, use diagram and keep the loopback as defined in the RFC.",
+          "createdAt": "2024-02-08T10:23:58Z",
+          "updatedAt": "2024-02-08T10:23:58Z"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOHLTwws59GkUG",
+      "title": "air-interface:maintenance-timer",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/30",
+      "state": "OPEN",
+      "author": "demx8as6",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Discussion Required",
+        "gap analysis"
+      ],
+      "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
+      "createdAt": "2024-01-24T18:44:44Z",
+      "updatedAt": "2024-01-31T10:12:39Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It seams that [RFC8533](https://datatracker.ietf.org/doc/html/rfc8533) does not cover - and maybe even should not cover, when looking to [RFC7276](https://www.rfc-editor.org/rfc/rfc7276) - the requested functionality. \r\n\r\nTherefore an update of [RFC8561](https://datatracker.ietf.org/doc/rfc8561/) is proposed. \r\n\r\n```\r\n  augment /if:interfaces/if:interface:\r\n       [...]\r\n       +--rw maintenance-mode\r\n          +--rw start?      yang:date-and-time\r\n          +--rw end?        yang:date-and-time\r\n          +--ro duration?   uint32\r\n          +--ro status?     boolean\r\n```\r\nPlease see: [ietf-onf-gab-discussion.yang.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/14110183/ietf-onf-gab-discussion.yang.txt)\r\n\r\n\r\n\r\n",
+          "createdAt": "2024-01-31T09:41:24Z",
+          "updatedAt": "2024-01-31T10:12:39Z"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOHLTwws59zjiY",
+      "title": "Tx Power min in ATPC ",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/31",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "review - pull request"
+      ],
+      "body": "The configuration of the minimum value of Tx Power (which is not to be undercut) on ATPC mode is missing on ietf-microwave-radio-link model.\r\n\r\nOn ONF model this parameter is foreseen (air-interface-configuration/atpc-tx-power-min).",
+      "createdAt": "2024-01-31T17:59:22Z",
+      "updatedAt": "2024-10-10T09:35:18Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "add minimum-nominal-power  power  to atpc.",
+          "createdAt": "2024-09-05T09:27:10Z",
+          "updatedAt": "2024-09-05T09:27:10Z"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOHLTwws5_UkFM",
+      "title": "Ethernet compression on Radio Link",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/32",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "Discussion Required",
+        "gap analysis"
+      ],
+      "body": "The need is to enable and define the compression of the Ethernet Header data on top of a Radio Link.\r\nA new attribute could be added to RLT interface:\r\n-- rw header-compression-mode ",
+      "createdAt": "2024-02-15T09:56:43Z",
+      "updatedAt": "2024-10-10T10:01:15Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Modelisation of header compression in YANG make sense.\r\n\r\nOn our 3 layers (virtEth, RTL, CT), I wonder what the appropriate level: RTL or virtEth.\r\nEven if I acknowledge that the is no microwave interoperability (Both endpoints of a Microwave are always same brand) and hence implementation donot have to follow a standardized header compression. But maybe it is a features which belong to our virtEth layer. **To which layer should it belong?**\r\n\r\nOther technologies also have header compression features: RObust Header Compression (ROHC) is an effort to share that. Since [RFC5795](https://datatracker.ietf.org/doc/html/rfc5795) abstract says \"`It is designed to operate efficiently and robustly over various link technologies with different characteristics.`\" and in introduction \"`For many types of networks, reducing the deployment and operational costs by improving the usage of the bandwidth resources is of vital importance.`\": I don't know what are these link technology (RFC just mentions \"wireless\" but doesnot describe it, Several pages later briefly mentions \"PPP\" in parenthesis). **On these link technologies, where do header compression apply: RTL-like or vrtEth? Is there a YANG module sharable with these technologies?**",
+          "createdAt": "2024-02-15T13:38:50Z",
+          "updatedAt": "2024-02-15T13:38:50Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think the [RFC5795](https://datatracker.ietf.org/doc/html/rfc5795) defines/suggests how to 'compress' data on a link basis on a node.\r\nThis is in order to not lose information on compressing/decompressing and to share a common algorithm  in a link.\r\nThis RFC doesn't define a management of the compression , so no yang module is shared.\r\nOn Radio MW link where the end points are of the same vendor there is no need to have a common algorithm.\r\nWe need in any case to discuss the correct layer : vEth or RLT\r\n",
+          "createdAt": "2024-02-15T13:59:39Z",
+          "updatedAt": "2024-02-15T13:59:39Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Instead of boolean, one option is to use an IdentityRef.  We define the base in the radio-link module, and allow/describe how to add identityrefs for the vendor specific compress algorithms.",
+          "createdAt": "2024-02-22T10:36:49Z",
+          "updatedAt": "2024-02-22T10:36:49Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Need to provide the options for modeling.  Some implementations have multiple compression options per interface.\r\n\r\nHow to identify that the node has the ability to support compression?",
+          "createdAt": "2024-02-22T10:46:27Z",
+          "updatedAt": "2024-02-22T10:46:27Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Please provide suggested yang for compression modes for RLT/CT for discussion.",
+          "createdAt": "2024-10-10T10:01:14Z",
+          "updatedAt": "2024-10-10T10:01:14Z"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOHLTwws6AFkqd",
+      "title": "Hardware model",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/33",
+      "state": "CLOSED",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "jrebiffe"
+      ],
+      "labels": [
+        "Discussion Required",
+        "New ID?"
+      ],
+      "body": "How to leverage ietf-hardware for microwave nodes?\r\n\r\nAre there microwave specific objects that need to be added to an augmentation of ietf-hardware?\r\n\r\nHere is an example of how the BBF is augmenting ietf-hardware for transceivers.\r\n\r\nhttps://github.com/BroadbandForum/yang/blob/master/standard/equipment/bbf-hardware-transceivers.yang\r\n",
+      "createdAt": "2024-02-22T12:16:36Z",
+      "updatedAt": "2024-10-10T09:36:16Z",
+      "closedAt": "2024-10-10T09:36:16Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Here is the complete set of YANG.  Look at the directory .\\yang-TR-383-v1.7.0.zip\\yang-TR-383-v1.7.0\\standard\\equipment\r\nhttps://github.com/BroadbandForum/yang/archive/refs/tags/TR-383-v1.7.0.zip",
+          "createdAt": "2024-02-22T12:20:39Z",
+          "updatedAt": "2024-02-22T12:20:39Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I add some examples of hardware 'components' for a MW node.\r\nThe assumption is to use the 'ietf-hardware' model as defined on the RFC 8348, augmenting it as specific technology attributes for mw.\r\n[MW-Node-HWExample.pptx](https://github.com/samans/draft-ybam-rfc8561bis/files/15079111/MW-Node-HWExample.pptx)\r\n\r\nAs an alternative, discussed on last meeting (18th April), there is a model on progress on IETF [IVY Working Group](https://datatracker.ietf.org/wg/ivy/documents/) (see  [ietf-ivy-wg/network-inventory-yang (github.com)](https://github.com/ietf-ivy-wg/network-inventory-yang) ). \r\nWe need to take into account that this model is planned to be used for NBI interface on a Controller.\r\n\r\nDiscussion and comments are welcome.",
+          "createdAt": "2024-04-23T15:34:33Z",
+          "updatedAt": "2024-04-23T15:34:33Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I add a JSON as example for the previous proposal:\r\n[mw-hw.json](https://github.com/samans/draft-ybam-rfc8561bis/files/15259925/mw-hw.json)\r\n",
+          "createdAt": "2024-05-09T08:45:29Z",
+          "updatedAt": "2024-05-09T08:45:29Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "One doubt on my side: do we need to represent in the hardware inventory ODU/IDU chassis type or just use the chassis component class for both? Is there something specific which is needed to differentiated ODU and IDU chassis, other than they location?\r\n\r\nFrom the figure, it seems that the relationship between IDU and ODUs is similar to the relationship between a main shelf and the sub-shelves in optical NEs.\r\n\r\nRegarding the modelling of the ports and of the intra-NE cables, there are few open issues in IVY WG:\r\n- https://github.com/ietf-ivy-wg/network-inventory-yang/issues/45\r\n- https://github.com/ietf-ivy-wg/network-inventory-yang/issues/32\r\n\r\nI think it would be good if we keep alignment with the on-going work in IVY WG\r\n",
+          "createdAt": "2024-05-09T08:54:47Z",
+          "updatedAt": "2024-05-09T08:54:47Z"
+        },
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This morning during _Microwave meetings series_, @italobusi, @DanielaSpreafico, Julien, Danilo and I, we said that starting a new draft would be a way to go. I took that point to initiate it.",
+          "createdAt": "2024-06-27T11:05:57Z",
+          "updatedAt": "2024-06-27T11:05:57Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Following a discussion on the yesterday meeting (2024-07-04) I upload an update to summarize the topics to agree.\r\n\r\n[MW-Node-HWExample-It2.pptx](https://github.com/user-attachments/files/16108888/MW-Node-HWExample-It2.pptx)\r\n\r\nMain points:\r\n\r\n1. how to model the ODU : \r\n     - using 'chassis' class ? Not allowed on a 'container'\r\n     - using a 'module' class ? This is a proposal from Danilo\r\n     - introducing a new IDENTITY 'mw-odu' ?\r\n\r\n2. how to model the connection of an ODU to a port on IDU? This both in case the connection is using an ethernet port or an IF cable:\r\n     - defining the 'container' (where the ODU could be contained) as a child of the port component connected to?\r\n     - adding something new?\r\n\r\n3. how to add (or change)  a new item HW by NETCONF client?\r\n\r\n4.  how about the use of the ethernet port connecte or not connected to an ODU for a service (Bridge, etc)?\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+          "createdAt": "2024-07-05T11:08:11Z",
+          "updatedAt": "2024-07-05T11:08:11Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've added another example how ODUs can be modelled on page 7 in the attached presentation.\r\n[MW-Node-HWExample-v3.pptx](https://github.com/user-attachments/files/16173836/MW-Node-HWExample-v3.pptx)\r\n",
+          "createdAt": "2024-07-11T08:40:58Z",
+          "updatedAt": "2024-07-11T08:40:58Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "See also: https://github.com/ietf-ivy-wg/network-inventory-yang/issues/64\r\n\r\nSee also some previous discussions in https://github.com/ietf-ccamp-wg/ietf-network-inventory/issues/6 which has been closed as superseded by https://github.com/ietf-ivy-wg/network-inventory-yang/issues/64",
+          "createdAt": "2024-09-19T10:25:10Z",
+          "updatedAt": "2024-09-19T10:25:10Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Continue the discussion in IVY.",
+          "createdAt": "2024-10-10T09:36:16Z",
+          "updatedAt": "2024-10-10T09:36:16Z"
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOHLTwws6M5c5W",
+      "title": "How to identify the Name of Equipment and the Sw Release for MW nodes?",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/34",
+      "state": "CLOSED",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "italobusi"
+      ],
+      "labels": [
+        "agreed"
+      ],
+      "body": "Following the 4th mWT ETSI plug test and also proposed for the next 5th mWT ETSI plug test:\r\n\r\n-  to identify the Name of equipment, it is used the _/system/hostname ._ \r\n    This attribute is formatted as domain-name, so what can it contain? An IP address is feasible?\r\n\r\n-  to identify the SW Release, the _/system/os-release_ and _/system/os-version_ are used. Are these the correct fields? \r\n   The Sw Release to report is the sw release of the controller of the node, not the sw relase of the Operating System of the node, like Linux. \r\n    Or can we consider them coincident?\r\n    As an alternative there is the _/hardware/component/software-rev for a specific hw component could be used.",
+      "createdAt": "2024-06-20T08:38:55Z",
+      "updatedAt": "2024-07-25T09:21:54Z",
+      "closedAt": "2024-07-25T09:21:54Z",
+      "comments": [
+        {
+          "author": "jrebiffe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "1. Danilo, Italo and I think yes, because it's an inet:domain-name as per rfc6991, then rfc1034 states that address `1.2.3.4` will be `4.3.2.1.IN-ADDR.ARPA`: to check with NetMod WG.\r\n2. Julien report that question was also raised in IVY WG: [Software components](https://datatracker.ietf.org/doc/html/draft-ietf-ivy-network-inventory-yang-01) and [Issue 2](https://github.com/ietf-ivy-wg/network-inventory-yang/issues/2): to ask the difference between /system/os-release and /system/os-version to NetMod WG.",
+          "createdAt": "2024-06-27T09:31:27Z",
+          "updatedAt": "2024-06-27T09:31:27Z"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOHLTwws6VciTp",
+      "title": "microwave-types move groupings",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/35",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "review - pull request"
+      ],
+      "body": "In the RFC8561bis, move tx-frequency, actual-rx-frequency, channel-separation, actual-tx-cm, actual-snir, actual-transmitted-level to a common grouping in ietf-microwave-types.yang.\r\nDeprecate the grouping in ietf-microwave-topology\r\n\r\nleverage the new rlt-mode grouping from the RFC8561bis version of ietf-microwave-types.yang in the microwave-radio-link-attributes:rlt-mode container in ietf-microwave-topology.yang and\r\nDeprecate the rlt-mode grouping from ietf-microwave-topology.yang.",
+      "createdAt": "2024-09-05T09:37:15Z",
+      "updatedAt": "2024-10-10T09:34:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOHLTwws6YzWyp",
+      "title": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/37",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [
+        "update yang"
+      ],
+      "body": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
+      "createdAt": "2024-10-03T09:49:10Z",
+      "updatedAt": "2024-10-10T09:38:35Z",
       "closedAt": null,
       "comments": []
     }
@@ -354,6 +1728,88 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOHLTwws5cJOHQ",
+      "title": "Prepared for -00 I-D text",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/21",
+      "state": "MERGED",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-06T19:34:06Z",
+      "updatedAt": "2023-10-17T19:42:57Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "39656b6ced2db9de0414377657111a0791e59c15",
+      "headRepository": "italobusi/draft-ybam-rfc8561bis",
+      "headRefName": "bis-draft",
+      "headRefOid": "ac3465bb651f6a5565cc6bb4dec3ccd7e12bd484",
+      "closedAt": "2023-10-17T19:42:57Z",
+      "mergedAt": "2023-10-17T19:42:57Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "369f60d9fc4304cb4d2698c01bd1aabd0e4cd89f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOHLTwws57VIDq",
+      "title": "2024 09 sam",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/36",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Implementation of Issue #35 and Issue #31 ",
+      "createdAt": "2024-09-12T16:41:07Z",
+      "updatedAt": "2024-10-10T12:42:26Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "8e536f35b93ac1a1fb422a80645df655c0d70538",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "2024-09-sam",
+      "headRefOid": "5eb5c4b76b16fcbe738ec0c006061645df043aa1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOHLTwws5-RkGL",
+      "title": "Fixups",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/38",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-10T21:45:05Z",
+      "updatedAt": "2024-10-11T00:50:43Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "91021696bb3a9a6d801aea0da724bde57dfe5ed4",
+      "headRepository": "martinthomson/draft-ybam-rfc8561bis",
+      "headRefName": "fixups",
+      "headRefOid": "e0baca2376151e0cf06189e1d07f7afbfec4afe8",
+      "closedAt": "2024-10-11T00:50:43Z",
+      "mergedAt": "2024-10-11T00:50:43Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "cea5507c10756d10b3176bad3be49a0f2f0f1219"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
