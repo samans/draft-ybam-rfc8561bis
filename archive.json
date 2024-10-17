@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T01:47:29.570082+00:00",
+  "timestamp": "2024-10-17T01:46:14.341817+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1483,7 +1483,7 @@
       ],
       "body": "The need is to enable and define the compression of the Ethernet Header data on top of a Radio Link.\r\nA new attribute could be added to RLT interface:\r\n-- rw header-compression-mode ",
       "createdAt": "2024-02-15T09:56:43Z",
-      "updatedAt": "2024-10-10T10:01:15Z",
+      "updatedAt": "2024-10-16T07:42:00Z",
       "closedAt": null,
       "comments": [
         {
@@ -1520,6 +1520,13 @@
           "body": "Please provide suggested yang for compression modes for RLT/CT for discussion.",
           "createdAt": "2024-10-10T10:01:14Z",
           "updatedAt": "2024-10-10T10:01:14Z"
+        },
+        {
+          "author": "niloda",
+          "authorAssociation": "NONE",
+          "body": "I added parameters (for RLT) in the yang file to handle header compression, just as an example to start the discussion.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n`    +--rw header-compression-enabled?        boolean`\r\n\r\nFor devices that require more complex configuration, I added a list of profiles, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n```\r\n    +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?`\r\n\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\nThe added code is wrapped inside a couple of markers:\r\n\r\n```\r\n/* HC - begin */\r\n   <added code>\r\n/* HC - end */\r\n```\r\n\r\n[rfc8651-bis-yang-header-compression.zip](https://github.com/user-attachments/files/17391319/rfc8651-bis-yang-header-compression.zip)\r\n",
+          "createdAt": "2024-10-15T11:51:04Z",
+          "updatedAt": "2024-10-16T07:42:00Z"
         }
       ]
     },
