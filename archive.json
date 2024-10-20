@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T01:46:14.341817+00:00",
+  "timestamp": "2024-10-20T01:54:11.635239+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1478,12 +1478,13 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
+        "proposed solution",
         "Discussion Required",
         "gap analysis"
       ],
       "body": "The need is to enable and define the compression of the Ethernet Header data on top of a Radio Link.\r\nA new attribute could be added to RLT interface:\r\n-- rw header-compression-mode ",
       "createdAt": "2024-02-15T09:56:43Z",
-      "updatedAt": "2024-10-16T07:42:00Z",
+      "updatedAt": "2024-10-17T09:46:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -1678,6 +1679,30 @@
       "updatedAt": "2024-10-10T09:38:35Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 39,
+      "id": "I_kwDOHLTwws6aoQCV",
+      "title": "Identity base for coding-modulation in microwave-types",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/39",
+      "state": "OPEN",
+      "author": "mamali68",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "it is unclear based on definition and syntax restrictions of base statement (RFC7950 Chapter 9.10.2 and RFC6020 Chapter 7.16) if an identity that is based on another identity and which is base of other derived identities is a valid value. \r\n\r\nExample:  in module ietf-microwave-types\r\n\r\n```\r\n[...]\r\nidentity coding-modulation {\r\n    description\r\n      \"The coding and modulation schemes.\";\r\n  }\r\n[...]\r\n  identity qam-256 {\r\n    base coding-modulation;\r\n    description\r\n      \"256 QAM coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-strong {\r\n    base qam-256;\r\n    description\r\n      \"256 QAM strong coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-light {\r\n    base qam-256;\r\n    description\r\n      \"256 QAM light coding and modulation scheme.\";\r\n  }\r\n[...]\r\n```\r\nin this case is identity qam-256 a valid value? If not the proposal is to add a base identity to each modulation and have the generic and variation modulations derived from this.\r\nexample: \r\n\r\n```\r\n[...]\r\n  identity qam-256-base {\r\n    base coding-modulation;\r\n    description\r\n      \"256 QAM coding and modulation scheme.\";\r\n  }\r\n  identity qam-256 {\r\n    base qam-256-base;\r\n    description\r\n      \"256 QAM coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-strong {\r\n    base qam-256-base;\r\n    description\r\n      \"256 QAM strong coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-light {\r\n    base qam-256-base;\r\n    description\r\n      \"256 QAM light coding and modulation scheme.\";\r\n  }\r\n[...]\r\n```",
+      "createdAt": "2024-10-17T10:02:35Z",
+      "updatedAt": "2024-10-17T12:57:08Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In the first example the identity qam-256 is the base for tow values and therefore it (the base) should not act as a value itself. \r\nCall it \"best practice\" in case this is not explicit mention in RFC7950. There are examples like ietf-alarms.\r\n\r\nQuestion: Is the identity \"qam-256-base\" really needed - if not:\r\n\r\n```\r\n[...]\r\n  identity qam-256 {\r\n    base coding-modulation;\r\n    description\r\n      \"256 QAM coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-strong {\r\n    base coding-modulation;\r\n    description\r\n      \"256 QAM strong coding and modulation scheme.\";\r\n  }\r\n\r\n  identity qam-256-light {\r\n    base coding-modulation;\r\n    description\r\n      \"256 QAM light coding and modulation scheme.\";\r\n  }\r\n[...]\r\n```",
+          "createdAt": "2024-10-17T12:57:07Z",
+          "updatedAt": "2024-10-17T12:57:07Z"
+        }
+      ]
     }
   ],
   "pulls": [
