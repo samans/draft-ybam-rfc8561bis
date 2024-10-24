@@ -108,6 +108,11 @@ module ietf-microwave-radio-link {
       "Indicates that the device supports TDM.";
   }
 
+  feature hc-profile {
+    description
+      "Indicates that the device supports Header Compression profiles.";
+  }
+  
   /*
    * Typedefs
    */
@@ -119,6 +124,45 @@ module ietf-microwave-radio-link {
     description
       "Type used for the power values in the data nodes
        for configuration or status.";
+  }
+
+  grouping header-compression-profile {
+  leaf header-compression-profile-name {
+    type string;
+    description
+      "none";
+  }
+  description
+    "Header compression profile: can be a list of protocol header to be compressed
+     or a header size in which all included (also partially) headers get compressed.";
+    choice header-compression {
+      case protocol-based {
+        leaf-list compressed-protocol-layer-list {
+          type mw-types:protocol-layer;
+          default "protocol-layer-type-none";
+          config false;
+          description
+            "List of protocol layers that get compressed with this kind of header compression.";
+        }
+        leaf-list mpls-payload-kind-list {
+          type mw-types:mpls-payload;
+          default "mpls-palyload-type-none";
+          config false;
+          description
+            "Defines how the header bytes inside the MPLS header has to be interpreted.";
+        }
+      }
+      case header-length-based {
+          leaf compressed-header-length {
+            type int16;
+            units "Byte";
+            default "-1";
+            config false;
+            description
+              "Number of Bytes of header information that get compressed.";
+          }
+      }
+    }
   }
 
   grouping acm-profile {
@@ -279,6 +323,32 @@ module ietf-microwave-radio-link {
         description
           "Number of connections of the specified type.";
       }
+    }
+    list header-compression-profile-list {
+      if-feature "hc-profile";
+      key "header-compression-profile-name";
+      config false;
+      description
+        "A list of header compression profiles.
+         A profile can be described by a list of protocol layer to be
+         compressed or by a size in which all included (also partially)
+         protocol header get compressed";
+      uses header-compression-profile;
+    }
+    leaf header-compression-profile {
+      if-feature "hc-profile";
+      type leafref {
+        path "../header-compression-profile-list/header-compression-profile-name";
+        require-instance false;
+      }
+      description
+        "Select the profile of header compression to be used.";
+    }
+    leaf header-compression-enabled {
+      type boolean;
+      default "false";
+      description
+        "Enable(true)/disable(false) header compression";
     }
   }
 
