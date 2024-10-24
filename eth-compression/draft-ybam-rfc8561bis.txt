@@ -483,12 +483,10 @@ Table of Contents
          "Indicates that the device supports TDM.";
      }
 
-   /* HC - begin */
      feature hc-profile {
        description
          "Indicates that the device supports Header Compression profiles.";
      }
-   /* HC - end */
 
      /*
       * Typedefs
@@ -503,7 +501,6 @@ Table of Contents
           for configuration or status.";
      }
 
-   /* HC - begin */
      grouping header-compression-profile {
      leaf header-compression-profile-name {
        type string;
@@ -542,7 +539,6 @@ Table of Contents
          }
        }
      }
-   /* HC - end */
 
      grouping acm-profile {
        description
@@ -703,7 +699,6 @@ Table of Contents
              "Number of connections of the specified type.";
          }
        }
-       /* HC - begin */
        list header-compression-profile-list {
          if-feature "hc-profile";
          key "header-compression-profile-name";
@@ -730,7 +725,6 @@ Table of Contents
          description
            "Enable(true)/disable(false) header compression";
        }
-       /* HC - end */
      }
 
      /*
