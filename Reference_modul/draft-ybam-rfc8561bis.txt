@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 13 April 2025                                             M. Ye
+Expires: 17 May 2025                                               M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                         10 October 2024
+                                                        13 November 2024
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2025.
+   This Internet-Draft will expire on 17 May 2025.
 
 Copyright Notice
 
@@ -435,7 +435,13 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2024-09-11 {
+      revision 2024-09-11 {
+       description
+         "Draft - Issue #16 (reference coding modulation in acm mode to be selected);
+       reference
+         "RFC XXX: A YANG Data Model for Microwave Radio Link";
+     }
+   revision 2024-09-11 {
        description
          "Draft - Issue #35 (grouping common-microwave-properties
                   Issue #31 added minimum-nominal-power";
@@ -509,6 +515,14 @@ Table of Contents
          description
            "True when the profile can be used in single
             coding-modulation-mode.";
+       }
+           leaf support-as reference-modulation {
+         type boolean;
+         description
+           "True when the profile can be used as reference-modulation in adaptive
+            coding-modulation-mode.
+                    Reference Modulation cannot be configured but can be set by the system
+                    when support-as-reference-modulation is false.";
        }
        leaf max-tx-power {
          type mw-types:power;
@@ -875,6 +889,13 @@ Table of Contents
                "Selected maximum coding/modulation.
                 Adaptive coding/modulation shall not go
                 above this value.";
+           }
+                   leaf reference-modulation {
+             type identityref {
+               base mw-types:coding-modulation;
+             }
+             description
+               "reference-modulation is a reference to a coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm.";
            }
          }
        }
@@ -1764,9 +1785,9 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2024-09-11 {
+     revision 2024-03-03 {
        description
-         "Draft - new grouping Issue #35";
+         "pretty printing";
        reference
          "RFC XXX: A YANG Data Model for Microwave Radio Link";
      }
@@ -2085,15 +2106,6 @@ Table of Contents
          "STM-1 connection, 155.52 Mbit/s.";
      }
 
-     typedef power {
-       type decimal64 {
-         fraction-digits 1;
-       }
-       description
-         "Type used for the power values in the data nodes
-          for configuration or status.";
-     }
-
      /*
       * Radio-link-terminal mode grouping
       */
@@ -2114,71 +2126,6 @@ Table of Contents
          mandatory true;
          description
            "Number of protecting carriers.";
-       }
-     }
-
-     /*
-      * Common microwave properties ode grouping
-      */
-
-     grouping common-microwave-properties {
-       description
-         "This grouping provides a reusable set of microwave
-          properties.";
-       leaf tx-frequency {
-         type uint32;
-         units "kHz";
-         mandatory true;
-         description
-           "Selected transmitter frequency.";
-       }
-       leaf actual-rx-frequency {
-         type uint32;
-         units "kHz";
-         config false;
-         description
-           "Computed receiver frequency.";
-       }
-       leaf channel-separation {
-         type uint32;
-         units "kHz";
-         mandatory true;
-         description
-           "The amount of bandwidth allocated to a carrier.  The
-            distance between adjacent channels in a radio
-            frequency channels arrangement";
-         reference
-           "ETSI EN 302 217-1";
-       }
-       leaf actual-transmitted-level {
-         type power {
-           range "-99..99";
-         }
-         units "dBm";
-         config false;
-         description
-           "Actual transmitted power level (0.1 dBm resolution).";
-         reference
-           "ETSI EN 301 129";
-       }
-       leaf actual-tx-cm {
-         type identityref {
-           base mw-types:coding-modulation;
-         }
-         config false;
-         description
-           "Actual coding/modulation in transmitting direction.";
-       }
-       leaf actual-snir {
-         type decimal64 {
-           fraction-digits 1;
-           range "0..99";
-         }
-         units "dB";
-         config false;
-         description
-           "Actual signal to noise plus the interference ratio
-            (0.1 dB resolution).";
        }
      }
    }
