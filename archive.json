@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-14T01:45:54.651423+00:00",
+  "timestamp": "2024-11-17T01:56:37.926296+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -152,7 +152,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2024-06-26T09:39:26Z",
+      "updatedAt": "2024-11-14T11:31:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -294,6 +294,13 @@
           "body": "Hi all,\r\nI've added some more info in a version 4.\r\nSee slides 7 and onwards.\r\n[Key Concepts - Bonding BCA v4.pptx](https://github.com/user-attachments/files/15985835/Key.Concepts.-.Bonding.BCA.v4.pptx)\r\n",
           "createdAt": "2024-06-26T09:39:25Z",
           "updatedAt": "2024-06-26T09:39:25Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Diagram including questions from discussion on 2024-11-14.\r\n[bca-model-questions-2024-11-14.pptx](https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx)\r\n",
+          "createdAt": "2024-11-14T11:31:35Z",
+          "updatedAt": "2024-11-14T11:31:35Z"
         }
       ]
     },
@@ -1808,7 +1815,7 @@
       "labels": [],
       "body": "Implementation of Issue #35 and Issue #31 ",
       "createdAt": "2024-09-12T16:41:07Z",
-      "updatedAt": "2024-10-24T09:08:49Z",
+      "updatedAt": "2024-11-15T22:38:25Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "8e536f35b93ac1a1fb422a80645df655c0d70538",
@@ -1833,6 +1840,50 @@
           "createdAt": "2024-10-24T09:08:49Z",
           "updatedAt": "2024-10-24T09:08:49Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHLTwws6RbPex",
+          "commit": {
+            "abbreviatedOid": "5eb5c4b"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I am not sure why there are 23 files changed. In theory, only the ietf-microwave-radio-link.yang and ietf-microwave-types.yang and their trees should have been changed.\r\n\r\nFor example:\r\n- Why there is the draft-ybam-rfc8561bis-01.txt file in the repository?\r\n- There is no need to include the draft-ybam-rfc8561bis.txt in the repository: it is possible to use the links in the README file to read the latest editors' version of the draft\r\n",
+          "createdAt": "2024-11-15T22:25:12Z",
+          "updatedAt": "2024-11-15T22:38:25Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "According to RFC8407 (and RFC8407-bis), we need only one revision statement describing the YANG model revision in RFC8561-bis and not multiple revisions for each draft version",
+              "createdAt": "2024-11-15T22:25:13Z",
+              "updatedAt": "2024-11-15T22:38:25Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "Good idea to move the power data type definition to MW types module\r\n\r\nHowever, this typedef was defined in RFC8561 so removing it will be an NBC change.\r\n\r\nWhat about deprecating it?\r\n",
+              "createdAt": "2024-11-15T22:27:32Z",
+              "updatedAt": "2024-11-15T22:38:25Z"
+            },
+            {
+              "originalPosition": 118,
+              "body": "Should we capture the concept of nominal?\r\n\r\n```suggestion\r\n            \"Nominal maximum output power.\";\r\n```",
+              "createdAt": "2024-11-15T22:30:24Z",
+              "updatedAt": "2024-11-15T22:38:25Z"
+            },
+            {
+              "originalPosition": 131,
+              "body": "Should we capture the concept of nominal?\r\n\r\nWhat about splitting the two statements?\r\n\r\n```suggestion\r\n            \"Minimum output power.\r\n\r\n             By default, minimum output power is the same as the\r\n             system capability minimum-power.\";\r\n```\r\n",
+              "createdAt": "2024-11-15T22:31:52Z",
+              "updatedAt": "2024-11-15T22:38:25Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "According to RFC8407 (and RFC8407-bis), we need only one revision statement describing the YANG model revision in RFC8561-bis and not multiple revisions for each draft version",
+              "createdAt": "2024-11-15T22:34:12Z",
+              "updatedAt": "2024-11-15T22:38:25Z"
+            }
+          ]
         }
       ]
     },
@@ -1902,7 +1953,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-11-13T17:31:03Z",
-      "updatedAt": "2024-11-13T17:32:18Z",
+      "updatedAt": "2024-11-15T22:57:39Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "cea5507c10756d10b3176bad3be49a0f2f0f1219",
@@ -1914,7 +1965,52 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws6RbWxC",
+          "commit": {
+            "abbreviatedOid": "b7bc199"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I have just few formatting and editorial comments\r\n\r\nI would suggest to rename the PR to something like \"Added parameters for reference modulation\" and indicate that this PR when merged it will close issue #16 \r\n\r\nThis PR contains also some changes which are duplicated with the changes in PR #36 and not associated with issue #16 which could create conflicts when both PRs are to be merged",
+          "createdAt": "2024-11-15T22:40:02Z",
+          "updatedAt": "2024-11-15T22:57:39Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "According to RFC8407 (and RFC8407-bis), we need only one revision statement describing the YANG model revision in RFC8561-bis and not multiple revisions for each draft version",
+              "createdAt": "2024-11-15T22:40:02Z",
+              "updatedAt": "2024-11-15T22:57:39Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "Reformatted the indentation: please check use of TAB characters instead of spaces in the editor\r\n\r\n```suggestion\r\n}\r\n  leaf support-as reference-modulation {\r\n    type boolean;\r\n    description\r\n      \"True when the profile can be used as reference-modulation in\r\n       adaptive coding-modulation-mode.\r\n\r\n       Reference Modulation cannot be configured but can be set by\r\n       the system when support-as-reference-modulation is false.\";\r\n```",
+              "createdAt": "2024-11-15T22:46:17Z",
+              "updatedAt": "2024-11-15T22:57:39Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "This sentence is not fully clear to me: please consider rephrasing",
+              "createdAt": "2024-11-15T22:46:42Z",
+              "updatedAt": "2024-11-15T22:57:39Z"
+            },
+            {
+              "originalPosition": 195,
+              "body": "Reformatted the indentation: please check use of TAB characters instead of spaces in the editor:\r\n\r\n```suggestion\r\n        }\r\n        leaf reference-modulation {\r\n          type identityref {\r\n            base mw-types:coding-modulation;\r\n          }\r\n          description\r\n            \"Reference-modulation is a reference to a\r\n             coding-modulation value between the 'selected-min-acm'\r\n             and the 'selected-max-acm.\";\r\n```",
+              "createdAt": "2024-11-15T22:51:30Z",
+              "updatedAt": "2024-11-15T22:57:39Z"
+            },
+            {
+              "originalPosition": 195,
+              "body": "The description is not fully clear to me. From https://github.com/samans/draft-ybam-rfc8561bis/issues/16#issuecomment-1541879715 I guess this attribute is the coding modulation to be used in the reference mode, as defined in ETSI EN 302 217-1 V3.2.2 (2020-02)\r\n\r\nPlease consider rephrasing and, if needed, adding the reference to ETSI EN 302 217-1 V3.2.2 (2020-02)",
+              "createdAt": "2024-11-15T22:52:50Z",
+              "updatedAt": "2024-11-15T22:57:39Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
