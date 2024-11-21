@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T01:52:10.749182+00:00",
+  "timestamp": "2024-11-21T01:50:37.525939+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -152,7 +152,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2024-11-14T11:31:37Z",
+      "updatedAt": "2024-11-20T16:55:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -301,6 +301,20 @@
           "body": "Diagram including questions from discussion on 2024-11-14.\r\n[bca-model-questions-2024-11-14.pptx](https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx)\r\n",
           "createdAt": "2024-11-14T11:31:35Z",
           "updatedAt": "2024-11-14T11:31:35Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I add a new proposal to discuss \r\n[BCA.Proposal.for.ccamp.v02.pptx](https://github.com/user-attachments/files/17834000/BCA.Proposal.for.ccamp.v02.pptx)\r\n\r\n",
+          "createdAt": "2024-11-20T16:49:28Z",
+          "updatedAt": "2024-11-20T16:49:28Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Trying to answer to the question on [bca-model-questions-2024-11-14.pptx](https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx):\r\n\r\n**Question-1**: Are RLT-B1 and RLT_C1 needed?\r\n**Answer**:\r\nSome advantages of modelling RLT-B1 and RLT-C1:\r\n1) They simplify the management of nodes B1 and C1 expecially when they are flexible and allow the configuration of packet services or remote carriers\r\n2) The parent-cc attribute with the RLT can be used to associate CC-B1 with CT-B1 and CC-C1 with CT-C1\r\n \r\nThe definition of this RLT could be seen as a bit \"stretched\" but it could be seen as \"an interface providing packet capacity and/or TDM capacity to the associated packet and/or TDM interfaces in a node and is used for setting up a a remote carrier transport service over a microwave/millimeter wave link\"\r\n\r\n**Question 2**: Are CC interfaces needed?\r\n**Answer:**\r\nIt seems that the model would work well without a new CC interface\r\n \r\nSlides updated (see [BCA.Proposal.for.ccamp.v02.pptx](https://github.com/user-attachments/files/17834000/BCA.Proposal.for.ccamp.v02.pptx)) and the following attributes can be renamed:\r\n \r\n- parent-cc --> parent-remote-carrier\r\n \r\n- carrier-connectors* -> remote-carrier-terminations\r\n\r\n\r\n",
+          "createdAt": "2024-11-20T16:55:21Z",
+          "updatedAt": "2024-11-20T16:55:21Z"
         }
       ]
     },
