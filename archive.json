@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T01:50:37.525939+00:00",
+  "timestamp": "2024-11-24T01:58:07.781506+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -152,7 +152,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2024-11-20T16:55:22Z",
+      "updatedAt": "2024-11-21T07:51:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -315,6 +315,13 @@
           "body": "Trying to answer to the question on [bca-model-questions-2024-11-14.pptx](https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx):\r\n\r\n**Question-1**: Are RLT-B1 and RLT_C1 needed?\r\n**Answer**:\r\nSome advantages of modelling RLT-B1 and RLT-C1:\r\n1) They simplify the management of nodes B1 and C1 expecially when they are flexible and allow the configuration of packet services or remote carriers\r\n2) The parent-cc attribute with the RLT can be used to associate CC-B1 with CT-B1 and CC-C1 with CT-C1\r\n \r\nThe definition of this RLT could be seen as a bit \"stretched\" but it could be seen as \"an interface providing packet capacity and/or TDM capacity to the associated packet and/or TDM interfaces in a node and is used for setting up a a remote carrier transport service over a microwave/millimeter wave link\"\r\n\r\n**Question 2**: Are CC interfaces needed?\r\n**Answer:**\r\nIt seems that the model would work well without a new CC interface\r\n \r\nSlides updated (see [BCA.Proposal.for.ccamp.v02.pptx](https://github.com/user-attachments/files/17834000/BCA.Proposal.for.ccamp.v02.pptx)) and the following attributes can be renamed:\r\n \r\n- parent-cc --> parent-remote-carrier\r\n \r\n- carrier-connectors* -> remote-carrier-terminations\r\n\r\n\r\n",
           "createdAt": "2024-11-20T16:55:21Z",
           "updatedAt": "2024-11-20T16:55:21Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello Daniela, Scott and all\r\n\r\nDaniela just a question.\r\nShould the\r\n\r\n+--rw parent-remote-carrier?   if:interface-ref\r\n\r\n\r\nbe a leaf-list?\r\nI.e. Is there a case with more than one parent-remote-carriers?\r\n\r\nBest regards\r\n\r\nTheodoros Kallimanis\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a4\u03b5\u03c4 20 \u039d\u03bf\u03b5 2024 \u03c3\u03c4\u03b9\u03c2 6:55\u202f\u03bc.\u03bc., \u03bf/\u03b7 DanielaSpreafico <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> Trying to answer to the question on bca-model-questions-2024-11-14.pptx\r\n> <https://github.com/user-attachments/files/17747911/bca-model-questions-2024-11-14.pptx>\r\n> :\r\n>\r\n> *Question-1*: Are RLT-B1 and RLT_C1 needed?\r\n> *Answer*:\r\n> Some advantages of modelling RLT-B1 and RLT-C1:\r\n>\r\n>    1. They simplify the management of nodes B1 and C1 expecially when\r\n>    they are flexible and allow the configuration of packet services or remote\r\n>    carriers\r\n>    2. The parent-cc attribute with the RLT can be used to associate CC-B1\r\n>    with CT-B1 and CC-C1 with CT-C1\r\n>\r\n> The definition of this RLT could be seen as a bit \"stretched\" but it could\r\n> be seen as \"an interface providing packet capacity and/or TDM capacity to\r\n> the associated packet and/or TDM interfaces in a node and is used for\r\n> setting up a a remote carrier transport service over a microwave/millimeter\r\n> wave link\"\r\n>\r\n> *Question 2*: Are CC interfaces needed?\r\n> *Answer:*\r\n> It seems that the model would work well without a new CC interface\r\n>\r\n> Slides updated (see BCA.Proposal.for.ccamp.v02.pptx\r\n> <https://github.com/user-attachments/files/17834000/BCA.Proposal.for.ccamp.v02.pptx>)\r\n> and the following attributes can be renamed:\r\n>\r\n>    -\r\n>\r\n>    parent-cc --> parent-remote-carrier\r\n>    -\r\n>\r\n>    carrier-connectors* -> remote-carrier-terminations\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2489109036>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVLLXD7GT7455HS2QXL2BS5I7AVCNFSM5T62TEK2U5DIOJSWCZC7NNSXTN2JONZXKZKDN5WW2ZLOOQ5TENBYHEYTAOJQGM3A>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-11-21T07:51:06Z",
+          "updatedAt": "2024-11-21T07:51:06Z"
         }
       ]
     },
