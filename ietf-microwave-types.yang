@@ -379,4 +379,121 @@ module ietf-microwave-types {
         "Number of protecting carriers.";
     }
   }
+  
+  identity protocol-layer-type {
+    description
+      "none";
+  }
+
+  identity protocol-layer-type-none {
+    base protocol-layer-type;
+    description
+      "none";
+  }
+
+  identity protocol-layer-type-ethernet-mac {
+    base protocol-layer-type;
+    description
+      "MAC layer";
+  }
+
+  identity protocol-layer-type-vlan {
+    base protocol-layer-type;
+    description
+      "C-VLAN tag";
+  }
+
+  identity protocol-layer-type-q-in-q {
+    base protocol-layer-type;
+    description
+      "S-VLAN tag";
+  }
+
+  identity protocol-layer-type-mpls {
+    base protocol-layer-type;
+    description
+      "MPLS labels";
+  }
+
+  identity protocol-layer-type-ipv4 {
+    base protocol-layer-type;
+    description
+      "IPV4 layer";
+  }
+
+  identity protocol-layer-type-ipv6 {
+    base protocol-layer-type;
+    description
+      "IPV6 layer";
+  }
+
+  identity protocol-layer-type-tcp {
+    base protocol-layer-type;
+    description
+      "TCP layer";
+  }
+
+  identity protocol-layer-type-udp {
+    base protocol-layer-type;
+    description
+      "UDP layer";
+  }
+
+  identity protocol-layer-type-rtp {
+    base protocol-layer-type;
+    description
+      "RTP layer";
+  }
+
+  identity protocol-layer-type-gtp-u {
+    base protocol-layer-type;
+    description
+      "GTP-U layer";
+  }
+
+  typedef protocol-layer {
+    type identityref {
+      base protocol-layer-type;
+    }
+    description
+      "none";
+  }
+  
+  identity mpls-palyload-type {
+    description
+      "none";
+  }
+
+  identity mpls-palyload-type-none {
+    base mpls-palyload-type;
+    description
+      "Parameter not required.";
+  }
+
+  identity mpls-palyload-type-auto {
+    base mpls-palyload-type;
+    description
+      "If the Control Word (CW) will be present, it would be Ethernet Over MPLS. Otherwise, it would be Pv4/IPv6.";
+  }
+
+  identity mpls-palyload-type-eth-o-mpls {
+    base mpls-palyload-type;
+    description
+      "Always Ethernet over MPLS ";
+  }
+
+  identity mpls-palyload-type-ip-o-mpls {
+    base mpls-palyload-type;
+    description
+      "Always IPv4/IPv6 over MPLS";
+  }
+
+  typedef mpls-payload {
+    type identityref {
+      base mpls-palyload-type;
+    }
+    description
+      "none";
+  }
+
 }

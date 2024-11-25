@@ -9,13 +9,6 @@ module: ietf-microwave-radio-link
   |     +--rw revertive-wait-to-restore?      uint16
   |     +--rw hold-off-timer?                 uint16
   |     +--ro status?                         identityref
-  |     +---x manual-switch-working
-  |     +---x manual-switch-protection
-  |     +---x forced-switch
-  |     +---x lockout-of-protection
-  |     +---x freeze
-  |     +---x exercise
-  |     +---x clear
   +--rw xpic-pairs {xpic}?
   |  +--rw xpic-pair* [name]
   |     +--rw name       string
@@ -28,24 +21,31 @@ module: ietf-microwave-radio-link
         +--rw members*   if:interface-ref
 
   augment /if:interfaces/if:interface:
-    +--rw id?                     string
+    +--rw id?                                string
     +--rw (mode-option)
-    |  x--:(mode)
-    |  |  x--rw mode              identityref
+    |  +--:(mode)
+    |  |  x--rw mode                         identityref
     |  +--:(rlt-mode)
     |     +--rw rlt-mode
     |        +--rw num-bonded-carriers        uint32
     |        +--rw num-protecting-carriers    uint32
-    +--rw carrier-terminations*   if:interface-ref
-    +--rw rlp-groups*
-    |       -> /radio-link-protection-groups/protection-group/name
-    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name
-    |       {xpic}?
-    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
-    |       {mimo}?
+    +--rw carrier-terminations*              if:interface-ref
+    +--rw rlp-groups*                        -> /radio-link-protection-groups/protection-group/name
+    +--rw xpic-pairs*                        -> /xpic-pairs/xpic-pair/name {xpic}?
+    +--rw mimo-groups*                       -> /mimo-groups/mimo-group/name {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
-       +--rw tdm-type           identityref
-       +--rw tdm-connections    uint16
+    |  +--rw tdm-type           identityref
+    |  +--rw tdm-connections    uint16
+    +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?
+    |  +--ro header-compression-profile-name         string
+    |  +--ro (header-compression)?
+    |     +--:(protocol-based)
+    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer
+    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload
+    |     +--:(header-length-based)
+    |        +--ro compressed-header-length?         int16
+    +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?
+    +--rw header-compression-enabled?        boolean
   augment /if:interfaces/if:interface:
     +--rw carrier-id?                     string
     +--rw tx-enabled?                     boolean
@@ -97,8 +97,7 @@ module: ietf-microwave-radio-link
     |  +--ro maximum-available-power?   power
     |  +--ro available-min-acm?         identityref
     |  +--ro available-max-acm?         identityref
-    |  +--ro acm-profile-list*
-    |          [profile-channel-separation-id profile-coding-modulation-id]
+    |  +--ro acm-profile-list* [profile-channel-separation-id profile-coding-modulation-id]
     |     +--ro profile-channel-separation-id    uint32
     |     +--ro profile-coding-modulation-id     identityref
     |     +--ro modulation-scheme?               uint8
@@ -107,11 +106,11 @@ module: ietf-microwave-radio-link
     |     +--ro max-tx-power?                    power
     |     +--ro min-tx-power?                    power
     |     +--ro lower-acm-profile-ptr
-    |     |  +--ro profile-coding-modulation-id-ref?    leafref
-    |     |  +--ro profile-channel-separation-id-ref?   leafref
+    |     |  +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
+    |     |  +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
     |     +--ro upper-acm-profile-ptr
-    |        +--ro profile-coding-modulation-id-ref?    leafref
-    |        +--ro profile-channel-separation-id-ref?   leafref
+    |        +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
+    |        +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
     +--ro error-performance-statistics
     |  +--ro bbe?   yang:counter32
     |  +--ro es?    yang:counter32
