@@ -77,8 +77,9 @@ module: ietf-microwave-radio-link
     |  |     +--rw selected-cm    identityref
     |  +--:(adaptive)
     |     +--rw adaptive
-    |        +--rw selected-min-acm    identityref
-    |        +--rw selected-max-acm    identityref
+    |        +--rw selected-min-acm       identityref
+    |        +--rw selected-max-acm       identityref
+    |        +--rw reference-modulation   identityref
     +--ro actual-tx-cm?                   identityref
     +--ro actual-snir?                    decimal64
     +--ro actual-xpi?                     decimal64 {xpic}?
@@ -104,6 +105,7 @@ module: ietf-microwave-radio-link
     |     +--ro modulation-scheme?               uint8
     |     +--ro nominal-tx-capacity?             uint32
     |     +--ro support-as-fixed-modulation?     boolean
+    |     +--ro support-as-reference-modulation?     boolean
     |     +--ro max-tx-power?                    power
     |     +--ro min-tx-power?                    power
     |     +--ro lower-acm-profile-ptr
