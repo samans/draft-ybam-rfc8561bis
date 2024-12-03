@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-01T02:09:55.889425+00:00",
+  "timestamp": "2024-12-03T01:55:54.662468+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1958,11 +1958,13 @@
       "state": "OPEN",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "DanielaSpreafico"
+      ],
       "labels": [],
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
-      "updatedAt": "2024-11-28T10:42:25Z",
+      "updatedAt": "2024-12-02T18:02:48Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "cea5507c10756d10b3176bad3be49a0f2f0f1219",
@@ -1973,8 +1975,30 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I revised and for me all is OK",
+          "createdAt": "2024-12-02T18:01:30Z",
+          "updatedAt": "2024-12-02T18:01:30Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws6Tbo9i",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-02T18:02:48Z",
+          "updatedAt": "2024-12-02T18:02:48Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 41,
@@ -1988,13 +2012,13 @@
       "labels": [],
       "body": "Fix #16",
       "createdAt": "2024-11-13T17:31:03Z",
-      "updatedAt": "2024-11-28T10:29:10Z",
+      "updatedAt": "2024-12-02T17:35:30Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "cea5507c10756d10b3176bad3be49a0f2f0f1219",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "Reference_modul",
-      "headRefOid": "b7bc199d56d10823cbdfd92b245d12f814ca7d1a",
+      "headRefOid": "5cab79e96287b954fbbc6979b6ce90c2c499d3f4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
