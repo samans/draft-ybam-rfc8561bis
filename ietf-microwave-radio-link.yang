@@ -404,7 +404,7 @@ module ietf-microwave-radio-link {
           units "dBm";
           mandatory true;
           description
-            "Maximum output power.";
+            "Nominal maximum output power.";
           reference
             "ETSI EN 302 217-1";
         }
