@@ -415,9 +415,10 @@ module ietf-microwave-radio-link {
           units "dBm";
           mandatory true;
           description
-            "Minimum output power.  By default, minimum output
-             power is the same as the system capability
-             minimum-power.";
+            "Minimum output power.
+
+             By default, minimum output power is the same as the
+             system capability minimum-power.";
         }
         leaf atpc-lower-threshold {
           type mw-types:power {
