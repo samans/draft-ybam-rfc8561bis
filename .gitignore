@@ -20,4 +20,9 @@ archive.json
 draft-ybam-rfc8561bis.xml
 package-lock.json
 report.xml
+<<<<<<< HEAD
 !requirements.txt
+=======
+venv/
+draft-*.txt
+>>>>>>> bfd68ff (Add draft-*.txt to ignore)
