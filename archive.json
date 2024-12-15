@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-12T01:55:51.550721+00:00",
+  "timestamp": "2024-12-15T02:02:59.371222+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -152,7 +152,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2024-12-05T08:49:21Z",
+      "updatedAt": "2024-12-12T11:01:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -357,6 +357,27 @@
           "body": "> * Radio Link Terminal: an interface providing Ethernet capacity and/or Time Division Multiplexing (TDM) capacity to the associated Ethernet and/or TDM interfaces in a node. It is used for setting up a transport service over a microwave radio link.\r\n\r\nIt would be worthwhile having some discussion in one of the next calls\r\n\r\nSince the interface between RLT-A1 and RLT-A2 can be TDM or Ethernet, we may consider the definition still valid with some \"stretches\"\r\n\r\nAlternatively, we may consider generalizing the definition to something like:\r\n\r\n      *  Radio Link Terminal: an interface providing packet capacity\r\n         and/or Time Division Multiplexing (TDM) capacity to the\r\n         associated client interfaces (e.g., Ethernet or TDM) in a node.  It is\r\n         used for setting up a transport service over a microwave radio\r\n         link.\r\n\r\nJust my 2 cents to trigger further thoughts/discussion\r\n",
           "createdAt": "2024-12-05T08:49:20Z",
           "updatedAt": "2024-12-05T08:49:20Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have some questions related to the model supporting the latest BCA-proposal.\r\n\r\n- I might have misunderstood, but it looks like there are references to model instances in other nodes/interfaces. Node A has an interface supporting e.g. the updated BCA module, but node A has no knowledge about any model entity exposed via interfaces in nodes B & C. What do then remote-carrier-termination, radio-link-termination and parent-remote-carrier refer to, since they cannot refer to interface-instances in other nodes/interfaces? Or are they references to IF-A3, IF-A4, IF-B5 and IF-C6?\r\n- Is the bonding function different depending on if the traffic stream comes from an internal CT, RLT or remote CT?\r\n- Is there any other info than what is supported by the basic interface-model that needs to be known about remote CT & RLTs?\r\n",
+          "createdAt": "2024-12-12T08:14:45Z",
+          "updatedAt": "2024-12-12T08:27:37Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello all\r\nJust a question.\r\nI thought that the parent-remote-carrrier was a way to represent locally at\r\nnode-A the interconnecting interface eg to node-B that we like to\r\ninclude as a member in the RLT-A1.\r\nIn the carrier-terminations, has the MUST statement be removed (MUST to\r\nrestrict the members interface types only to CT IANA i/f type)?\r\nI.e. is the interconnecting i/f  (eg IF-A3 in the ppt) intended to be\r\nincluded in the carrier-terminations list together with the CTs members?\r\nForgive my ignorance if this is an already clarified point.\r\nBEST REGARDS\r\nThodoros Kallimanis\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a0\u03ad\u03bc 12 \u0394\u03b5\u03ba 2024 \u03c3\u03c4\u03b9\u03c2 10:15\u202f\u03c0.\u03bc., \u03bf/\u03b7 JonasAhl ***@***.***>\r\n\u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> There is a need to walk through the model supporting the latest\r\n> BCA-proposal.\r\n> I might have misunderstood, but it looks like there are references to\r\n> model instaces in other nodes/interfaces.\r\n> Node A has an interface supporting e.g. the updated BCA module, but node A\r\n> has no knowledge about any model entity exposed via interfaces in nodes B &\r\n> C. What do then remote-carrier-termination, radio-link-termination and\r\n> parent-remote-carrier refer to, since they cannot refer to\r\n> interface-instances in other nodes/interfaces?\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2538120259>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVORI6XQSFO4JQLL7LD2FFAYVAVCNFSM5T62TEK2U5DIOJSWCZC7NNSXTN2JONZXKZKDN5WW2ZLOOQ5TENJTHAYTEMBSGU4Q>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-12-12T09:11:12Z",
+          "updatedAt": "2024-12-12T09:11:12Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The slides updated during the call today: [BCA.Proposal.for.ccamp.v04.pptx](https://github.com/user-attachments/files/18110408/BCA.Proposal.for.ccamp.v04.pptx)\r\n",
+          "createdAt": "2024-12-12T11:01:45Z",
+          "updatedAt": "2024-12-12T11:01:45Z"
         }
       ]
     },
@@ -1773,6 +1794,22 @@
           "updatedAt": "2024-10-24T09:49:46Z"
         }
       ]
+    },
+    {
+      "number": 42,
+      "id": "I_kwDOHLTwws6jN2sk",
+      "title": "Default values for data nodes added in this revision",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/42",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See thread initiated on Netmod WG: https://mailarchive.ietf.org/arch/msg/netmod/p2MExPZrHZZWT0ApL-oJ0pxXnA0/",
+      "createdAt": "2024-12-13T12:44:39Z",
+      "updatedAt": "2024-12-13T12:44:39Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -1871,18 +1908,26 @@
       "labels": [],
       "body": "Implementation of Issue #35 and Issue #31 ",
       "createdAt": "2024-09-12T16:41:07Z",
-      "updatedAt": "2024-11-15T22:38:25Z",
+      "updatedAt": "2024-12-13T13:30:35Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
-      "baseRefOid": "8e536f35b93ac1a1fb422a80645df655c0d70538",
+      "baseRefOid": "9be461c25b83748874c4f83d5926b1c5bbba2fc5",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "2024-09-sam",
-      "headRefOid": "5eb5c4b76b16fcbe738ec0c006061645df043aa1",
+      "headRefOid": "bd3338aedc197f82020f27306938f7a37e76476c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "> I am not sure why there are 23 files changed. In theory, only the ietf-microwave-radio-link.yang and ietf-microwave-types.yang and their trees should have been changed.\r\n> \r\n> For example:\r\n> \r\n> * Why there is the draft-ybam-rfc8561bis-01.txt file in the repository?\r\n> * There is no need to include the draft-ybam-rfc8561bis.txt in the repository: it is possible to use the links in the README file to read the latest editors' version of the draft\r\n\r\nI'll take the txt out of the repository on a further commit.",
+          "createdAt": "2024-12-13T13:07:30Z",
+          "updatedAt": "2024-12-13T13:07:30Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOHLTwws6OkE7o",
@@ -1940,6 +1985,106 @@
               "updatedAt": "2024-11-15T22:38:25Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VJTWy",
+          "commit": {
+            "abbreviatedOid": "5eb5c4b"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T12:58:46Z",
+          "updatedAt": "2024-12-13T12:58:46Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Ok, I will note to remove the old revision statements.",
+              "createdAt": "2024-12-13T12:58:46Z",
+              "updatedAt": "2024-12-13T12:58:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VJUWg",
+          "commit": {
+            "abbreviatedOid": "5eb5c4b"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T13:01:01Z",
+          "updatedAt": "2024-12-13T13:01:01Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "noted, and will be fixed in subsequent commit",
+              "createdAt": "2024-12-13T13:01:01Z",
+              "updatedAt": "2024-12-13T13:01:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VJU6m",
+          "commit": {
+            "abbreviatedOid": "5eb5c4b"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T13:02:20Z",
+          "updatedAt": "2024-12-13T13:02:20Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "ok, will do this in a subsequent commit",
+              "createdAt": "2024-12-13T13:02:20Z",
+              "updatedAt": "2024-12-13T13:02:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VJV3K",
+          "commit": {
+            "abbreviatedOid": "5eb5c4b"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T13:04:28Z",
+          "updatedAt": "2024-12-13T13:04:28Z",
+          "comments": [
+            {
+              "originalPosition": 118,
+              "body": "I suggest adding this an issue and discussing on a call.",
+              "createdAt": "2024-12-13T13:04:28Z",
+              "updatedAt": "2024-12-13T13:04:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VJWIy",
+          "commit": {
+            "abbreviatedOid": "5eb5c4b"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-13T13:04:45Z",
+          "updatedAt": "2024-12-13T13:04:45Z",
+          "comments": [
+            {
+              "originalPosition": 131,
+              "body": "I suggest adding this an issue and discussing on a call.",
+              "createdAt": "2024-12-13T13:04:45Z",
+              "updatedAt": "2024-12-13T13:04:45Z"
+            }
+          ]
         }
       ]
     },
@@ -1985,7 +2130,7 @@
       "labels": [],
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
-      "updatedAt": "2024-12-02T18:02:48Z",
+      "updatedAt": "2024-12-12T17:27:19Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "cea5507c10756d10b3176bad3be49a0f2f0f1219",
@@ -2018,6 +2163,184 @@
           "createdAt": "2024-12-02T18:02:48Z",
           "updatedAt": "2024-12-02T18:02:48Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VBdlA",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I have made some detailed comments embedded in github code to make it easy to track\r\n\r\nNot being a subject experts, some comments are based on what I have understood from the YANG model\r\n\r\nI have also some general comments:\r\n\r\n1) From the feature definition, I understand that supporting header compression and the possibility to enable/disable it is a mandatory requirements for any implementation while the possibility to support different profiles for header compressions is optional\r\n\r\n   If this was not the intention, the YANG model needs to be updated tor reflect the real intention\r\n\r\n2) The list of profiles is defined under the RLT. Therefore, different RLTs can support different profiles.\r\n\r\n   Was that the intention or the list of supported profiles shall be defined at the node level?\r\n\r\n3) The code needs to be pretty printed using 'pyang -f yang'\r\n\r\n4) The generated YANG tree lines are too long for being embedded within the draft. I would suggest to compile the code using 'pyang --strict --ietf --max-line-length 69 -f tree --tree-line-length=69'",
+          "createdAt": "2024-12-12T16:33:05Z",
+          "updatedAt": "2024-12-12T17:25:16Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "\r\nA couple of questions:\r\n1. do you have requirements to read the list header-compression-profile-list?\r\n2. for readability purposes, what about placing all the information about header compression under a container?\r\n\r\nOption 1 (just place the list under a top-level container):\r\n\r\n```\r\n    +--ro header-compression-profiles {hc-profile}?\r\n    |  +--ro header-compression-profile-list* [header-compression-profile-name]\r\n    |     ...\r\n    +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n    +--rw header-compression-enabled?        boolean\r\n```\r\n\r\nOption 2 (place everything under a top-level container):\r\n\r\n```\r\n    +--rw header-compression\r\n    |  +--ro profile-list* [header-compression-profile-name]  {hc-profile}?\r\n    |  |  ...\r\n    |  +--rw profile?        -> ../header-compression-profile-list/header-compression-profile-name  {hc-profile}?\r\n    |  +--rw enabled?        boolean\r\n```\r\n\r\nOption 3 (place everything under a top-level container as well as the list of profiles under under container):\r\n\r\n```\r\n    +--rw header-compression\r\n       +--ro profiles {hc-profile}?\r\n       |  +--ro profile-list* [header-compression-profile-name]\r\n       |     ...\r\n       +--rw profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n       +--rw enabled?        boolean\r\n```\r\n",
+              "createdAt": "2024-12-12T16:33:05Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "The common practice in YANG models is not to add the '-list' prefix to the list\r\n\r\nIf the intention is to avoid a naming conflict, what about renaming the list and attribute as 'supported-profiles' and 'configured-profile'?\r\n",
+              "createdAt": "2024-12-12T16:37:31Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 70,
+              "body": "Editorial\r\n```suggestion\r\n        \"The list of header compression profiles supported by the RLT.\r\n\r\n         A profile can be described by a list of protocol layer to be\r\n         compressed or by a size in which all included (also partially)\r\n         protocol header get compressed\";\r\n```",
+              "createdAt": "2024-12-12T16:38:47Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 84,
+              "body": "This means that all the implementations compliant with RFC8561 have the header compression always disabled\r\n\r\nIf this is not the intention, I would suggest to remove the default statement and either leave the default implementation specific (without saying anything) or suggesting the default value to be false (within the description statement)\r\n",
+              "createdAt": "2024-12-12T16:43:00Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "Do we need this identity?",
+              "createdAt": "2024-12-12T16:43:51Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "No need to add the 'layer-protocol-type' prefix to the identity name\r\n\r\n```suggestion\r\n  identity ethernet-mac {\r\n```\r\n\r\nNote: this comment applies to all the other derived identities and it is not repeated",
+              "createdAt": "2024-12-12T16:44:42Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 32,
+              "body": "Q-in-Q is a marketing name and not a standardized name\r\n\r\n```suggestion\r\n  identity c-vlan {\r\n    base protocol-layer-type;\r\n    description\r\n      \"C-VLAN tag\";\r\n  }\r\n\r\n  identity s-vlan {\r\n    base protocol-layer-type;\r\n    description\r\n      \"S-VLAN tag\";\r\n  }\r\n```",
+              "createdAt": "2024-12-12T16:46:10Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "A meaningful description should be provided:\r\n\r\n```suggestion\r\n      \"The base identity used to define the protocol layers whose header can be compressed.\";\r\n```",
+              "createdAt": "2024-12-12T16:47:31Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 81,
+              "body": "A meaningful description should be provided:\r\n\r\n```suggestion\r\n      \"      \"Defines the protocol layers whose header can be compressed.\";\r\n```",
+              "createdAt": "2024-12-12T16:48:13Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 86,
+              "body": "A meaningful description should be provided:\r\n\r\n```suggestion\r\n      \"The base identity used to define how the payload of MPLS packets is identified.\";\r\n```",
+              "createdAt": "2024-12-12T16:49:49Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 92,
+              "body": "The description is not fully clear to me. From the other derived identities, I think this is the intended meaning:\r\n\r\n```suggestion\r\n      \"The payload of MPLS packets cannot be identified.\";\r\n```",
+              "createdAt": "2024-12-12T16:51:10Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 98,
+              "body": "Editorial\r\n\r\n```suggestion\r\n      \"If the Control Word (CW) is present, the payload of the MPLS packet is Ethernet Over MPLS. Otherwise, the payload of the MPLS packet is IPv4 or IPv6.\";\r\n```\r\n\r\nWhat about ACh?",
+              "createdAt": "2024-12-12T16:52:36Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 104,
+              "body": "Editorial:\r\n\r\n```suggestion\r\n      \"The payload of all MPLS packets is always Ethernet\";\r\n```",
+              "createdAt": "2024-12-12T16:53:35Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 110,
+              "body": "```suggestion\r\n      \"The payload of all MPLS packets is always IPv4 or IPv6\";\r\n```",
+              "createdAt": "2024-12-12T16:54:27Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 118,
+              "body": "A meaningful description should be provided:\r\n\r\n```suggestion\r\n      \"Defines how the payload of MPLS packets is identified.\";\r\n```",
+              "createdAt": "2024-12-12T16:55:20Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 39,
+              "body": "The current description was not fully clear to me until I have seen the list of possible values\r\n\r\n```suggestion\r\n            \"Defines how the payload of MPLS packets is identified.\";\r\n```",
+              "createdAt": "2024-12-12T16:56:58Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 45,
+              "body": "Editorial: I think the convention is to use plural names:\r\n\r\n```suggestion\r\n            units \"Bytes\";\r\n```",
+              "createdAt": "2024-12-12T16:57:36Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "The description is not fully clear to me nor why negative values have to be interpreted\r\n\r\nI would suggest to either provide more text here or to create a section in the draft and reference it from this attribute\r\n",
+              "createdAt": "2024-12-12T16:58:29Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "No need to add the '-list' suffix\r\n\r\n```suggestion\r\n        leaf-list compressed-protocol-layer {\r\n```\r\n\r\nAdding a top-level container 'protocol-based' may also help checking which modes are supporting protocol-based header compression and which modes are not",
+              "createdAt": "2024-12-12T17:04:30Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\n        leaf-list mpls-payload-identification {\r\n```",
+              "createdAt": "2024-12-12T17:05:01Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 43,
+              "body": "Adding an header-length-based container would be more future proof (allowing also proprietary augmentations) but not strictly needed to check which modes are supporting header-length-based header compression and which modes are not, since there is only one leaf which can be used instead of the container\r\n",
+              "createdAt": "2024-12-12T17:07:49Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "This grouping is used only once. YANG doctors usually complain and ask the authors to consider whether there is a need to make this grouping re-usable by other modules or, otherwise, move the data nodes within the code",
+              "createdAt": "2024-12-12T17:11:59Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 17,
+              "body": "There is no need to add the header-compression prefix\r\n\r\n```suggestion\r\n  leaf name {\r\n```",
+              "createdAt": "2024-12-12T17:14:15Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "A meaningful description should be provided:\r\n\r\n```suggestion\r\n      \"A name that uniquely identifies the header compression profile in an RLT.\";\r\n```\r\n\r\nNote that since the name is the key of the list, it cannot be changed.\r\n\r\nAlternatively, two data nodes can be defined (as string): an 'identifier' used as a key and a 'name' which can be configured by the operator (like a user label)",
+              "createdAt": "2024-12-12T17:19:39Z",
+              "updatedAt": "2024-12-12T17:25:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VCDy6",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-12T17:27:19Z",
+          "updatedAt": "2024-12-12T17:27:19Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "Need to add prefixes:\r\n\r\n```suggestion\r\n        path \"../mrl:header-compression-profile-list/mrl:header-compression-profile-name\";\r\n```",
+              "createdAt": "2024-12-12T17:27:19Z",
+              "updatedAt": "2024-12-12T17:27:19Z"
+            }
+          ]
         }
       ]
     },
