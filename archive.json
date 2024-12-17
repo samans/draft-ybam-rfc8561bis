@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-15T02:02:59.371222+00:00",
+  "timestamp": "2024-12-17T01:55:27.981180+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1244,7 +1244,7 @@
       ],
       "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2023-11-30T09:55:44Z",
-      "updatedAt": "2024-10-10T09:31:06Z",
+      "updatedAt": "2024-12-16T14:56:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -1295,6 +1295,13 @@
           "body": "Review this again, and add as microwave specific extension.",
           "createdAt": "2024-10-10T09:31:05Z",
           "updatedAt": "2024-10-10T09:31:05Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "In the existing module, RFC 8561, there are ids on both RLT and CT levels with purpose to check that RLTs and CTs are connected with the correct far-end RLT & CT. Is this an alternative approach or does it add anything more?\r\n",
+          "createdAt": "2024-12-16T14:56:33Z",
+          "updatedAt": "2024-12-16T14:56:33Z"
         }
       ]
     },
@@ -1391,7 +1398,7 @@
       ],
       "body": "In the excel spreadsheet line 97 and98 is documented that the ONF air interface supports encryption related configurations.\r\n\r\n```\r\n     |  |     |  +--rw air-interface:encryption-is-on?                   boolean\r\n     |  |     |  +--rw air-interface:cryptographic-key?                  string\r\n```\r\n\r\n**Discussion:**\r\n\r\nI would prefer that such feature is handled by\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/28/\r\n\r\nBut this module is still a draft - how can we deal with it?",
       "createdAt": "2024-01-24T17:54:18Z",
-      "updatedAt": "2024-10-10T09:52:31Z",
+      "updatedAt": "2024-12-16T14:47:32Z",
       "closedAt": null,
       "comments": [
         {
@@ -1407,6 +1414,13 @@
           "body": "https://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/34/\r\nand\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-keystore/\r\nAre in the RFC Editor's queue.  So will be RFCs before the radio-link bis is finished.\r\n\r\nValidate that the new modules are sufficient for radio-link-bis\r\n\r\n",
           "createdAt": "2024-10-10T09:52:07Z",
           "updatedAt": "2024-10-10T09:52:07Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Some thoughts:\r\n- Should the key-reference really be possible to read once set?\r\n- Is there a need to support some kind of operational status?",
+          "createdAt": "2024-12-16T14:47:30Z",
+          "updatedAt": "2024-12-16T14:47:30Z"
         }
       ]
     },
@@ -1514,7 +1528,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2024-01-31T10:12:39Z",
+      "updatedAt": "2024-12-16T14:35:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -1523,6 +1537,13 @@
           "body": "It seams that [RFC8533](https://datatracker.ietf.org/doc/html/rfc8533) does not cover - and maybe even should not cover, when looking to [RFC7276](https://www.rfc-editor.org/rfc/rfc7276) - the requested functionality. \r\n\r\nTherefore an update of [RFC8561](https://datatracker.ietf.org/doc/rfc8561/) is proposed. \r\n\r\n```\r\n  augment /if:interfaces/if:interface:\r\n       [...]\r\n       +--rw maintenance-mode\r\n          +--rw start?      yang:date-and-time\r\n          +--rw end?        yang:date-and-time\r\n          +--ro duration?   uint32\r\n          +--ro status?     boolean\r\n```\r\nPlease see: [ietf-onf-gab-discussion.yang.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/14110183/ietf-onf-gab-discussion.yang.txt)\r\n\r\n\r\n\r\n",
           "createdAt": "2024-01-31T09:41:24Z",
           "updatedAt": "2024-01-31T10:12:39Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is this only for info, or is the system expected to do roll-back of any configurations at the end of the maintenance interval? In that case, how do you specify which configurations to roll-back? ",
+          "createdAt": "2024-12-16T14:35:16Z",
+          "updatedAt": "2024-12-16T14:35:16Z"
         }
       ]
     },
@@ -1568,7 +1589,7 @@
       ],
       "body": "The need is to enable and define the compression of the Ethernet Header data on top of a Radio Link.\r\nA new attribute could be added to RLT interface:\r\n-- rw header-compression-mode ",
       "createdAt": "2024-02-15T09:56:43Z",
-      "updatedAt": "2024-10-17T09:46:16Z",
+      "updatedAt": "2024-12-16T14:21:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -1612,6 +1633,13 @@
           "body": "I added parameters (for RLT) in the yang file to handle header compression, just as an example to start the discussion.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n`    +--rw header-compression-enabled?        boolean`\r\n\r\nFor devices that require more complex configuration, I added a list of profiles, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n```\r\n    +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?`\r\n\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\nThe added code is wrapped inside a couple of markers:\r\n\r\n```\r\n/* HC - begin */\r\n   <added code>\r\n/* HC - end */\r\n```\r\n\r\n[rfc8651-bis-yang-header-compression.zip](https://github.com/user-attachments/files/17391319/rfc8651-bis-yang-header-compression.zip)\r\n",
           "createdAt": "2024-10-15T11:51:04Z",
           "updatedAt": "2024-10-16T07:42:00Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm not sure I fully understand the proposal. Could you please provide some examples on how the header compression profiles could look like.",
+          "createdAt": "2024-12-16T14:21:34Z",
+          "updatedAt": "2024-12-16T14:21:34Z"
         }
       ]
     },
