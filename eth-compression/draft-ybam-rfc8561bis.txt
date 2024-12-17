@@ -714,7 +714,7 @@ Table of Contents
        leaf header-compression-profile {
          if-feature "hc-profile";
          type leafref {
-           path "../header-compression-profile-list/header-compression-profile-name";
+           path "../mrl:header-compression-profile-list/mrl:header-compression-profile-name";
            require-instance false;
          }
          description
