@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="432" width="472" viewBox="0 0 472 432" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px">
+<path d="M 56,64 L 56,368" fill="none" stroke="black"/>
+<path d="M 72,144 L 72,224" fill="none" stroke="black"/>
+<path d="M 72,256 L 72,336" fill="none" stroke="black"/>
+<path d="M 168,144 L 168,224" fill="none" stroke="black"/>
+<path d="M 168,256 L 168,336" fill="none" stroke="black"/>
+<path d="M 184,64 L 184,368" fill="none" stroke="black"/>
+<path d="M 280,64 L 280,368" fill="none" stroke="black"/>
+<path d="M 296,144 L 296,224" fill="none" stroke="black"/>
+<path d="M 296,256 L 296,336" fill="none" stroke="black"/>
+<path d="M 392,144 L 392,224" fill="none" stroke="black"/>
+<path d="M 392,256 L 392,336" fill="none" stroke="black"/>
+<path d="M 408,64 L 408,368" fill="none" stroke="black"/>
+<path d="M 112,16 L 176,16" fill="none" stroke="black"/>
+<path d="M 280,16 L 344,16" fill="none" stroke="black"/>
+<path d="M 56,64 L 184,64" fill="none" stroke="black"/>
+<path d="M 280,64 L 408,64" fill="none" stroke="black"/>
+<path d="M 72,144 L 168,144" fill="none" stroke="black"/>
+<path d="M 296,144 L 392,144" fill="none" stroke="black"/>
+<path d="M 192,176 L 272,176" fill="none" stroke="black"/>
+<path d="M 72,224 L 168,224" fill="none" stroke="black"/>
+<path d="M 296,224 L 392,224" fill="none" stroke="black"/>
+<path d="M 72,256 L 168,256" fill="none" stroke="black"/>
+<path d="M 296,256 L 392,256" fill="none" stroke="black"/>
+<path d="M 192,288 L 272,288" fill="none" stroke="black"/>
+<path d="M 72,336 L 168,336" fill="none" stroke="black"/>
+<path d="M 296,336 L 392,336" fill="none" stroke="black"/>
+<path d="M 56,368 L 184,368" fill="none" stroke="black"/>
+<path d="M 280,368 L 408,368" fill="none" stroke="black"/>
+<path d="M 16,400 L 32,400" fill="none" stroke="black"/>
+<path d="M 168,400 L 184,400" fill="none" stroke="black"/>
+<path d="M 288,400 L 304,400" fill="none" stroke="black"/>
+<path d="M 440,400 L 456,400" fill="none" stroke="black"/>
+<polygon class="arrowhead" points="280,288 268,282.4 268,293.6 " fill="black" transform="rotate(0,272,288)"/>
+<polygon class="arrowhead" points="280,176 268,170.4 268,181.6 " fill="black" transform="rotate(0,272,176)"/>
+<polygon class="arrowhead" points="200,288 188,282.4 188,293.6 " fill="black" transform="rotate(180,192,288)"/>
+<polygon class="arrowhead" points="200,176 188,170.4 188,181.6 " fill="black" transform="rotate(180,192,176)"/>
+<g class="text">
+<text x="104" y="20">/</text>
+<text x="228" y="20">Radio Link</text>
+<text x="352" y="20">\</text>
+<text x="140" y="36">Near End</text>
+<text x="312" y="36">Far End</text>
+<text x="108" y="84">Radio Link</text>
+<text x="332" y="84">Radio Link</text>
+<text x="108" y="100">Terminal A</text>
+<text x="332" y="100">Terminal B</text>
+<text x="232" y="164">Carrier A</text>
+<text x="120" y="180">Carrier</text>
+<text x="344" y="180">Carrier</text>
+<text x="120" y="196">Termination</text>
+<text x="344" y="196">Termination</text>
+<text x="120" y="212">1</text>
+<text x="344" y="212">1</text>
+<text x="232" y="276">Carrier B</text>
+<text x="120" y="292">Carrier</text>
+<text x="344" y="292">Carrier</text>
+<text x="120" y="308">Termination</text>
+<text x="344" y="308">Termination</text>
+<text x="120" y="324">2</text>
+<text x="344" y="324">2</text>
+<text x="8" y="404">\</text>
+<text x="100" y="404">Microwave Node</text>
+<text x="192" y="404">/</text>
+<text x="280" y="404">\</text>
+<text x="372" y="404">Microwave Node</text>
+<text x="464" y="404">/</text>
+</g>
+</svg>

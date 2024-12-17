@@ -1,0 +1,184 @@
+module: ietf-interfaces
+  +--rw interfaces
+  |  +--rw interface* [name]
+  |     +--rw name                                string
+  |     +--rw description?                        string
+  |     +--rw type                                identityref
+  |     +--rw enabled?                            boolean
+  |     +--rw link-up-down-trap-enable?           enumeration
+  |     |       {if-mib}?
+  |     +--ro admin-status                        enumeration
+  |     |       {if-mib}?
+  |     +--ro oper-status                         enumeration
+  |     +--ro last-change?                        yang:date-and-time
+  |     +--ro if-index                            int32 {if-mib}?
+  |     +--ro phys-address?                       yang:phys-address
+  |     +--ro higher-layer-if*                    interface-ref
+  |     +--ro lower-layer-if*                     interface-ref
+  |     +--ro speed?                              yang:gauge64
+  |     +--ro statistics
+  |     |  +--ro discontinuity-time    yang:date-and-time
+  |     |  +--ro in-octets?            yang:counter64
+  |     |  +--ro in-unicast-pkts?      yang:counter64
+  |     |  +--ro in-broadcast-pkts?    yang:counter64
+  |     |  +--ro in-multicast-pkts?    yang:counter64
+  |     |  +--ro in-discards?          yang:counter32
+  |     |  +--ro in-errors?            yang:counter32
+  |     |  +--ro in-unknown-protos?    yang:counter32
+  |     |  +--ro out-octets?           yang:counter64
+  |     |  +--ro out-unicast-pkts?     yang:counter64
+  |     |  +--ro out-broadcast-pkts?   yang:counter64
+  |     |  +--ro out-multicast-pkts?   yang:counter64
+  |     |  +--ro out-discards?         yang:counter32
+  |     |  +--ro out-errors?           yang:counter32
+  |     +--rw mrl:id?                             string
+  |     +--rw (mrl:mode-option)
+  |     |  x--:(mrl:mode)
+  |     |  |  x--rw mrl:mode                      identityref
+  |     |  +--:(mrl:rlt-mode)
+  |     |     +--rw mrl:rlt-mode
+  |     |        +--rw mrl:num-bonded-carriers        uint32
+  |     |        +--rw mrl:num-protecting-carriers    uint32
+  |     +--rw mrl:carrier-terminations*           if:interface-ref
+  |     +--rw mrl:rlp-groups*                     leafref
+  |     +--rw mrl:xpic-pairs*
+  |     |       -> /xpic-pairs/xpic-pair/name {xpic}?
+  |     +--rw mrl:mimo-groups*
+  |     |       -> /mimo-groups/mimo-group/name {mimo}?
+  |     +--rw mrl:tdm-connections* [tdm-type] {tdm}?
+  |     |  +--rw mrl:tdm-type           identityref
+  |     |  +--rw mrl:tdm-connections    uint16
+  |     +--rw mrl:carrier-id?                     string
+  |     +--rw mrl:tx-enabled?                     boolean
+  |     +--ro mrl:tx-oper-status?                 enumeration
+  |     +--rw mrl:tx-frequency                    uint32
+  |     +--rw (mrl:freq-or-distance)
+  |     |  +--:(mrl:rx-frequency)
+  |     |  |  +--rw mrl:rx-frequency?             uint32
+  |     |  +--:(mrl:duplex-distance)
+  |     |     +--rw mrl:duplex-distance?          int32
+  |     +--ro mrl:actual-rx-frequency?            uint32
+  |     +--ro mrl:actual-duplex-distance?         uint32
+  |     +--rw mrl:channel-separation              uint32
+  |     +--rw mrl:polarization?                   enumeration
+  |     +--rw (mrl:power-mode)
+  |     |  +--:(mrl:rtpc)
+  |     |  |  +--rw mrl:rtpc
+  |     |  |     +--rw mrl:maximum-nominal-power    power
+  |     |  +--:(mrl:atpc)
+  |     |     +--rw mrl:atpc
+  |     |        +--rw mrl:maximum-nominal-power    power
+  |     |        +--rw mrl:atpc-lower-threshold     power
+  |     |        +--rw mrl:atpc-upper-threshold     power
+  |     +--ro mrl:actual-transmitted-level?       power
+  |     +--ro mrl:actual-received-level?          power
+  |     +--rw (mrl:coding-modulation-mode)
+  |     |  +--:(mrl:single)
+  |     |  |  +--rw mrl:single
+  |     |  |     +--rw mrl:selected-cm    identityref
+  |     |  +--:(mrl:adaptive)
+  |     |     +--rw mrl:adaptive
+  |     |        +--rw mrl:selected-min-acm    identityref
+  |     |        +--rw mrl:selected-max-acm    identityref
+  |     +--ro mrl:actual-tx-cm?                   identityref
+  |     +--ro mrl:actual-snir?                    decimal64
+  |     +--ro mrl:actual-xpi?                     decimal64 {xpic}?
+  |     +--rw mrl:ct-performance-thresholds
+  |     |  +--rw mrl:received-level-alarm-threshold?      power
+  |     |  +--rw mrl:transmitted-level-alarm-threshold?   power
+  |     |  +--rw mrl:ber-alarm-threshold?
+  |     |          enumeration
+  |     +--rw mrl:if-loop?                        enumeration
+  |     +--rw mrl:rf-loop?                        enumeration
+  |     +--ro mrl:capabilities
+  |     |  +--ro mrl:min-tx-frequency?          uint32
+  |     |  +--ro mrl:max-tx-frequency?          uint32
+  |     |  +--ro mrl:min-rx-frequency?          uint32
+  |     |  +--ro mrl:max-rx-frequency?          uint32
+  |     |  +--ro mrl:minimum-power?             power
+  |     |  +--ro mrl:maximum-available-power?   power
+  |     |  +--ro mrl:available-min-acm?         identityref
+  |     |  +--ro mrl:available-max-acm?         identityref
+  |     |  +--ro mrl:acm-profile-list*
+  |     |     [profile-channel-separation-id
+  |     |      profile-coding-modulation-id]
+  |     |     +--ro mrl:profile-channel-separation-id    uint32
+  |     |     +--ro mrl:profile-coding-modulation-id     identityref
+  |     |     +--ro mrl:modulation-scheme?               uint8
+  |     |     +--ro mrl:nominal-tx-capacity?             uint32
+  |     |     +--ro mrl:support-as-fixed-modulation?     boolean
+  |     |     +--ro mrl:max-tx-power?                    power
+  |     |     +--ro mrl:min-tx-power?                    power
+  |     |     +--ro mrl:lower-acm-profile-ptr
+  |     |     |  +--ro mrl:profile-coding-modulation-id-ref?  leafref
+  |     |     |  +--ro mrl:profile-channel-separation-id-ref? leafref
+  |     |     +--ro mrl:upper-acm-profile-ptr
+  |     |        +--ro mrl:profile-coding-modulation-id-ref?  leafref
+  |     |        +--ro mrl:profile-channel-separation-id-ref? leafref
+  |     +--ro mrl:error-performance-statistics
+  |     |  +--ro mrl:bbe?   yang:counter32
+  |     |  +--ro mrl:es?    yang:counter32
+  |     |  +--ro mrl:ses?   yang:counter32
+  |     |  +--ro mrl:uas?   yang:counter32
+  |     +--ro mrl:radio-performance-statistics
+  |        +--ro mrl:min-rltm?   power
+  |        +--ro mrl:max-rltm?   power
+  |        +--ro mrl:min-tltm?   power
+  |        +--ro mrl:max-tltm?   power
+  x--ro interfaces-state
+     x--ro interface* [name]
+        x--ro name               string
+        x--ro type               identityref
+        x--ro admin-status       enumeration {if-mib}?
+        x--ro oper-status        enumeration
+        x--ro last-change?       yang:date-and-time
+        x--ro if-index           int32 {if-mib}?
+        x--ro phys-address?      yang:phys-address
+        x--ro higher-layer-if*   interface-state-ref
+        x--ro lower-layer-if*    interface-state-ref
+        x--ro speed?             yang:gauge64
+        x--ro statistics
+           x--ro discontinuity-time    yang:date-and-time
+           x--ro in-octets?            yang:counter64
+           x--ro in-unicast-pkts?      yang:counter64
+           x--ro in-broadcast-pkts?    yang:counter64
+           x--ro in-multicast-pkts?    yang:counter64
+           x--ro in-discards?          yang:counter32
+           x--ro in-errors?            yang:counter32
+           x--ro in-unknown-protos?    yang:counter32
+           x--ro out-octets?           yang:counter64
+           x--ro out-unicast-pkts?     yang:counter64
+           x--ro out-broadcast-pkts?   yang:counter64
+           x--ro out-multicast-pkts?   yang:counter64
+           x--ro out-discards?         yang:counter32
+           x--ro out-errors?           yang:counter32
+
+module: ietf-microwave-radio-link
+  +--rw radio-link-protection-groups
+  |  +--rw protection-group* [name]
+  |     +---x manual-switch-working
+  |     +---x manual-switch-protection
+  |     +---x forced-switch
+  |     +---x lockout-of-protection
+  |     +---x freeze
+  |     +---x exercise
+  |     +---x clear
+  |     +--rw name                            string
+  |     +--rw protection-architecture-type?   identityref
+  |     +--rw members*                        if:interface-ref
+  |     +--rw operation-type?                 enumeration
+  |     +--rw working-entity*                 if:interface-ref
+  |     +--rw revertive-wait-to-restore?      uint16
+  |     +--rw hold-off-timer?                 uint16
+  |     +--ro status?                         identityref
+  +--rw xpic-pairs {xpic}?
+  |  +--rw xpic-pair* [name]
+  |     +--rw name       string
+  |     +--rw enabled?   boolean
+  |     +--rw members*   if:interface-ref
+  +--rw mimo-groups {mimo}?
+     +--rw mimo-group* [name]
+        +--rw name       string
+        +--rw enabled?   boolean
+        +--rw members*   if:interface-ref
+

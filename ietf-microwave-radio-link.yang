@@ -60,9 +60,10 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2024-03-03 {
+  revision 2024-09-11 {
     description
-      "pretty printing";
+      "Draft - Issue #35 (grouping common-microwave-properties
+               Issue #31 added minimum-nominal-power";
     reference
       "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
@@ -112,15 +113,6 @@ module ietf-microwave-radio-link {
    * Typedefs
    */
 
-  typedef power {
-    type decimal64 {
-      fraction-digits 1;
-    }
-    description
-      "Type used for the power values in the data nodes
-       for configuration or status.";
-  }
-
   grouping acm-profile {
     description
       "acm-profile";
@@ -144,14 +136,14 @@ module ietf-microwave-radio-link {
          coding-modulation-mode.";
     }
     leaf max-tx-power {
-      type power;
+      type mw-types:power;
       description
         "The maximum transmitted power when the carrier termination
          is operating this acm-profile.  Used to configure
          transmitted power.";
     }
     leaf min-tx-power {
-      type power;
+      type mw-types:power;
       description
         "The minimum transmitted power when the carrier termination
          is operating this acm-profile.  Used to configure
@@ -332,13 +324,9 @@ module ietf-microwave-radio-link {
       description
         "Shows the operative status of the transmitter.";
     }
-    leaf tx-frequency {
-      type uint32;
-      units "kHz";
-      mandatory true;
-      description
-        "Selected transmitter frequency.";
-    }
+
+    uses mw-types:common-microwave-properties;
+
     choice freq-or-distance {
       mandatory true;
       description
@@ -357,30 +345,12 @@ module ietf-microwave-radio-link {
           "Distance between transmitter and receiver frequencies.";
       }
     }
-    leaf actual-rx-frequency {
-      type uint32;
-      units "kHz";
-      config false;
-      description
-        "Computed receiver frequency.";
-    }
     leaf actual-duplex-distance {
       type uint32;
       units "kHz";
       config false;
       description
         "Computed distance between Tx and Rx frequencies.";
-    }
-    leaf channel-separation {
-      type uint32;
-      units "kHz";
-      mandatory true;
-      description
-        "The amount of bandwidth allocated to a carrier.  The
-         distance between adjacent channels in a radio
-         frequency channels arrangement";
-      reference
-        "ETSI EN 302 217-1";
     }
     leaf polarization {
       type enumeration {
@@ -411,7 +381,7 @@ module ietf-microwave-radio-link {
         reference
           "ETSI EN 302 217-1";
         leaf maximum-nominal-power {
-          type power {
+          type mw-types:power {
             range "-99..99";
           }
           units "dBm";
@@ -428,20 +398,30 @@ module ietf-microwave-radio-link {
         reference
           "ETSI EN 302 217-1";
         leaf maximum-nominal-power {
-          type power {
+          type mw-types:power {
             range "-99..99";
           }
           units "dBm";
           mandatory true;
           description
-            "Selected maximum output power.  Minimum output
-             power is the same as the system capability,
-             minimum-power.";
+            "Nominal maximum output power.";
           reference
             "ETSI EN 302 217-1";
         }
+        leaf minimum-nominal-power {
+          type mw-types:power {
+            range "-99..99";
+          }
+          units "dBm";
+          mandatory true;
+          description
+            "Minimum output power.
+
+             By default, minimum output power is the same as the
+             system capability minimum-power.";
+        }
         leaf atpc-lower-threshold {
-          type power {
+          type mw-types:power {
             range "-99..-20";
           }
           units "dBm";
@@ -454,7 +434,7 @@ module ietf-microwave-radio-link {
             "ETSI EN 302 217-1";
         }
         leaf atpc-upper-threshold {
-          type power {
+          type mw-types:power {
             range "-99..-20";
           }
           units "dBm";
@@ -467,19 +447,8 @@ module ietf-microwave-radio-link {
         }
       }
     }
-    leaf actual-transmitted-level {
-      type power {
-        range "-99..99";
-      }
-      units "dBm";
-      config false;
-      description
-        "Actual transmitted power level (0.1 dBm resolution).";
-      reference
-        "ETSI EN 301 129";
-    }
     leaf actual-received-level {
-      type power {
+      type mw-types:power {
         range "-99..-20";
       }
       units "dBm";
@@ -535,25 +504,6 @@ module ietf-microwave-radio-link {
         }
       }
     }
-    leaf actual-tx-cm {
-      type identityref {
-        base mw-types:coding-modulation;
-      }
-      config false;
-      description
-        "Actual coding/modulation in transmitting direction.";
-    }
-    leaf actual-snir {
-      type decimal64 {
-        fraction-digits 1;
-        range "0..99";
-      }
-      units "dB";
-      config false;
-      description
-        "Actual signal to noise plus the interference ratio
-         (0.1 dB resolution).";
-    }
     leaf actual-xpi {
       if-feature "xpic";
       type decimal64 {
@@ -573,7 +523,7 @@ module ietf-microwave-radio-link {
         "Specification of thresholds for when alarms should
          be sent and cleared for various performance counters.";
       leaf received-level-alarm-threshold {
-        type power {
+        type mw-types:power {
           range "-99..-20";
         }
         units "dBm";
@@ -585,7 +535,7 @@ module ietf-microwave-radio-link {
           "ETSI EN 301 129";
       }
       leaf transmitted-level-alarm-threshold {
-        type power {
+        type mw-types:power {
           range "-99..99";
         }
         units "dBm";
@@ -715,7 +665,7 @@ module ietf-microwave-radio-link {
           "Maximum Tx frequency possible to use.";
       }
       leaf minimum-power {
-        type power;
+        type mw-types:power;
         units "dBm";
         description
           "The minimum output power supported.";
@@ -723,7 +673,7 @@ module ietf-microwave-radio-link {
           "ETSI EN 302 217-1";
       }
       leaf maximum-available-power {
-        type power;
+        type mw-types:power;
         units "dBm";
         description
           "The maximum output power supported.";
@@ -924,7 +874,7 @@ module ietf-microwave-radio-link {
         "ETSI EN 301 129 radio physical interface statistics relevant
          for a carrier termination.";
       leaf min-rltm {
-        type power {
+        type mw-types:power {
           range "-99..-20";
         }
         units "dBm";
@@ -938,7 +888,7 @@ module ietf-microwave-radio-link {
           "ETSI EN 301 129";
       }
       leaf max-rltm {
-        type power {
+        type mw-types:power {
           range "-99..-20";
         }
         units "dBm";
@@ -952,7 +902,7 @@ module ietf-microwave-radio-link {
           "ETSI EN 301 129";
       }
       leaf min-tltm {
-        type power {
+        type mw-types:power {
           range "-99..99";
         }
         units "dBm";
@@ -966,7 +916,7 @@ module ietf-microwave-radio-link {
           "ETSI EN 301 129";
       }
       leaf max-tltm {
-        type power {
+        type mw-types:power {
           range "-99..99";
         }
         units "dBm";
