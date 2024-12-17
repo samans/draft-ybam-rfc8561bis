@@ -19,19 +19,5 @@ Gemfile.lock
 archive.json
 draft-*.txt
 draft-ybam-rfc8561bis.xml
-<<<<<<< HEAD
-=======
-lib
->>>>>>> 1869b2d (Automatic update of .gitignore)
 package-lock.json
 report.xml
-<<<<<<< HEAD
-!requirements.txt
-=======
-venv/
-<<<<<<< HEAD
-draft-*.txt
->>>>>>> bfd68ff (Add draft-*.txt to ignore)
-=======
-!requirements.txt
->>>>>>> 1869b2d (Automatic update of .gitignore)
