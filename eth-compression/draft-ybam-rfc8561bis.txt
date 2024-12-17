@@ -704,7 +704,8 @@ Table of Contents
          key "header-compression-profile-name";
          config false;
          description
-           "A list of header compression profiles.
+           "The list of header compression profiles supported by the RLT.
+
             A profile can be described by a list of protocol layer to be
             compressed or by a size in which all included (also partially)
             protocol header get compressed";
