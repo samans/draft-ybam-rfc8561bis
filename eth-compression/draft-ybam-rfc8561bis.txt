@@ -502,7 +502,7 @@ Table of Contents
      }
 
      grouping header-compression-profile {
-     leaf header-compression-profile-name {
+     leaf name {
        type string;
        description
          "none";
