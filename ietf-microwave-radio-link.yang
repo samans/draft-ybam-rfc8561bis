@@ -144,7 +144,7 @@ module ietf-microwave-radio-link {
           description
             "List of protocol layers that get compressed with this kind of header compression.";
         }
-        leaf-list mpls-payload-kind-list {
+        leaf-list mpls-payload-identification {
           type mw-types:mpls-payload;
           default "mpls-palyload-type-none";
           config false;
