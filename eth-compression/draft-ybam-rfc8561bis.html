@@ -1604,7 +1604,8 @@ module ietf-microwave-radio-link {
       Min Ye (amy.yemin@huawei.com)
       Xi Li (Xi.Li@neclab.eu)
       Daniela Spreafico (daniela.spreafico@nokia.com)
-      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+      Danilo Pala (danilo.pala@siaemic.com)";
   description
     "This is a module for the entities in
      a generic microwave system.
@@ -1691,45 +1692,6 @@ module ietf-microwave-radio-link {
     description
       "Type used for the power values in the data nodes
        for configuration or status.";
-  }
-
-  grouping header-compression-profile {
-  leaf name {
-    type string;
-    description
-      "A name that uniquely identifies the header compression profile in an RLT.";
-  }
-  description
-    "Header compression profile: can be a list of protocol header to be compressed
-     or a header size in which all included (also partially) headers get compressed.";
-    choice header-compression {
-      case protocol-based {
-        leaf-list compressed-protocol-layer-list {
-          type mw-types:protocol-layer;
-          default "protocol-layer-type-none";
-          config false;
-          description
-            "List of protocol layers that get compressed with this kind of header compression.";
-        }
-        leaf-list mpls-payload-identification {
-          type mw-types:mpls-payload;
-          default "mpls-palyload-type-none";
-          config false;
-          description
-            "Defines how the header bytes inside the MPLS header has to be interpreted.";
-        }
-      }
-      case header-length-based {
-          leaf compressed-header-length {
-            type int16;
-            units "Byte";
-            default "-1";
-            config false;
-            description
-              "Number of Bytes of header information that get compressed.";
-          }
-      }
-    }
   }
 
   grouping acm-profile {
@@ -1891,33 +1853,78 @@ module ietf-microwave-radio-link {
           "Number of connections of the specified type.";
       }
     }
-    list supported-header-compression-profiles {
+    container header-compression {
       if-feature "hc-profile";
-      key "name";
-      config false;
       description
-        "The list of header compression profiles supported by the RLT.
+        "Configuration of Header Compression ";
+      list supported-profiles {
+        key "name";
+        config false;
+        description
+          "The list of header compression profiles supported by the RLT.
 
-         A profile can be described by a list of protocol layer to be
-         compressed or by a size in which all included (also partially)
-         protocol header get compressed";
-      uses header-compression-profile;
-    }
-    leaf configured-header-compression-profile {
-      if-feature "hc-profile";
-      type leafref {
-        path "../mrl:supported-header-compression-profiles/mrl:name";
-        require-instance false;
+           A profile can be described by a list of protocol layer to be
+           compressed or by a size in which all included (also partially)
+           protocol header get compressed";
+        leaf name {
+          type string;
+          description
+            "A name that uniquely identifies the header compression profile
+             in an RLT.";
+        }
+        choice header-compression {
+          description
+            "A choice to select the header profile type, based on protocol
+             heders or on the header size";
+          case protocol-based {
+            container protocol-headers {
+              description
+                "Protocol headers to be compressed";
+              leaf-list protocols {
+                type mw-types:protocol-layer;
+                config false;
+                description
+                  "List of protocol layers that get compressed with this type
+                   of header compression.";
+              }
+              leaf mpls-payload-type {
+                type mw-types:mpls-payload;
+                config false;
+                description
+                  "Defines how the header bytes inside the MPLS header has to
+                   be interpreted.";
+              }
+            }
+          }
+          case header-size-based {
+            container header-size {
+              description
+                "Header size to be compressed";
+              leaf size {
+                type int16;
+                units "Byte";
+                default "-1";
+                config false;
+                description
+                  "Number of Bytes of header information that get compressed.";
+              }
+            }
+          }
+        }
       }
-      description
-        "Select the profile of header compression to be used.";
-    }
-    leaf header-compression-enabled {
-      if-feature "hc-profile";
-      type boolean;
-      default "false";
-      description
-        "Enable(true)/disable(false) header compression";
+      leaf configured-profile {
+        type leafref {
+          path "../mrl:supported-profiles/mrl:name";
+          require-instance false;
+        }
+        description
+          "Select the profile of header compression to be used.";
+      }
+      leaf header-compression-enabled {
+        type boolean;
+        description
+          "Enable(true)/disable(false) header compression";
+      }
     }
   }
 
@@ -2447,11 +2454,10 @@ module ietf-microwave-radio-link {
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path
-                "../../.."
-              + "/acm-profile-list[profile-coding-modulation-id="
-              + "current()/../profile-coding-modulation-id-ref]"
-              + "/profile-channel-separation-id";
+              path "../../.."
+                 + "/acm-profile-list[profile-coding-modulation-id="
+                 + "current()/../profile-coding-modulation-id-ref]"
+                 + "/profile-channel-separation-id";
             }
             description
               "A reference to an acm-profile to give an order in
@@ -2484,11 +2490,10 @@ module ietf-microwave-radio-link {
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path
-                "../../.."
-              + "/acm-profile-list[profile-coding-modulation-id="
-              + "current()/../profile-coding-modulation-id-ref]"
-              + "/profile-channel-separation-id";
+              path "../../.."
+                 + "/acm-profile-list[profile-coding-modulation-id="
+                 + "current()/../profile-coding-modulation-id-ref]"
+                 + "/profile-channel-separation-id";
             }
             description
               "A reference to an acm-profile to give an order in
