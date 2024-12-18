@@ -1869,7 +1869,8 @@ Table of Contents
          Min Ye (amy.yemin@huawei.com)
          Xi Li (Xi.Li@neclab.eu)
          Daniela Spreafico (daniela.spreafico@nokia.com)
-         Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+         Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+         Danilo Pala (danilo.pala@siaemic.com)";
      description
        "This module contains a collection of YANG data types
         considered generally useful for microwave interfaces.
@@ -2241,12 +2242,6 @@ Table of Contents
          "none";
      }
 
-     identity protocol-layer-type-none {
-       base protocol-layer-type;
-       description
-         "none";
-     }
-
      identity protocol-layer-type-ethernet-mac {
        base protocol-layer-type;
        description
@@ -2351,7 +2346,6 @@ Table of Contents
        description
          "none";
      }
-
    }
    <CODE ENDS>
 
