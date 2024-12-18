@@ -5,9 +5,7 @@
 *.txt
 *.upload
 *~
-.refcache
 .tags
-.targets.mk
 /*-[0-9][0-9].xml
 /.gems/
 /.refcache
@@ -21,8 +19,5 @@ Gemfile.lock
 archive.json
 draft-*.txt
 draft-ybam-rfc8561bis.xml
-lib
 package-lock.json
 report.xml
-venv/
-!requirements.txt

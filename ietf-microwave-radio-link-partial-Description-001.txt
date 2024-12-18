@@ -1,0 +1,116 @@
+      list acm-profile-list {
+        key "profile-coding-modulation-id profile-channel-separation-id";
+          description
+            "A list of acm-profile. 
+		 Each acm-profile is identified by a channel-separation and coding-modulation values as supported by the carrier termination
+		 and defines the parameter's values of each transmission acm profile.
+		 
+             Basically, the list contains all acm profiles supported by the device.
+             Profiles are organized into profile chains for each different channel separation value available.
+             The chains are formed by the lower-acm-profile-ptr and upper-acm-profile-ptr pointers.
+             The sequence in the list reflects the sequence of profiles that are operated by the device according to the fading conditions,
+             from the clear sky down to the persistent rain, and vice versa.
+             The channel-separation and selected-cm configuration parameters (or the selected-min-acm/selected-max-acm pair)
+             must address one of the profiles in the list.";
+	 
+        leaf profile-channel-separation-id {
+          type string;
+		  description
+          "Uniquely identifies the acm profile (together with 'profile-coding-modulation-id'.
+		   It could be used to allow the configuration of the channel-separation value.";
+        }
+        leaf profile-coding-modulation-id {
+          type identityref {
+            base mw-types:coding-modulation;
+		  description
+          "Uniquely identifies the acm profile (together with 'profile-channel-separation-id' ) .
+		   It could be used to allow the configuration of the selected-cm (single mode) or  selected-min-acm/selected-max-acm (adaptive mode).";
+          }
+        }
+
+        uses acm-profile;
+
+        container lower-acm-profile-ptr {
+          description: "Together with the upper-acm-profile-ptr parameters it creates a chain of acm profiles related to a specific channel separation value.
+                        Specifically it references the next lower acm-profile, while upper-acm-profile-ptr references the next higher profile.
+                        The lowest profile in the chain, shall not instantiate this container.
+                        The acm-profile-list can contain multiple chains related to different channel separation values supported by the device."
+          leaf profile-coding-modulation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list/profile-coding-modulation-id";
+		    description
+              "A reference to an acm-profile to give an order in acm-profile-list. 
+			   This is the reference to the 'profile-coding-modulation-id' key of the next lower acm-profile in the list respect to the current one.";
+            }
+          }
+          leaf profile-channel-separation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id";
+		    description
+              "A reference to an acm-profile to give an order in acm-profile-list. 
+			   This is the reference to the 'profile-coding-modulation-id' key of the next lower acm-profile in the list respect to the current one.";
+            }
+          }
+        }
+        container upper-acm-profile-ptr {
+          description: "Together with the lower-acm-profile-ptr parameters it creates a chain of acm profiles related to a specific channel separation value.
+                        Specifically it references the next higher acm-profile, while lower-acm-profile-ptr references the next lower profile.
+                        The highest profile in the chain, shall not instantiate this container.
+                        The acm-profile-list can contain multiple chains related to different channel separation values supported by the device."
+
+          leaf profile-coding-modulation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list/profile-coding-modulation-id";
+ 		    description
+              "A reference to an acm-profile to give a sequence in acm-profile-list. 
+			   This is the reference to the 'profile-coding-modulation-id' key of the next higher acm-profile in the list respect to the current one.";
+            }
+          }
+          leaf profile-channel-separation-id-ref {
+            type leafref {
+              path "../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id";
+		    description
+              "A reference to an acm-profile to give a sequence in acm-profile-list. 
+			   This is the reference to the 'profile-coding-modulation-id' key of the next higher acm-profile in the list respect to the current one.";
+            }
+          }
+        }
+      }
+    }
+
+  grouping acm-profile {
+     description "acm-profile. It reports the characteristics  of the acm-profile as supported by the carrier termination. "
+
+     leaf modulation-scheme {
+        type uint8;
+		description
+         "It is the logarithm base two of the number of points in the transmitted constellation. 
+		  E.g.: value would be 2 for 4QAM, 10 for 1024QAM and 12 for 4096QAM .";
+     }
+     leaf nominal-tx-capacity {
+        type uint64;
+		units "bit/sec";
+		description
+         "The nominal radio link capacity associated to this acm-profile .";
+     }
+     leaf support-as-fixed-modulation {
+        type boolean;
+		description
+         "It is true when the profile can be used in single coding-modulation-mode.";
+     }
+     leaf max-tx-power {
+        type power;
+		units "dBm";
+		description
+         "It is the maximum transmitted power when the carrier termination is operating this acm-profile.
+		 It is used to configure transmitted power";
+     }
+     leaf min-tx-power {
+        type power;
+		units "dBm"
+		description
+         "It is the minimum  transmitted power when the carrier termination is operating this acm-profile. 
+		 It is used to configure transmitted power";
+     }
+  }
+}
