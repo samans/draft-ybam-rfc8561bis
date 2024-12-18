@@ -699,9 +699,9 @@ Table of Contents
              "Number of connections of the specified type.";
          }
        }
-       list header-compression-profile-list {
+       list supported-header-compression-profiles {
          if-feature "hc-profile";
-         key "header-compression-profile-name";
+         key "name";
          config false;
          description
            "The list of header compression profiles supported by the RLT.
@@ -711,10 +711,10 @@ Table of Contents
             protocol header get compressed";
          uses header-compression-profile;
        }
-       leaf header-compression-profile {
+       leaf configured-header-compression-profile {
          if-feature "hc-profile";
          type leafref {
-           path "../mrl:header-compression-profile-list/mrl:header-compression-profile-name";
+           path "../mrl:supported-header-compression-profiles/mrl:name";
            require-instance false;
          }
          description
