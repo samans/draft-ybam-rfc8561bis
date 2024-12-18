@@ -346,6 +346,7 @@ module ietf-microwave-radio-link {
         "Select the profile of header compression to be used.";
     }
     leaf header-compression-enabled {
+      if-feature "hc-profile";
       type boolean;
       default "false";
       description
