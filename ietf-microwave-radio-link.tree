@@ -52,7 +52,7 @@ module: ietf-microwave-radio-link
        |           +--ro size?   int16
        +--rw configured-profile?
        |       -> ../supported-profiles/name
-       +--rw header-compression-enabled?   boolean
+       +--rw enabled?                     boolean
   augment /if:interfaces/if:interface:
     +--rw carrier-id?                     string
     +--rw tx-enabled?                     boolean
