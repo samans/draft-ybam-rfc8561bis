@@ -336,7 +336,7 @@ module ietf-microwave-radio-link {
         description
           "Select the profile of header compression to be used.";
       }
-      leaf header-compression-enabled {
+      leaf enabled {
         type boolean;
         description
           "Enable(true)/disable(false) header compression";
