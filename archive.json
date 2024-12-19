@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-17T01:55:27.981180+00:00",
+  "timestamp": "2024-12-19T01:52:41.448653+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -775,7 +775,7 @@
       "id": "I_kwDOHLTwws5ldx9R",
       "title": "reference coding modulation in acm mode to be selected",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/16",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -784,8 +784,8 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2023-12-14T10:44:46Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-18T17:03:17Z",
+      "closedAt": "2024-12-17T20:29:24Z",
       "comments": [
         {
           "author": "DanielaSpreafico",
@@ -912,6 +912,13 @@
           "body": "reference-modulation description:\r\nreference-modulation is a reference to a coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'.",
           "createdAt": "2023-12-14T10:37:24Z",
           "updatedAt": "2023-12-14T10:37:24Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello\r\n\r\nMy opinion is that the base  mw-types:coding-modulation of the\r\nreference-modulation leaf definition is not correct and we need instead a\r\nnew type\r\nhaving the 11 values specified at the Table of the ETSI EN 302 217-1 V3.2.2\r\n(2020-02).\r\nThis point had been mentioned before when referring to the fact that the\r\nvalues of the reference-modulation are not related to the\r\nstrong / light code rates (FEC).\r\nI think that in general, regarding to the Spectral Efficiency, that is\r\nassociated with this reference-modulation specification and that is\r\nmeasured in Mbps/MHz, the term \"bits per sec\" refers to user data rate and\r\nFEC is excluded.\r\n\r\n\r\nBest regards\r\nThodoros Kallimanis\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a4\u03c1\u03af 17 \u0394\u03b5\u03ba 2024 \u03c3\u03c4\u03b9\u03c2 10:29\u202f\u03bc.\u03bc., \u03bf/\u03b7 Scott Mansfield <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> Closed #16 <https://github.com/samans/draft-ybam-rfc8561bis/issues/16> as\r\n> completed via #41\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/pull/41>.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/16#event-15692606445>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVMXXQE5OUC55GOA5T32GCCTTAVCNFSM6AAAAABTZHERBGVHI2DSMVQWIX3LMV45UABCJFZXG5LFIV3GK3TUJZXXI2LGNFRWC5DJN5XDWMJVGY4TENRQGY2DINI>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2024-12-18T17:03:16Z",
+          "updatedAt": "2024-12-18T17:03:16Z"
         }
       ]
     },
@@ -1929,24 +1936,26 @@
       "id": "PR_kwDOHLTwws57VIDq",
       "title": "2024 09 sam",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/36",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Implementation of Issue #35 and Issue #31 ",
       "createdAt": "2024-09-12T16:41:07Z",
-      "updatedAt": "2024-12-13T13:30:35Z",
+      "updatedAt": "2024-12-17T20:26:23Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "9be461c25b83748874c4f83d5926b1c5bbba2fc5",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "2024-09-sam",
-      "headRefOid": "bd3338aedc197f82020f27306938f7a37e76476c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "274a6bf2dd87aea7d6eaca82ffa34232ae4f994b",
+      "closedAt": "2024-12-17T20:26:23Z",
+      "mergedAt": "2024-12-17T20:26:23Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "59467d19d9859214517e3c63990cf1820ad9ad02"
+      },
       "comments": [
         {
           "author": "samans",
@@ -2158,13 +2167,13 @@
       "labels": [],
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
-      "updatedAt": "2024-12-12T17:27:19Z",
+      "updatedAt": "2024-12-18T19:09:31Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
-      "baseRefOid": "cea5507c10756d10b3176bad3be49a0f2f0f1219",
+      "baseRefOid": "56e805309ae448a16efb0d05d62d92f7f038e694",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "eth-compression",
-      "headRefOid": "f0c20f4b7cfea111642f00bd9356ad195b175660",
+      "headRefOid": "23a6989baa3f9d50ac86c2023819df7f325d95c6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2369,6 +2378,106 @@
               "updatedAt": "2024-12-12T17:27:19Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VkAsB",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-17T15:41:30Z",
+          "updatedAt": "2024-12-17T15:41:30Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "You are right, RFC8561 compliant implementations do not have this attribute and in this case the default value would be used.  Moreover, the statement if-feature \"hc-profile\" has to be added to this node to make it optional. ",
+              "createdAt": "2024-12-17T15:41:30Z",
+              "updatedAt": "2024-12-17T16:55:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6Vkbef",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-17T16:04:52Z",
+          "updatedAt": "2024-12-17T16:04:52Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Having the group the module is likely more readable than having data nodes within the code, anyway no problem to move data nodes into the code.",
+              "createdAt": "2024-12-17T16:04:52Z",
+              "updatedAt": "2024-12-17T16:04:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6Vk0WJ",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-17T16:39:58Z",
+          "updatedAt": "2024-12-17T16:39:59Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Some device requires to enable the header compression feature without the need to manage a specific profile. Several options meet this requirement:\r\n\r\n1. do not create header-compression-profile\r\n2. add require-instance statement to header-compression-profile and set it to false \r\n3. create header-compression-profile and reference a profile with only this dummy protocol (protocol-layer-type-none) \r\n4. create header-compression-profile and reference a profile with only a dummy compressed-header-length (-1)\r\n5. ...\r\n\r\nWhat is the best practice? ",
+              "createdAt": "2024-12-17T16:39:58Z",
+              "updatedAt": "2024-12-17T16:42:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VrzVg",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T09:32:35Z",
+          "updatedAt": "2024-12-18T09:32:35Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "The enable and profile selection should be available on RLT level, instead the supported profile list can also be at node/device level. Leaving it at RLT level is a more flexible solution, even if the number of yang nodes increases.\r\nThe module will be changed according to the option 2. ",
+              "createdAt": "2024-12-18T09:32:35Z",
+              "updatedAt": "2024-12-18T09:34:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6VwsHO",
+          "commit": {
+            "abbreviatedOid": "f0c20f4"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-18T18:28:43Z",
+          "updatedAt": "2024-12-18T18:28:43Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "Added a container for each of the two case statement.",
+              "createdAt": "2024-12-18T18:28:43Z",
+              "updatedAt": "2024-12-18T18:28:43Z"
+            }
+          ]
         }
       ]
     },
@@ -2377,24 +2486,26 @@
       "id": "PR_kwDOHLTwws6B0UF7",
       "title": "Reference Modulation",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/41",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #16",
       "createdAt": "2024-11-13T17:31:03Z",
-      "updatedAt": "2024-12-02T17:35:30Z",
+      "updatedAt": "2024-12-17T20:29:23Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
-      "baseRefOid": "cea5507c10756d10b3176bad3be49a0f2f0f1219",
+      "baseRefOid": "59467d19d9859214517e3c63990cf1820ad9ad02",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "Reference_modul",
-      "headRefOid": "5cab79e96287b954fbbc6979b6ce90c2c499d3f4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f746ed6916ae2616155a383300501fb7a95f06c7",
+      "closedAt": "2024-12-17T20:29:23Z",
+      "mergedAt": "2024-12-17T20:29:23Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "56e805309ae448a16efb0d05d62d92f7f038e694"
+      },
       "comments": [],
       "reviews": [
         {
