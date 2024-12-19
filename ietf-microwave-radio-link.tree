@@ -9,13 +9,6 @@ module: ietf-microwave-radio-link
   |     +--rw revertive-wait-to-restore?      uint16
   |     +--rw hold-off-timer?                 uint16
   |     +--ro status?                         identityref
-  |     +---x manual-switch-working
-  |     +---x manual-switch-protection
-  |     +---x forced-switch
-  |     +---x lockout-of-protection
-  |     +---x freeze
-  |     +---x exercise
-  |     +---x clear
   +--rw xpic-pairs {xpic}?
   |  +--rw xpic-pair* [name]
   |     +--rw name       string
@@ -30,7 +23,7 @@ module: ietf-microwave-radio-link
   augment /if:interfaces/if:interface:
     +--rw id?                     string
     +--rw (mode-option)
-    |  x--:(mode)
+    |  +--:(mode)
     |  |  x--rw mode              identityref
     |  +--:(rlt-mode)
     |     +--rw rlt-mode
@@ -44,8 +37,22 @@ module: ietf-microwave-radio-link
     +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
     |       {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
-       +--rw tdm-type           identityref
-       +--rw tdm-connections    uint16
+    |  +--rw tdm-type           identityref
+    |  +--rw tdm-connections    uint16
+    +--rw header-compression {hc-profile}?
+       +--ro supported-profiles* [name]
+       |  +--ro name                      string
+       |  +--ro (header-compression)?
+       |     +--:(protocol-based)
+       |     |  +--ro protocol-headers
+       |     |     +--ro protocols*           mw-types:protocol-layer
+       |     |     +--ro mpls-payload-type?   mw-types:mpls-payload
+       |     +--:(header-size-based)
+       |        +--ro header-size
+       |           +--ro size?   int16
+       +--rw configured-profile?
+       |       -> ../supported-profiles/name
+       +--rw enabled?                     boolean
   augment /if:interfaces/if:interface:
     +--rw carrier-id?                     string
     +--rw tx-enabled?                     boolean
