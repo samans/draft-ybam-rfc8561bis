@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T02:18:14.556017+00:00",
+  "timestamp": "2025-01-12T01:55:29.488790+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1566,7 +1566,7 @@
       "id": "I_kwDOHLTwws59zjiY",
       "title": "Tx Power min in ATPC ",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/31",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1575,8 +1575,8 @@
       ],
       "body": "The configuration of the minimum value of Tx Power (which is not to be undercut) on ATPC mode is missing on ietf-microwave-radio-link model.\r\n\r\nOn ONF model this parameter is foreseen (air-interface-configuration/atpc-tx-power-min).",
       "createdAt": "2024-01-31T17:59:22Z",
-      "updatedAt": "2024-10-10T09:35:18Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-09T10:08:47Z",
+      "closedAt": "2025-01-09T10:08:47Z",
       "comments": [
         {
           "author": "samans",
@@ -1584,6 +1584,13 @@
           "body": "add minimum-nominal-power  power  to atpc.",
           "createdAt": "2024-09-05T09:27:10Z",
           "updatedAt": "2024-09-05T09:27:10Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "YANG issue has been merged. So close this issue",
+          "createdAt": "2025-01-09T10:08:47Z",
+          "updatedAt": "2025-01-09T10:08:47Z"
         }
       ]
     },
@@ -1775,7 +1782,7 @@
       "id": "I_kwDOHLTwws6VciTp",
       "title": "microwave-types move groupings",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/35",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [],
@@ -1784,9 +1791,17 @@
       ],
       "body": "In the RFC8561bis, move tx-frequency, actual-rx-frequency, channel-separation, actual-tx-cm, actual-snir, actual-transmitted-level to a common grouping in ietf-microwave-types.yang.\r\nDeprecate the grouping in ietf-microwave-topology\r\n\r\nleverage the new rlt-mode grouping from the RFC8561bis version of ietf-microwave-types.yang in the microwave-radio-link-attributes:rlt-mode container in ietf-microwave-topology.yang and\r\nDeprecate the rlt-mode grouping from ietf-microwave-topology.yang.",
       "createdAt": "2024-09-05T09:37:15Z",
-      "updatedAt": "2024-10-10T09:34:56Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-01-09T10:09:25Z",
+      "closedAt": "2025-01-09T10:09:24Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Merged, close issue",
+          "createdAt": "2025-01-09T10:09:24Z",
+          "updatedAt": "2025-01-09T10:09:24Z"
+        }
+      ]
     },
     {
       "number": 37,
@@ -1851,9 +1866,17 @@
       "labels": [],
       "body": "See thread initiated on Netmod WG: https://mailarchive.ietf.org/arch/msg/netmod/p2MExPZrHZZWT0ApL-oJ0pxXnA0/",
       "createdAt": "2024-12-13T12:44:39Z",
-      "updatedAt": "2024-12-13T12:44:39Z",
+      "updatedAt": "2025-01-09T10:33:40Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "What is an example of adding a default statement to an existing leaf in the radio-link yang?  Trying to understand what problem is being identified.  Can we specifically ask the YANG doctors?  Do the updated YANG guidelines help?",
+          "createdAt": "2025-01-09T10:33:39Z",
+          "updatedAt": "2025-01-09T10:33:39Z"
+        }
+      ]
     }
   ],
   "pulls": [
