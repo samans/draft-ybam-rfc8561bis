@@ -467,7 +467,7 @@ Table of Contents
          "Indicates that the device supports TDM.";
      }
 
-     feature hc-profile {
+     feature header-compression {
        description
          "Indicates that the device supports Header Compression profiles.";
      }
@@ -645,7 +645,7 @@ Table of Contents
          }
        }
        container header-compression {
-         if-feature "hc-profile";
+         if-feature "header-compression";
          description
            "Configuration of Header Compression ";
          list supported-profiles {
@@ -668,7 +668,7 @@ Table of Contents
                "A choice to select the header profile type, based on protocol
                 heders or on the header size";
              case protocol-based {
-               container protocol-headers {
+               container protocol-list {
                  description
                    "Protocol headers to be compressed";
                  leaf-list protocols {
@@ -711,7 +711,7 @@ Table of Contents
            description
              "Select the profile of header compression to be used.";
          }
-         leaf enabled {
+         leaf enable {
            type boolean;
            description
              "Enable(true)/disable(false) header compression";
