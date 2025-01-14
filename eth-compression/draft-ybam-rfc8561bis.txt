@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 22 June 2025                                              M. Ye
+Expires: 18 July 2025                                              M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                        19 December 2024
+                                                         14 January 2025
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,11 +58,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 June 2025.
+   This Internet-Draft will expire on 18 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -2203,61 +2203,61 @@ Table of Contents
          "none";
      }
 
-     identity protocol-layer-type-ethernet-mac {
+     identity ethernet-mac {
        base protocol-layer-type;
        description
          "MAC layer";
      }
 
-     identity protocol-layer-type-vlan {
+     identity vlan {
        base protocol-layer-type;
        description
          "C-VLAN tag";
      }
 
-     identity protocol-layer-type-q-in-q {
+     identity q-in-q {
        base protocol-layer-type;
        description
          "S-VLAN tag";
      }
 
-     identity protocol-layer-type-mpls {
+     identity mpls {
        base protocol-layer-type;
        description
          "MPLS labels";
      }
 
-     identity protocol-layer-type-ipv4 {
+     identity ipv4 {
        base protocol-layer-type;
        description
          "IPV4 layer";
      }
 
-     identity protocol-layer-type-ipv6 {
+     identity ipv6 {
        base protocol-layer-type;
        description
          "IPV6 layer";
      }
 
-     identity protocol-layer-type-tcp {
+     identity tcp {
        base protocol-layer-type;
        description
          "TCP layer";
      }
 
-     identity protocol-layer-type-udp {
+     identity udp {
        base protocol-layer-type;
        description
          "UDP layer";
      }
 
-     identity protocol-layer-type-rtp {
+     identity rtp {
        base protocol-layer-type;
        description
          "RTP layer";
      }
 
-     identity protocol-layer-type-gtp-u {
+     identity gtp-u {
        base protocol-layer-type;
        description
          "GTP-U layer";
@@ -2271,38 +2271,39 @@ Table of Contents
          "none";
      }
 
-     identity mpls-palyload-type {
+     identity mpls-payload-type {
        description
          "none";
      }
 
-     identity mpls-palyload-type-none {
-       base mpls-palyload-type;
+     identity mpls-payload-none {
+       base mpls-payload-type;
        description
          "Parameter not required.";
      }
 
-     identity mpls-palyload-type-auto {
-       base mpls-palyload-type;
+     identity mpls-payload-auto {
+       base mpls-payload-type;
        description
-         "If the Control Word (CW) will be present, it would be Ethernet Over MPLS. Otherwise, it would be Pv4/IPv6.";
+         "If the Control Word (CW) will be present, it would be Ethernet Over MPLS.
+          Otherwise, it would be Pv4/IPv6.";
      }
 
-     identity mpls-palyload-type-eth-o-mpls {
-       base mpls-palyload-type;
+     identity mpls-payload-eth-o-mpls {
+       base mpls-payload-type;
        description
          "Always Ethernet over MPLS ";
      }
 
-     identity mpls-palyload-type-ip-o-mpls {
-       base mpls-palyload-type;
+     identity mpls-payload-ip-o-mpls {
+       base mpls-payload-type;
        description
          "Always IPv4/IPv6 over MPLS";
      }
 
      typedef mpls-payload {
        type identityref {
-         base mpls-palyload-type;
+         base mpls-payload-type;
        }
        description
          "none";
