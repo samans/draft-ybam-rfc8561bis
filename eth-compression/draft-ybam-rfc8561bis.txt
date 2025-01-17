@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 18 July 2025                                              M. Ye
+Expires: 21 July 2025                                              M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                         14 January 2025
+                                                         17 January 2025
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2025.
+   This Internet-Draft will expire on 21 July 2025.
 
 Copyright Notice
 
@@ -436,12 +436,29 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2024-09-11 {
+     revision 2024-03-03 {
        description
-         "Draft - Issue #35 (grouping common-microwave-properties
-                  Issue #31 added minimum-nominal-power";
+         "pretty printing";
        reference
          "RFC XXX: A YANG Data Model for Microwave Radio Link";
+     }
+     revision 2023-10-06 {
+       description
+         "To add the summary of the changes in this revision:
+
+          - more updates related to git Issue #13 and #16.
+
+          - git Issue #13 and #16 and discussion updates for acm-profile
+
+          - Updated with proposal for BCA.";
+       reference
+         "RFC XXX: A YANG Data Model for Microwave Radio Link";
+     }
+     revision 2019-06-19 {
+       description
+         "Initial revision.";
+       reference
+         "RFC 8561: A YANG Data Model for Microwave Radio Link";
      }
 
      /*
@@ -469,12 +486,21 @@ Table of Contents
 
      feature header-compression {
        description
-         "Indicates that the device supports Header Compression profiles.";
+         "Indicates that the device supports Header Compression.";
      }
 
      /*
       * Typedefs
       */
+
+     typedef power {
+       type decimal64 {
+         fraction-digits 1;
+       }
+       description
+         "Type used for the power values in the data nodes
+          for configuration or status.";
+     }
 
      grouping acm-profile {
        description
@@ -498,24 +524,15 @@ Table of Contents
            "True when the profile can be used in single
             coding-modulation-mode.";
        }
-       leaf support-as-reference-modulation {
-         type boolean;
-         description
-           " 'true' when the profile can be used to configure the reference-modulation in adaptive
-            coding-modulation-mode.
-                    Otherwise the value is 'false' and the reference-modulation to use cannot be configured
-                    (it could be selected automatically by the system).
-                   ";
-       }
        leaf max-tx-power {
-         type mw-types:power;
+         type power;
          description
            "The maximum transmitted power when the carrier termination
             is operating this acm-profile.  Used to configure
             transmitted power.";
        }
        leaf min-tx-power {
-         type mw-types:power;
+         type power;
          description
            "The minimum transmitted power when the carrier termination
             is operating this acm-profile.  Used to configure
@@ -654,53 +671,20 @@ Table of Contents
            description
              "The list of header compression profiles supported by the RLT.
 
-              A profile can be described by a list of protocol layer to be
-              compressed or by a size in which all included (also partially)
-              protocol header get compressed";
+              Header compression is typically vendor proprietary and it is
+              assumed there is no ambition to change that. For this reason
+              the list provides only generic attributes to be augmented by
+              vendor with proprietary implementation attributes.";
            leaf name {
              type string;
              description
                "A name that uniquely identifies the header compression profile
                 in an RLT.";
            }
-           choice header-compression {
+           leaf description {
+             type string;
              description
-               "A choice to select the header profile type, based on protocol
-                heders or on the header size";
-             case protocol-based {
-               container protocol-list {
-                 description
-                   "Protocol headers to be compressed";
-                 leaf-list protocols {
-                   type mw-types:protocol-layer;
-                   config false;
-                   description
-                     "List of protocol layers that get compressed with this type
-                      of header compression.";
-                 }
-                 leaf mpls-payload-type {
-                   type mw-types:mpls-payload;
-                   config false;
-                   description
-                     "Defines how the header bytes inside the MPLS header has to
-                      be interpreted.";
-                 }
-               }
-             }
-             case header-size-based {
-               container header-size {
-                 description
-                   "Header size to be compressed";
-                 leaf size {
-                   type int16;
-                   units "Byte";
-                   default "-1";
-                   config false;
-                   description
-                     "Number of Bytes of header information that get compressed.";
-                 }
-               }
-             }
+               "Detailed description of the profile.";
            }
          }
          leaf configured-profile {
@@ -711,10 +695,25 @@ Table of Contents
            description
              "Select the profile of header compression to be used.";
          }
-         leaf enable {
+         leaf enabled {
            type boolean;
            description
-             "Enable(true)/disable(false) header compression";
+             "Disables (false) or enables (true) the header compression.";
+         }
+         leaf oper-status {
+           type enumeration {
+             enum off {
+               description
+                 "Header compression is off.";
+             }
+             enum on {
+               description
+                 "Header compression is on.";
+             }
+           }
+           config false;
+           description
+             "Shows the operative status of the header compression.";
          }
        }
      }
@@ -769,9 +768,13 @@ Table of Contents
          description
            "Shows the operative status of the transmitter.";
        }
-
-       uses mw-types:common-microwave-properties;
-
+       leaf tx-frequency {
+         type uint32;
+         units "kHz";
+         mandatory true;
+         description
+           "Selected transmitter frequency.";
+       }
        choice freq-or-distance {
          mandatory true;
          description
@@ -790,12 +793,30 @@ Table of Contents
              "Distance between transmitter and receiver frequencies.";
          }
        }
+       leaf actual-rx-frequency {
+         type uint32;
+         units "kHz";
+         config false;
+         description
+           "Computed receiver frequency.";
+       }
        leaf actual-duplex-distance {
          type uint32;
          units "kHz";
          config false;
          description
            "Computed distance between Tx and Rx frequencies.";
+       }
+       leaf channel-separation {
+         type uint32;
+         units "kHz";
+         mandatory true;
+         description
+           "The amount of bandwidth allocated to a carrier.  The
+            distance between adjacent channels in a radio
+            frequency channels arrangement";
+         reference
+           "ETSI EN 302 217-1";
        }
        leaf polarization {
          type enumeration {
@@ -826,7 +847,7 @@ Table of Contents
            reference
              "ETSI EN 302 217-1";
            leaf maximum-nominal-power {
-             type mw-types:power {
+             type power {
                range "-99..99";
              }
              units "dBm";
@@ -843,30 +864,20 @@ Table of Contents
            reference
              "ETSI EN 302 217-1";
            leaf maximum-nominal-power {
-             type mw-types:power {
+             type power {
                range "-99..99";
              }
              units "dBm";
              mandatory true;
              description
-               "Nominal maximum output power.";
+               "Selected maximum output power.  Minimum output
+                power is the same as the system capability,
+                minimum-power.";
              reference
                "ETSI EN 302 217-1";
            }
-           leaf minimum-nominal-power {
-             type mw-types:power {
-               range "-99..99";
-             }
-             units "dBm";
-             mandatory true;
-             description
-               "Minimum output power.
-
-                By default, minimum output power is the same as the
-                system capability minimum-power.";
-           }
            leaf atpc-lower-threshold {
-             type mw-types:power {
+             type power {
                range "-99..-20";
              }
              units "dBm";
@@ -879,7 +890,7 @@ Table of Contents
                "ETSI EN 302 217-1";
            }
            leaf atpc-upper-threshold {
-             type mw-types:power {
+             type power {
                range "-99..-20";
              }
              units "dBm";
@@ -892,8 +903,19 @@ Table of Contents
            }
          }
        }
+       leaf actual-transmitted-level {
+         type power {
+           range "-99..99";
+         }
+         units "dBm";
+         config false;
+         description
+           "Actual transmitted power level (0.1 dBm resolution).";
+         reference
+           "ETSI EN 301 129";
+       }
        leaf actual-received-level {
-         type mw-types:power {
+         type power {
            range "-99..-20";
          }
          units "dBm";
@@ -947,18 +969,26 @@ Table of Contents
                 Adaptive coding/modulation shall not go
                 above this value.";
            }
-           leaf reference-modulation {
-             type identityref {
-               base mw-types:coding-modulation;
-             }
-             description
-               "the reference-modulation is the coding modulation to be used in the reference mode, as defined in ETSI EN 302 217-1 V3.2.2 (2020-02).
-                           The reference mode identifies the operative mode which characteristics (i.e. system capacity, spectral efficiency class over a given channel separation)
-                           are used (i.e. declared in the licensing process) in the link per link coordination analysis.
-                           Its value has to be between the 'selected-min-acm' and the 'selected-max-acm' attribute's values.
-                           ";
-           }
          }
+       }
+       leaf actual-tx-cm {
+         type identityref {
+           base mw-types:coding-modulation;
+         }
+         config false;
+         description
+           "Actual coding/modulation in transmitting direction.";
+       }
+       leaf actual-snir {
+         type decimal64 {
+           fraction-digits 1;
+           range "0..99";
+         }
+         units "dB";
+         config false;
+         description
+           "Actual signal to noise plus the interference ratio
+            (0.1 dB resolution).";
        }
        leaf actual-xpi {
          if-feature "xpic";
@@ -979,7 +1009,7 @@ Table of Contents
            "Specification of thresholds for when alarms should
             be sent and cleared for various performance counters.";
          leaf received-level-alarm-threshold {
-           type mw-types:power {
+           type power {
              range "-99..-20";
            }
            units "dBm";
@@ -991,7 +1021,7 @@ Table of Contents
              "ETSI EN 301 129";
          }
          leaf transmitted-level-alarm-threshold {
-           type mw-types:power {
+           type power {
              range "-99..99";
            }
            units "dBm";
@@ -1121,7 +1151,7 @@ Table of Contents
              "Maximum Tx frequency possible to use.";
          }
          leaf minimum-power {
-           type mw-types:power;
+           type power;
            units "dBm";
            description
              "The minimum output power supported.";
@@ -1129,7 +1159,7 @@ Table of Contents
              "ETSI EN 302 217-1";
          }
          leaf maximum-available-power {
-           type mw-types:power;
+           type power;
            units "dBm";
            description
              "The maximum output power supported.";
@@ -1328,7 +1358,7 @@ Table of Contents
            "ETSI EN 301 129 radio physical interface statistics relevant
             for a carrier termination.";
          leaf min-rltm {
-           type mw-types:power {
+           type power {
              range "-99..-20";
            }
            units "dBm";
@@ -1342,7 +1372,7 @@ Table of Contents
              "ETSI EN 301 129";
          }
          leaf max-rltm {
-           type mw-types:power {
+           type power {
              range "-99..-20";
            }
            units "dBm";
@@ -1356,7 +1386,7 @@ Table of Contents
              "ETSI EN 301 129";
          }
          leaf min-tltm {
-           type mw-types:power {
+           type power {
              range "-99..99";
            }
            units "dBm";
@@ -1370,7 +1400,7 @@ Table of Contents
              "ETSI EN 301 129";
          }
          leaf max-tltm {
-           type mw-types:power {
+           type power {
              range "-99..99";
            }
            units "dBm";
