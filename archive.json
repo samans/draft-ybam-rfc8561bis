@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:42:02.881599+00:00",
+  "timestamp": "2025-02-02T01:48:02.676057+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1556,7 +1556,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2024-12-16T14:35:17Z",
+      "updatedAt": "2025-01-30T11:00:42Z",
       "closedAt": null,
       "comments": [
         {
@@ -1572,6 +1572,13 @@
           "body": "Is this only for info, or is the system expected to do roll-back of any configurations at the end of the maintenance interval? In that case, how do you specify which configurations to roll-back? ",
           "createdAt": "2024-12-16T14:35:16Z",
           "updatedAt": "2024-12-16T14:35:16Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-01-30 Weekly Call**\n\nAlternative solution could be to define an action to set the interface in maintenance mode, configuring the duration of the maintenance window\n\nAs a consequence of this action, the operational DS can report whether the interface is in maintenance mode or not\n\nNeed more investigation about what the different vendors are implementing\n\nFor further discussion in the next calls\n",
+          "createdAt": "2025-01-30T11:00:41Z",
+          "updatedAt": "2025-01-30T11:00:41Z"
         }
       ]
     },
@@ -1921,13 +1928,23 @@
       "state": "OPEN",
       "author": "mamali68",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "mamali68"
+      ],
       "labels": [],
       "body": "Since minimum-nominal-power is a system capability of the radio it is needed in case of remote control as well, to maintain backward-compatibility, the suggestion is that it should be added to container rtpc as well. \r\n\r\nSecondly, raising the proposal to create a grouping to consolidate both attributes. \r\n\r\n```\r\n[...]\r\ngrouping nominal-power-limits {\r\n    description\r\n      \"The minimum and maximum power capabilities of the radio\";\r\n        leaf maximum-nominal-power {\r\n          type mw-types:power {\r\n            range \"-99..99\";\r\n          }\r\n          units \"dBm\";\r\n          mandatory true;\r\n          description\r\n            \"Nominal maximum output power.\";\r\n          reference\r\n            \"ETSI EN 302 217-1\";\r\n        }\r\n        leaf minimum-nominal-power {\r\n          type mw-types:power {\r\n            range \"-99..99\";\r\n          }\r\n          units \"dBm\";\r\n          mandatory true;\r\n          description\r\n            \"Minimum output power.\r\n\r\n             By default, minimum output power is the same as the\r\n             system capability minimum-power.\";\r\n        }\r\n  }\r\n[...]\r\n    choice power-mode {\r\n      mandatory true;\r\n      description\r\n        \"A choice of RTPC or ATPC.\";\r\n      container rtpc {\r\n        description\r\n          \"Remote Transmit Power Control (RTPC).\";\r\n        reference\r\n          \"ETSI EN 302 217-1\";\r\n        uses  nominal-power-limits;\r\n      }\r\n      container atpc {\r\n        description\r\n          \"Automatic Transmitter Power Control (ATPC).\";\r\n        reference\r\n          \"ETSI EN 302 217-1\";\r\n        uses nominal-power-limits;\r\n        [...]\r\n      }\r\n    }\r\n[...]\r\n```",
       "createdAt": "2025-01-16T10:22:31Z",
-      "updatedAt": "2025-01-16T10:22:31Z",
+      "updatedAt": "2025-01-30T10:30:31Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-01-30 Weekly Call**\n\n> Since minimum-nominal-power is a system capability of the radio it is needed in case of remote control as well, to maintain backward-compatibility, the suggestion is that it should be added to container rtpc as well.\n\nFor atpc, the minimum-nominal-power and maximum-nominal-power are not capability but the configuration of the range within which the atcp algorithm should select the actual output power.\n\nFor rtpc, there is no need to configure the minimum-nominal-power because the actual output power is set to the configure maximum-nominal-power.\n",
+          "createdAt": "2025-01-30T10:30:15Z",
+          "updatedAt": "2025-01-30T10:30:15Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2250,7 +2267,7 @@
       "labels": [],
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
-      "updatedAt": "2025-01-17T11:50:05Z",
+      "updatedAt": "2025-01-30T10:07:41Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "56e805309ae448a16efb0d05d62d92f7f038e694",
