@@ -30,7 +30,7 @@ module: ietf-microwave-radio-link
   augment /if:interfaces/if:interface:
     +--rw id?                     string
     +--rw (mode-option)
-    |  x--:(mode)
+    |  +--:(mode)
     |  |  x--rw mode              identityref
     |  +--:(rlt-mode)
     |     +--rw rlt-mode
@@ -44,8 +44,15 @@ module: ietf-microwave-radio-link
     +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
     |       {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
-       +--rw tdm-type           identityref
-       +--rw tdm-connections    uint16
+    |  +--rw tdm-type           identityref
+    |  +--rw tdm-connections    uint16
+    +--rw header-compression {header-compression}?
+       +--ro supported-profile* [name]
+       |  +--ro name           string
+       |  +--ro description?   string
+       +--rw configured-profile?   -> ../supported-profile/name
+       +--rw enabled?              boolean
+       +--ro oper-status?          enumeration
   augment /if:interfaces/if:interface:
     +--rw carrier-id?                     string
     +--rw tx-enabled?                     boolean

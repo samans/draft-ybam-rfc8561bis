@@ -37,7 +37,8 @@ module ietf-microwave-radio-link {
       Min Ye (amy.yemin@huawei.com)
       Xi Li (Xi.Li@neclab.eu)
       Daniela Spreafico (daniela.spreafico@nokia.com)
-      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+      Danilo Pala (danilo.pala@siaemic.com)";
   description
     "This is a module for the entities in
      a generic microwave system.
@@ -106,6 +107,11 @@ module ietf-microwave-radio-link {
   feature tdm {
     description
       "Indicates that the device supports TDM.";
+  }
+
+  feature header-compression {
+    description
+      "Indicates that the device supports Header Compression profiles.";
   }
 
   /*
@@ -278,6 +284,61 @@ module ietf-microwave-radio-link {
         mandatory true;
         description
           "Number of connections of the specified type.";
+      }
+    }
+    container header-compression {
+      if-feature "header-compression";
+      description
+        "Configuration of Header Compression ";
+      list supported-profile {
+        key "name";
+        config false;
+        description
+          "The list of header compression profiles supported by the RLT.
+
+           Header compression is typically vendor proprietary and it is
+           assumed there is no ambition to change that. For this reason
+           the list provides only generic attributes to be augmented by
+           vendor with proprietary implementation attributes.";
+        leaf name {
+          type string;
+          description
+            "A name that uniquely identifies the header compression profile
+             in an RLT.";
+        }
+        leaf description {
+          type string;
+          description
+            "Detailed description of the profile.";
+        }
+      }
+      leaf configured-profile {
+        type leafref {
+          path "../mrl:supported-profile/mrl:name";
+          require-instance false;
+        }
+        description
+          "Select the profile of header compression to be used.";
+      }
+      leaf enabled {
+        type boolean;
+        description
+          "Disables (false) or enables (true) the header compression.";
+      }
+      leaf oper-status {
+        type enumeration {
+          enum off {
+            description
+              "Header compression is off.";
+          }
+          enum on {
+            description
+              "Header compression is on.";
+          }
+        }
+        config false;
+        description
+          "Shows the operative status of the header compression.";
       }
     }
   }
@@ -808,11 +869,10 @@ module ietf-microwave-radio-link {
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path
-                "../../.."
-              + "/acm-profile-list[profile-coding-modulation-id="
-              + "current()/../profile-coding-modulation-id-ref]"
-              + "/profile-channel-separation-id";
+              path "../../.."
+                 + "/acm-profile-list[profile-coding-modulation-id="
+                 + "current()/../profile-coding-modulation-id-ref]"
+                 + "/profile-channel-separation-id";
             }
             description
               "A reference to an acm-profile to give an order in
@@ -845,11 +905,10 @@ module ietf-microwave-radio-link {
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path
-                "../../.."
-              + "/acm-profile-list[profile-coding-modulation-id="
-              + "current()/../profile-coding-modulation-id-ref]"
-              + "/profile-channel-separation-id";
+              path "../../.."
+                 + "/acm-profile-list[profile-coding-modulation-id="
+                 + "current()/../profile-coding-modulation-id-ref]"
+                 + "/profile-channel-separation-id";
             }
             description
               "A reference to an acm-profile to give an order in
