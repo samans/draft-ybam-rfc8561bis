@@ -689,7 +689,7 @@ Table of Contents
          }
          leaf configured-profile {
            type leafref {
-             path "../mrl:supported-profiles/mrl:name";
+             path "../mrl:supported-profile/mrl:name";
              require-instance false;
            }
            description
