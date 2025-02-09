@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-06T01:45:44.319416+00:00",
+  "timestamp": "2025-02-09T01:49:39.577968+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1410,7 +1410,7 @@
       "id": "I_kwDOHLTwws59GR0D",
       "title": "MW-Link encryption",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/28",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1419,8 +1419,8 @@
       ],
       "body": "In the excel spreadsheet line 97 and98 is documented that the ONF air interface supports encryption related configurations.\r\n\r\n```\r\n     |  |     |  +--rw air-interface:encryption-is-on?                   boolean\r\n     |  |     |  +--rw air-interface:cryptographic-key?                  string\r\n```\r\n\r\n**Discussion:**\r\n\r\nI would prefer that such feature is handled by\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/28/\r\n\r\nBut this module is still a draft - how can we deal with it?",
       "createdAt": "2024-01-24T17:54:18Z",
-      "updatedAt": "2025-01-16T10:44:01Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-06T10:49:29Z",
+      "closedAt": "2025-02-06T10:49:27Z",
       "comments": [
         {
           "author": "demx8as6",
@@ -1449,6 +1449,20 @@
           "body": "\"YANG Data Types and Groupings for Cryptography\" https://datatracker.ietf.org/doc/rfc9640/ is now an RFC",
           "createdAt": "2025-01-16T10:43:59Z",
           "updatedAt": "2025-01-16T10:43:59Z"
+        },
+        {
+          "author": "mamali68",
+          "authorAssociation": "NONE",
+          "body": "The Issue can be closed with Reference to RFC9640 ",
+          "createdAt": "2025-02-06T10:48:54Z",
+          "updatedAt": "2025-02-06T10:48:54Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "The Issue can be closed with Reference to RFC9640",
+          "createdAt": "2025-02-06T10:49:27Z",
+          "updatedAt": "2025-02-06T10:49:27Z"
         }
       ]
     },
@@ -1945,6 +1959,22 @@
           "updatedAt": "2025-01-30T10:30:15Z"
         }
       ]
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOHLTwws6pCxvR",
+      "title": "Pyang reports warnings about the IETF Trust Copyright statement.",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/44",
+      "state": "OPEN",
+      "author": "niloda",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "By compiling modules with pyang (version 2.1 - not exactly the latest available) the following warning are shown:\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-radio-link.yang -o ./ietf-microwave-radio-link.tree\nietf-microwave-radio-link.yang:57: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-types.yang -o ./ietf-microwave-types.tree\nietf-microwave-types.yang:33: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n",
+      "createdAt": "2025-02-06T16:50:44Z",
+      "updatedAt": "2025-02-06T16:51:18Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -2267,13 +2297,13 @@
       "labels": [],
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
-      "updatedAt": "2025-01-30T10:07:41Z",
+      "updatedAt": "2025-02-06T18:55:34Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "56e805309ae448a16efb0d05d62d92f7f038e694",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "eth-compression",
-      "headRefOid": "275c66303cee30b2b82133d0c9b3f960ff7cf829",
+      "headRefOid": "5162ede6c79d6adf07c99dcd46132c0545f0b13f",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2578,6 +2608,185 @@
               "updatedAt": "2024-12-18T18:28:43Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6a4bs8",
+          "commit": {
+            "abbreviatedOid": "275c663"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-02-06T12:07:16Z",
+          "updatedAt": "2025-02-06T12:34:48Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "See: https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis#name-module-header-meta-and-revi\r\n\r\n> For an unpublished module, a complete history of each unpublished module revision is not required. That is, within a sequence of draft versions, only the most recent revision need be recorded in the module.\r\n\r\n```suggestion\r\n      \"To add the summary of the changes in this revision:\r\n\r\n       - more updates related to git Issue #13 and #16.\r\n\r\n       - git Issue #13 and #16 and discussion updates for acm-profile\r\n\r\n       - Updated with proposal for BCA.\";\r\n    reference\r\n      \"RFC XXX: A YANG Data Model for Microwave Radio Link\";\r\n  }\r\n```\r\n",
+              "createdAt": "2025-02-06T12:07:16Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "Why a new power data type is defined here instead of using the data type already defined in microwave-types?",
+              "createdAt": "2025-02-06T12:10:46Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 81,
+              "body": "Why this leaf has been removed in this PR (which is intended to add only header compression attributes)?\r\n\r\nI am wondering whether some of the previous changes to the main branch got lost",
+              "createdAt": "2025-02-06T12:11:25Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 104,
+              "body": "See: https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis#name-identifier-naming-conventio\r\n\r\n> List identifiers SHOULD be singular with the surrounding container name plural. \r\n\r\n```suggestion\r\n      list supported-profile {\r\n```",
+              "createdAt": "2025-02-06T12:13:35Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 154,
+              "body": "With NMDA, as defined in [REF 8342](https://datatracker.ietf.org/doc/html/rfc8342), I am not sure we need this attribute:\r\n- the enable attribute in the running DS indicates whether the operator has requested the HC to be on or off\r\n- the enable attribute in the operational DS indicates whether the HC has been actually turned on or off",
+              "createdAt": "2025-02-06T12:19:12Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 171,
+              "body": "Why the common-microwave-properties grouping is no longer used?\r\n\r\nI am wondering whether some of the previous changes to the main branch got lost",
+              "createdAt": "2025-02-06T12:20:26Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 185,
+              "body": "See previous comment about re-using the common-microwave-properties grouping",
+              "createdAt": "2025-02-06T12:21:05Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 203,
+              "body": "See previous comment about re-using the common-microwave-properties grouping",
+              "createdAt": "2025-02-06T12:21:11Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 245,
+              "body": "Why the attributes for ATCP have been changed in this PR (which is intended to add only header compression attributes)?\r\n\r\nI am wondering whether some of the previous changes to the main branch got lost",
+              "createdAt": "2025-02-06T12:23:30Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 275,
+              "body": "Why this attribute has been added in this PR (which is intended to add only header compression attributes)?\r\n\r\nI am wondering whether some of the previous changes to the main branch got lost",
+              "createdAt": "2025-02-06T12:23:45Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 296,
+              "body": "Why this attribute has been removed in this PR (which is intended to add only header compression attributes)?\r\n\r\nI am wondering whether some of the previous changes to the main branch got lost",
+              "createdAt": "2025-02-06T12:31:48Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            },
+            {
+              "originalPosition": 317,
+              "body": "Why these attributes have been added in this PR (which is intended to add only header compression attributes)?\r\n\r\nI am wondering whether some of the previous changes to the main branch got lost",
+              "createdAt": "2025-02-06T12:32:04Z",
+              "updatedAt": "2025-02-06T12:34:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6a6ISm",
+          "commit": {
+            "abbreviatedOid": "275c663"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-06T14:55:30Z",
+          "updatedAt": "2025-02-06T14:55:30Z",
+          "comments": [
+            {
+              "originalPosition": 154,
+              "body": "I am also not sure if we need this attribute with NMDA. If I correct understood from Scott, there is no violation adding it.  The attribute has been requested by Jonas.",
+              "createdAt": "2025-02-06T14:55:30Z",
+              "updatedAt": "2025-02-07T07:37:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6a6Rzj",
+          "commit": {
+            "abbreviatedOid": "275c663"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-06T15:08:49Z",
+          "updatedAt": "2025-02-06T15:08:49Z",
+          "comments": [
+            {
+              "originalPosition": 275,
+              "body": "It seem that the attribute was already there when the branch eth-compression was created.",
+              "createdAt": "2025-02-06T15:08:49Z",
+              "updatedAt": "2025-02-06T15:08:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6a6UK9",
+          "commit": {
+            "abbreviatedOid": "275c663"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-06T15:12:11Z",
+          "updatedAt": "2025-02-06T15:12:11Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "It seem that the type was already there when the branch eth-compression was created.",
+              "createdAt": "2025-02-06T15:12:11Z",
+              "updatedAt": "2025-02-06T15:12:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6a6XQ-",
+          "commit": {
+            "abbreviatedOid": "275c663"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-06T15:16:19Z",
+          "updatedAt": "2025-02-06T15:16:19Z",
+          "comments": [
+            {
+              "originalPosition": 317,
+              "body": "It seem that the attribute was already there when the branch eth-compression was created.",
+              "createdAt": "2025-02-06T15:16:19Z",
+              "updatedAt": "2025-02-06T15:16:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6a8xZD",
+          "commit": {
+            "abbreviatedOid": "5162ede"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I think we can merge this PR and create an open issue to discuss the only pending comment of my review: https://github.com/samans/draft-ybam-rfc8561bis/pull/40/files#r1944626680",
+          "createdAt": "2025-02-06T18:55:34Z",
+          "updatedAt": "2025-02-06T18:55:34Z",
+          "comments": []
         }
       ]
     },
