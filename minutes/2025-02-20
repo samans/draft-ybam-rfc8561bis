@@ -1,0 +1,8 @@
+Attending:  Scott, Jonas, Mohammad
+
+Discussed [ONF Gap Analysis(https://github.com/samans/draft-ybam-rfc8561bis/issues/22)
+- ONF no longer exists, the core model work has moved to ITU-T SG15 Question 14.  So any further gap analysis should be done using the latest work from the ITU-T.  There is a new version of G.7711 coming out soon (March - May 2025 timeframe).  ITU-T will be asked to liaise the latest draft to the IETF at the March 2025 SG15 Plenary.
+
+Discussed [add minimum-nominal-power to rtpc and consolidate nominal-limits in a grouping(https://github.com/samans/draft-ybam-rfc8561bis/issues/43
+- This item can be closed because the issue is one of naming convention.
+
