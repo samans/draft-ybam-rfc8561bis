@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-20T01:47:12.188025+00:00",
+  "timestamp": "2025-02-23T01:53:16.367793+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1157,7 +1157,7 @@
       ],
       "body": "Link to excel sheet with a comparison between ONF & IETF related fragments for the microwave domain. \r\nThe focus for this issue is the content in air-interface.\r\nNext step is to walk through the sheets in order to understand the gaps identified.\r\n\r\nhttps://oranalliance.atlassian.net/wiki/pages/viewpageattachments.action?pageId=2796486759&preview=%2F2796486759%2F2830729250%2Fietf-vs-onf-microwave%26ethernetwired-v03.xlsx&search_id=750a7e3a-bf9a-45a2-8fd8-2aa07a574880\r\n",
       "createdAt": "2023-11-16T10:25:38Z",
-      "updatedAt": "2023-12-14T10:53:17Z",
+      "updatedAt": "2025-02-20T10:37:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -1166,6 +1166,20 @@
           "body": "https://github.com/samans/draft-ybam-rfc8561bis/blob/main/presentations/ietf-vs-onf-microwave%26ethernetwired-v03.xlsx",
           "createdAt": "2023-11-16T13:59:36Z",
           "updatedAt": "2023-11-16T13:59:36Z"
+        },
+        {
+          "author": "mamali68",
+          "authorAssociation": "NONE",
+          "body": "Since ITU have taken over the core model, The GAP analysis should now be done against the latest Draft of ITU-T G.7711 by SG.15/14. \nLiased version request for IETF. ",
+          "createdAt": "2025-02-20T10:35:31Z",
+          "updatedAt": "2025-02-20T10:37:41Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "For those with an ITU-T account, the latest draft for consent (2025-03) is here: [TDxxP_G.7711_v4.0.02-clean_for-consent-as-v5.0.docx](https://www.itu.int/ifa/t/2022/sg15/exchange/wp3/q14/G.7711/G.7711_v4.0.02/TDxxP_G.7711_v4.0.02-clean_for-consent-as-v5.0.docx)",
+          "createdAt": "2025-02-20T10:36:52Z",
+          "updatedAt": "2025-02-20T10:36:52Z"
         }
       ]
     },
@@ -1949,7 +1963,7 @@
       "labels": [],
       "body": "Since minimum-nominal-power is a system capability of the radio it is needed in case of remote control as well, to maintain backward-compatibility, the suggestion is that it should be added to container rtpc as well. \r\n\r\nSecondly, raising the proposal to create a grouping to consolidate both attributes. \r\n\r\n```\r\n[...]\r\ngrouping nominal-power-limits {\r\n    description\r\n      \"The minimum and maximum power capabilities of the radio\";\r\n        leaf maximum-nominal-power {\r\n          type mw-types:power {\r\n            range \"-99..99\";\r\n          }\r\n          units \"dBm\";\r\n          mandatory true;\r\n          description\r\n            \"Nominal maximum output power.\";\r\n          reference\r\n            \"ETSI EN 302 217-1\";\r\n        }\r\n        leaf minimum-nominal-power {\r\n          type mw-types:power {\r\n            range \"-99..99\";\r\n          }\r\n          units \"dBm\";\r\n          mandatory true;\r\n          description\r\n            \"Minimum output power.\r\n\r\n             By default, minimum output power is the same as the\r\n             system capability minimum-power.\";\r\n        }\r\n  }\r\n[...]\r\n    choice power-mode {\r\n      mandatory true;\r\n      description\r\n        \"A choice of RTPC or ATPC.\";\r\n      container rtpc {\r\n        description\r\n          \"Remote Transmit Power Control (RTPC).\";\r\n        reference\r\n          \"ETSI EN 302 217-1\";\r\n        uses  nominal-power-limits;\r\n      }\r\n      container atpc {\r\n        description\r\n          \"Automatic Transmitter Power Control (ATPC).\";\r\n        reference\r\n          \"ETSI EN 302 217-1\";\r\n        uses nominal-power-limits;\r\n        [...]\r\n      }\r\n    }\r\n[...]\r\n```",
       "createdAt": "2025-01-16T10:22:31Z",
-      "updatedAt": "2025-01-30T10:30:31Z",
+      "updatedAt": "2025-02-20T15:49:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -1958,6 +1972,13 @@
           "body": "**2025-01-30 Weekly Call**\n\n> Since minimum-nominal-power is a system capability of the radio it is needed in case of remote control as well, to maintain backward-compatibility, the suggestion is that it should be added to container rtpc as well.\n\nFor atpc, the minimum-nominal-power and maximum-nominal-power are not capability but the configuration of the range within which the atcp algorithm should select the actual output power.\n\nFor rtpc, there is no need to configure the minimum-nominal-power because the actual output power is set to the configure maximum-nominal-power.\n",
           "createdAt": "2025-01-30T10:30:15Z",
           "updatedAt": "2025-01-30T10:30:15Z"
+        },
+        {
+          "author": "mamali68",
+          "authorAssociation": "NONE",
+          "body": "after studying the ETSI standards and also comparing to the old ONF core model, i realized the naming was the confusing part for me. this issue can be closed. ",
+          "createdAt": "2025-02-20T15:49:35Z",
+          "updatedAt": "2025-02-20T15:49:35Z"
         }
       ]
     },
