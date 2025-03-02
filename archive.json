@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-27T01:49:16.929344+00:00",
+  "timestamp": "2025-03-02T01:54:41.438324+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -148,11 +148,12 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
-        "proposed solution"
+        "proposed solution",
+        "update yang"
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2025-01-23T11:20:06Z",
+      "updatedAt": "2025-02-27T10:32:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -392,6 +393,13 @@
           "body": "**2025-01-23 Call**\n\nThe slides updated during the call today: [BCA.Proposal.for.ccamp.v05.pptx](https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx)\n\nNeed to clarify that if the different nodes are managed as a single device, RFC 8561 has no gaps to support BCA across multiple nodes with a flat RLT configuration.\n\nThe model extensions are design to support:\n1. the cases where the two nodes are managed as independent devices\n2. ,hierarchical RLT configurations (in a single or multiple nodes)\n",
           "createdAt": "2025-01-23T10:51:24Z",
           "updatedAt": "2025-01-23T11:20:06Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-02-27 Call**\n\nAgreed to create a new issue #45 to track the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nAgreed to define the following YANG tree for BCA:\n\n```\naugment /if:interfaces/if:interface:\n    +--rw id?                          string\n    +--rw mode                         identityref\n    +--rw carrier-terminations*        if:interface-ref  // MUST be CT\n    +--rw local-child-rlt*             if:interface-ref  // NEW: MUST be RLT\n    +--rw remote-child-rlt*            if:interface-ref  // NEW: MUST not be CT nor RLT\n    +--rw rlp-groups*\n    |       -> /radio-link-protection-groups/protection-group/name\n    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name\n    |       {xpic}?\n    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name\n    |       {mimo}?\n    +--rw remote-parent-rlt?           if:interface-ref  // NEW: MUST not be CT nor RLT\n    +--rw tdm-connections* [tdm-type] {tdm}?\n       +--rw tdm-type             identityref\n       +--rw tdm-connections      uint16\n```\n\n",
+          "createdAt": "2025-02-27T10:29:37Z",
+          "updatedAt": "2025-02-27T10:31:25Z"
         }
       ]
     },
@@ -1157,7 +1165,7 @@
       ],
       "body": "Link to excel sheet with a comparison between ONF & IETF related fragments for the microwave domain. \r\nThe focus for this issue is the content in air-interface.\r\nNext step is to walk through the sheets in order to understand the gaps identified.\r\n\r\nhttps://oranalliance.atlassian.net/wiki/pages/viewpageattachments.action?pageId=2796486759&preview=%2F2796486759%2F2830729250%2Fietf-vs-onf-microwave%26ethernetwired-v03.xlsx&search_id=750a7e3a-bf9a-45a2-8fd8-2aa07a574880\r\n",
       "createdAt": "2023-11-16T10:25:38Z",
-      "updatedAt": "2025-02-20T10:37:41Z",
+      "updatedAt": "2025-02-27T10:40:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -1180,6 +1188,13 @@
           "body": "For those with an ITU-T account, the latest draft for consent (2025-03) is here: [TDxxP_G.7711_v4.0.02-clean_for-consent-as-v5.0.docx](https://www.itu.int/ifa/t/2022/sg15/exchange/wp3/q14/G.7711/G.7711_v4.0.02/TDxxP_G.7711_v4.0.02-clean_for-consent-as-v5.0.docx)",
           "createdAt": "2025-02-20T10:36:52Z",
           "updatedAt": "2025-02-20T10:36:52Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The relevant work in former ONF has now been moved to different places:\n\n- The work on Core Information Model, former ONF TR-512, has been moved to ITU-T G.7711: https://github.com/samans/draft-ybam-rfc8561bis/issues/22#issuecomment-2671103128\n\n- The work on MW Model, former ONF TR-532, has been moved to Linux Foundation ONMI project: https://github.com/Open-Network-Models-and-Interfaces-ONMI/xhaul-home",
+          "createdAt": "2025-02-27T10:40:01Z",
+          "updatedAt": "2025-02-27T10:40:01Z"
         }
       ]
     },
@@ -1954,7 +1969,7 @@
       "id": "I_kwDOHLTwws6mbyjF",
       "title": "add minimum-nominal-power to rtpc and consolidate nominal-limits in a grouping",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mamali68",
       "authorAssociation": "NONE",
       "assignees": [
@@ -1963,8 +1978,8 @@
       "labels": [],
       "body": "Since minimum-nominal-power is a system capability of the radio it is needed in case of remote control as well, to maintain backward-compatibility, the suggestion is that it should be added to container rtpc as well. \r\n\r\nSecondly, raising the proposal to create a grouping to consolidate both attributes. \r\n\r\n```\r\n[...]\r\ngrouping nominal-power-limits {\r\n    description\r\n      \"The minimum and maximum power capabilities of the radio\";\r\n        leaf maximum-nominal-power {\r\n          type mw-types:power {\r\n            range \"-99..99\";\r\n          }\r\n          units \"dBm\";\r\n          mandatory true;\r\n          description\r\n            \"Nominal maximum output power.\";\r\n          reference\r\n            \"ETSI EN 302 217-1\";\r\n        }\r\n        leaf minimum-nominal-power {\r\n          type mw-types:power {\r\n            range \"-99..99\";\r\n          }\r\n          units \"dBm\";\r\n          mandatory true;\r\n          description\r\n            \"Minimum output power.\r\n\r\n             By default, minimum output power is the same as the\r\n             system capability minimum-power.\";\r\n        }\r\n  }\r\n[...]\r\n    choice power-mode {\r\n      mandatory true;\r\n      description\r\n        \"A choice of RTPC or ATPC.\";\r\n      container rtpc {\r\n        description\r\n          \"Remote Transmit Power Control (RTPC).\";\r\n        reference\r\n          \"ETSI EN 302 217-1\";\r\n        uses  nominal-power-limits;\r\n      }\r\n      container atpc {\r\n        description\r\n          \"Automatic Transmitter Power Control (ATPC).\";\r\n        reference\r\n          \"ETSI EN 302 217-1\";\r\n        uses nominal-power-limits;\r\n        [...]\r\n      }\r\n    }\r\n[...]\r\n```",
       "createdAt": "2025-01-16T10:22:31Z",
-      "updatedAt": "2025-02-20T15:49:37Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-27T10:56:14Z",
+      "closedAt": "2025-02-27T10:56:14Z",
       "comments": [
         {
           "author": "italobusi",
@@ -1979,6 +1994,13 @@
           "body": "after studying the ETSI standards and also comparing to the old ONF core model, i realized the naming was the confusing part for me. this issue can be closed. ",
           "createdAt": "2025-02-20T15:49:35Z",
           "updatedAt": "2025-02-20T15:49:35Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-02-27 Call**\n\nAgreed to close the issue with no actions",
+          "createdAt": "2025-02-27T10:56:13Z",
+          "updatedAt": "2025-02-27T10:56:13Z"
         }
       ]
     },
@@ -1997,6 +2019,22 @@
       "body": "By compiling modules with pyang (version 2.1 - not exactly the latest available) the following warning are shown:\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-radio-link.yang -o ./ietf-microwave-radio-link.tree\nietf-microwave-radio-link.yang:57: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-types.yang -o ./ietf-microwave-types.tree\nietf-microwave-types.yang:33: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n",
       "createdAt": "2025-02-06T16:50:44Z",
       "updatedAt": "2025-02-13T10:15:02Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 45,
+      "id": "I_kwDOHLTwws6r59Ly",
+      "title": "New attributes for BCA",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/45",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "**2025-02-27 Call**\n\nDiscuss the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nSee: https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx\n",
+      "createdAt": "2025-02-27T10:31:07Z",
+      "updatedAt": "2025-02-27T10:31:07Z",
       "closedAt": null,
       "comments": []
     }
