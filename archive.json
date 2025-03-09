@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-06T01:51:10.519940+00:00",
+  "timestamp": "2025-03-09T01:35:33.053431+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2025,18 +2025,52 @@
     {
       "number": 45,
       "id": "I_kwDOHLTwws6r59Ly",
-      "title": "New attributes for BCA",
+      "title": "New attributes for bonding and BCA",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/45",
       "state": "OPEN",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "**2025-02-27 Call**\n\nDiscuss the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nSee: https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx\n",
+      "body": "**2025-02-27 Call**\n\nDiscuss the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members?  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nSee: https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx\n",
       "createdAt": "2025-02-27T10:31:07Z",
-      "updatedAt": "2025-02-27T10:31:07Z",
+      "updatedAt": "2025-03-06T11:01:12Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-03-06 Call**\n\nThe proposed new attributes are applicable to bonding within a single NE (as currently supported by RFC8561) as well as to BCA across multiple NEs (as planned to be updated in #2)\n\nConcerns raised during the call:\n- the RLT is supposed to be up as long as there is at least one carrier up \n- a carrier can be added to the group as soon as it recovers since, as opposed to the protection configuration, there is no flapping condition affecting the other carrier(s)\n\nOverall concern is whether adding these two attributes is going to change the definition of what is meant by bonding: need to check also with ETSI references",
+          "createdAt": "2025-03-06T10:49:00Z",
+          "updatedAt": "2025-03-06T11:01:12Z"
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "I_kwDOHLTwws6s3o0t",
+      "title": "XPIC over multiple nodes",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/46",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "enhancement"
+      ],
+      "body": "See: [XPIC.Proposal._v00.pptx](https://github.com/user-attachments/files/19108182/XPIC.Proposal._v00.pptx)",
+      "createdAt": "2025-03-06T12:24:35Z",
+      "updatedAt": "2025-03-06T12:26:08Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-03-06 Call**\n\nNeed to investigate the pros&cons of the two options for defining the new `twin-member` (i.e., interface reference or string)",
+          "createdAt": "2025-03-06T12:26:06Z",
+          "updatedAt": "2025-03-06T12:26:06Z"
+        }
+      ]
     }
   ],
   "pulls": [
