@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-13T01:52:42.876559+00:00",
+  "timestamp": "2025-03-16T01:58:24.574515+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -148,12 +148,12 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [
-        "proposed solution",
-        "update yang"
+        "update yang",
+        "agreed"
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2025-02-27T10:32:08Z",
+      "updatedAt": "2025-03-13T10:31:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -1156,7 +1156,7 @@
       "id": "I_kwDOHLTwws53AMHa",
       "title": "ONF Gap Analysis",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/22",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1165,8 +1165,8 @@
       ],
       "body": "Link to excel sheet with a comparison between ONF & IETF related fragments for the microwave domain. \r\nThe focus for this issue is the content in air-interface.\r\nNext step is to walk through the sheets in order to understand the gaps identified.\r\n\r\nhttps://oranalliance.atlassian.net/wiki/pages/viewpageattachments.action?pageId=2796486759&preview=%2F2796486759%2F2830729250%2Fietf-vs-onf-microwave%26ethernetwired-v03.xlsx&search_id=750a7e3a-bf9a-45a2-8fd8-2aa07a574880\r\n",
       "createdAt": "2023-11-16T10:25:38Z",
-      "updatedAt": "2025-02-27T10:40:02Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-13T10:47:07Z",
+      "closedAt": "2025-03-13T10:47:04Z",
       "comments": [
         {
           "author": "samans",
@@ -1195,6 +1195,13 @@
           "body": "The relevant work in former ONF has now been moved to different places:\n\n- The work on Core Information Model, former ONF TR-512, has been moved to ITU-T G.7711: https://github.com/samans/draft-ybam-rfc8561bis/issues/22#issuecomment-2671103128\n\n- The work on MW Model, former ONF TR-532, has been moved to Linux Foundation ONMI project: https://github.com/Open-Network-Models-and-Interfaces-ONMI/xhaul-home",
           "createdAt": "2025-02-27T10:40:01Z",
           "updatedAt": "2025-02-27T10:40:01Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "2025-03-13\n\nClosed since specific issues have been created to resolve the identified gaps",
+          "createdAt": "2025-03-13T10:47:04Z",
+          "updatedAt": "2025-03-13T10:47:04Z"
         }
       ]
     },
@@ -1287,14 +1294,15 @@
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "samans"
+        "DanielaSpreafico"
       ],
       "labels": [
-        "Review"
+        "update yang",
+        "agreed"
       ],
       "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2023-11-30T09:55:44Z",
-      "updatedAt": "2025-03-10T10:26:58Z",
+      "updatedAt": "2025-03-13T10:29:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -1359,6 +1367,13 @@
           "body": "Yes, the RLT ID could be used as sent value for the same, but it is a string and for some vendor an integer has to be used.\nMoreover also an enabling/disabling of the feature and an expected value could be configured.",
           "createdAt": "2025-03-10T10:26:58Z",
           "updatedAt": "2025-03-10T10:26:58Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-03-13 Call**\n\nAgreed to re-use the exiting RLT and CT id attributes to configure the transmitted value\n\nIntegers can be encoded as strings\n\nThe transmission of the identifiers can be disabled by not configuring the RLT and CT id attributes\n\nNeed to add two new attributes\n1. expected value (by default the expected value is the same as the transmitted value)\n2. enable/disable the transmission of the identifier\n\nNo need to report the received value.\n\n---\n\nNote: the other attributes in the https://github.com/samans/draft-ybam-rfc8561bis/issues/25#issuecomment-1909778812 proposal cover different features and are not considered for radio-signal-id feature:\n\n```\n  augment /if:interfaces/if:interface:\n       +--rw rx-enabled?         boolean\n       +--ro rx-oper-status?     oper-status\n       +--rw cryptographic {cryptographic}?\n       |  +--rw enabled?             boolean\n       |  +--rw symmetric-key-ref    ks:central-symmetric-key-ref\n```\n",
+          "createdAt": "2025-03-13T10:28:05Z",
+          "updatedAt": "2025-03-13T10:29:12Z"
         }
       ]
     },
@@ -2034,15 +2049,15 @@
       "id": "I_kwDOHLTwws6r59Ly",
       "title": "New attributes for bonding and BCA",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/45",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "**2025-02-27 Call**\n\nDiscuss the need to add these new attributes for BCA management:\n\n```\n augment /if:interfaces/if:interface:\n    ...\n    +--rw minimum-number-of-active-members?  uint16\n    +--rw revertive-wait-to-restore?      uint16\n```\n\nSee: https://github.com/user-attachments/files/18519659/BCA.Proposal.for.ccamp.v05.pptx\n",
       "createdAt": "2025-02-27T10:31:07Z",
-      "updatedAt": "2025-03-06T11:01:12Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-13T10:39:00Z",
+      "closedAt": "2025-03-13T10:38:55Z",
       "comments": [
         {
           "author": "italobusi",
@@ -2050,6 +2065,13 @@
           "body": "**2025-03-06 Call**\n\nThe proposed new attributes are applicable to bonding within a single NE (as currently supported by RFC8561) as well as to BCA across multiple NEs (as planned to be updated in #2)\n\nConcerns raised during the call:\n- the RLT is supposed to be up as long as there is at least one carrier up \n- a carrier can be added to the group as soon as it recovers since, as opposed to the protection configuration, there is no flapping condition affecting the other carrier(s)\n\nOverall concern is whether adding these two attributes is going to change the definition of what is meant by bonding: need to check also with ETSI references",
           "createdAt": "2025-03-06T10:49:00Z",
           "updatedAt": "2025-03-06T11:01:12Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-03-13**\n\nThese two attributes can be defined in vendor-specific augmentations and no need to standardize them",
+          "createdAt": "2025-03-13T10:38:55Z",
+          "updatedAt": "2025-03-13T10:38:55Z"
         }
       ]
     },
@@ -2061,13 +2083,17 @@
       "state": "OPEN",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "italobusi"
+      ],
       "labels": [
-        "enhancement"
+        "enhancement",
+        "update yang",
+        "agreed"
       ],
       "body": "See: [XPIC.Proposal._v00.pptx](https://github.com/user-attachments/files/19108182/XPIC.Proposal._v00.pptx)",
       "createdAt": "2025-03-06T12:24:35Z",
-      "updatedAt": "2025-03-06T12:26:08Z",
+      "updatedAt": "2025-03-13T10:44:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -2076,6 +2102,13 @@
           "body": "**2025-03-06 Call**\n\nNeed to investigate the pros&cons of the two options for defining the new `twin-member` (i.e., interface reference or string)",
           "createdAt": "2025-03-06T12:26:06Z",
           "updatedAt": "2025-03-06T12:26:06Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "**2025-03-13 Call**\n\nThe string can be useful in implementations where the link used is not managed as an interface (according to RFC8343)\n\nIn case the link is managed as an interface, the string can report the interface name.\n",
+          "createdAt": "2025-03-13T10:43:27Z",
+          "updatedAt": "2025-03-13T10:43:27Z"
         }
       ]
     }
