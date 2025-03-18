@@ -60,10 +60,9 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2024-09-11 {
+  revision 2025-03-18 {
     description
-      "Draft - Issue #35 (grouping common-microwave-properties
-               Issue #31 added minimum-nominal-power";
+      "Draft - Issue #25 (radio-signal-id (Trail trace identifier (TTI))";
     reference
       "RFC XXX: A YANG Data Model for Microwave Radio Link";
   }
@@ -153,10 +152,24 @@ module ietf-microwave-radio-link {
       "Addition of data nodes for the radio link terminal to
        the standard Interface data model, for interfaces of
        the type 'microwaveRadioLinkTerminal'.";
+    leaf id-enabled {
+      type boolean;
+      description
+        "'true' value when the check if far-end RLT is connected to the correct near-end RLT is used.
+         'false' if the check is not used.";
+    }
     leaf id {
       type string;
       description
         "Descriptive identity of the radio link terminal used by
+         far-end RLT to check that it's connected to the correct
+         near-end RLT.  Does not need to be configured if this
+         check is not used.";
+    }
+    leaf expected-id {
+      type string;
+      description
+        "Descriptive identity of the radio link terminal expected from 
          far-end RLT to check that it's connected to the correct
          near-end RLT.  Does not need to be configured if this
          check is not used.";
@@ -276,16 +289,31 @@ module ietf-microwave-radio-link {
       "Addition of data nodes for carrier termination to
        the standard Interface data model, for interfaces
        of the type 'microwaveCarrierTermination'.";
+   leaf carrier-id-enabled {
+      type boolean;
+      description
+        "'true' value when the check if far-end CT is connected 
+          to the correct near-end CT is used.
+         'false' if the check is not used.";
+    }
     leaf carrier-id {
       type string;
       default "A";
       description
-        "ID of the carrier (e.g., A, B, C, or D).
-         Used in XPIC and MIMO configurations to check that
-         the carrier termination is connected to the correct
-         far-end carrier termination.  Should be the same
-         carrier ID on both sides of the hop.  Left as
-         default value when MIMO and XPIC are not in use.";
+        "ID of the near-end carrier (e.g., A, B, C, or D).
+         Used in XPIC and MIMO configurations (or in RLT configurations 
+         with more one CT) to check that the carrier termination is 
+         connected to the correct far-end carrier termination. 
+         Left as default value when not used.";
+    }
+    leaf expected-carrier-id {
+      type string;
+      description
+        "ID of the expected far-end carrier (e.g., A, B, C, or D).
+         Used in XPIC and MIMO configurations (or in RLT configurations 
+         with more one CT) to check that the far-end carrier termination is 
+         connected to the correct near-end carrier termination. 
+         Left as default value when not used.";
     }
     leaf tx-enabled {
       type boolean;

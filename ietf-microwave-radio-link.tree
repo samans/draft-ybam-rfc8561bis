@@ -28,7 +28,9 @@ module: ietf-microwave-radio-link
         +--rw members*   if:interface-ref
 
   augment /if:interfaces/if:interface:
+    +--rw id-enabled?             boolean
     +--rw id?                     string
+    +--rw expected-id?            string
     +--rw (mode-option)
     |  x--:(mode)
     |  |  x--rw mode              identityref
@@ -47,7 +49,9 @@ module: ietf-microwave-radio-link
        +--rw tdm-type           identityref
        +--rw tdm-connections    uint16
   augment /if:interfaces/if:interface:
+    +--rw carrier-id-enabled?             boolean
     +--rw carrier-id?                     string
+    +--rw expected-carrier-id?            string
     +--rw tx-enabled?                     boolean
     +--ro tx-oper-status?                 enumeration
     +--rw tx-frequency                    uint32
