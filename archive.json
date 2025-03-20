@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-18T01:53:08.293776+00:00",
+  "timestamp": "2025-03-20T01:52:21.659553+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1302,7 +1302,7 @@
       ],
       "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2023-11-30T09:55:44Z",
-      "updatedAt": "2025-03-13T10:29:58Z",
+      "updatedAt": "2025-03-18T14:36:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -1374,6 +1374,13 @@
           "body": "**2025-03-13 Call**\n\nAgreed to re-use the exiting RLT and CT id attributes to configure the transmitted value\n\nIntegers can be encoded as strings\n\nThe transmission of the identifiers can be disabled by not configuring the RLT and CT id attributes\n\nNeed to add two new attributes\n1. expected value (by default the expected value is the same as the transmitted value)\n2. enable/disable the transmission of the identifier\n\nNo need to report the received value.\n\n---\n\nNote: the other attributes in the https://github.com/samans/draft-ybam-rfc8561bis/issues/25#issuecomment-1909778812 proposal cover different features and are not considered for radio-signal-id feature:\n\n```\n  augment /if:interfaces/if:interface:\n       +--rw rx-enabled?         boolean\n       +--ro rx-oper-status?     oper-status\n       +--rw cryptographic {cryptographic}?\n       |  +--rw enabled?             boolean\n       |  +--rw symmetric-key-ref    ks:central-symmetric-key-ref\n```\n",
           "createdAt": "2025-03-13T10:28:05Z",
           "updatedAt": "2025-03-13T10:29:12Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The proposal is to add the following on module ietf-microwave-radio-link:\n\nfor /if:interfaces/if:interface/if:type = ianaift:microwaveRadioLinkTerminal\n\naugment /if:interfaces/if:interface:\n       +--rw id-enabled?         boolean\n       +--rw expected-id?        string\n\nfor /if:interfaces/if:interface/if:type = ianaift:microwaveCarrierTermination\n\naugment /if:interfaces/if:interface:\n       +--rw carrier-id-enabled?         boolean\n       +--rw expected-carrier-id?        string\n\nAnd also changing the Description statement of /if:interfaces/if:interface/mrl:carrier-id attribute as in the following:\nfrom\n      \"ID of the near-end carrier (e.g., A, B, C, or D).\n         Used in XPIC and MIMO configurations to check that\n         the carrier termination is connected to the correct\n         far-end carrier termination.  **Should be the same\n         carrier ID on both sides of the hop.**  Left as\n         default value when MIMO and XPIC are not in use.\";\nto\n        \"ID of the near-end carrier (e.g., A, B, C, or D).\n         Used in XPIC and MIMO configurations (**or in RLT configurations \n         with more one CT)** to check that the carrier termination is \n         connected to the correct far-end carrier termination. \n         Left as default value when not used.\n",
+          "createdAt": "2025-03-18T13:43:27Z",
+          "updatedAt": "2025-03-18T14:36:48Z"
         }
       ]
     },
@@ -2998,6 +3005,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOHLTwws6PHwqD",
+      "title": "radio-signal-id (Trail trace identifier (TTI))",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/47",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
+      "createdAt": "2025-03-18T14:52:49Z",
+      "updatedAt": "2025-03-18T14:54:37Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "Radio-signal-id",
+      "headRefOid": "7d8f91ba1438afb0aef241d3087c4cc3ea58837d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
