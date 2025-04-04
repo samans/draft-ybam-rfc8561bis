@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 24 August 2025                                            M. Ye
+Expires: 6 October 2025                                            M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                        20 February 2025
+                                                            4 April 2025
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 August 2025.
+   This Internet-Draft will expire on 6 October 2025.
 
 Copyright Notice
 
@@ -412,7 +412,8 @@ Table of Contents
          Min Ye (amy.yemin@huawei.com)
          Xi Li (Xi.Li@neclab.eu)
          Daniela Spreafico (daniela.spreafico@nokia.com)
-         Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+         Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+         Danilo Pala (danilo.pala@siaemic.com)";
      description
        "This is a module for the entities in
         a generic microwave system.
@@ -464,6 +465,11 @@ Table of Contents
      feature tdm {
        description
          "Indicates that the device supports TDM.";
+     }
+
+     feature header-compression {
+       description
+         "Indicates that the device supports Header Compression profiles.";
      }
 
      /*
@@ -636,6 +642,61 @@ Table of Contents
            mandatory true;
            description
              "Number of connections of the specified type.";
+         }
+       }
+       container header-compression {
+         if-feature "header-compression";
+         description
+           "Configuration of Header Compression ";
+         list supported-profile {
+           key "name";
+           config false;
+           description
+             "The list of header compression profiles supported by the RLT.
+
+              Header compression is typically vendor proprietary and it is
+              assumed there is no ambition to change that. For this reason
+              the list provides only generic attributes to be augmented by
+              vendor with proprietary implementation attributes.";
+           leaf name {
+             type string;
+             description
+               "A name that uniquely identifies the header compression profile
+                in an RLT.";
+           }
+           leaf description {
+             type string;
+             description
+               "Detailed description of the profile.";
+           }
+         }
+         leaf configured-profile {
+           type leafref {
+             path "../mrl:supported-profile/mrl:name";
+             require-instance false;
+           }
+           description
+             "Select the profile of header compression to be used.";
+         }
+         leaf enabled {
+           type boolean;
+           description
+             "Disables (false) or enables (true) the header compression.";
+         }
+         leaf oper-status {
+           type enumeration {
+             enum off {
+               description
+                 "Header compression is off.";
+             }
+             enum on {
+               description
+                 "Header compression is on.";
+             }
+           }
+           config false;
+           description
+             "Shows the operative status of the header compression.";
          }
        }
      }
@@ -1135,11 +1196,10 @@ Table of Contents
              }
              leaf profile-channel-separation-id-ref {
                type leafref {
-                 path
-                   "../../.."
-                 + "/acm-profile-list[profile-coding-modulation-id="
-                 + "current()/../profile-coding-modulation-id-ref]"
-                 + "/profile-channel-separation-id";
+                 path "../../.."
+                    + "/acm-profile-list[profile-coding-modulation-id="
+                    + "current()/../profile-coding-modulation-id-ref]"
+                    + "/profile-channel-separation-id";
                }
                description
                  "A reference to an acm-profile to give an order in
@@ -1172,11 +1232,10 @@ Table of Contents
              }
              leaf profile-channel-separation-id-ref {
                type leafref {
-                 path
-                   "../../.."
-                 + "/acm-profile-list[profile-coding-modulation-id="
-                 + "current()/../profile-coding-modulation-id-ref]"
-                 + "/profile-channel-separation-id";
+                 path "../../.."
+                    + "/acm-profile-list[profile-coding-modulation-id="
+                    + "current()/../profile-coding-modulation-id-ref]"
+                    + "/profile-channel-separation-id";
                }
                description
                  "A reference to an acm-profile to give an order in
@@ -1744,7 +1803,8 @@ Table of Contents
          Min Ye (amy.yemin@huawei.com)
          Xi Li (Xi.Li@neclab.eu)
          Daniela Spreafico (daniela.spreafico@nokia.com)
-         Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+         Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+         Danilo Pala (danilo.pala@siaemic.com)";
      description
        "This module contains a collection of YANG data types
         considered generally useful for microwave interfaces.

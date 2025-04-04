@@ -18,18 +18,18 @@ nodes for management of the interface protection functionality is
 broken out into a separate and generic YANG data model in order to
 make it available for other interface types as well. This document obsoletes RFC 8561. 
     " name="description">
-<meta content="xml2rfc 3.27.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ybam-rfc8561bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.27.0
+  xml2rfc 3.28.1
     Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.5
+    Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1053,11 +1053,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Microwave Radio Link YANG</td>
-<td class="right">February 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mansfield, et al.</td>
-<td class="center">Expires 24 August 2025</td>
+<td class="center">Expires 6 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1073,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc8561" class="eref">8561</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-20" class="published">20 February 2025</time>
+<time datetime="2025-04-04" class="published">4 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-24">24 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-06">6 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1148,7 +1148,7 @@ make it available for other interface types as well. This document obsoletes RFC
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1604,7 +1604,8 @@ module ietf-microwave-radio-link {
       Min Ye (amy.yemin@huawei.com)
       Xi Li (Xi.Li@neclab.eu)
       Daniela Spreafico (daniela.spreafico@nokia.com)
-      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+      Danilo Pala (danilo.pala@siaemic.com)";
   description
     "This is a module for the entities in
      a generic microwave system.
@@ -1656,6 +1657,11 @@ module ietf-microwave-radio-link {
   feature tdm {
     description
       "Indicates that the device supports TDM.";
+  }
+
+  feature header-compression {
+    description
+      "Indicates that the device supports Header Compression profiles.";
   }
 
   /*
@@ -1828,6 +1834,61 @@ module ietf-microwave-radio-link {
         mandatory true;
         description
           "Number of connections of the specified type.";
+      }
+    }
+    container header-compression {
+      if-feature "header-compression";
+      description
+        "Configuration of Header Compression ";
+      list supported-profile {
+        key "name";
+        config false;
+        description
+          "The list of header compression profiles supported by the RLT.
+
+           Header compression is typically vendor proprietary and it is
+           assumed there is no ambition to change that. For this reason
+           the list provides only generic attributes to be augmented by
+           vendor with proprietary implementation attributes.";
+        leaf name {
+          type string;
+          description
+            "A name that uniquely identifies the header compression profile
+             in an RLT.";
+        }
+        leaf description {
+          type string;
+          description
+            "Detailed description of the profile.";
+        }
+      }
+      leaf configured-profile {
+        type leafref {
+          path "../mrl:supported-profile/mrl:name";
+          require-instance false;
+        }
+        description
+          "Select the profile of header compression to be used.";
+      }
+      leaf enabled {
+        type boolean;
+        description
+          "Disables (false) or enables (true) the header compression.";
+      }
+      leaf oper-status {
+        type enumeration {
+          enum off {
+            description
+              "Header compression is off.";
+          }
+          enum on {
+            description
+              "Header compression is on.";
+          }
+        }
+        config false;
+        description
+          "Shows the operative status of the header compression.";
       }
     }
   }
@@ -2327,11 +2388,10 @@ module ietf-microwave-radio-link {
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path
-                "../../.."
-              + "/acm-profile-list[profile-coding-modulation-id="
-              + "current()/../profile-coding-modulation-id-ref]"
-              + "/profile-channel-separation-id";
+              path "../../.."
+                 + "/acm-profile-list[profile-coding-modulation-id="
+                 + "current()/../profile-coding-modulation-id-ref]"
+                 + "/profile-channel-separation-id";
             }
             description
               "A reference to an acm-profile to give an order in
@@ -2364,11 +2424,10 @@ module ietf-microwave-radio-link {
           }
           leaf profile-channel-separation-id-ref {
             type leafref {
-              path
-                "../../.."
-              + "/acm-profile-list[profile-coding-modulation-id="
-              + "current()/../profile-coding-modulation-id-ref]"
-              + "/profile-channel-separation-id";
+              path "../../.."
+                 + "/acm-profile-list[profile-coding-modulation-id="
+                 + "current()/../profile-coding-modulation-id-ref]"
+                 + "/profile-channel-separation-id";
             }
             description
               "A reference to an acm-profile to give an order in
@@ -2949,7 +3008,8 @@ module ietf-microwave-types {
       Min Ye (amy.yemin@huawei.com)
       Xi Li (Xi.Li@neclab.eu)
       Daniela Spreafico (daniela.spreafico@nokia.com)
-      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
+      Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
+      Danilo Pala (danilo.pala@siaemic.com)";
   description
     "This module contains a collection of YANG data types
      considered generally useful for microwave interfaces.
