@@ -226,130 +226,140 @@ Table of Contents
 
 1.4.  YANG Tree
 
-   module: ietf-microwave-radio-link
-    +--rw radio-link-protection-groups
-    | +--rw protection-group* [name]
-    |   +--rw name              string
-    |   +--rw protection-architecture-type?  identityref
-    |   +--rw members*            if:interface-ref
-    |   +--rw operation-type?         enumeration
-    |   +--rw working-entity*         if:interface-ref
-    |   +--rw revertive-wait-to-restore?   uint16
-    |   +--rw hold-off-timer?         uint16
-    |   +--ro status?             identityref
-    |   +---x manual-switch-working
-    |   +---x manual-switch-protection
-    |   +---x forced-switch
-    |   +---x lockout-of-protection
-    |   +---x freeze
-    |   +---x exercise
-    |   +---x clear
-    +--rw xpic-pairs {xpic}?
-    | +--rw xpic-pair* [name]
-    |   +--rw name    string
-    |   +--rw enabled?  boolean
-    |   +--rw members*  if:interface-ref
-    +--rw mimo-groups {mimo}?
-      +--rw mimo-group* [name]
-       +--rw name    string
-       +--rw enabled?  boolean
-       +--rw members*  if:interface-ref
+module: ietf-microwave-radio-link
+  +--rw radio-link-protection-groups
+  |  +--rw protection-group* [name]
+  |     +---x manual-switch-working
+  |     +---x manual-switch-protection
+  |     +---x forced-switch
+  |     +---x lockout-of-protection
+  |     +---x freeze
+  |     +---x exercise
+  |     +---x clear
+  |     +--rw name                            string
+  |     +--rw protection-architecture-type?   identityref
+  |     +--rw members*                        if:interface-ref
+  |     +--rw operation-type?                 enumeration
+  |     +--rw working-entity*                 if:interface-ref
+  |     +--rw revertive-wait-to-restore?      uint16
+  |     +--rw hold-off-timer?                 uint16
+  |     +--ro status?                         identityref
+  +--rw xpic-pairs {xpic}?
+  |  +--rw xpic-pair* [name]
+  |     +--rw name       string
+  |     +--rw enabled?   boolean
+  |     +--rw members*   if:interface-ref
+  +--rw mimo-groups {mimo}?
+     +--rw mimo-group* [name]
+        +--rw name       string
+        +--rw enabled?   boolean
+        +--rw members*   if:interface-ref
 
-    augment /if:interfaces/if:interface:
-     +--rw id?           string
-     +--rw (mode-option)
-     | x--:(mode)
-     | | x--rw mode       identityref
-     | +--:(rlt-mode)
-     |   +--rw rlt-mode
-     |    +--rw num-bonded-carriers    uint32
-     |    +--rw num-protecting-carriers  uint32
-     +--rw carrier-terminations*  if:interface-ref
-     +--rw rlp-groups*
-     |    -> /radio-link-protection-groups/protection-group/name
-     +--rw xpic-pairs*       -> /xpic-pairs/xpic-pair/name
-     |    {xpic}?
-     +--rw mimo-groups*      -> /mimo-groups/mimo-group/name
-     |    {mimo}?
-     +--rw tdm-connections* [tdm-type] {tdm}?
-       +--rw tdm-type      identityref
-       +--rw tdm-connections  uint16
-    augment /if:interfaces/if:interface:
-     +--rw carrier-id?           string
-     +--rw tx-enabled?           boolean
-     +--ro tx-oper-status?         enumeration
-     +--rw tx-frequency          uint32
-     +--rw (freq-or-distance)
-     | +--:(rx-frequency)
-     | | +--rw rx-frequency?       uint32
-     | +--:(duplex-distance)
-     |   +--rw duplex-distance?     int32
-     +--ro actual-rx-frequency?      uint32
-     +--ro actual-duplex-distance?     uint32
-     +--rw channel-separation       uint32
-     +--rw polarization?          enumeration
-     +--rw (power-mode)
-     | +--:(rtpc)
-     | | +--rw rtpc
-     | |   +--rw maximum-nominal-power  power
-     | +--:(atpc)
-     |   +--rw atpc
-     |    +--rw maximum-nominal-power  power
-     |    +--rw atpc-lower-threshold   power
-     |    +--rw atpc-upper-threshold   power
-     +--ro actual-transmitted-level?    power
-     +--ro actual-received-level?     power
-     +--rw (coding-modulation-mode)
-     | +--:(single)
-     | | +--rw single
-     | |   +--rw selected-cm  identityref
-     | +--:(adaptive)
-     |   +--rw adaptive
-     |    +--rw selected-min-acm  identityref
-     |    +--rw selected-max-acm  identityref
-     +--ro actual-tx-cm?          identityref
-     +--ro actual-snir?          decimal64
-     +--ro actual-xpi?           decimal64 {xpic}?
-     +--rw ct-performance-thresholds
-     | +--rw received-level-alarm-threshold?   power
-     | +--rw transmitted-level-alarm-threshold?  power
-     | +--rw ber-alarm-threshold?         enumeration
-     +--rw if-loop?            enumeration
-     +--rw rf-loop?            enumeration
-     +--ro capabilities
-     | +--ro min-tx-frequency?     uint32
-     | +--ro max-tx-frequency?     uint32
-     | +--ro min-rx-frequency?     uint32
-     | +--ro max-rx-frequency?     uint32
-     | +--ro minimum-power?       power
-     | +--ro maximum-available-power?  power
-     | +--ro available-min-acm?     identityref
-     | +--ro available-max-acm?     identityref
-     | +--ro acm-profile-list*
-     |   [profile-channel-separation-id profile-coding-modulation-id]
-     |   +--ro profile-channel-separation-id  uint32
-     |   +--ro profile-coding-modulation-id   identityref
-     |   +--ro modulation-scheme?        uint8
-     |   +--ro nominal-tx-capacity?       uint32
-     |   +--ro support-as-fixed-modulation?   boolean
-     |   +--ro max-tx-power?          power
-     |   +--ro min-tx-power?          power
-     |   +--ro lower-acm-profile-ptr
-     |   | +--ro profile-coding-modulation-id-ref?  leafref
-     |   | +--ro profile-channel-separation-id-ref?  leafref
-     |   +--ro upper-acm-profile-ptr
-     |    +--ro profile-coding-modulation-id-ref?  leafref
-     |    +--ro profile-channel-separation-id-ref?  leafref
-     +--ro error-performance-statistics
-     | +--ro bbe?  yang:counter32
-     | +--ro es?  yang:counter32
-     | +--ro ses?  yang:counter32
-     | +--ro uas?  yang:counter32
-     +--ro radio-performance-statistics
-       +--ro min-rltm?  power
-       +--ro max-rltm?  power
-       +--ro min-tltm?  power
-       +--ro max-tltm?  power
+  augment /if:interfaces/if:interface:
+    +--rw id?                     string
+    +--rw (mode-option)
+    |  x--:(mode)
+    |  |  x--rw mode              identityref
+    |  +--:(rlt-mode)
+    |     +--rw rlt-mode
+    |        +--rw num-bonded-carriers        uint32
+    |        +--rw num-protecting-carriers    uint32
+    +--rw carrier-terminations*   if:interface-ref
+    +--rw rlp-groups*
+    |       -> /radio-link-protection-groups/protection-group/name
+    +--rw xpic-pairs*             -> /xpic-pairs/xpic-pair/name
+    |       {xpic}?
+    +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
+    |       {mimo}?
+    +--rw tdm-connections* [tdm-type] {tdm}?
+    |  +--rw tdm-type           identityref
+    |  +--rw tdm-connections    uint16
+    +--rw header-compression {header-compression}?
+       +--ro supported-profile* [name]
+       |  +--ro name           string
+       |  +--ro description?   string
+       +--rw configured-profile?   -> ../supported-profile/name
+       +--rw enabled?              boolean
+       +--ro oper-status?          enumeration
+  augment /if:interfaces/if:interface:
+    +--rw carrier-id?                     string
+    +--rw tx-enabled?                     boolean
+    +--ro tx-oper-status?                 enumeration
+    +--rw tx-frequency                    uint32
+    +--ro actual-rx-frequency?            uint32
+    +--rw channel-separation              uint32
+    +--ro actual-transmitted-level?       power
+    +--ro actual-tx-cm?                   identityref
+    +--ro actual-snir?                    decimal64
+    +--rw (freq-or-distance)
+    |  +--:(rx-frequency)
+    |  |  +--rw rx-frequency?             uint32
+    |  +--:(duplex-distance)
+    |     +--rw duplex-distance?          int32
+    +--ro actual-duplex-distance?         uint32
+    +--rw polarization?                   enumeration
+    +--rw (power-mode)
+    |  +--:(rtpc)
+    |  |  +--rw rtpc
+    |  |     +--rw maximum-nominal-power    mw-types:power
+    |  +--:(atpc)
+    |     +--rw atpc
+    |        +--rw maximum-nominal-power    mw-types:power
+    |        +--rw minimum-nominal-power    mw-types:power
+    |        +--rw atpc-lower-threshold     mw-types:power
+    |        +--rw atpc-upper-threshold     mw-types:power
+    +--ro actual-received-level?          mw-types:power
+    +--rw (coding-modulation-mode)
+    |  +--:(single)
+    |  |  +--rw single
+    |  |     +--rw selected-cm    identityref
+    |  +--:(adaptive)
+    |     +--rw adaptive
+    |        +--rw selected-min-acm        identityref
+    |        +--rw selected-max-acm        identityref
+    |        +--rw reference-modulation?   identityref
+    +--ro actual-xpi?                     decimal64 {xpic}?
+    +--rw ct-performance-thresholds
+    |  +--rw received-level-alarm-threshold?      mw-types:power
+    |  +--rw transmitted-level-alarm-threshold?   mw-types:power
+    |  +--rw ber-alarm-threshold?                 enumeration
+    +--rw if-loop?                        enumeration
+    +--rw rf-loop?                        enumeration
+    +--ro capabilities
+    |  +--ro min-tx-frequency?          uint32
+    |  +--ro max-tx-frequency?          uint32
+    |  +--ro min-rx-frequency?          uint32
+    |  +--ro max-rx-frequency?          uint32
+    |  +--ro minimum-power?             mw-types:power
+    |  +--ro maximum-available-power?   mw-types:power
+    |  +--ro available-min-acm?         identityref
+    |  +--ro available-max-acm?         identityref
+    |  +--ro acm-profile-list*
+    |          [profile-channel-separation-id profile-coding-modulation-id]
+    |     +--ro profile-channel-separation-id      uint32
+    |     +--ro profile-coding-modulation-id       identityref
+    |     +--ro modulation-scheme?                 uint8
+    |     +--ro nominal-tx-capacity?               uint32
+    |     +--ro support-as-fixed-modulation?       boolean
+    |     +--ro support-as-reference-modulation?   boolean
+    |     +--ro max-tx-power?                      mw-types:power
+    |     +--ro min-tx-power?                      mw-types:power
+    |     +--ro lower-acm-profile-ptr
+    |     |  +--ro profile-coding-modulation-id-ref?    leafref
+    |     |  +--ro profile-channel-separation-id-ref?   leafref
+    |     +--ro upper-acm-profile-ptr
+    |        +--ro profile-coding-modulation-id-ref?    leafref
+    |        +--ro profile-channel-separation-id-ref?   leafref
+    +--ro error-performance-statistics
+    |  +--ro bbe?   yang:counter32
+    |  +--ro es?    yang:counter32
+    |  +--ro ses?   yang:counter32
+    |  +--ro uas?   yang:counter32
+    +--ro radio-performance-statistics
+       +--ro min-rltm?   mw-types:power
+       +--ro max-rltm?   mw-types:power
+       +--ro min-tltm?   mw-types:power
+       +--ro max-tltm?   mw-types:power
 
 1.5.  Explanation of the Microwave Data Model
 
@@ -372,7 +382,7 @@ Table of Contents
    and [RFC7224], and it references [TR102311], [EN302217-1],
    [EN301129], and [G.826].
 
-   <CODE BEGINS> file "ietf-microwave-radio-link@2024-03-03.yang"
+   <CODE BEGINS> file "ietf-microwave-radio-link@2025-04-04.yang"
    module ietf-microwave-radio-link {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-microwave-radio-link";
@@ -418,7 +428,7 @@ Table of Contents
        "This is a module for the entities in
         a generic microwave system.
 
-        Copyright (c) 2024 IETF Trust and the persons identified as
+        Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
@@ -436,9 +446,10 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2024-09-11 {
+     revision 2025-04-04 {
        description
-         "Draft - Issue #35 (grouping common-microwave-properties
+         "Draft - Issue #32 Compression,
+                  Issue #35 grouping common-microwave-properties,
                   Issue #31 added minimum-nominal-power";
        reference
          "RFC XXX: A YANG Data Model for Microwave Radio Link";
@@ -469,7 +480,8 @@ Table of Contents
 
      feature header-compression {
        description
-         "Indicates that the device supports Header Compression profiles.";
+         "Indicates that the device supports Header Compression
+          profiles.";
      }
 
      /*
@@ -501,11 +513,12 @@ Table of Contents
        leaf support-as-reference-modulation {
          type boolean;
          description
-           " 'true' when the profile can be used to configure the reference-modulation in adaptive
-            coding-modulation-mode.
-                    Otherwise the value is 'false' and the reference-modulation to use cannot be configured
-                    (it could be selected automatically by the system).
-                   ";
+           " 'true' when the profile can be used to configure the
+             reference-modulation in adaptive coding-modulation-mode.
+             Otherwise the value is 'false' and the reference-modulation
+             to use cannot be configured
+             (it could be selected automatically by the system).
+           ";
        }
        leaf max-tx-power {
          type mw-types:power;
@@ -652,17 +665,17 @@ Table of Contents
            key "name";
            config false;
            description
-             "The list of header compression profiles supported by the RLT.
-
-              Header compression is typically vendor proprietary and it is
-              assumed there is no ambition to change that. For this reason
-              the list provides only generic attributes to be augmented by
-              vendor with proprietary implementation attributes.";
+           "The list of header compression profiles supported by the
+            RLT.
+            Header compression is typically vendor proprietary and it is
+            assumed there is no ambition to change that. For this reason
+            the list provides only generic attributes to be augmented by
+            vendor with proprietary implementation attributes.";
            leaf name {
              type string;
              description
-               "A name that uniquely identifies the header compression profile
-                in an RLT.";
+               "A name that uniquely identifies the header compression
+                profile in an RLT.";
            }
            leaf description {
              type string;
@@ -681,7 +694,8 @@ Table of Contents
          leaf enabled {
            type boolean;
            description
-             "Disables (false) or enables (true) the header compression.";
+             "Disables (false) or enables (true) the header
+              compression.";
          }
          leaf oper-status {
            type enumeration {
@@ -934,11 +948,17 @@ Table of Contents
                base mw-types:coding-modulation;
              }
              description
-               "the reference-modulation is the coding modulation to be used in the reference mode, as defined in ETSI EN 302 217-1 V3.2.2 (2020-02).
-                           The reference mode identifies the operative mode which characteristics (i.e. system capacity, spectral efficiency class over a given channel separation)
-                           are used (i.e. declared in the licensing process) in the link per link coordination analysis.
-                           Its value has to be between the 'selected-min-acm' and the 'selected-max-acm' attribute's values.
-                           ";
+               "the reference-modulation is the coding modulation to be
+                used in the reference mode, as defined in
+                ETSI EN 302 217-1 V3.2.2 (2020-02).
+                The reference mode identifies the operative mode which
+                characteristics (i.e. system capacity, spectral
+                efficiency class over a given channel separation) are
+                used (i.e. declared in the licensing process) in the
+                link per link coordination analysis. Its value has to be
+                between the 'selected-min-acm' and the
+                'selected-max-acm' attribute's values.
+            ";
            }
          }
        }
@@ -1787,7 +1807,7 @@ Table of Contents
    data modeling language.  These common types are designed to be
    imported by other modules defined in the microwave area.
 
-   <CODE BEGINS> file "ietf-microwave-types@2024-03-03.yang"
+   <CODE BEGINS> file "ietf-microwave-types@2025-04-04.yang"
    module ietf-microwave-types {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-microwave-types";
@@ -1809,7 +1829,7 @@ Table of Contents
        "This module contains a collection of YANG data types
         considered generally useful for microwave interfaces.
 
-        Copyright (c) 2024 IETF Trust and the persons identified as
+        Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
@@ -1827,29 +1847,11 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2024-09-11 {
+     revision 2025-04-04 {
        description
-         "Draft - new grouping Issue #35";
+         "Draft - Comression #32, new grouping Issue #35";
        reference
          "RFC XXX: A YANG Data Model for Microwave Radio Link";
-     }
-     revision 2023-10-06 {
-       description
-         "To add the summary of the changes in this revision:
-
-          - Changed name for 8PSK.
-
-          - Updated for 8PSK
-
-          - Updated with proposal for BCA.";
-       reference
-         "RFC XXX: A YANG Data Model for Microwave Radio Link";
-     }
-     revision 2019-06-19 {
-       description
-         "Initial revision.";
-       reference
-         "RFC 8561: A YANG Data Model for Microwave Radio Link";
      }
 
      /*
