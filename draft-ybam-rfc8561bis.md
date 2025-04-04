@@ -327,7 +327,7 @@ and {{!RFC7224}}, and it references {{TR102311}}, {{EN302217-1}},
 ~~~~ yang
 {::include ./ietf-microwave-radio-link.yang}
 ~~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-microwave-radio-link@2024-03-03.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-microwave-radio-link@2025-04-04.yang"}
 
 # Interface Protection YANG Data Model
 
@@ -353,7 +353,7 @@ imported by other modules defined in the microwave area.
 ~~~~ yang
 {::include ./ietf-microwave-types.yang}
 ~~~~
-{: sourcecode-markers="true" sourcecode-name="ietf-microwave-types@2024-03-03.yang"}
+{: sourcecode-markers="true" sourcecode-name="ietf-microwave-types@2025-04-04.yang"}
 
 # Security Considerations
 

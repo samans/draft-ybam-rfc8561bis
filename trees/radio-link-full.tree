@@ -48,44 +48,56 @@ module: ietf-interfaces
   |     +--rw mrl:tdm-connections* [tdm-type] {tdm}?
   |     |  +--rw mrl:tdm-type           identityref
   |     |  +--rw mrl:tdm-connections    uint16
+  |     +--rw mrl:header-compression {header-compression}?
+  |     |  +--ro mrl:supported-profile* [name]
+  |     |  |  +--ro mrl:name           string
+  |     |  |  +--ro mrl:description?   string
+  |     |  +--rw mrl:configured-profile?
+  |     |  |       -> ../supported-profile/name
+  |     |  +--rw mrl:enabled?              boolean
+  |     |  +--ro mrl:oper-status?          enumeration
   |     +--rw mrl:carrier-id?                     string
   |     +--rw mrl:tx-enabled?                     boolean
   |     +--ro mrl:tx-oper-status?                 enumeration
   |     +--rw mrl:tx-frequency                    uint32
+  |     +--ro mrl:actual-rx-frequency?            uint32
+  |     +--rw mrl:channel-separation              uint32
+  |     +--ro mrl:actual-transmitted-level?       power
+  |     +--ro mrl:actual-tx-cm?                   identityref
+  |     +--ro mrl:actual-snir?                    decimal64
   |     +--rw (mrl:freq-or-distance)
   |     |  +--:(mrl:rx-frequency)
   |     |  |  +--rw mrl:rx-frequency?             uint32
   |     |  +--:(mrl:duplex-distance)
   |     |     +--rw mrl:duplex-distance?          int32
-  |     +--ro mrl:actual-rx-frequency?            uint32
   |     +--ro mrl:actual-duplex-distance?         uint32
-  |     +--rw mrl:channel-separation              uint32
   |     +--rw mrl:polarization?                   enumeration
   |     +--rw (mrl:power-mode)
   |     |  +--:(mrl:rtpc)
   |     |  |  +--rw mrl:rtpc
-  |     |  |     +--rw mrl:maximum-nominal-power    power
+  |     |  |     +--rw mrl:maximum-nominal-power    mw-types:power
   |     |  +--:(mrl:atpc)
   |     |     +--rw mrl:atpc
-  |     |        +--rw mrl:maximum-nominal-power    power
-  |     |        +--rw mrl:atpc-lower-threshold     power
-  |     |        +--rw mrl:atpc-upper-threshold     power
-  |     +--ro mrl:actual-transmitted-level?       power
-  |     +--ro mrl:actual-received-level?          power
+  |     |        +--rw mrl:maximum-nominal-power    mw-types:power
+  |     |        +--rw mrl:minimum-nominal-power    mw-types:power
+  |     |        +--rw mrl:atpc-lower-threshold     mw-types:power
+  |     |        +--rw mrl:atpc-upper-threshold     mw-types:power
+  |     +--ro mrl:actual-received-level?          mw-types:power
   |     +--rw (mrl:coding-modulation-mode)
   |     |  +--:(mrl:single)
   |     |  |  +--rw mrl:single
   |     |  |     +--rw mrl:selected-cm    identityref
   |     |  +--:(mrl:adaptive)
   |     |     +--rw mrl:adaptive
-  |     |        +--rw mrl:selected-min-acm    identityref
-  |     |        +--rw mrl:selected-max-acm    identityref
-  |     +--ro mrl:actual-tx-cm?                   identityref
-  |     +--ro mrl:actual-snir?                    decimal64
+  |     |        +--rw mrl:selected-min-acm        identityref
+  |     |        +--rw mrl:selected-max-acm        identityref
+  |     |        +--rw mrl:reference-modulation?   identityref
   |     +--ro mrl:actual-xpi?                     decimal64 {xpic}?
   |     +--rw mrl:ct-performance-thresholds
-  |     |  +--rw mrl:received-level-alarm-threshold?      power
-  |     |  +--rw mrl:transmitted-level-alarm-threshold?   power
+  |     |  +--rw mrl:received-level-alarm-threshold?
+  |     |  |       mw-types:power
+  |     |  +--rw mrl:transmitted-level-alarm-threshold?
+  |     |  |       mw-types:power
   |     |  +--rw mrl:ber-alarm-threshold?
   |     |          enumeration
   |     +--rw mrl:if-loop?                        enumeration
@@ -95,36 +107,43 @@ module: ietf-interfaces
   |     |  +--ro mrl:max-tx-frequency?          uint32
   |     |  +--ro mrl:min-rx-frequency?          uint32
   |     |  +--ro mrl:max-rx-frequency?          uint32
-  |     |  +--ro mrl:minimum-power?             power
-  |     |  +--ro mrl:maximum-available-power?   power
+  |     |  +--ro mrl:minimum-power?             mw-types:power
+  |     |  +--ro mrl:maximum-available-power?   mw-types:power
   |     |  +--ro mrl:available-min-acm?         identityref
   |     |  +--ro mrl:available-max-acm?         identityref
   |     |  +--ro mrl:acm-profile-list*
-  |     |     [profile-channel-separation-id
-  |     |      profile-coding-modulation-id]
-  |     |     +--ro mrl:profile-channel-separation-id    uint32
-  |     |     +--ro mrl:profile-coding-modulation-id     identityref
-  |     |     +--ro mrl:modulation-scheme?               uint8
-  |     |     +--ro mrl:nominal-tx-capacity?             uint32
-  |     |     +--ro mrl:support-as-fixed-modulation?     boolean
-  |     |     +--ro mrl:max-tx-power?                    power
-  |     |     +--ro mrl:min-tx-power?                    power
+  |     |          [profile-channel-separation-id profile-coding-modulation-id]
+  |     |     +--ro mrl:profile-channel-separation-id      uint32
+  |     |     +--ro mrl:profile-coding-modulation-id
+  |     |     |       identityref
+  |     |     +--ro mrl:modulation-scheme?                 uint8
+  |     |     +--ro mrl:nominal-tx-capacity?               uint32
+  |     |     +--ro mrl:support-as-fixed-modulation?       boolean
+  |     |     +--ro mrl:support-as-reference-modulation?   boolean
+  |     |     +--ro mrl:max-tx-power?
+  |     |     |       mw-types:power
+  |     |     +--ro mrl:min-tx-power?
+  |     |     |       mw-types:power
   |     |     +--ro mrl:lower-acm-profile-ptr
-  |     |     |  +--ro mrl:profile-coding-modulation-id-ref?  leafref
-  |     |     |  +--ro mrl:profile-channel-separation-id-ref? leafref
+  |     |     |  +--ro mrl:profile-coding-modulation-id-ref?
+  |     |     |  |       leafref
+  |     |     |  +--ro mrl:profile-channel-separation-id-ref?
+  |     |     |          leafref
   |     |     +--ro mrl:upper-acm-profile-ptr
-  |     |        +--ro mrl:profile-coding-modulation-id-ref?  leafref
-  |     |        +--ro mrl:profile-channel-separation-id-ref? leafref
+  |     |        +--ro mrl:profile-coding-modulation-id-ref?
+  |     |        |       leafref
+  |     |        +--ro mrl:profile-channel-separation-id-ref?
+  |     |                leafref
   |     +--ro mrl:error-performance-statistics
   |     |  +--ro mrl:bbe?   yang:counter32
   |     |  +--ro mrl:es?    yang:counter32
   |     |  +--ro mrl:ses?   yang:counter32
   |     |  +--ro mrl:uas?   yang:counter32
   |     +--ro mrl:radio-performance-statistics
-  |        +--ro mrl:min-rltm?   power
-  |        +--ro mrl:max-rltm?   power
-  |        +--ro mrl:min-tltm?   power
-  |        +--ro mrl:max-tltm?   power
+  |        +--ro mrl:min-rltm?   mw-types:power
+  |        +--ro mrl:max-rltm?   mw-types:power
+  |        +--ro mrl:min-tltm?   mw-types:power
+  |        +--ro mrl:max-tltm?   mw-types:power
   x--ro interfaces-state
      x--ro interface* [name]
         x--ro name               string
