@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-30T02:02:08.143054+00:00",
+  "timestamp": "2025-04-06T02:00:51.796452+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1699,7 +1699,7 @@
       "id": "I_kwDOHLTwws5_UkFM",
       "title": "Ethernet compression on Radio Link",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/32",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1711,8 +1711,8 @@
       ],
       "body": "The need is to enable and define the compression of the Ethernet Header data on top of a Radio Link.\r\nA new attribute could be added to RLT interface:\r\n-- rw header-compression-mode ",
       "createdAt": "2024-02-15T09:56:43Z",
-      "updatedAt": "2025-02-13T10:24:13Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-04T08:59:40Z",
+      "closedAt": "2025-04-04T08:59:40Z",
       "comments": [
         {
           "author": "jrebiffe",
@@ -1939,9 +1939,17 @@
       ],
       "body": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
       "createdAt": "2024-10-03T09:49:10Z",
-      "updatedAt": "2024-10-10T09:38:35Z",
+      "updatedAt": "2025-04-04T10:18:43Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "I will fix this when we move to working group adoption",
+          "createdAt": "2025-04-04T10:18:41Z",
+          "updatedAt": "2025-04-04T10:18:41Z"
+        }
+      ]
     },
     {
       "number": 39,
@@ -2054,9 +2062,17 @@
       ],
       "body": "By compiling modules with pyang (version 2.1 - not exactly the latest available) the following warning are shown:\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-radio-link.yang -o ./ietf-microwave-radio-link.tree\nietf-microwave-radio-link.yang:57: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-types.yang -o ./ietf-microwave-types.tree\nietf-microwave-types.yang:33: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n",
       "createdAt": "2025-02-06T16:50:44Z",
-      "updatedAt": "2025-02-13T10:15:02Z",
+      "updatedAt": "2025-04-04T10:17:35Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "This is on the yang file that hasn't changed since 2024.  I will fix this when we move to working group adoption.",
+          "createdAt": "2025-04-04T10:17:34Z",
+          "updatedAt": "2025-04-04T10:17:34Z"
+        }
+      ]
     },
     {
       "number": 45,
@@ -2438,7 +2454,7 @@
       "id": "PR_kwDOHLTwws5_xZrY",
       "title": "Header Compression",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/40",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2447,17 +2463,19 @@
       "labels": [],
       "body": "Fix #32\r\n\r\nAdded parameters (for RLT) in the yang file to handle header compression, just as an example to be reviewed.\r\n\r\nA boolean attribute has been added just to activate/deactivate the functionality.\r\n\r\n    +--rw header-compression-enabled?        boolean\r\n\r\nFor devices that require more complex configuration, a list of profiles has been added, each composed of a list of protocol headers to compress or composed of the size of the area at the beginning of the packet where all included headers are compressed.\r\n\r\n ```\r\n   +--ro header-compression-profile-list* [header-compression-profile-name] {hc-profile}?\r\n    |  +--ro header-compression-profile-name         string\r\n    |  +--ro (header-compression)?\r\n    |     +--:(protocol-based)\r\n    |     |  +--ro compressed-protocol-layer-list*   mw-types:protocol-layer\r\n    |     |  +--ro mpls-payload-kind-list*           mw-types:mpls-payload\r\n    |     +--:(header-length-based)\r\n    |        +--ro compressed-header-length?         int16\r\n\r\n```\r\nA configuration attribute selects the profile to use.\r\n\r\n`      +--rw header-compression-profile?        -> ../header-compression-profile-list/header-compression-profile-name {hc-profile}?\r\n`\r\n(not sure if the path is correct)\r\n\r\nA feature hc-profile has been added to include or exclude the header compression profile support.\r\n\r\n```\r\n  feature hc-profile {\r\n    description\r\n      \"Indicates that the device supports Header Compression profiles.\";\r\n  }\r\n```\r\n\r\nUnlike from modules inside the zip file uploaded in [issue#32](https://github.com/samans/draft-ybam-rfc8561bis/issues/32) the added code is NOT wrapped inside the couple of markers:\r\n\r\n",
       "createdAt": "2024-10-24T13:07:33Z",
-      "updatedAt": "2025-02-06T18:55:34Z",
+      "updatedAt": "2025-04-04T08:59:40Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "56e805309ae448a16efb0d05d62d92f7f038e694",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "eth-compression",
       "headRefOid": "5162ede6c79d6adf07c99dcd46132c0545f0b13f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-04-04T08:59:39Z",
+      "mergedAt": "2025-04-04T08:59:39Z",
+      "mergedBy": "samans",
+      "mergeCommit": {
+        "oid": "c699b0a4d063150ed5539136ffcb394d8ead7b11"
+      },
       "comments": [
         {
           "author": "DanielaSpreafico",
@@ -2937,6 +2955,19 @@
           "createdAt": "2025-02-06T18:55:34Z",
           "updatedAt": "2025-02-06T18:55:34Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHLTwws6jROLy",
+          "commit": {
+            "abbreviatedOid": "5162ede"
+          },
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "OK for me. Let's add another separate issue to change enums for oper-status to up & down.",
+          "createdAt": "2025-04-03T09:54:14Z",
+          "updatedAt": "2025-04-03T09:54:14Z",
+          "comments": []
         }
       ]
     },
@@ -3025,7 +3056,7 @@
       "labels": [],
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
-      "updatedAt": "2025-03-18T14:54:37Z",
+      "updatedAt": "2025-04-03T09:20:52Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
@@ -3037,7 +3068,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws6jFyrD",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-02T13:03:02Z",
+          "updatedAt": "2025-04-03T09:20:52Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "Some devices use the value of id node also as expected-id value.  Should we add a note to the description of this node or provide a sort of capability to declare this behavior?",
+              "createdAt": "2025-04-02T13:03:02Z",
+              "updatedAt": "2025-04-03T09:20:52Z"
+            },
+            {
+              "originalPosition": 75,
+              "body": "Some devices use the value of carrier-id node also as expected-carrier-id value. Should we add a note to the description of this node or provide a sort of capability to declare this behavior?",
+              "createdAt": "2025-04-02T13:18:19Z",
+              "updatedAt": "2025-04-03T09:20:52Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
