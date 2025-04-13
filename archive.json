@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-06T02:00:51.796452+00:00",
+  "timestamp": "2025-04-13T03:22:05.355557+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3056,7 +3056,7 @@
       "labels": [],
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
-      "updatedAt": "2025-04-03T09:20:52Z",
+      "updatedAt": "2025-04-10T11:51:40Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
@@ -3092,6 +3092,56 @@
               "body": "Some devices use the value of carrier-id node also as expected-carrier-id value. Should we add a note to the description of this node or provide a sort of capability to declare this behavior?",
               "createdAt": "2025-04-02T13:18:19Z",
               "updatedAt": "2025-04-03T09:20:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6kSunw",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-10T11:42:03Z",
+          "updatedAt": "2025-04-10T11:51:40Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "One doubt: what is this leaf enabling?\r\n\r\nIs it enabling checking that the received ID is the same as the expected ID or is it enabling the transmission of the configured ID or both?",
+              "createdAt": "2025-04-10T11:42:04Z",
+              "updatedAt": "2025-04-10T11:51:40Z"
+            },
+            {
+              "originalPosition": 28,
+              "body": "I have also a doubt on the last sentence\r\n\r\nIs the value not needed when the transmission of this ID is not enabled on the near-end RLT or when the checking of the  received ID is not enabled on the far-end RLT?\r\n\r\nOnce the semantic is clarified, we may also consider some syntax checks using proper when/must statements",
+              "createdAt": "2025-04-10T11:44:51Z",
+              "updatedAt": "2025-04-10T11:51:40Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "@niloda I think we can say that by default the expected-id is the same as the transmitted id and remove the last sentence \"Does not need to be configured if this check is not used\"\r\n\r\nHowever, this possible approach needs to be validate based on the clarification of the meaning of that sentence.",
+              "createdAt": "2025-04-10T11:47:33Z",
+              "updatedAt": "2025-04-10T11:51:40Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "Same doubt as above",
+              "createdAt": "2025-04-10T11:48:51Z",
+              "updatedAt": "2025-04-10T11:51:40Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "I have the same doubt as above about the case where \"not used\".\r\n\r\nMoreover, does this mean that, when used, the default value A should not be used?",
+              "createdAt": "2025-04-10T11:50:35Z",
+              "updatedAt": "2025-04-10T11:51:40Z"
+            },
+            {
+              "originalPosition": 75,
+              "body": "@niloda I think we can say that by default the expected-id is the same as the transmitted id and remove the last sentence\r\n\r\nIn this case, the last sentence is also not correct because no default value is defined for this leaf.",
+              "createdAt": "2025-04-10T11:51:32Z",
+              "updatedAt": "2025-04-10T11:51:40Z"
             }
           ]
         }
