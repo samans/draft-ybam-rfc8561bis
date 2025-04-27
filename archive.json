@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T03:22:05.355557+00:00",
+  "timestamp": "2025-04-27T02:04:33.952645+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1933,13 +1933,15 @@
       "state": "OPEN",
       "author": "samans",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "samans"
+      ],
       "labels": [
         "update yang"
       ],
       "body": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
       "createdAt": "2024-10-03T09:49:10Z",
-      "updatedAt": "2025-04-04T10:18:43Z",
+      "updatedAt": "2025-04-24T09:21:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -2056,13 +2058,15 @@
       "state": "OPEN",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "samans"
+      ],
       "labels": [
         "update yang"
       ],
       "body": "By compiling modules with pyang (version 2.1 - not exactly the latest available) the following warning are shown:\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-radio-link.yang -o ./ietf-microwave-radio-link.tree\nietf-microwave-radio-link.yang:57: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-types.yang -o ./ietf-microwave-types.tree\nietf-microwave-types.yang:33: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n",
       "createdAt": "2025-02-06T16:50:44Z",
-      "updatedAt": "2025-04-04T10:17:35Z",
+      "updatedAt": "2025-04-24T09:20:50Z",
       "closedAt": null,
       "comments": [
         {
@@ -3056,7 +3060,7 @@
       "labels": [],
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
-      "updatedAt": "2025-04-10T11:51:40Z",
+      "updatedAt": "2025-04-24T13:43:28Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
@@ -3144,6 +3148,19 @@
               "updatedAt": "2025-04-10T11:51:40Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6mXzyU",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I\u2019ve got a few comments/questions:\r\n\r\nid-enabled leaf:\r\n-\tI think something like \u201cfar-end-id-check\u201d (true/false) is describing it in a better way.\r\n\r\nId-enabled description:\r\n-\tI think it is a bit backwards. Isn\u2019t it this node (near-end) that checks if it is connected to the right far-end?\r\n-\tAn alternative description: \u201cEnable(true)/disable(false) check of the ID of the radio link terminal at far-end. When true, the system verifies that far-end radio link terminal ID is equal to the expected.\u201d\r\n-\tMaybe complemented with what it means if the check is not OK: \u201cIf ok then the radio link terminal status is UP. If not ok, then the status is stated as DOWN.\u201d\r\n\r\nexpected-id leaf:\r\n-\tOnce again, I think it is better to include a reference to far-end: \u201cexpected-far-end-id\u201d\r\n\r\nexpected-id description:\r\n-\tCan be shorter/clearer: \u201cExpected ID of the radio link terminal at far-end\u201d\r\n\t\r\ncarrier-id-enabled leaf:\r\n-\tMy understanding is that this should be used (and always used) in MIMO & XPIC configurations. If so, do we then need to enable this separately?\r\n-\tOr is this also used in other configurations?\r\n-\tIf required, then I suggest we change the name to include far-end: \u201cfar-end-id-check\u201d\r\n\r\ncarrier-id-enabled description:\r\n-\tSame as for RLT.\r\n-\tAn alternative description: \u201cEnable(true)/disable(false) check of the ID of the carrier termination at far-end. When true, the system verifies that far-end carrier termination ID is equal to the expected.\u201d\r\n-\tMaybe complemented with what it means if the check is not OK: \u201cIf ok then the carrier termination status is UP. If not ok, then the status is stated as DOWN.\u201d\r\n\r\nexpected-carrier-id leaf:\r\n-\tNot required. I think that the old description of leaf \u201ccarrier-id\u201d is still correct and that ID is supposed to be the same on both ends, and that means that we do not need to specify the same ID one more time.\r\n\r\ncarrier-id description:\r\n-\tOld description is still correct. I don\u2019t see the need to change.\r\n",
+          "createdAt": "2025-04-24T13:41:20Z",
+          "updatedAt": "2025-04-24T13:43:28Z",
+          "comments": []
         }
       ]
     }
