@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-27T02:04:33.952645+00:00",
+  "timestamp": "2025-05-04T02:09:51.607961+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3060,7 +3060,7 @@
       "labels": [],
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
-      "updatedAt": "2025-04-24T13:43:28Z",
+      "updatedAt": "2025-05-01T14:03:23Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
@@ -3071,7 +3071,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "- Just a question regarding to the carrier-id proposed change:\r\n\r\n\"Used in XPIC and MIMO configurations **(or in RLT configurations  with more one CT)**  \r\n\r\n Is it correct to use the CTid for CTs aggregated at an RLT to check the far-end carrier terminal?\r\n What I means is that in such an aggregated communication, it may not matter what is \r\n the far-end connection of each individual CT member of the RLT because the CT may \r\n send / receive to whatever CT members of the far-end RLT.\r\n It may be important in the aggregated case (eg 2+0) to use the RLT-id instead to check the far-end RLT, \r\n not the CT-id of the CT members.\r\n Furthermore, I thinkl that the CT-id should be also used at 1+0 operation mode, \r\n not only at the XPIC/MIMO configurations.\r\n \r\n \r\n - Another issue I would like to comment is the Italo's question for CT-id defval:\r\n \r\n **\"does this mean that, when used, the default value A should not be used?\"**\r\n \r\n My interpretation is that the the defval \"A\" implies that the feature of the remote-linkId check is not used.\r\n So if we have enable it a local-CT by a CT-id != A and the feature is not enabled at the remote-CT \r\n then the local-CT will receive via air the remote-CT-id = A and will not take into account \r\n the remote-link-id check at the radio connection establishment (alternatively, the local site may reject \r\n the connection if it considers that this should only be established towards a remote CT \r\n that have the remote-CT-linkId check enabled i.e. remote-CT-id != A.\r\n \r\n - Another comment for the RLT-id descritpion part:\r\n \r\n **\"...Does not need to be configured if this\r\n check is not used.\"**\r\n \r\n It seems to me that it is more reasonable to have also for the RLT-id a defval, eg \"A\" as in the CT-id case \r\n and that defval to imply that the RLT-id check is not used / enabled.\r\n This is definitely a more robust definition than the one in the current description.\r\n \r\n-  Regarding to the addition of further leaves:\r\n \r\n **id-enabled\r\n carrier-id-enabled**\r\n \r\n these look to me redumdant if we consider the defval values of these IDs to indicate \r\n a not-used/not-enabled status.\r\n \r\n BEST REGARDS\r\nTheodoros Kallimanis\r\nPrincipal Engineer (Systems & SW)\r\nDepartment SSD\r\n\r\nIntracom Telecom\r\n19.7 km New Road Peania-Markopoulo, \r\nPeania, GR 19002\r\nt:   +30 6671961\r\nf:   +30 6671446\r\nm: +30 6941636679\r\n[email tks@intracom-telecom.com](mailto:email%20tks@intracom-telecom.com)\r\n[www.intracom-telecom.com](http://www.intracom-telecom.com/)",
+          "createdAt": "2025-05-01T14:03:21Z",
+          "updatedAt": "2025-05-01T14:03:21Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOHLTwws6jFyrD",
