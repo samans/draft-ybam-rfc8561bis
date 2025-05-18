@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-04T02:09:51.607961+00:00",
+  "timestamp": "2025-05-18T02:09:37.217498+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -681,7 +681,7 @@
       "id": "I_kwDOHLTwws5hk2M_",
       "title": "identityref coding-modulation does not cover all values ",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/13",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -690,8 +690,8 @@
       ],
       "body": "Having implemented the model in the 4th ETSI Plugtest for mw devices, we realized that the identityref coding-modulation does not provide all possible values. Some mw devices support 8 PSK modulation which is not included.\r\n\r\nThe use of identityrefs, even if it currently covers all values, also has the disadvantage of having to update the YANG model if new and more complex modulation schemes are standardized in the future.\r\n\r\nA different approach could be taken to overcome this limitation. Let the device declare the acm profiles it supports, making explicit the parameters of each transmission ACM profile, and point to one of these in selected-min-acm, selected-max-acm or selected-cm.\r\n  \r\nWhereas each ACM profile is basically described by\r\n   - bandwidth\r\n   - modulation\r\n   - code rate (ratio between net bandwidth and gross bandwidth\r\n   - a reduction factor of the symbol rate (usefull for half-bpsk)\r\n  to which generic parameters can be added, such as (for example) a descriptive name of the profile and a value to organize the profiles in ascending/descending order\r\n  \r\nthe following structure could be assumed as an ACM profile entry:\r\n\r\n    grouping acm-profile {\r\n     leaf acm-profile-name {\r\n          typestring;\r\n          ...\r\n         \"Eg: 4qam-strong\"\r\n     }\r\n     leaf acm-profile-order {\r\n       type int32;\r\n       ...\r\n       \"1 to N\"\r\n     }\r\n     leaf channel separation {\r\n       type int32;\r\n       units \"kHz\";\r\n       ...\r\n     }\r\n     leaf modulation-scheme {\r\n       type int16;\r\n       units \"symbols\";\r\n       ...\r\n       \"2=BSPK ... 10=1024qam ... 12=4096qam\"\r\n     }\r\n     leaf code rate {\r\n       type int8;\r\n       units \"%\";\r\n       ...\r\n     }\r\n     leaf symbol-rate-reduction-factor {\r\n       type int8;\r\n       default \"1\";\r\n        \"Reduction factor for the symbol rate. Example: value would be 2 for 1/2BPSK.\";\r\n     }\r\n     leaf supported-as-fixed-configuration {\r\n       type boolean;\r\n       defaults \"false\";\r\n        \"true = This acm profile is available for manual configuration when Adaptive Modulation is switched off.\";\r\n     }\r\n   }\r\n\r\nFrom which it would also be possible to obtain the available radio capacity with the simple formula:\r\ntx-capacity = channel-separation * log2(modulation-scheme) * code-rate / symbol-rate-reduction-factor / K ;\r\nK takes into account the rolloff (approx. 1.15).\r\n\r\nThe device could only show the profiles of the selected channel-separation, if one accepted that the list containing the ACM profiles is not invariant over time. In this case, acm-profile grouping might not include the channel-separation attribute.\r\n\r\nThe selected-min-acm, selected-max-acm or selected-cm attributes should become leafrefs pointing to one of the ACM profiles.\r\n\r\nWith this approach, although complex, it is not necessary to maintain the identityref in the future.\r\nEven the user who has to configure the ACM profiles would be facilitated in the setting, having the list of values supported by the device available.",
       "createdAt": "2023-03-23T08:15:13Z",
-      "updatedAt": "2023-12-14T10:44:17Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-15T09:25:34Z",
+      "closedAt": "2025-05-15T09:25:33Z",
       "comments": [
         {
           "author": "niloda",
@@ -748,6 +748,13 @@
           "body": "A few additional comments:\r\n- We have similar tables/profiles for our nodes, but channel-separation is not part or impacting those profiles.\r\n- Reference spectrum efficiency class, RSEC, is on the other hand a deciding factor for us.\r\n- supported-as-fixed-modulation means that the same profile values could apply also for fixed modulations. In our systems max-tx-power might be different depending on if it is fixed or adaptive. How would that be handled in the suggested model construct?\r\n- Is this really modelling an industry standard or is this perhaps something more system specific & proprietary and if so should be modelled as such?\r\n- I'm still struggling to understand how this information is supposed to be used by a PNC (microwave domain controller).\r\nIs is possible to provide a set of example data and a description of how that could be used by a PNC?",
           "createdAt": "2023-07-03T06:29:51Z",
           "updatedAt": "2023-07-03T06:29:51Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "YANG updated to support this issue.",
+          "createdAt": "2025-05-15T09:25:33Z",
+          "updatedAt": "2025-05-15T09:25:33Z"
         }
       ]
     },
@@ -983,13 +990,15 @@
       "state": "OPEN",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "samans"
+      ],
       "labels": [
         "update yang"
       ],
       "body": "Currently the yang module has the following description. \r\n\r\n  description\r\n    \"This is a module for the entities in\r\n     a generic microwave system.\r\n\r\nBased on the discussion from 2023-08-17 (https://github.com/samans/draft-ybam-rfc8561bis/blob/main/minutes/2023-08-17.md) we may want to add a kind of 'scope' to the description. \r\n\r\nProposal for discussion:\r\n\r\n  description\r\n    \"This module pertains to the components within a microwave system ([sko] network function ??). \r\n      Its purpose is to establish the specific configurations associated with radio links. \r\n     Configurations that concern the management of faults, performance, security, synchronization, \r\n     as well as packet and Ethernet management within a microwave system ([sko] network function ??), \r\n     are encompassed by distinct yang modules.\"\r\n\r\n",
       "createdAt": "2023-08-24T08:16:07Z",
-      "updatedAt": "2023-12-14T10:45:08Z",
+      "updatedAt": "2025-05-15T09:22:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -1137,7 +1146,7 @@
       "id": "I_kwDOHLTwws5zB2Vb",
       "title": "Potential usage of a coding modulation profile list",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -1146,8 +1155,8 @@
       ],
       "body": "This issues is an add on on the discussion around #13 and #16.\r\nIn this issues it should be discussed if a list of coding-modulation-profiles (cm-profile) should be modelled and how it could be used. \r\nBasically what is the value of such profiles.\r\n\r\nCurrent understanding - to be challenged :) \r\n- A CM-profile does not group a set of configuration parameters and its values. So it must not be used as a kind of bulk configuration.\r\n- A CM-profile describes the constrains of depending parameters \r\n  - Example: **parameter-value-a** must not exceed value x if **parameter-value-b** is equals to y.\r\n  - Therefore a coding-modulation-profile can be used for validating the configuration.\r\n- A CM-profile describes the \"behaviour\" of a device and includes information of a technical description in a machine readable way.\r\n\r\nBase on the understanding above a use case could be that the SDN Controller validates the configuration to the device against a selected profile. \r\n\r\n![usage-of-coding-modulation-profile](https://github.com/samans/draft-ybam-rfc8561bis/assets/9154981/512020d2-910b-43ac-a889-7fee5b2084d1)\r\n\r\nSource code - feel free to modify [ietf-microwave-usage-of-coding-modulation-profile.puml.txt](https://github.com/samans/draft-ybam-rfc8561bis/files/12829955/ietf-microwave-usage-of-coding-modulation-profile.puml.txt)\r\n\r\n\r\n",
       "createdAt": "2023-10-06T10:24:16Z",
-      "updatedAt": "2023-12-14T10:57:19Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-15T09:21:46Z",
+      "closedAt": "2025-05-15T09:21:45Z",
       "comments": [
         {
           "author": "niloda",
@@ -1155,6 +1164,13 @@
           "body": "ACM profiles are useful for some microwave network control/automation applications. They are applications that typically operate in a closed loop in order to continuously maximize network efficiency and functionality, i.e. applications that use a feedback value to configure the output.\r\n\r\nTwo very simplified use-case examples are described below, which can however clarify the usefulness of the ACM profile list.\r\n\r\n**Use-case 1: interference reduction**\r\nSuppose we want to implement an application that minimizes interference between radio links in a specific geographical area. This application would need to know the SNR value of the radio links and would act on the transmitted power value, according to a specific control algorithm. To correctly configure transmitted power, the application must know the transmitted power ranges allowed by each ACM profile. The transmitted power ranges are provided by the _max-tx-power_ and _min-tx-power_ parameters\r\n\r\n**Use-case2: Shaping**\r\nSuppose we want to implement an application that reduces the throughput of the routers at the ends of a chain of one or more radio links, in order to avoid packet loss by exploiting the buffering capacity of the router. This application would need to know the current transmitted capacity available on the radio links in order to appropriately configure the router shaper. The current transmitted capacity is a function of the ACM profile that the link is operating at a given moment (which depends on atmospheric events). The current capacity is provided by the _nominal-tx-capacity_ parameter included in the ACM profile list.",
           "createdAt": "2023-10-23T15:46:09Z",
           "updatedAt": "2023-10-23T15:46:09Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Model exists.  Reopen if further discussion needed.",
+          "createdAt": "2025-05-15T09:21:45Z",
+          "updatedAt": "2025-05-15T09:21:45Z"
         }
       ]
     },
@@ -1399,14 +1415,16 @@
       "state": "OPEN",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "DanielaSpreafico"
+      ],
       "labels": [
         "Discussion Required",
         "gap analysis"
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2024-02-15T09:28:57Z",
+      "updatedAt": "2025-05-15T09:19:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -1628,14 +1646,17 @@
       "state": "OPEN",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "italobusi",
+        "DanielaSpreafico"
+      ],
       "labels": [
         "Discussion Required",
         "gap analysis"
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2025-01-30T11:00:42Z",
+      "updatedAt": "2025-05-15T09:17:57Z",
       "closedAt": null,
       "comments": [
         {
@@ -1994,11 +2015,13 @@
       "state": "OPEN",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "italobusi"
+      ],
       "labels": [],
       "body": "See thread initiated on Netmod WG: https://mailarchive.ietf.org/arch/msg/netmod/p2MExPZrHZZWT0ApL-oJ0pxXnA0/",
       "createdAt": "2024-12-13T12:44:39Z",
-      "updatedAt": "2025-01-09T10:33:40Z",
+      "updatedAt": "2025-05-15T11:32:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -2007,6 +2030,13 @@
           "body": "What is an example of adding a default statement to an existing leaf in the radio-link yang?  Trying to understand what problem is being identified.  Can we specifically ask the YANG doctors?  Do the updated YANG guidelines help?",
           "createdAt": "2025-01-09T10:33:39Z",
           "updatedAt": "2025-01-09T10:33:39Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think that for the scope of this model we can close this issue\n\nThe issue has been triggered by the first proposal in https://github.com/samans/draft-ybam-rfc8561bis/pull/40 where a default value   False was defined for the header-compression-enabled but is is no longer applicable because we have agreed not to define any default value for enabling/disabling header compression\n\nThe generic issue is still valid but no longer applicable for this model",
+          "createdAt": "2025-05-15T11:32:15Z",
+          "updatedAt": "2025-05-15T11:32:15Z"
         }
       ]
     },
