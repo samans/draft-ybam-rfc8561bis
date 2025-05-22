@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-18T02:09:37.217498+00:00",
+  "timestamp": "2025-05-22T02:03:05.952450+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1502,7 +1502,7 @@
       ],
       "body": "In the excel spreadsheet line 97 and98 is documented that the ONF air interface supports encryption related configurations.\r\n\r\n```\r\n     |  |     |  +--rw air-interface:encryption-is-on?                   boolean\r\n     |  |     |  +--rw air-interface:cryptographic-key?                  string\r\n```\r\n\r\n**Discussion:**\r\n\r\nI would prefer that such feature is handled by\r\nhttps://datatracker.ietf.org/doc/draft-ietf-netconf-crypto-types/28/\r\n\r\nBut this module is still a draft - how can we deal with it?",
       "createdAt": "2024-01-24T17:54:18Z",
-      "updatedAt": "2025-02-06T10:49:29Z",
+      "updatedAt": "2025-05-21T15:36:06Z",
       "closedAt": "2025-02-06T10:49:27Z",
       "comments": [
         {
@@ -1546,6 +1546,13 @@
           "body": "The Issue can be closed with Reference to RFC9640",
           "createdAt": "2025-02-06T10:49:27Z",
           "updatedAt": "2025-02-06T10:49:27Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello\nIt seems to me that this closed issue is not too clear.\nI.e. it is not clear how the encryption configuration and status will be associated to a specific Carrier-Terminal (or RLT?).\nIs this something straightforward to be done through RFC9640 and its associated RFCs?",
+          "createdAt": "2025-05-21T15:36:05Z",
+          "updatedAt": "2025-05-21T15:36:05Z"
         }
       ]
     },
@@ -1656,7 +1663,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2025-05-15T09:17:57Z",
+      "updatedAt": "2025-05-20T11:04:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -1679,6 +1686,13 @@
           "body": "**2025-01-30 Weekly Call**\n\nAlternative solution could be to define an action to set the interface in maintenance mode, configuring the duration of the maintenance window\n\nAs a consequence of this action, the operational DS can report whether the interface is in maintenance mode or not\n\nNeed more investigation about what the different vendors are implementing\n\nFor further discussion in the next calls\n",
           "createdAt": "2025-01-30T11:00:41Z",
           "updatedAt": "2025-01-30T11:00:41Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "An RPC is useful to enter on maintenance mode and to define the duration but the type of the maintenance command (Tx mute, looback or other future commands) is not addressed.\nOn the model attributes to activate a loopback or disable the Transmitter are already there.\nMy proposal is to add only an attribute to define the duration of the maintenance command (loopback , Tx disable) and an other one to report the activation date.\nOnce the duration expires the maintenance command is removed automatically (if not already done manually).\nThe rool-back , mentioned by Jonas on a previous comment, is related to the removal of the maintenance command (onle one at each time).\nThe proposal could be as in the following:\n\naugment /if:interfaces/if:interface:\n       [...]\n       +--rw timer-duration?   uint32\n       +--ro activation-date?   date-and-time",
+          "createdAt": "2025-05-20T11:04:13Z",
+          "updatedAt": "2025-05-20T11:04:13Z"
         }
       ]
     },
@@ -3090,7 +3104,7 @@
       "labels": [],
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
-      "updatedAt": "2025-05-01T14:03:23Z",
+      "updatedAt": "2025-05-20T14:57:15Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
@@ -3108,6 +3122,13 @@
           "body": "- Just a question regarding to the carrier-id proposed change:\r\n\r\n\"Used in XPIC and MIMO configurations **(or in RLT configurations  with more one CT)**  \r\n\r\n Is it correct to use the CTid for CTs aggregated at an RLT to check the far-end carrier terminal?\r\n What I means is that in such an aggregated communication, it may not matter what is \r\n the far-end connection of each individual CT member of the RLT because the CT may \r\n send / receive to whatever CT members of the far-end RLT.\r\n It may be important in the aggregated case (eg 2+0) to use the RLT-id instead to check the far-end RLT, \r\n not the CT-id of the CT members.\r\n Furthermore, I thinkl that the CT-id should be also used at 1+0 operation mode, \r\n not only at the XPIC/MIMO configurations.\r\n \r\n \r\n - Another issue I would like to comment is the Italo's question for CT-id defval:\r\n \r\n **\"does this mean that, when used, the default value A should not be used?\"**\r\n \r\n My interpretation is that the the defval \"A\" implies that the feature of the remote-linkId check is not used.\r\n So if we have enable it a local-CT by a CT-id != A and the feature is not enabled at the remote-CT \r\n then the local-CT will receive via air the remote-CT-id = A and will not take into account \r\n the remote-link-id check at the radio connection establishment (alternatively, the local site may reject \r\n the connection if it considers that this should only be established towards a remote CT \r\n that have the remote-CT-linkId check enabled i.e. remote-CT-id != A.\r\n \r\n - Another comment for the RLT-id descritpion part:\r\n \r\n **\"...Does not need to be configured if this\r\n check is not used.\"**\r\n \r\n It seems to me that it is more reasonable to have also for the RLT-id a defval, eg \"A\" as in the CT-id case \r\n and that defval to imply that the RLT-id check is not used / enabled.\r\n This is definitely a more robust definition than the one in the current description.\r\n \r\n-  Regarding to the addition of further leaves:\r\n \r\n **id-enabled\r\n carrier-id-enabled**\r\n \r\n these look to me redumdant if we consider the defval values of these IDs to indicate \r\n a not-used/not-enabled status.\r\n \r\n BEST REGARDS\r\nTheodoros Kallimanis\r\nPrincipal Engineer (Systems & SW)\r\nDepartment SSD\r\n\r\nIntracom Telecom\r\n19.7 km New Road Peania-Markopoulo, \r\nPeania, GR 19002\r\nt:   +30 6671961\r\nf:   +30 6671446\r\nm: +30 6941636679\r\n[email tks@intracom-telecom.com](mailto:email%20tks@intracom-telecom.com)\r\n[www.intracom-telecom.com](http://www.intracom-telecom.com/)",
           "createdAt": "2025-05-01T14:03:21Z",
           "updatedAt": "2025-05-01T14:03:21Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hello all\r\n\r\nI think that the carrier-id should be described to be used also in the 1+0\r\noperation-mode to verify the\r\ncorrect and legal far-end carrier termination. This is also a carrier-id\r\ncheck case, that should be described.\r\n\r\nFurthermore, I doubt whether in the 2+0 nonXPIC and nonMIMO operation mode,\r\nthe carrier-id is to be used.\r\nIn an aggregation of 2 CTs in an RLT, I think that it does not matter to\r\nverify the far-end carrier termination of the\r\nindividual CTs but the RLTs end-to -end termination.\r\nIn the aggregated 2+0 mode, traffic of one near-end CT may be sent to\r\neither one of the two aggregated  CTs of the far-end.\r\nI think then that the individual CTs carrier-ids checks are not to be used.\r\nIn this case, the RLT-id check is significant.\r\nBest regards\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a4\u03c1\u03af 20 \u039c\u03b1\u0390 2025 \u03c3\u03c4\u03b9\u03c2 5:18\u202f\u03bc.\u03bc., \u03bf/\u03b7 DanielaSpreafico <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> ***@***.**** commented on this pull request.\r\n> ------------------------------\r\n>\r\n> In ietf-microwave-radio-link.yang\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/pull/47#discussion_r2098106419>\r\n> :\r\n>\r\n> >      leaf carrier-id {\r\n>        type string;\r\n>        default \"A\";\r\n>        description\r\n> -        \"ID of the carrier (e.g., A, B, C, or D).\r\n> -         Used in XPIC and MIMO configurations to check that\r\n> -         the carrier termination is connected to the correct\r\n> -         far-end carrier termination.  Should be the same\r\n> -         carrier ID on both sides of the hop.  Left as\r\n> -         default value when MIMO and XPIC are not in use.\";\r\n> +        \"ID of the near-end carrier (e.g., A, B, C, or D).\r\n> +         Used in XPIC and MIMO configurations (or in RLT configurations\r\n> +         with more one CT) to check that the carrier termination is\r\n> +         connected to the correct far-end carrier termination.\r\n> +         Left as default value when not used.\";\r\n>\r\n> The carrier-id attribute is already supported on CT model. No changes are\r\n> foreseen\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/pull/47#discussion_r2098106419>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVOK22XIM62SS6GHN2D27M2SHAVCNFSM6AAAAABZIMF2SOVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZDQNJUGQYDOMJYG4>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2025-05-20T14:57:14Z",
+          "updatedAt": "2025-05-20T14:57:14Z"
         }
       ],
       "reviews": [
@@ -3199,6 +3220,146 @@
           "createdAt": "2025-04-24T13:41:20Z",
           "updatedAt": "2025-04-24T13:43:28Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qGP80",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T11:17:09Z",
+          "updatedAt": "2025-05-20T11:17:09Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "Both",
+              "createdAt": "2025-05-20T11:17:09Z",
+              "updatedAt": "2025-05-20T11:17:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qHcPF",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T12:58:26Z",
+          "updatedAt": "2025-05-20T12:58:26Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "2 points: \r\n- in case the devices use _id_ also as expected-id then the 2 values are the same and the _expected-id_ could not be configured.\r\n- in case the check is not used (_id-enabled_ = false) then, as for id, the **expected-id** is not needed to be configured ",
+              "createdAt": "2025-05-20T12:58:26Z",
+              "updatedAt": "2025-05-20T12:58:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qHdf5",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T12:59:53Z",
+          "updatedAt": "2025-05-20T12:59:53Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "In case the devices use   _id_ also as expected-id a note could be added to the description",
+              "createdAt": "2025-05-20T12:59:53Z",
+              "updatedAt": "2025-05-20T12:59:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qHhxo",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T13:03:50Z",
+          "updatedAt": "2025-05-20T13:03:50Z",
+          "comments": [
+            {
+              "originalPosition": 75,
+              "body": "Same considerations of previuos _id_ attribute.\r\nYou are right: the last sentence on expected-carrier-id could be removed and a note could be added to say that by default the expected-id is the same as the transmitted id.",
+              "createdAt": "2025-05-20T13:03:50Z",
+              "updatedAt": "2025-05-20T13:03:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qHkGk",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T13:06:06Z",
+          "updatedAt": "2025-05-20T13:06:07Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "When the feature is enabled the ID is sent and a check is performed that the expected ID is the same as the received ID ",
+              "createdAt": "2025-05-20T13:06:06Z",
+              "updatedAt": "2025-05-20T13:06:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qHmfO",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T13:08:52Z",
+          "updatedAt": "2025-05-20T13:08:52Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "YES, when the ID is not enabled then the value of ID is not needed, but for backward compatibility I think we cannot change the syntax of the attribute.",
+              "createdAt": "2025-05-20T13:08:52Z",
+              "updatedAt": "2025-05-20T13:08:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws6qIswT",
+          "commit": {
+            "abbreviatedOid": "7d8f91b"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-20T14:17:50Z",
+          "updatedAt": "2025-05-20T14:17:50Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "The carrier-id attribute is already supported on CT model. No changes are foreseen",
+              "createdAt": "2025-05-20T14:17:50Z",
+              "updatedAt": "2025-05-20T14:17:50Z"
+            }
+          ]
         }
       ]
     }
