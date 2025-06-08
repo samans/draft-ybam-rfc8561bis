@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-25T02:15:57.139523+00:00",
+  "timestamp": "2025-06-08T02:20:12.752510+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2026,7 +2026,7 @@
       "id": "I_kwDOHLTwws6jN2sk",
       "title": "Default values for data nodes added in this revision",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2035,8 +2035,8 @@
       "labels": [],
       "body": "See thread initiated on Netmod WG: https://mailarchive.ietf.org/arch/msg/netmod/p2MExPZrHZZWT0ApL-oJ0pxXnA0/",
       "createdAt": "2024-12-13T12:44:39Z",
-      "updatedAt": "2025-05-15T11:32:16Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-05T09:43:25Z",
+      "closedAt": "2025-06-05T09:43:25Z",
       "comments": [
         {
           "author": "samans",
@@ -3097,21 +3097,21 @@
       "id": "PR_kwDOHLTwws6PHwqD",
       "title": "radio-signal-id (Trail trace identifier (TTI))",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/47",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
       "createdAt": "2025-03-18T14:52:49Z",
-      "updatedAt": "2025-05-22T09:56:40Z",
+      "updatedAt": "2025-06-05T09:41:36Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "300842bdedee1ea7488845e86984e7ed3acb4f2b",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "Radio-signal-id",
       "headRefOid": "7d8f91ba1438afb0aef241d3087c4cc3ea58837d",
-      "closedAt": null,
+      "closedAt": "2025-06-05T09:41:35Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -3136,6 +3136,13 @@
           "body": "Discussion during the call on May 22:\r\n\r\n![image](https://github.com/user-attachments/assets/6755df64-e6e1-42cb-b92f-a59fd129a5d7)\r\n\r\n![image](https://github.com/user-attachments/assets/3b838cec-fbd0-4896-b104-96f447507b08)\r\n\r\nAgreed:\r\n- need to clarify that the near-end node is checking that the far-end ID (transmitted by the far-end and received by the near-end) is matching the expected far-end ID as configured in the near-end node\r\n- the default value for the enable attribute is implementation specific\r\n- a must statement can be add for the enable attribute to ensure that when the enable is set to true either the near-end id or the expected far-end id value is also configured\r\n- the default value for the expected far-end id is the same as the near-end id\r\n\r\nFor further discussion whether to include the far-end in the attribute names or group the new attributes into a far-end container or just clarify the meaning of the attributes in the description\r\n\r\nNote: these considerations are equally applicable to carrier and RLT ids",
           "createdAt": "2025-05-22T09:55:23Z",
           "updatedAt": "2025-05-22T09:56:35Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Suggestion is to close this pull request, and open a new pull request using the latest yang file.",
+          "createdAt": "2025-06-05T09:41:35Z",
+          "updatedAt": "2025-06-05T09:41:35Z"
         }
       ],
       "reviews": [
