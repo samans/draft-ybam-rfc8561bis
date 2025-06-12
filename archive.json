@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-08T02:20:12.752510+00:00",
+  "timestamp": "2025-06-12T02:05:11.369063+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2189,6 +2189,22 @@
           "updatedAt": "2025-03-13T10:43:27Z"
         }
       ]
+    },
+    {
+      "number": 48,
+      "id": "I_kwDOHLTwws66t5DK",
+      "title": "Wrong enumeration values for oper-status of header-compression",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/48",
+      "state": "OPEN",
+      "author": "niloda",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Supported values of the node **oper-status** included in the container **header-compression** should be aligned with other attributes reporting an operational status, so it is proposed to replace the value **off** with the value **down** and the value **on** with the value **up**",
+      "createdAt": "2025-06-10T08:12:08Z",
+      "updatedAt": "2025-06-10T08:12:08Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
