@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-12T02:05:11.369063+00:00",
+  "timestamp": "2025-06-22T02:21:55.021795+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1663,7 +1663,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2025-05-20T11:04:14Z",
+      "updatedAt": "2025-06-19T09:18:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -1693,6 +1693,13 @@
           "body": "An RPC is useful to enter on maintenance mode and to define the duration but the type of the maintenance command (Tx mute, looback or other future commands) is not addressed.\nOn the model attributes to activate a loopback or disable the Transmitter are already there.\nMy proposal is to add only an attribute to define the duration of the maintenance command (loopback , Tx disable) and an other one to report the activation date.\nOnce the duration expires the maintenance command is removed automatically (if not already done manually).\nThe rool-back , mentioned by Jonas on a previous comment, is related to the removal of the maintenance command (onle one at each time).\nThe proposal could be as in the following:\n\naugment /if:interfaces/if:interface:\n       [...]\n       +--rw timer-duration?   uint32\n       +--ro activation-date?   date-and-time",
           "createdAt": "2025-05-20T11:04:13Z",
           "updatedAt": "2025-05-20T11:04:13Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Italo contacting the authors of [draft-ietf-netmod-schedule-yang-07](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang/), to understand how the scheduling process impacts the datastores when using NMDA. ",
+          "createdAt": "2025-06-19T09:18:03Z",
+          "updatedAt": "2025-06-19T09:18:03Z"
         }
       ]
     },
@@ -2195,16 +2202,24 @@
       "id": "I_kwDOHLTwws66t5DK",
       "title": "Wrong enumeration values for oper-status of header-compression",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/48",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Supported values of the node **oper-status** included in the container **header-compression** should be aligned with other attributes reporting an operational status, so it is proposed to replace the value **off** with the value **down** and the value **on** with the value **up**",
       "createdAt": "2025-06-10T08:12:08Z",
-      "updatedAt": "2025-06-10T08:12:08Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-06-19T09:26:34Z",
+      "closedAt": "2025-06-19T09:26:34Z",
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Leave values as on/off to match tx-oper-status.",
+          "createdAt": "2025-06-19T09:26:34Z",
+          "updatedAt": "2025-06-19T09:26:34Z"
+        }
+      ]
     }
   ],
   "pulls": [
