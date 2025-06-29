@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-22T02:21:55.021795+00:00",
+  "timestamp": "2025-06-29T02:24:21.918070+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1420,11 +1420,12 @@
       ],
       "labels": [
         "Discussion Required",
+        "update yang",
         "gap analysis"
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2025-05-15T09:19:26Z",
+      "updatedAt": "2025-06-26T09:13:56Z",
       "closedAt": null,
       "comments": [
         {
