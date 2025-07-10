@@ -1,0 +1,12 @@
+Attendees: Scott, Daniela, Danilo, Leo, Jonas, Italo, Mohammad
+
+Discussed 
+[Passive Inventory](https://github.com/aguoietf/draft-ygb-ivy-passive-network-inventory/issues/10)
+And the following is still open and to be discussed. 
+- Open Questions to be clarified regarding Scope of Passive Inventory.
+   - Cable, Connectors, Waveguides
+   - Antennas
+- Automation purpose of microwave passive devices
+- What are the advantages to the controller?
+- Source of information for these passive devices?
+- Effects of Cables and Connectors on a Link and their importance to the Controller. 
