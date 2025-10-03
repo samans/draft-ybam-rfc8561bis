@@ -1,3 +1,5 @@
+<!-- regenerate: on (set to off if you edit this file) -->
+
 # A YANG Data Model for Microwave Radio Link
 
 This is the working area for the individual Internet-Draft, "A YANG Data Model for Microwave Radio Link".
@@ -13,9 +15,8 @@ This is the working area for the individual Internet-Draft, "A YANG Data Model f
 See the
 [guidelines for contributions](https://github.com/samans/draft-ybam-rfc8561bis/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
