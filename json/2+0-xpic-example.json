@@ -2,24 +2,36 @@
   "ietf-interfaces:interfaces": {
     "interface": [
       {
-        "name": "RLT-A",
+        "name": "example:RLT-A",
         "description": "Radio Link Terminal A",
         "type": "iana-if-type:microwaveRadioLinkTerminal",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
         "ietf-microwave-radio-link:mode":
            "ietf-microwave-types:two-plus-zero",
         "ietf-microwave-radio-link:carrier-terminations": [
-          "RLT-A:CT-1",
-          "RLT-A:CT-2"
+          "example:RLT-A:CT-1",
+          "example:RLT-A:CT-2"
         ],
         "ietf-microwave-radio-link:xpic-pairs": [
           "xpic-pair1"
         ]
       },
       {
-        "name": "RLT-A:CT-1",
+        "name": "example:RLT-A:CT-1",
         "description": "Carrier Termination 1",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "A",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 2,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:A",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10728000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -33,10 +45,16 @@
         }
       },
       {
-        "name": "RLT-A:CT-2",
+        "name": "example:RLT-A:CT-2",
         "description": "Carrier Termination 2",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "B",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 3,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:B",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10618000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -56,8 +74,8 @@
       {
         "name": "xpic-pair1",
         "members": [
-          "RLT-A:CT-1",
-          "RLT-A:CT-2"
+          "example:RLT-A:CT-1",
+          "example:RLT-A:CT-2"
         ]
       }
     ]

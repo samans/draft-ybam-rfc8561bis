@@ -2,20 +2,32 @@
   "ietf-interfaces:interfaces": {
     "interface": [
       {
-        "name": "RLT-A",
+        "name": "example:RLT-A",
         "description": "Radio Link Terminal A",
         "type": "iana-if-type:microwaveRadioLinkTerminal",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
         "ietf-microwave-radio-link:mode":
            "ietf-microwave-types:one-plus-zero",
         "ietf-microwave-radio-link:carrier-terminations": [
-          "RLT-A:CT-1"
+          "example:RLT-A:CT-1"
         ]
       },
       {
-        "name": "RLT-A:CT-1",
+        "name": "example:RLT-A:CT-1",
         "description": "Carrier Termination 1",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "A",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:A",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10728000,
         "ietf-microwave-radio-link:duplex-distance": 644000,

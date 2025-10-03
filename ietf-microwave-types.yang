@@ -16,8 +16,8 @@ module ietf-microwave-types {
       Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
       Danilo Pala (danilo.pala@siaemic.com)";
   description
-    "This module contains a collection of YANG data types
-     considered generally useful for microwave interfaces.
+    "This is a YANG module for the entities in
+     a generic interface protection mechanism.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -29,19 +29,25 @@ module ietf-microwave-types {
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC 8561; see
-     the RFC itself for full legal notices.";
+     This version of this YANG module is part of RFC 8561bis;
+     see the RFC itself for full legal notices.";
 
-  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // RFC Ed.: replace 8561bis with actual RFC number and remove
   // this note
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
+  revision 2025-10-03 {
+    description
+      "Draft - Issue #44 Copyright statement Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
   revision 2025-04-04 {
     description
       "Draft - Comression #32, new grouping Issue #35";
     reference
-      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
 
   /*

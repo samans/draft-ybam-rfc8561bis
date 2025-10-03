@@ -40,8 +40,16 @@ module ietf-microwave-radio-link {
       Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
       Danilo Pala (danilo.pala@siaemic.com)";
   description
-    "This is a module for the entities in
+    "This YANG module defines a YANG data model for control
+     and management of radio link interfaces and their
+     connectivity to packet (typically Ethernet) interfaces
+     in a microwave/millimeter wave node. The data
+     nodes for management of the interface protection
+     functionality is broken out into a separate and generic
+     YANG data model in order to make it available for other
+     interface types as well. This is a YANG module for the entities in
      a generic microwave system.
+
 
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -53,13 +61,20 @@ module ietf-microwave-radio-link {
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC XXXX;
+     This version of this YANG module is part of RFC 8561bis;
      see the RFC itself for full legal notices.";
 
-  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // RFC Ed.: replace 8561bis with actual RFC number and remove
   // this note
   // replace the revision date with the module publication date
   // the format is (year-month-day)
+
+  revision 2025-10-03 {
+    description
+      "Draft - Issue #44 Copyright statement Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
 
   revision 2025-04-04 {
     description
@@ -67,7 +82,7 @@ module ietf-microwave-radio-link {
                Issue #35 grouping common-microwave-properties,
                Issue #31 added minimum-nominal-power";
     reference
-      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
 
   /*
