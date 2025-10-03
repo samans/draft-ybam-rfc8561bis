@@ -47,8 +47,8 @@ module ietf-microwave-radio-link {
      nodes for management of the interface protection
      functionality is broken out into a separate and generic
      YANG data model in order to make it available for other
-     interface types as well. This is a YANG module for the entities in
-     a generic microwave system.
+     interface types as well. This is a YANG module for the
+     entities in a generic microwave system.
 
 
      Copyright (c) 2025 IETF Trust and the persons identified as

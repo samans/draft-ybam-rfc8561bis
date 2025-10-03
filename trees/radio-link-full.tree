@@ -112,7 +112,6 @@ module: ietf-interfaces
   |     |  +--ro mrl:available-min-acm?         identityref
   |     |  +--ro mrl:available-max-acm?         identityref
   |     |  +--ro mrl:acm-profile-list*
-  |     |          [profile-channel-separation-id profile-coding-modulation-id]
   |     |     +--ro mrl:profile-channel-separation-id      uint32
   |     |     +--ro mrl:profile-coding-modulation-id
   |     |     |       identityref
