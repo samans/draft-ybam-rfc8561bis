@@ -18,11 +18,11 @@ nodes for management of the interface protection functionality is
 broken out into a separate and generic YANG data model in order to
 make it available for other interface types as well. This document obsoletes RFC 8561. 
     " name="description">
-<meta content="xml2rfc 3.30.1" name="generator">
+<meta content="xml2rfc 3.30.2" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ybam-rfc8561bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.1
+  xml2rfc 3.30.2
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -34,7 +34,7 @@ make it available for other interface types as well. This document obsoletes RFC
     PyYAML 6.0.2
     requests 2.32.5
     setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ybam-rfc8561bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1053,11 +1053,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Microwave Radio Link YANG</td>
-<td class="right">September 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Mansfield, et al.</td>
-<td class="center">Expires 15 March 2026</td>
+<td class="center">Expires 6 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1073,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc8561" class="eref">8561</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-11" class="published">11 September 2025</time>
+<time datetime="2025-10-03" class="published">3 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-15">15 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-06">6 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1148,7 +1148,7 @@ make it available for other interface types as well. This document obsoletes RFC
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1573,7 +1573,7 @@ and therefore are not applicable for RLT and CT.<a href="#section-1.5-3" class="
 and <span>[<a href="#RFC7224" class="cite xref">RFC7224</a>]</span>, and it references <span>[<a href="#TR102311" class="cite xref">TR102311</a>]</span>, <span>[<a href="#EN302217-1" class="cite xref">EN302217-1</a>]</span>,
 <span>[<a href="#EN301129" class="cite xref">EN301129</a>]</span>, and <span>[<a href="#G.826" class="cite xref">G.826</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-2-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-radio-link@2025-04-04.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-radio-link@2025-10-03.yang"
 
 module ietf-microwave-radio-link {
   yang-version 1.1;
@@ -1617,8 +1617,16 @@ module ietf-microwave-radio-link {
       Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
       Danilo Pala (danilo.pala@siaemic.com)";
   description
-    "This is a module for the entities in
-     a generic microwave system.
+    "This YANG module defines a YANG data model for control
+     and management of radio link interfaces and their
+     connectivity to packet (typically Ethernet) interfaces
+     in a microwave/millimeter wave node. The data
+     nodes for management of the interface protection
+     functionality is broken out into a separate and generic
+     YANG data model in order to make it available for other
+     interface types as well. This is a YANG module for the
+     entities in a generic microwave system.
+
 
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -1630,13 +1638,20 @@ module ietf-microwave-radio-link {
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC XXXX;
+     This version of this YANG module is part of RFC 8561bis;
      see the RFC itself for full legal notices.";
 
-  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // RFC Ed.: replace 8561bis with actual RFC number and remove
   // this note
   // replace the revision date with the module publication date
   // the format is (year-month-day)
+
+  revision 2025-10-03 {
+    description
+      "Draft - Issue #44 Copyright statement Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
 
   revision 2025-04-04 {
     description
@@ -1644,7 +1659,7 @@ module ietf-microwave-radio-link {
                Issue #35 grouping common-microwave-properties,
                Issue #31 added minimum-nominal-power";
     reference
-      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
 
   /*
@@ -2710,7 +2725,7 @@ available for other interface types.<a href="#section-3-1" class="pilcrow">¶</a
 <p id="section-3-2">This module imports modules from <span>[<a href="#RFC8343" class="cite xref">RFC8343</a>]</span>, and it references
 <span>[<a href="#G.808.1" class="cite xref">G.808.1</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-3-3">
-<pre>&lt;CODE BEGINS&gt; file "ietf-interface-protection@2024-03-03.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-interface-protection@2025-10-03.yang"
 
 module ietf-interface-protection {
   yang-version 1.1;
@@ -2735,38 +2750,44 @@ module ietf-interface-protection {
       Daniela Spreafico (daniela.spreafico@nokia.com)
       Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
   description
-    "This is a module for the entities in
+    "This is a YANG module for the entities in
      a generic interface protection mechanism.
 
-     Copyright (c) 2024 IETF Trust and the persons identified as
+     Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
      without modification, is permitted pursuant to, and subject
-     to the license terms contained in, the Simplified BSD License
+     to the license terms contained in, the Revised BSD License
      set forth in Section 4.c of the IETF Trust's Legal Provisions
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC XXXX; see
-     the RFC itself for full legal notices.";
+     This version of this YANG module is part of RFC 8561bis; see the
+     RFC itself for full legal notices.";
 
-  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // RFC Ed.: replace 8561bis with actual RFC number and remove
   // this note
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
+  revision 2025-10-03 {
+    description
+      "Draft - Issue #44 Copyright statement Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
   revision 2024-03-03 {
     description
       "Updating reference to RFC XXXX. - pretty printing";
     reference
-      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
   revision 2020-10-06 {
     description
       "Updating reference to RFC XXXX.";
     reference
-      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
   revision 2019-06-19 {
     description
@@ -3011,7 +3032,7 @@ module ietf-interface-protection {
 data modeling language.  These common types are designed to be
 imported by other modules defined in the microwave area.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-4-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-types@2025-04-04.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-types@2025-10-03.yang"
 
 module ietf-microwave-types {
   yang-version 1.1;
@@ -3031,8 +3052,8 @@ module ietf-microwave-types {
       Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
       Danilo Pala (danilo.pala@siaemic.com)";
   description
-    "This module contains a collection of YANG data types
-     considered generally useful for microwave interfaces.
+    "This is a YANG module for the entities in
+     a generic interface protection mechanism.
 
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -3044,19 +3065,25 @@ module ietf-microwave-types {
      Relating to IETF Documents
      (http://trustee.ietf.org/license-info).
 
-     This version of this YANG module is part of RFC 8561; see
-     the RFC itself for full legal notices.";
+     This version of this YANG module is part of RFC 8561bis;
+     see the RFC itself for full legal notices.";
 
-  // RFC Ed.: replace XXXX with actual RFC number and remove
+  // RFC Ed.: replace 8561bis with actual RFC number and remove
   // this note
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
+  revision 2025-10-03 {
+    description
+      "Draft - Issue #44 Copyright statement Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
   revision 2025-04-04 {
     description
       "Draft - Comression #32, new grouping Issue #35";
     reference
-      "RFC XXX: A YANG Data Model for Microwave Radio Link";
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
 
   /*
@@ -3744,20 +3771,32 @@ protection switch.<a href="#section-5-22" class="pilcrow">¶</a></p>
   "ietf-interfaces:interfaces": {
     "interface": [
       {
-        "name": "RLT-A",
+        "name": "example:RLT-A",
         "description": "Radio Link Terminal A",
         "type": "iana-if-type:microwaveRadioLinkTerminal",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
         "ietf-microwave-radio-link:mode":
            "ietf-microwave-types:one-plus-zero",
         "ietf-microwave-radio-link:carrier-terminations": [
-          "RLT-A:CT-1"
+          "example:RLT-A:CT-1"
         ]
       },
       {
-        "name": "RLT-A:CT-1",
+        "name": "example:RLT-A:CT-1",
         "description": "Carrier Termination 1",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "A",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:A",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10728000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -3826,21 +3865,33 @@ node.<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
   "ietf-interfaces:interfaces": {
     "interface": [
       {
-        "name": "RLT-A",
+        "name": "example:RLT-A",
         "description": "Radio Link Terminal A",
         "type": "iana-if-type:microwaveRadioLinkTerminal",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
         "ietf-microwave-radio-link:mode":
           "ietf-microwave-types:two-plus-zero",
         "ietf-microwave-radio-link:carrier-terminations": [
-          "RLT-A:CT-1",
-          "RLT-A:CT-2"
+          "example:RLT-A:CT-1",
+          "example:RLT-A:CT-2"
         ]
       },
       {
-        "name": "RLT-A:CT-1",
+        "name": "example:RLT-A:CT-1",
         "description": "Carrier Termination 1",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "A",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 2,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:A",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10728000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -3854,10 +3905,16 @@ node.<a href="#appendix-B.2-3" class="pilcrow">¶</a></p>
         }
       },
       {
-        "name": "RLT-A:CT-2",
+        "name": "example:RLT-A:CT-2",
         "description": "Carrier Termination 2",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "B",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 3,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:B",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10618000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -3890,24 +3947,36 @@ node.<a href="#appendix-B.3-1" class="pilcrow">¶</a></p>
   "ietf-interfaces:interfaces": {
     "interface": [
       {
-        "name": "RLT-A",
+        "name": "example:RLT-A",
         "description": "Radio Link Terminal A",
         "type": "iana-if-type:microwaveRadioLinkTerminal",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 1,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
         "ietf-microwave-radio-link:mode":
            "ietf-microwave-types:two-plus-zero",
         "ietf-microwave-radio-link:carrier-terminations": [
-          "RLT-A:CT-1",
-          "RLT-A:CT-2"
+          "example:RLT-A:CT-1",
+          "example:RLT-A:CT-2"
         ],
         "ietf-microwave-radio-link:xpic-pairs": [
           "xpic-pair1"
         ]
       },
       {
-        "name": "RLT-A:CT-1",
+        "name": "example:RLT-A:CT-1",
         "description": "Carrier Termination 1",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "A",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 2,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:A",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10728000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -3921,10 +3990,16 @@ node.<a href="#appendix-B.3-1" class="pilcrow">¶</a></p>
         }
       },
       {
-        "name": "RLT-A:CT-2",
+        "name": "example:RLT-A:CT-2",
         "description": "Carrier Termination 2",
         "type": "iana-if-type:microwaveCarrierTermination",
-        "ietf-microwave-radio-link:carrier-id": "B",
+        "admin-status": "up",
+        "oper-status": "up",
+        "if-index": 3,
+        "statistics": {
+           "discontinuity-time": "2024-02-21T18:59:00-05:00"
+        },
+        "ietf-microwave-radio-link:carrier-id": "example:B",
         "ietf-microwave-radio-link:tx-enabled": true,
         "ietf-microwave-radio-link:tx-frequency": 10618000,
         "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -3944,8 +4019,8 @@ node.<a href="#appendix-B.3-1" class="pilcrow">¶</a></p>
       {
         "name": "xpic-pair1",
         "members": [
-          "RLT-A:CT-1",
-          "RLT-A:CT-2"
+          "example:RLT-A:CT-1",
+          "example:RLT-A:CT-2"
         ]
       }
     ]

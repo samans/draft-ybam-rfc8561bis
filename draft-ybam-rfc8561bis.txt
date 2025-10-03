@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 15 March 2026                                             M. Ye
+Expires: 6 April 2026                                              M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                       11 September 2025
+                                                          3 October 2025
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2026.
+   This Internet-Draft will expire on 6 April 2026.
 
 Copyright Notice
 
@@ -382,7 +382,7 @@ module: ietf-microwave-radio-link
    and [RFC7224], and it references [TR102311], [EN302217-1],
    [EN301129], and [G.826].
 
-   <CODE BEGINS> file "ietf-microwave-radio-link@2025-04-04.yang"
+   <CODE BEGINS> file "ietf-microwave-radio-link@2025-10-03.yang"
    module ietf-microwave-radio-link {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-microwave-radio-link";
@@ -425,8 +425,16 @@ module: ietf-microwave-radio-link
          Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
          Danilo Pala (danilo.pala@siaemic.com)";
      description
-       "This is a module for the entities in
-        a generic microwave system.
+       "This YANG module defines a YANG data model for control
+        and management of radio link interfaces and their
+        connectivity to packet (typically Ethernet) interfaces
+        in a microwave/millimeter wave node. The data
+        nodes for management of the interface protection
+        functionality is broken out into a separate and generic
+        YANG data model in order to make it available for other
+        interface types as well. This is a YANG module for the
+        entities in a generic microwave system.
+
 
         Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
@@ -438,13 +446,20 @@ module: ietf-microwave-radio-link
         Relating to IETF Documents
         (http://trustee.ietf.org/license-info).
 
-        This version of this YANG module is part of RFC XXXX;
+        This version of this YANG module is part of RFC 8561bis;
         see the RFC itself for full legal notices.";
 
-     // RFC Ed.: replace XXXX with actual RFC number and remove
+     // RFC Ed.: replace 8561bis with actual RFC number and remove
      // this note
      // replace the revision date with the module publication date
      // the format is (year-month-day)
+
+     revision 2025-10-03 {
+       description
+         "Draft - Issue #44 Copyright statement Issue";
+       reference
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+     }
 
      revision 2025-04-04 {
        description
@@ -452,7 +467,7 @@ module: ietf-microwave-radio-link
                   Issue #35 grouping common-microwave-properties,
                   Issue #31 added minimum-nominal-power";
        reference
-         "RFC XXX: A YANG Data Model for Microwave Radio Link";
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
 
      /*
@@ -1513,7 +1528,7 @@ module: ietf-microwave-radio-link
    This module imports modules from [RFC8343], and it references
    [G.808.1].
 
-   <CODE BEGINS> file "ietf-interface-protection@2024-03-03.yang"
+   <CODE BEGINS> file "ietf-interface-protection@2025-10-03.yang"
    module ietf-interface-protection {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-interface-protection";
@@ -1537,38 +1552,44 @@ module: ietf-microwave-radio-link
          Daniela Spreafico (daniela.spreafico@nokia.com)
          Marko Vaupotic (Marko.Vaupotic@aviatnet.com)";
      description
-       "This is a module for the entities in
+       "This is a YANG module for the entities in
         a generic interface protection mechanism.
 
-        Copyright (c) 2024 IETF Trust and the persons identified as
+        Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
         without modification, is permitted pursuant to, and subject
-        to the license terms contained in, the Simplified BSD License
+        to the license terms contained in, the Revised BSD License
         set forth in Section 4.c of the IETF Trust's Legal Provisions
         Relating to IETF Documents
         (http://trustee.ietf.org/license-info).
 
-        This version of this YANG module is part of RFC XXXX; see
-        the RFC itself for full legal notices.";
+        This version of this YANG module is part of RFC 8561bis; see the
+        RFC itself for full legal notices.";
 
-     // RFC Ed.: replace XXXX with actual RFC number and remove
+     // RFC Ed.: replace 8561bis with actual RFC number and remove
      // this note
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
+     revision 2025-10-03 {
+       description
+         "Draft - Issue #44 Copyright statement Issue";
+       reference
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+     }
      revision 2024-03-03 {
        description
          "Updating reference to RFC XXXX. - pretty printing";
        reference
-         "RFC XXX: A YANG Data Model for Microwave Radio Link";
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
      revision 2020-10-06 {
        description
          "Updating reference to RFC XXXX.";
        reference
-         "RFC XXX: A YANG Data Model for Microwave Radio Link";
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
      revision 2019-06-19 {
        description
@@ -1807,7 +1828,7 @@ module: ietf-microwave-radio-link
    data modeling language.  These common types are designed to be
    imported by other modules defined in the microwave area.
 
-   <CODE BEGINS> file "ietf-microwave-types@2025-04-04.yang"
+   <CODE BEGINS> file "ietf-microwave-types@2025-10-03.yang"
    module ietf-microwave-types {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-microwave-types";
@@ -1826,8 +1847,8 @@ module: ietf-microwave-radio-link
          Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
          Danilo Pala (danilo.pala@siaemic.com)";
      description
-       "This module contains a collection of YANG data types
-        considered generally useful for microwave interfaces.
+       "This is a YANG module for the entities in
+        a generic interface protection mechanism.
 
         Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
@@ -1839,19 +1860,25 @@ module: ietf-microwave-radio-link
         Relating to IETF Documents
         (http://trustee.ietf.org/license-info).
 
-        This version of this YANG module is part of RFC 8561; see
-        the RFC itself for full legal notices.";
+        This version of this YANG module is part of RFC 8561bis;
+        see the RFC itself for full legal notices.";
 
-     // RFC Ed.: replace XXXX with actual RFC number and remove
+     // RFC Ed.: replace 8561bis with actual RFC number and remove
      // this note
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
+     revision 2025-10-03 {
+       description
+         "Draft - Issue #44 Copyright statement Issue";
+       reference
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+     }
      revision 2025-04-04 {
        description
          "Draft - Comression #32, new grouping Issue #35";
        reference
-         "RFC XXX: A YANG Data Model for Microwave Radio Link";
+         "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
 
      /*
@@ -2511,20 +2538,32 @@ B.1.  1+0 Instance
      "ietf-interfaces:interfaces": {
        "interface": [
          {
-           "name": "RLT-A",
+           "name": "example:RLT-A",
            "description": "Radio Link Terminal A",
            "type": "iana-if-type:microwaveRadioLinkTerminal",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 1,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
            "ietf-microwave-radio-link:mode":
               "ietf-microwave-types:one-plus-zero",
            "ietf-microwave-radio-link:carrier-terminations": [
-             "RLT-A:CT-1"
+             "example:RLT-A:CT-1"
            ]
          },
          {
-           "name": "RLT-A:CT-1",
+           "name": "example:RLT-A:CT-1",
            "description": "Carrier Termination 1",
            "type": "iana-if-type:microwaveCarrierTermination",
-           "ietf-microwave-radio-link:carrier-id": "A",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 1,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
+           "ietf-microwave-radio-link:carrier-id": "example:A",
            "ietf-microwave-radio-link:tx-enabled": true,
            "ietf-microwave-radio-link:tx-frequency": 10728000,
            "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -2580,21 +2619,33 @@ B.2.  2+0 Instance
      "ietf-interfaces:interfaces": {
        "interface": [
          {
-           "name": "RLT-A",
+           "name": "example:RLT-A",
            "description": "Radio Link Terminal A",
            "type": "iana-if-type:microwaveRadioLinkTerminal",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 1,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
            "ietf-microwave-radio-link:mode":
              "ietf-microwave-types:two-plus-zero",
            "ietf-microwave-radio-link:carrier-terminations": [
-             "RLT-A:CT-1",
-             "RLT-A:CT-2"
+             "example:RLT-A:CT-1",
+             "example:RLT-A:CT-2"
            ]
          },
          {
-           "name": "RLT-A:CT-1",
+           "name": "example:RLT-A:CT-1",
            "description": "Carrier Termination 1",
            "type": "iana-if-type:microwaveCarrierTermination",
-           "ietf-microwave-radio-link:carrier-id": "A",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 2,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
+           "ietf-microwave-radio-link:carrier-id": "example:A",
            "ietf-microwave-radio-link:tx-enabled": true,
            "ietf-microwave-radio-link:tx-frequency": 10728000,
            "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -2608,10 +2659,16 @@ B.2.  2+0 Instance
            }
          },
          {
-           "name": "RLT-A:CT-2",
+           "name": "example:RLT-A:CT-2",
            "description": "Carrier Termination 2",
            "type": "iana-if-type:microwaveCarrierTermination",
-           "ietf-microwave-radio-link:carrier-id": "B",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 3,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
+           "ietf-microwave-radio-link:carrier-id": "example:B",
            "ietf-microwave-radio-link:tx-enabled": true,
            "ietf-microwave-radio-link:tx-frequency": 10618000,
            "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -2637,24 +2694,36 @@ B.3.  2+0 XPIC Instance
      "ietf-interfaces:interfaces": {
        "interface": [
          {
-           "name": "RLT-A",
+           "name": "example:RLT-A",
            "description": "Radio Link Terminal A",
            "type": "iana-if-type:microwaveRadioLinkTerminal",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 1,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
            "ietf-microwave-radio-link:mode":
               "ietf-microwave-types:two-plus-zero",
            "ietf-microwave-radio-link:carrier-terminations": [
-             "RLT-A:CT-1",
-             "RLT-A:CT-2"
+             "example:RLT-A:CT-1",
+             "example:RLT-A:CT-2"
            ],
            "ietf-microwave-radio-link:xpic-pairs": [
              "xpic-pair1"
            ]
          },
          {
-           "name": "RLT-A:CT-1",
+           "name": "example:RLT-A:CT-1",
            "description": "Carrier Termination 1",
            "type": "iana-if-type:microwaveCarrierTermination",
-           "ietf-microwave-radio-link:carrier-id": "A",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 2,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
+           "ietf-microwave-radio-link:carrier-id": "example:A",
            "ietf-microwave-radio-link:tx-enabled": true,
            "ietf-microwave-radio-link:tx-frequency": 10728000,
            "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -2668,10 +2737,16 @@ B.3.  2+0 XPIC Instance
            }
          },
          {
-           "name": "RLT-A:CT-2",
+           "name": "example:RLT-A:CT-2",
            "description": "Carrier Termination 2",
            "type": "iana-if-type:microwaveCarrierTermination",
-           "ietf-microwave-radio-link:carrier-id": "B",
+           "admin-status": "up",
+           "oper-status": "up",
+           "if-index": 3,
+           "statistics": {
+              "discontinuity-time": "2024-02-21T18:59:00-05:00"
+           },
+           "ietf-microwave-radio-link:carrier-id": "example:B",
            "ietf-microwave-radio-link:tx-enabled": true,
            "ietf-microwave-radio-link:tx-frequency": 10618000,
            "ietf-microwave-radio-link:duplex-distance": 644000,
@@ -2691,8 +2766,8 @@ B.3.  2+0 XPIC Instance
          {
            "name": "xpic-pair1",
            "members": [
-             "RLT-A:CT-1",
-             "RLT-A:CT-2"
+             "example:RLT-A:CT-1",
+             "example:RLT-A:CT-2"
            ]
          }
        ]
