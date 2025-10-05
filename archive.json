@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-05T02:26:41.140964+00:00",
+  "timestamp": "2025-10-05T02:02:33.982995+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1015,7 +1015,7 @@
       "id": "I_kwDOHLTwws5vJEH3",
       "title": "Add 'scope' to the yang description.",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1026,8 +1026,8 @@
       ],
       "body": "Currently the yang module has the following description. \r\n\r\n  description\r\n    \"This is a module for the entities in\r\n     a generic microwave system.\r\n\r\nBased on the discussion from 2023-08-17 (https://github.com/samans/draft-ybam-rfc8561bis/blob/main/minutes/2023-08-17.md) we may want to add a kind of 'scope' to the description. \r\n\r\nProposal for discussion:\r\n\r\n  description\r\n    \"This module pertains to the components within a microwave system ([sko] network function ??). \r\n      Its purpose is to establish the specific configurations associated with radio links. \r\n     Configurations that concern the management of faults, performance, security, synchronization, \r\n     as well as packet and Ethernet management within a microwave system ([sko] network function ??), \r\n     are encompassed by distinct yang modules.\"\r\n\r\n",
       "createdAt": "2023-08-24T08:16:07Z",
-      "updatedAt": "2025-05-15T09:22:22Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-03T15:11:25Z",
+      "closedAt": "2025-10-03T15:11:25Z",
       "comments": [
         {
           "author": "samans",
@@ -1035,6 +1035,13 @@
           "body": "Align the YANG module description with the Abstract from RFC 8561 (as modified by the contributors based on the gap analysis).\r\n\r\nCurrently the wording would be...\r\nThis YANG module defines a YANG data model for control and management of\r\n   radio link interfaces and their connectivity to packet (typically\r\n   Ethernet) interfaces in a microwave/millimeter wave node.  The data\r\n   nodes for management of the interface protection functionality is\r\n   broken out into a separate and generic YANG data model in order to\r\n   make it available for other interface types as well.\r\n",
           "createdAt": "2023-08-24T09:27:34Z",
           "updatedAt": "2023-08-24T09:27:34Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Updated ietf-microwave-radio-link.yang with the suggested text for discussion.\n2025-10-03 version.",
+          "createdAt": "2025-10-03T15:11:25Z",
+          "updatedAt": "2025-10-03T15:11:25Z"
         }
       ]
     },
@@ -2001,7 +2008,7 @@
       "id": "I_kwDOHLTwws6YzWyp",
       "title": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/37",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -2012,8 +2019,8 @@
       ],
       "body": "Follow RFC8407bis guidelines for JSON examples (uri and ip address examples)",
       "createdAt": "2024-10-03T09:49:10Z",
-      "updatedAt": "2025-04-24T09:21:01Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-03T15:07:55Z",
+      "closedAt": "2025-10-03T15:07:54Z",
       "comments": [
         {
           "author": "samans",
@@ -2021,6 +2028,13 @@
           "body": "I will fix this when we move to working group adoption",
           "createdAt": "2025-04-04T10:18:41Z",
           "updatedAt": "2025-04-04T10:18:41Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Added example: to ids and names, fixed the json so it will validate using yanglint.\nIn the 2025-10-03 version.",
+          "createdAt": "2025-10-03T15:07:55Z",
+          "updatedAt": "2025-10-03T15:07:55Z"
         }
       ]
     },
@@ -2135,7 +2149,7 @@
       "id": "I_kwDOHLTwws6pCxvR",
       "title": "Pyang reports warnings about the IETF Trust Copyright statement.",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/44",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "niloda",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2146,8 +2160,8 @@
       ],
       "body": "By compiling modules with pyang (version 2.1 - not exactly the latest available) the following warning are shown:\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-radio-link.yang -o ./ietf-microwave-radio-link.tree\nietf-microwave-radio-link.yang:57: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n\npyang --format=tree --strict --ietf --max-line-length 69 --tree-line-length=69 -p . ./ietf-microwave-types.yang -o ./ietf-microwave-types.tree\nietf-microwave-types.yang:33: **warning: RFC 8407: 3.1: The IETF Trust Copyright statement seems to be missing (see pyang --ietf-help for details).**\n",
       "createdAt": "2025-02-06T16:50:44Z",
-      "updatedAt": "2025-04-24T09:20:50Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-03T14:23:36Z",
+      "closedAt": "2025-10-03T14:23:36Z",
       "comments": [
         {
           "author": "samans",
@@ -2155,6 +2169,13 @@
           "body": "This is on the yang file that hasn't changed since 2024.  I will fix this when we move to working group adoption.",
           "createdAt": "2025-04-04T10:17:34Z",
           "updatedAt": "2025-04-04T10:17:34Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Updated in 2025-10-03 Version.",
+          "createdAt": "2025-10-03T14:23:36Z",
+          "updatedAt": "2025-10-03T14:23:36Z"
         }
       ]
     },
