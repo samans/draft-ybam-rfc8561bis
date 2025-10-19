@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-05T02:02:33.982995+00:00",
+  "timestamp": "2025-10-19T02:08:07.786852+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2270,6 +2270,22 @@
           "updatedAt": "2025-06-19T09:26:34Z"
         }
       ]
+    },
+    {
+      "number": 49,
+      "id": "I_kwDOHLTwws7R33k8",
+      "title": "New Coding Modulation value to cover new modulation value.",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/49",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "On _ietf-microwave-type_ module a new IDENTITY based on coding-modulation IDENTITY is needed to cover the 1/4 bpsk modulation case. ",
+      "createdAt": "2025-10-16T09:34:36Z",
+      "updatedAt": "2025-10-16T09:34:36Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
