@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T02:08:07.786852+00:00",
+  "timestamp": "2025-11-02T02:06:53.954004+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2283,9 +2283,17 @@
       "labels": [],
       "body": "On _ietf-microwave-type_ module a new IDENTITY based on coding-modulation IDENTITY is needed to cover the 1/4 bpsk modulation case. ",
       "createdAt": "2025-10-16T09:34:36Z",
-      "updatedAt": "2025-10-16T09:34:36Z",
+      "updatedAt": "2025-10-31T07:31:37Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Is 1/4 BPSK the new modulation or 1/4 QPSK?",
+          "createdAt": "2025-10-31T07:31:37Z",
+          "updatedAt": "2025-10-31T07:31:37Z"
+        }
+      ]
     }
   ],
   "pulls": [
