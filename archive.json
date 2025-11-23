@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-02T02:06:53.954004+00:00",
+  "timestamp": "2025-11-23T02:22:26.544302+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1699,7 +1699,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2025-06-19T09:18:03Z",
+      "updatedAt": "2025-11-20T10:26:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -1736,6 +1736,13 @@
           "body": "Italo contacting the authors of [draft-ietf-netmod-schedule-yang-07](https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang/), to understand how the scheduling process impacts the datastores when using NMDA. ",
           "createdAt": "2025-06-19T09:18:03Z",
           "updatedAt": "2025-06-19T09:18:03Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "The schedule draft is now at version -10.  The link to datatracker: https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang/\n",
+          "createdAt": "2025-11-20T10:26:45Z",
+          "updatedAt": "2025-11-20T10:26:45Z"
         }
       ]
     },
@@ -2279,11 +2286,13 @@
       "state": "OPEN",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "DanielaSpreafico"
+      ],
       "labels": [],
       "body": "On _ietf-microwave-type_ module a new IDENTITY based on coding-modulation IDENTITY is needed to cover the 1/4 bpsk modulation case. ",
       "createdAt": "2025-10-16T09:34:36Z",
-      "updatedAt": "2025-10-31T07:31:37Z",
+      "updatedAt": "2025-11-20T10:25:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -2294,6 +2303,27 @@
           "updatedAt": "2025-10-31T07:31:37Z"
         }
       ]
+    },
+    {
+      "number": 50,
+      "id": "I_kwDOHLTwws7ZW3Jb",
+      "title": "Rename draft name to target it to CCAMP WG",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/50",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "samans",
+        "italobusi"
+      ],
+      "labels": [
+        "agreed"
+      ],
+      "body": "Rename the draft as draft-ybam-cccamp-rfc8561bis-00 in the next update",
+      "createdAt": "2025-11-20T10:41:27Z",
+      "updatedAt": "2025-11-20T10:44:48Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
