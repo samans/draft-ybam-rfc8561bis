@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-23T02:22:26.544302+00:00",
+  "timestamp": "2025-12-11T02:10:24.364051+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1360,7 +1360,7 @@
       ],
       "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2023-11-30T09:55:44Z",
-      "updatedAt": "2025-03-18T14:36:49Z",
+      "updatedAt": "2025-12-10T14:07:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -1439,6 +1439,13 @@
           "body": "The proposal is to add the following on module ietf-microwave-radio-link:\n\nfor /if:interfaces/if:interface/if:type = ianaift:microwaveRadioLinkTerminal\n\naugment /if:interfaces/if:interface:\n       +--rw id-enabled?         boolean\n       +--rw expected-id?        string\n\nfor /if:interfaces/if:interface/if:type = ianaift:microwaveCarrierTermination\n\naugment /if:interfaces/if:interface:\n       +--rw carrier-id-enabled?         boolean\n       +--rw expected-carrier-id?        string\n\nAnd also changing the Description statement of /if:interfaces/if:interface/mrl:carrier-id attribute as in the following:\nfrom\n      \"ID of the near-end carrier (e.g., A, B, C, or D).\n         Used in XPIC and MIMO configurations to check that\n         the carrier termination is connected to the correct\n         far-end carrier termination.  **Should be the same\n         carrier ID on both sides of the hop.**  Left as\n         default value when MIMO and XPIC are not in use.\";\nto\n        \"ID of the near-end carrier (e.g., A, B, C, or D).\n         Used in XPIC and MIMO configurations (**or in RLT configurations \n         with more one CT)** to check that the carrier termination is \n         connected to the correct far-end carrier termination. \n         Left as default value when not used.\n",
           "createdAt": "2025-03-18T13:43:27Z",
           "updatedAt": "2025-03-18T14:36:48Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I would like to suggest the following adaptation of Daniela's proposal above.\nI think adding far-end to the name of the leafs would make it more clear.\n\nfor /if:interfaces/if:interface/if:type = ianaift:microwaveRadioLinkTerminal\naugment /if:interfaces/if:interface:\n+--rw far-end-id-check-enabled? boolean\n+--rw expected-far-end-id? string\n\nfor /if:interfaces/if:interface/if:type = ianaift:microwaveCarrierTermination\naugment /if:interfaces/if:interface:\n+--rw far-end-id-check-enabled? boolean\n+--rw expected-far-end-id? string\n\nI also think that the description for carrier-id could be made shorter, I'm not sure that the part with RLT is needed, even if it could be used in that way.\n\"ID of the near-end carrier (e.g., A, B, C, or D).\nCan be used in XPIC and MIMO configurations to check that\nthe carrier termination is connected to the correct\nfar-end carrier termination.\"\n\n\n",
+          "createdAt": "2025-12-10T14:07:58Z",
+          "updatedAt": "2025-12-10T14:07:58Z"
         }
       ]
     },
@@ -1460,7 +1467,7 @@
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2025-06-26T09:13:56Z",
+      "updatedAt": "2025-12-10T13:56:48Z",
       "closedAt": null,
       "comments": [
         {
@@ -1490,6 +1497,13 @@
           "body": "My proposal is to use the receiver attributes (grouping receiver) in a list to allow 2 receivers (Rx main and Rx diversity) on the same CT ('microwaveCarrierTermination' interface).",
           "createdAt": "2024-02-15T09:28:56Z",
           "updatedAt": "2024-02-15T09:28:56Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm still struggling to understand the use-case related to enable the receiver function in a CT.\nDaniela's suggestion looks like a construct for supporting space diversity combiner (SDC). There we have a use-case with multiple receivers that need to be managed. But that would require a wider discussion than just adding a list of receivers.",
+          "createdAt": "2025-12-10T13:56:48Z",
+          "updatedAt": "2025-12-10T13:56:48Z"
         }
       ]
     },
@@ -2235,7 +2249,7 @@
       ],
       "body": "See: [XPIC.Proposal._v00.pptx](https://github.com/user-attachments/files/19108182/XPIC.Proposal._v00.pptx)",
       "createdAt": "2025-03-06T12:24:35Z",
-      "updatedAt": "2025-03-13T10:44:18Z",
+      "updatedAt": "2025-12-10T14:12:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -2251,6 +2265,13 @@
           "body": "**2025-03-13 Call**\n\nThe string can be useful in implementations where the link used is not managed as an interface (according to RFC8343)\n\nIn case the link is managed as an interface, the string can report the interface name.\n",
           "createdAt": "2025-03-13T10:43:27Z",
           "updatedAt": "2025-03-13T10:43:27Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with the concept, but would like to suggest another name of the leaf. I think \"twin\" is a bit misleading.\n\n+--rw member-in-external-ne? string\n",
+          "createdAt": "2025-12-10T14:12:41Z",
+          "updatedAt": "2025-12-10T14:12:41Z"
         }
       ]
     },
