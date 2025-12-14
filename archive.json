@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-11T02:10:24.364051+00:00",
+  "timestamp": "2025-12-14T02:22:27.388628+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1467,7 +1467,7 @@
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2025-12-10T13:56:48Z",
+      "updatedAt": "2025-12-11T10:26:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -1504,6 +1504,13 @@
           "body": "I'm still struggling to understand the use-case related to enable the receiver function in a CT.\nDaniela's suggestion looks like a construct for supporting space diversity combiner (SDC). There we have a use-case with multiple receivers that need to be managed. But that would require a wider discussion than just adding a list of receivers.",
           "createdAt": "2025-12-10T13:56:48Z",
           "updatedAt": "2025-12-10T13:56:48Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On the meeting Dec 11 we concluded that the use case is about the ability to manage multiple receivers (transmitters?) in an SDC configuration.\nSince SDC might have a larger impact on the model than just adding the possibility to enable different receivers individually, there is a need to broaden the discussion and look at the definition of what a CT is, other leafs that might need to be duplicated for each receiver, etc. It was agreed that we proceed with additional input as comments and and discussions on the coming weekly meetings.",
+          "createdAt": "2025-12-11T10:26:03Z",
+          "updatedAt": "2025-12-11T10:26:03Z"
         }
       ]
     },
