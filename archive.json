@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-14T02:22:27.388628+00:00",
+  "timestamp": "2025-12-21T02:22:28.362244+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2317,10 +2317,12 @@
       "assignees": [
         "DanielaSpreafico"
       ],
-      "labels": [],
+      "labels": [
+        "update yang"
+      ],
       "body": "On _ietf-microwave-type_ module a new IDENTITY based on coding-modulation IDENTITY is needed to cover the 1/4 bpsk modulation case. ",
       "createdAt": "2025-10-16T09:34:36Z",
-      "updatedAt": "2025-11-20T10:25:09Z",
+      "updatedAt": "2025-12-18T10:16:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -2349,9 +2351,17 @@
       ],
       "body": "Rename the draft as draft-ybam-cccamp-rfc8561bis-00 in the next update",
       "createdAt": "2025-11-20T10:41:27Z",
-      "updatedAt": "2025-11-20T10:44:48Z",
+      "updatedAt": "2025-12-18T10:18:40Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "draft-ybam-ccamp-rfc8561bis-00",
+          "createdAt": "2025-12-18T10:18:40Z",
+          "updatedAt": "2025-12-18T10:18:40Z"
+        }
+      ]
     }
   ],
   "pulls": [
