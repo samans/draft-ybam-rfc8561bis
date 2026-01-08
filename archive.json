@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-21T02:22:28.362244+00:00",
+  "timestamp": "2026-01-08T02:19:50.166383+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2362,6 +2362,22 @@
           "updatedAt": "2025-12-18T10:18:40Z"
         }
       ]
+    },
+    {
+      "number": 51,
+      "id": "I_kwDOHLTwws7h5HWh",
+      "title": "Updating Danilo mail address",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/51",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "New mail address: danilo.pala@alice.it\n",
+      "createdAt": "2026-01-07T18:24:00Z",
+      "updatedAt": "2026-01-07T18:24:00Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
