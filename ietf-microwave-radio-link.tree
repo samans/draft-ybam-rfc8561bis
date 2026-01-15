@@ -1,6 +1,13 @@
 module: ietf-microwave-radio-link
   +--rw radio-link-protection-groups
   |  +--rw protection-group* [name]
+  |     +---x manual-switch-working
+  |     +---x manual-switch-protection
+  |     +---x forced-switch
+  |     +---x lockout-of-protection
+  |     +---x freeze
+  |     +---x exercise
+  |     +---x clear
   |     +--rw name                            string
   |     +--rw protection-architecture-type?   identityref
   |     +--rw members*                        if:interface-ref
@@ -9,13 +16,6 @@ module: ietf-microwave-radio-link
   |     +--rw revertive-wait-to-restore?      uint16
   |     +--rw hold-off-timer?                 uint16
   |     +--ro status?                         identityref
-  |     +---x manual-switch-working
-  |     +---x manual-switch-protection
-  |     +---x forced-switch
-  |     +---x lockout-of-protection
-  |     +---x freeze
-  |     +---x exercise
-  |     +---x clear
   +--rw xpic-pairs {xpic}?
   |  +--rw xpic-pair* [name]
   |     +--rw name       string
@@ -28,9 +28,9 @@ module: ietf-microwave-radio-link
         +--rw members*   if:interface-ref
 
   augment /if:interfaces/if:interface:
-    +--rw id-enabled?             boolean
     +--rw id?                     string
-    +--rw expected-id?            string
+    +--rw far-end-id-check-enabled? boolean
+    +--rw expected-far-end-id? string
     +--rw (mode-option)
     |  x--:(mode)
     |  |  x--rw mode              identityref
@@ -46,50 +46,58 @@ module: ietf-microwave-radio-link
     +--rw mimo-groups*            -> /mimo-groups/mimo-group/name
     |       {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
-       +--rw tdm-type           identityref
-       +--rw tdm-connections    uint16
+    |  +--rw tdm-type           identityref
+    |  +--rw tdm-connections    uint16
+    +--rw header-compression {header-compression}?
+       +--ro supported-profile* [name]
+       |  +--ro name           string
+       |  +--ro description?   string
+       +--rw configured-profile?   -> ../supported-profile/name
+       +--rw enabled?              boolean
+       +--ro oper-status?          enumeration
   augment /if:interfaces/if:interface:
-    +--rw carrier-id-enabled?             boolean
     +--rw carrier-id?                     string
-    +--rw expected-carrier-id?            string
+    +--rw far-end-carrier-id-check-enabled?   boolean
+    +--rw expected-far-end-carrier-id?            string
     +--rw tx-enabled?                     boolean
     +--ro tx-oper-status?                 enumeration
     +--rw tx-frequency                    uint32
+    +--ro actual-rx-frequency?            uint32
+    +--rw channel-separation              uint32
+    +--ro actual-transmitted-level?       power
+    +--ro actual-tx-cm?                   identityref
+    +--ro actual-snir?                    decimal64
     +--rw (freq-or-distance)
     |  +--:(rx-frequency)
     |  |  +--rw rx-frequency?             uint32
     |  +--:(duplex-distance)
     |     +--rw duplex-distance?          int32
-    +--ro actual-rx-frequency?            uint32
     +--ro actual-duplex-distance?         uint32
-    +--rw channel-separation              uint32
     +--rw polarization?                   enumeration
     +--rw (power-mode)
     |  +--:(rtpc)
     |  |  +--rw rtpc
-    |  |     +--rw maximum-nominal-power    power
+    |  |     +--rw maximum-nominal-power    mw-types:power
     |  +--:(atpc)
     |     +--rw atpc
-    |        +--rw maximum-nominal-power    power
-    |        +--rw atpc-lower-threshold     power
-    |        +--rw atpc-upper-threshold     power
-    +--ro actual-transmitted-level?       power
-    +--ro actual-received-level?          power
+    |        +--rw maximum-nominal-power    mw-types:power
+    |        +--rw minimum-nominal-power    mw-types:power
+    |        +--rw atpc-lower-threshold     mw-types:power
+    |        +--rw atpc-upper-threshold     mw-types:power
+    +--ro actual-received-level?          mw-types:power
     +--rw (coding-modulation-mode)
     |  +--:(single)
     |  |  +--rw single
     |  |     +--rw selected-cm    identityref
     |  +--:(adaptive)
     |     +--rw adaptive
-    |        +--rw selected-min-acm       identityref
-    |        +--rw selected-max-acm       identityref
-    |        +--rw reference-modulation   identityref
-    +--ro actual-tx-cm?                   identityref
-    +--ro actual-snir?                    decimal64
+    |        +--rw selected-min-acm        identityref
+    |        +--rw selected-max-acm        identityref
+    |        +--rw reference-modulation?   identityref
     +--ro actual-xpi?                     decimal64 {xpic}?
     +--rw ct-performance-thresholds
-    |  +--rw received-level-alarm-threshold?      power
-    |  +--rw transmitted-level-alarm-threshold?   power
+    |  +--rw received-level-alarm-threshold?      mw-types:power
+    |  +--rw transmitted-level-alarm-threshold?   mw-types:power
     |  +--rw ber-alarm-threshold?                 enumeration
     +--rw if-loop?                        enumeration
     +--rw rf-loop?                        enumeration
@@ -98,20 +106,20 @@ module: ietf-microwave-radio-link
     |  +--ro max-tx-frequency?          uint32
     |  +--ro min-rx-frequency?          uint32
     |  +--ro max-rx-frequency?          uint32
-    |  +--ro minimum-power?             power
-    |  +--ro maximum-available-power?   power
+    |  +--ro minimum-power?             mw-types:power
+    |  +--ro maximum-available-power?   mw-types:power
     |  +--ro available-min-acm?         identityref
     |  +--ro available-max-acm?         identityref
     |  +--ro acm-profile-list*
     |          [profile-channel-separation-id profile-coding-modulation-id]
-    |     +--ro profile-channel-separation-id    uint32
-    |     +--ro profile-coding-modulation-id     identityref
-    |     +--ro modulation-scheme?               uint8
-    |     +--ro nominal-tx-capacity?             uint32
-    |     +--ro support-as-fixed-modulation?     boolean
-    |     +--ro support-as-reference-modulation?     boolean
-    |     +--ro max-tx-power?                    power
-    |     +--ro min-tx-power?                    power
+    |     +--ro profile-channel-separation-id      uint32
+    |     +--ro profile-coding-modulation-id       identityref
+    |     +--ro modulation-scheme?                 uint8
+    |     +--ro nominal-tx-capacity?               uint32
+    |     +--ro support-as-fixed-modulation?       boolean
+    |     +--ro support-as-reference-modulation?   boolean
+    |     +--ro max-tx-power?                      mw-types:power
+    |     +--ro min-tx-power?                      mw-types:power
     |     +--ro lower-acm-profile-ptr
     |     |  +--ro profile-coding-modulation-id-ref?    leafref
     |     |  +--ro profile-channel-separation-id-ref?   leafref
@@ -124,7 +132,7 @@ module: ietf-microwave-radio-link
     |  +--ro ses?   yang:counter32
     |  +--ro uas?   yang:counter32
     +--ro radio-performance-statistics
-       +--ro min-rltm?   power
-       +--ro max-rltm?   power
-       +--ro min-tltm?   power
-       +--ro max-tltm?   power
+       +--ro min-rltm?   mw-types:power
+       +--ro max-rltm?   mw-types:power
+       +--ro min-tltm?   mw-types:power
+       +--ro max-tltm?   mw-types:power
