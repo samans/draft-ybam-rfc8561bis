@@ -69,9 +69,16 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
+ revision 2026-01-15 {
+    description
+      "Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
+
   revision 2025-10-03 {
     description
-      "Draft - Issue #44 Copyright statement Issue";
+      "Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
@@ -185,6 +192,21 @@ module ietf-microwave-radio-link {
          near-end RLT.  Does not need to be configured if this
          check is not used.";
     }
+    leaf far-end-id-check-enabled {
+      type boolean;
+      description
+        "'true' value when the check if far-end RLT is connected to the correct near-end RLT is used.
+         'false' if the check is not used.";
+    }
+	leaf expected-far-end-id {
+      type string;
+      description
+        "Descriptive identity of the radio link terminal expected from 
+         far-end RLT to check that it's connected to the correct
+         near-end RLT.  Does not need to be configured if this
+         check is not used.";
+    }
+	
     choice mode-option {
       mandatory true;
       description
@@ -361,12 +383,28 @@ module ietf-microwave-radio-link {
       default "A";
       description
         "ID of the carrier (e.g., A, B, C, or D).
-         Used in XPIC and MIMO configurations to check that
+         Used in XPIC and MIMO configurations (or in RLT configurations 
+         with more one CT) to check that
          the carrier termination is connected to the correct
-         far-end carrier termination.  Should be the same
-         carrier ID on both sides of the hop.  Left as
-         default value when MIMO and XPIC are not in use.";
+         far-end carrier termination.";
     }
+	leaf far-end-carrier-id-check-enabled {
+      type boolean;
+      description
+        "'true' value when the check if far-end CT is connected 
+          to the correct near-end CT is used.
+         'false' if the check is not used.";
+    }
+	leaf expected-far-end-carrier-id {
+      type string;
+      description
+        "ID of the expected far-end carrier (e.g., A, B, C, or D).
+         Used in XPIC and MIMO configurations (or in RLT configurations 
+         with more one CT) to check that the far-end carrier termination is 
+         connected to the correct near-end carrier termination. 
+         Left as default value when not used.";
+    }
+	
     leaf tx-enabled {
       type boolean;
       default "false";
