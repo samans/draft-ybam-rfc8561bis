@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-08T02:19:50.166383+00:00",
+  "timestamp": "2026-01-18T02:28:53.436162+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -102,6 +102,11 @@
       "name": "review - pull request",
       "description": "",
       "color": "CD8934"
+    },
+    {
+      "name": "Wait For Pull Request",
+      "description": null,
+      "color": "aaaaaa"
     }
   ],
   "issues": [
@@ -146,14 +151,16 @@
       "state": "OPEN",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "italobusi"
+      ],
       "labels": [
         "update yang",
         "agreed"
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2025-08-04T12:29:30Z",
+      "updatedAt": "2026-01-15T10:22:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -839,7 +846,7 @@
       "id": "I_kwDOHLTwws5ldx9R",
       "title": "reference coding modulation in acm mode to be selected",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/16",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -848,8 +855,8 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2024-12-18T17:03:17Z",
-      "closedAt": "2024-12-17T20:29:24Z",
+      "updatedAt": "2026-01-16T10:09:50Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "DanielaSpreafico",
@@ -983,6 +990,13 @@
           "body": "Hello\r\n\r\nMy opinion is that the base  mw-types:coding-modulation of the\r\nreference-modulation leaf definition is not correct and we need instead a\r\nnew type\r\nhaving the 11 values specified at the Table of the ETSI EN 302 217-1 V3.2.2\r\n(2020-02).\r\nThis point had been mentioned before when referring to the fact that the\r\nvalues of the reference-modulation are not related to the\r\nstrong / light code rates (FEC).\r\nI think that in general, regarding to the Spectral Efficiency, that is\r\nassociated with this reference-modulation specification and that is\r\nmeasured in Mbps/MHz, the term \"bits per sec\" refers to user data rate and\r\nFEC is excluded.\r\n\r\n\r\nBest regards\r\nThodoros Kallimanis\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a4\u03c1\u03af 17 \u0394\u03b5\u03ba 2024 \u03c3\u03c4\u03b9\u03c2 10:29\u202f\u03bc.\u03bc., \u03bf/\u03b7 Scott Mansfield <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> Closed #16 <https://github.com/samans/draft-ybam-rfc8561bis/issues/16> as\r\n> completed via #41\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/pull/41>.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/16#event-15692606445>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVMXXQE5OUC55GOA5T32GCCTTAVCNFSM6AAAAABTZHERBGVHI2DSMVQWIX3LMV45UABCJFZXG5LFIV3GK3TUJZXXI2LGNFRWC5DJN5XDWMJVGY4TENRQGY2DINI>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
           "createdAt": "2024-12-18T17:03:16Z",
           "updatedAt": "2024-12-18T17:03:16Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi all,\nI hope it is OK that I reopen this issue.\nI think Thodoros make a valid point in his comment above and we have looked into to again in a bit more detail.\n\nTypically, as has been mentioned, it is the Tx spectrum mask that will constrain what reference mode that will be granted by a licensing body. The Tx spectrum is not modulation dependent but rather output power limited, i.e. at e.g. 128 QAM whether you fulfill the spectrum mask for SEC 2 or SEC 5L will depend on the output power set.\n\nThe term 'Reference mode'  mentioned before in this conversation, defined in ETSI EN 302 217-1 points to the spectrum efficiency rather than modulation.\nIn the table referenced earlier from ETSI EN 302 217-2 it is specifically stated:\n\"The classes reported in table 0 are for system identification only and will not imply any constraint to the actual\nmodulation format, provided that all the requirements of the selected class are met.\" \n\nAt the time of configuration, in case a certain reference mode has been granted by the licensing body, the system needs an attribute indicating that the power setting will meet the required spectrum mask.\nAs the requirements for spectrum masks in ETSI 302 217-2 all refer to the Spectral Efficiency Class, a more natural configuration parameter is  Spectral Efficiency Class (SEC).\nWhen set by an operator the system should validate that with the output power configured, so that the system will meet the spectrum mask for this SEC at any modulation.\n\nSo our proposal would be to add an attribute called SEC (Spectral Efficiency Class) with the values defined in ETSI 302 217-2 , i.e. 1, 2, 3, 4L, 4H, 5L, 5H, 6L, 6H. 7 and 8.\nAlso, as these requirements for fulfilling the ETSI spectrum mask do not apply for all markets, e.g.  the ANSI standard, there must also be a \u2018Not Applicable\u2019-type of value.\n\n/JonasA\n",
+          "createdAt": "2026-01-16T10:09:50Z",
+          "updatedAt": "2026-01-16T10:09:50Z"
         }
       ]
     },
@@ -1356,11 +1370,12 @@
       ],
       "labels": [
         "update yang",
-        "agreed"
+        "agreed",
+        "Wait For Pull Request"
       ],
       "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2023-11-30T09:55:44Z",
-      "updatedAt": "2025-12-10T14:07:58Z",
+      "updatedAt": "2026-01-15T10:15:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -2252,11 +2267,12 @@
       "labels": [
         "enhancement",
         "update yang",
-        "agreed"
+        "agreed",
+        "Wait For Pull Request"
       ],
       "body": "See: [XPIC.Proposal._v00.pptx](https://github.com/user-attachments/files/19108182/XPIC.Proposal._v00.pptx)",
       "createdAt": "2025-03-06T12:24:35Z",
-      "updatedAt": "2025-12-10T14:12:41Z",
+      "updatedAt": "2026-01-15T10:17:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -2318,11 +2334,12 @@
         "DanielaSpreafico"
       ],
       "labels": [
-        "update yang"
+        "update yang",
+        "Wait For Pull Request"
       ],
       "body": "On _ietf-microwave-type_ module a new IDENTITY based on coding-modulation IDENTITY is needed to cover the 1/4 bpsk modulation case. ",
       "createdAt": "2025-10-16T09:34:36Z",
-      "updatedAt": "2025-12-18T10:16:43Z",
+      "updatedAt": "2026-01-15T11:04:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -2331,6 +2348,13 @@
           "body": "Is 1/4 BPSK the new modulation or 1/4 QPSK?",
           "createdAt": "2025-10-31T07:31:37Z",
           "updatedAt": "2025-10-31T07:31:37Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The proposal is to add on ietf-microwave-types the following new IDENTITY:\n\n  identity fourth-bpsk {\n    base coding-modulation;\n    description\n      \"Fourth BPSK coding and modulation scheme.\";\n  }\n",
+          "createdAt": "2026-01-15T11:04:03Z",
+          "updatedAt": "2026-01-15T11:04:03Z"
         }
       ]
     },
@@ -2371,11 +2395,16 @@
       "state": "OPEN",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "niloda"
+      ],
+      "labels": [
+        "agreed",
+        "Wait For Pull Request"
+      ],
       "body": "New mail address: danilo.pala@alice.it\n",
       "createdAt": "2026-01-07T18:24:00Z",
-      "updatedAt": "2026-01-07T18:24:00Z",
+      "updatedAt": "2026-01-15T10:25:19Z",
       "closedAt": null,
       "comments": []
     }
@@ -3565,6 +3594,92 @@
           ]
         }
       ]
+    },
+    {
+      "number": 52,
+      "id": "PR_kwDOHLTwws69XZS6",
+      "title": "New modulation value",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/52",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This pull-request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/49.",
+      "createdAt": "2026-01-15T11:46:52Z",
+      "updatedAt": "2026-01-15T11:58:51Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "New-modulation-value",
+      "headRefOid": "d03a09be90991baae1b2f2d2f9882f7a7aedc795",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 53,
+      "id": "PR_kwDOHLTwws69aZTx",
+      "title": "Radio signal",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/53",
+      "state": "CLOSED",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This pul request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25\r\n",
+      "createdAt": "2026-01-15T15:44:21Z",
+      "updatedAt": "2026-01-15T15:51:09Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "Radio-signal-id",
+      "headRefOid": "26d0391d9a689636377d1fd81f23caee53666e9e",
+      "closedAt": "2026-01-15T15:50:33Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I close this pull-request to use a different branch",
+          "createdAt": "2026-01-15T15:51:08Z",
+          "updatedAt": "2026-01-15T15:51:08Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDOHLTwws69ahe6",
+      "title": "Radio Signal IDs new",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/54",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
+      "createdAt": "2026-01-15T15:54:20Z",
+      "updatedAt": "2026-01-15T15:56:17Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "Radio-Signal-new",
+      "headRefOid": "e1b86969b6fecdc5d02c2e1eca558ac4d996f76e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
