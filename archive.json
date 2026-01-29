@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-18T02:28:53.436162+00:00",
+  "timestamp": "2026-01-29T02:40:35.889796+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2407,6 +2407,22 @@
       "updatedAt": "2026-01-15T10:25:19Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 55,
+      "id": "I_kwDOHLTwws7mPbt4",
+      "title": "Clean-up YANG revision statements",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/55",
+      "state": "OPEN",
+      "author": "italobusi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See the guidelines in [RFC 8407-bis](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis#name-module-header-meta-and-revi)",
+      "createdAt": "2026-01-27T23:08:11Z",
+      "updatedAt": "2026-01-27T23:08:11Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -3667,7 +3683,7 @@
       "labels": [],
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
-      "updatedAt": "2026-01-15T15:56:17Z",
+      "updatedAt": "2026-01-27T23:46:08Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
@@ -3679,7 +3695,76 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws7dXXTu",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "General comments:\r\n\r\n1) The revision statements need some clean-up: see #55 .\r\n\r\n   This can be done after merging the PR to avoid merge conflict or as part of this PR\r\n\r\n2) It seems some lines are too long.\r\n\r\n   I would suggest pretty printing the YANG file using 'pyang --strict --ietf --max-line-length 69 -f yang'\r\n",
+          "createdAt": "2026-01-27T23:11:33Z",
+          "updatedAt": "2026-01-27T23:46:08Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "No default value is defined for this leaf, maybe we can align the description to the one above for RLT connectivity check",
+              "createdAt": "2026-01-27T23:11:33Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "It is not fully clear to me that this the the identifier being transmitted to the far-end\r\n\r\nWhat about: \"Descriptive identity of the radio link terminal transmitted to be used by far-end RLT to check that it's connected to the correct near-end RLT.  Does not need to be configured if this check is not used by the far-end RLT.\"\r\n\r\nThe use of far-end and near-end is getting a bit convoluted. What about using the term \"RLT connectivity check\" to describe the process?\r\n\r\nThe description could then become: \"Descriptive identity of the radio link terminal transmitted to be used by far-end RLT for RLT connectivity check.  Does not need to be configured if RLT connectivity check is not used by the far-end RLT.\"\r\n",
+              "createdAt": "2026-01-27T23:25:12Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "If we adopt the term \"term \"RLT connectivity check\", what about:\r\n\r\n```suggestion\r\n        \"'true' value when the RLT connectivity check is used.\r\n         'false' if the RLT connectivity check is not used.\";\r\n```",
+              "createdAt": "2026-01-27T23:27:13Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "Should the default value be the same as the transmitted value? See https://github.com/samans/draft-ybam-rfc8561bis/issues/25#issuecomment-2720747092\r\n\r\nIn this case, it is not possible not to configure a value for this attribute if a value is configured for the transmitted ID.\r\n\r\nWhat about:\r\n\r\n```suggestion\r\n        \"Descriptive identity of the radio link terminal expected from \r\n         far-end RLT to check that it's connected to the correct\r\n         near-end RLT.\r\n         \r\n         By default it is the same as the 'id'.\";\r\n```\r\n",
+              "createdAt": "2026-01-27T23:38:53Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "Or, using the term \"RLT connectivity check\":\r\n\r\n```suggestion\r\n        \"Descriptive identity of the radio link terminal expected from \r\n         far-end RLT and used for RLT connectivity check (i.e., to\r\n         check that the expected value is the same as the value\r\n         received from the far-end RLT).\r\n         \r\n         By default it is the same as the 'id'.\";\r\n```",
+              "createdAt": "2026-01-27T23:39:00Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "Should we add some 'must' statement to check that the RLT connectivity check is used only when an expected value is configured?",
+              "createdAt": "2026-01-27T23:39:54Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "See Jonas comment on the RLT configuration: https://github.com/samans/draft-ybam-rfc8561bis/issues/25#issuecomment-3637258561",
+              "createdAt": "2026-01-27T23:40:40Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "We can consider aligning the description with the one above for RLT connectivity check",
+              "createdAt": "2026-01-27T23:41:57Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "We can consider aligning the resto of the description with the one above for RLT connectivity check",
+              "createdAt": "2026-01-27T23:42:07Z",
+              "updatedAt": "2026-01-27T23:46:08Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
