@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-29T02:40:35.889796+00:00",
+  "timestamp": "2026-02-08T03:23:39.962574+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3683,7 +3683,7 @@
       "labels": [],
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
-      "updatedAt": "2026-01-27T23:46:08Z",
+      "updatedAt": "2026-02-05T10:33:45Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
@@ -3694,7 +3694,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "> General comments:\r\n> \r\n> 1. The revision statements need some clean-up: see #55 .\r\n>    This can be done after merging the PR to avoid merge conflict or as part of this PR\r\n> 2. It seems some lines are too long.\r\n>    I would suggest pretty printing the YANG file using 'pyang --strict --ietf --max-line-length 69 -f yang'\r\n\r\nIssue #55 will be progressed separately.\r\nThe line length will be done in a different pull request, at the end of the process. ",
+          "createdAt": "2026-02-05T10:09:12Z",
+          "updatedAt": "2026-02-05T10:09:12Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOHLTwws7dXXTu",
@@ -3761,6 +3769,66 @@
               "body": "We can consider aligning the resto of the description with the one above for RLT connectivity check",
               "createdAt": "2026-01-27T23:42:07Z",
               "updatedAt": "2026-01-27T23:46:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7f3tRa",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-05T10:24:39Z",
+          "updatedAt": "2026-02-05T10:24:40Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "The description could then become: \"Descriptive identity of the near-end radio link terminal transmitted to be used by the far-end RLT for RLT connectivity check. Does not need to be configured if RLT connectivity check is not used by the far-end RLT.\"",
+              "createdAt": "2026-02-05T10:24:40Z",
+              "updatedAt": "2026-02-05T10:24:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7f30xv",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-05T10:28:33Z",
+          "updatedAt": "2026-02-05T10:28:33Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "add a when statement to expected-far-end-id",
+              "createdAt": "2026-02-05T10:28:33Z",
+              "updatedAt": "2026-02-05T10:28:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7f3-qj",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-05T10:33:45Z",
+          "updatedAt": "2026-02-05T10:33:45Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "Don't change",
+              "createdAt": "2026-02-05T10:33:45Z",
+              "updatedAt": "2026-02-05T10:33:45Z"
             }
           ]
         }
