@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 15 August 2026                                            M. Ye
+Expires: 16 August 2026                                            M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                                     SIAE
-                                                        11 February 2026
+                                                        12 February 2026
 
 
                A YANG Data Model for Microwave Radio Link
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 August 2026.
+   This Internet-Draft will expire on 16 August 2026.
 
 Copyright Notice
 
@@ -589,7 +589,7 @@ module: ietf-microwave-radio-link
            "Descriptive identity of the radio link terminal expected from
             far-end RLT and used for RLT connectivity check (i.e., to
             check that the expected value is the same as the value
-            received from the far-end RLT.
+            received from the far-end RLT).
                     By default it is the same as the 'id'.";
        }
 
