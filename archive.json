@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-08T03:23:39.962574+00:00",
+  "timestamp": "2026-02-12T02:54:07.482086+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3683,13 +3683,13 @@
       "labels": [],
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
-      "updatedAt": "2026-02-05T10:33:45Z",
+      "updatedAt": "2026-02-12T00:05:22Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "Radio-Signal-new",
-      "headRefOid": "e1b86969b6fecdc5d02c2e1eca558ac4d996f76e",
+      "headRefOid": "dbe2d9757e771f1582471bfe0b9e6a07d71bae12",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3829,6 +3829,106 @@
               "body": "Don't change",
               "createdAt": "2026-02-05T10:33:45Z",
               "updatedAt": "2026-02-05T10:33:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7hmVKG",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-11T13:47:02Z",
+          "updatedAt": "2026-02-11T13:47:03Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "done",
+              "createdAt": "2026-02-11T13:47:02Z",
+              "updatedAt": "2026-02-11T13:47:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7hmY8i",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-11T13:49:50Z",
+          "updatedAt": "2026-02-11T13:49:51Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "done",
+              "createdAt": "2026-02-11T13:49:50Z",
+              "updatedAt": "2026-02-11T13:49:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7hmoQm",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-11T13:59:28Z",
+          "updatedAt": "2026-02-11T13:59:28Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "done",
+              "createdAt": "2026-02-11T13:59:28Z",
+              "updatedAt": "2026-02-11T13:59:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7hqV55",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-11T16:40:03Z",
+          "updatedAt": "2026-02-11T16:40:03Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "done",
+              "createdAt": "2026-02-11T16:40:03Z",
+              "updatedAt": "2026-02-11T16:40:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7hycvf",
+          "commit": {
+            "abbreviatedOid": "dbe2d97"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-12T00:04:52Z",
+          "updatedAt": "2026-02-12T00:05:22Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "Typo: just need to close the brackets:\n\n```suggestion\n         received from the far-end RLT).\n```",
+              "createdAt": "2026-02-12T00:04:52Z",
+              "updatedAt": "2026-02-12T00:05:22Z"
             }
           ]
         }
