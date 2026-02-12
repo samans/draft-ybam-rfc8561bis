@@ -204,7 +204,7 @@ module ietf-microwave-radio-link {
         "Descriptive identity of the radio link terminal expected from 
          far-end RLT and used for RLT connectivity check (i.e., to
          check that the expected value is the same as the value
-         received from the far-end RLT.
+         received from the far-end RLT).
 		 By default it is the same as the 'id'.";
     }
 	
