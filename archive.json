@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-12T02:54:07.482086+00:00",
+  "timestamp": "2026-02-15T02:55:29.636475+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3623,7 +3623,7 @@
       "labels": [],
       "body": "This pull-request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/49.",
       "createdAt": "2026-01-15T11:46:52Z",
-      "updatedAt": "2026-01-15T11:58:51Z",
+      "updatedAt": "2026-02-12T11:58:52Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
@@ -3634,7 +3634,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "I'm trying to understand what fourth-bpsk means.  half-bpsk means that the data rate is reduced by (I assume half).  Does fourth-bpsk reduce the data rate by a quarter?  So it is halfway between bpsk and half-bpsk?\r\n\r\nOr is it something else entirely?\r\n\r\nLooking at the standards in ETSI, ITU-T, and others, BPSK is mentioned but all the flavors of BPSK listed in this ID are not specifically standardized.  So, I suggest more information is added to the descriptions to provide more detail on what the technique means.",
+          "createdAt": "2026-02-12T11:58:52Z",
+          "updatedAt": "2026-02-12T11:58:52Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -3683,13 +3691,13 @@
       "labels": [],
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
-      "updatedAt": "2026-02-12T00:05:22Z",
+      "updatedAt": "2026-02-12T10:16:25Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "Radio-Signal-new",
-      "headRefOid": "dbe2d9757e771f1582471bfe0b9e6a07d71bae12",
+      "headRefOid": "6105849b738a5949129ed4c7f0b54a0f48704c66",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3931,6 +3939,19 @@
               "updatedAt": "2026-02-12T00:05:22Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7h5vwj",
+          "commit": {
+            "abbreviatedOid": "6105849"
+          },
+          "author": "niloda",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-12T10:16:25Z",
+          "updatedAt": "2026-02-12T10:16:25Z",
+          "comments": []
         }
       ]
     }
