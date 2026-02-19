@@ -37,7 +37,13 @@ module ietf-microwave-types {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2025-10-03 {
+ revision 2026-01-15 {
+    description
+      "Draft - Issue #49 New Coding Modulation value to cover new modulation value Issue";
+    reference
+      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+  }
+ revision 2025-10-03 {
     description
       "Draft - Issue #44 Copyright statement Issue";
     reference
@@ -93,6 +99,12 @@ module ietf-microwave-types {
   identity coding-modulation {
     description
       "The coding and modulation schemes.";
+  }
+
+  identity fourth-bpsk {
+    base coding-modulation;
+    description
+      "Fourth BPSK coding and modulation scheme.";
   }
 
   identity half-bpsk {
