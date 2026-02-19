@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-15T02:55:29.636475+00:00",
+  "timestamp": "2026-02-19T02:49:22.158083+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3691,7 +3691,7 @@
       "labels": [],
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
-      "updatedAt": "2026-02-12T10:16:25Z",
+      "updatedAt": "2026-02-18T08:12:42Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
@@ -3952,6 +3952,146 @@
           "createdAt": "2026-02-12T10:16:25Z",
           "updatedAt": "2026-02-12T10:16:25Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jRsD4",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T10:26:40Z",
+          "updatedAt": "2026-02-17T10:26:40Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "A question. \nDoes  \"A\", i.e. a string character, as the Default value, fits well, while the requirement is to cover by a unique string type of the carrier-id, the need of the users to use either numeric or alphanumeric carrier-id?  \nIs it more appropriate to use a number being presented as a string, eg \"1\"?\nThe TR-532 air-interface.yang has separate numeric and alphanumeric signal-id leaves but with a unique string leaf for this entity, it seems to me, that its value fits more to be a numeric string, that  is valid for use with both, numeric and alphanumeric signal-ids.\n\nAnother remark question:\n\"...check that the carrier termination is connected to the correct far-end carrier termination.\"\nI assume that this node now has two uses:\n\n1. If the expected-far-end-carrier-id is not used then the \"carrier-id\" is going to be used for the signal-id check at both sides, local and remote, to identify correct carrier-terminations.\nI.e. the \"carrier-id\" plays also the role of the \"expected-far-end-carrier-id\" as well as the role of transmitted carrier-id to the remote side.\n\n2. If the expected-far-end-carrier-id is used then the \"carrier-id\" is going to be transmitted and used for the signal-id check at  remote side, to be compared with the expected-far-end-carrier-id of that side, to identify correct carrier-terminations.",
+              "createdAt": "2026-02-17T10:26:40Z",
+              "updatedAt": "2026-02-17T10:26:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jRsd8",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T10:26:57Z",
+          "updatedAt": "2026-02-17T10:26:57Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "Does this leaf need to have a default value, eg false?\nIs this leaf necessary? Can it be actually replaced by the fact that the carrier-id has a default value that can be more clearly stated, that it indicates that the carrier-id check is not used when the carrier-id is at this default value?",
+              "createdAt": "2026-02-17T10:26:57Z",
+              "updatedAt": "2026-02-17T10:26:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jRtMt",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T10:27:27Z",
+          "updatedAt": "2026-02-17T10:27:27Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "I thought that the default value of this leaf should indicate, that the expected-far-end-carrier-id is equal to the carrier-id (i.e. the one that is to be transmitted). \nI have in mind a relevant TR-532 leaf, expected-equals-transmitted-radio-signal-id, that is described there as :\n\"true = It is not possible to configure an expectedRadioSignalID different from the transmittedRadioSignalID.\"",
+              "createdAt": "2026-02-17T10:27:27Z",
+              "updatedAt": "2026-02-17T10:27:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jXstn",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T15:27:02Z",
+          "updatedAt": "2026-02-17T15:27:02Z",
+          "comments": [
+            {
+              "originalPosition": 67,
+              "body": "I think that Daniela has already fixed this issue in the latest update indicating that the expected-far-end-carrier-id by default \"is the same as the carrier-id\".\r\n\r\nSee: https://github.com/samans/draft-ybam-rfc8561bis/blob/6105849b738a5949129ed4c7f0b54a0f48704c66/ietf-microwave-radio-link.yang#L402",
+              "createdAt": "2026-02-17T15:27:02Z",
+              "updatedAt": "2026-02-17T15:27:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jYFwr",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T15:43:04Z",
+          "updatedAt": "2026-02-17T15:43:04Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "> A question. Does \"A\", i.e. a string character, as the Default value, fits well, while the requirement is to cover by a unique string type of the carrier-id, the need of the users to use either numeric or alphanumeric carrier-id? Is it more appropriate to use a number being presented as a string, eg \"1\"? The TR-532 air-interface.yang has separate numeric and alphanumeric signal-id leaves but with a unique string leaf for this entity, it seems to me, that its value fits more to be a numeric string, that is valid for use with both, numeric and alphanumeric signal-ids.\r\n> \r\n\r\nFor the purpose of configuring what it is transmitted and checked, I do not think we need to use numeric data types. We may update the description clarifying that it is an alphanumeric string so numbers can be encoded as strings.\r\n\r\n> Another remark question: \"...check that the carrier termination is connected to the correct far-end carrier termination.\" I assume that this node now has two uses:\r\n> \r\n\r\nDaniela has recently update the description:\r\n\r\nhttps://github.com/samans/draft-ybam-rfc8561bis/blob/6105849b738a5949129ed4c7f0b54a0f48704c66/ietf-microwave-radio-link.yang#L386C1-L389C1\r\n\r\n> 1. If the expected-far-end-carrier-id is not used then the \"carrier-id\" is going to be used for the signal-id check at both sides, local and remote, to identify correct carrier-terminations.\r\n>    I.e. the \"carrier-id\" plays also the role of the \"expected-far-end-carrier-id\" as well as the role of transmitted carrier-id to the remote side.\r\n\r\nSince the default value of the expected-far-end-carrier-id is the carrier-id, we can say that the expected-far-end-carrier-id is always used for the check.\r\n\r\n> 2. If the expected-far-end-carrier-id is used then the \"carrier-id\" is going to be transmitted and used for the signal-id check at  remote side, to be compared with the expected-far-end-carrier-id of that side, to identify correct carrier-terminations.\r\n\r\nAny setting on a YANG attribute in the near-end node has no effect on the far-end node.\r\n\r\nThe carrier-id value configured on node A is the value transmitted by node A to node B.\r\nThe expected-far-end-carrier-id value configured on node B is the value that node B compares with the value it receives from node A: the controller MUST ensure that the carrier-id value configured on node A is the same as the expected-far-end-carrier-id value configured on node B.\r\n\r\nIn a similar way, the MUST ensure that the carrier-id value configured on node B is the same as the expected-far-end-carrier-id value configured on node A.\r\n\r\nIn theory there is no reason for the carrier-id configured on node A to be the same as the carrier-id configured in node B but this is a valid implementation choice.\r\n\r\nThe defaults have been properly selected to allow configuring only the carrier-id on nodes A and B with this implementation choice while allowing configuring different values for carrier-id and expected-far-end-carrier-id with a different implementation choice.\r\n",
+              "createdAt": "2026-02-17T15:43:04Z",
+              "updatedAt": "2026-02-17T15:43:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jYL9-",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T15:47:44Z",
+          "updatedAt": "2026-02-17T15:47:45Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "> Does this leaf need to have a default value, eg false? \r\n\r\nWe have decided to keep the default value implementation-specific\r\n\r\n> Is this leaf necessary? Can it be actually replaced by the fact that the carrier-id has a default value that can be more clearly stated, that it indicates that the carrier-id check is not used when the carrier-id is at this default value?\r\n\r\nConfiguring the carrier-id implicitly enables the transmission of the configured value but not necessarily the check on the received value.\r\n\r\nThis allows for example checking the CT connectivity only in node B: the carrier-id is configured in node A and transmitted to node B but the checking is enabled only in node B and disabled in node A. \r\n\r\nSince the default value is implementation specific, an implementation can decide to enable by default the checking when the carrier-id is configured but this is an implementation choice not mandated by the standard.\r\n",
+              "createdAt": "2026-02-17T15:47:45Z",
+              "updatedAt": "2026-02-17T15:47:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7jl5h_",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-18T08:12:42Z",
+          "updatedAt": "2026-02-18T08:12:42Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "Italo, thanks for your answer.\nI would like to clarify that the first part of my comment, regarding to the default value \"A\" of carrier-id, is not about the changing of the leaf type from string to a numerical type . \nThe comment is to keep the string type but better change the default string from \"A\" to a numerical string, eg \"1\", because in that way we provide a default value that is valid either the user uses numerical carrier-id or alphanumerical one.\n\nAnother relevant comment / question is the fact that the following sentence has been now removed from  the description of the carrier-id:\n\n_\"Left as default value when MIMO and XPIC are not in use.\"_\n\nA question is **whether the carrier-id transmission is a mandatory function or an optional feature.**\nThe definitions in the model, to my understanding, specify the carrier-id transmission as mandatory and the carrier-id check is just not-used when CT is not in MIMO-group, XPIC-pair, or RLT aggregation of CTs.\nI.e. if the peer system receives a \"carried-id\" and the receiving CT is not in MIMO, XPIC etc then the peer system will not proceed to check the received carrier-id.\nIf this is so then we do not need a specific carrier-id value to be transmitted to indicate to the receiving side that the carrier-id check should not be performed (i.e. transmit default \"A\" as an indication that carrier-id check should not be performed). \n\nThe above was mainly a question for clarification rather than a remark.\n\nThanks again. ",
+              "createdAt": "2026-02-18T08:12:42Z",
+              "updatedAt": "2026-02-18T08:12:42Z"
+            }
+          ]
         }
       ]
     }
