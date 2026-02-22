@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T02:49:22.158083+00:00",
+  "timestamp": "2026-02-22T02:50:50.916997+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -3623,7 +3623,7 @@
       "labels": [],
       "body": "This pull-request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/49.",
       "createdAt": "2026-01-15T11:46:52Z",
-      "updatedAt": "2026-02-12T11:58:52Z",
+      "updatedAt": "2026-02-19T11:10:11Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
@@ -3641,6 +3641,13 @@
           "body": "I'm trying to understand what fourth-bpsk means.  half-bpsk means that the data rate is reduced by (I assume half).  Does fourth-bpsk reduce the data rate by a quarter?  So it is halfway between bpsk and half-bpsk?\r\n\r\nOr is it something else entirely?\r\n\r\nLooking at the standards in ETSI, ITU-T, and others, BPSK is mentioned but all the flavors of BPSK listed in this ID are not specifically standardized.  So, I suggest more information is added to the descriptions to provide more detail on what the technique means.",
           "createdAt": "2026-02-12T11:58:52Z",
           "updatedAt": "2026-02-12T11:58:52Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Update the descriptions of the identities to describe what strong and light mean, also what fourth and half mean.  Add an eighth-bpsk entry for future proofing.\r\n\r\nClarify the net throughput is defined in the speed.",
+          "createdAt": "2026-02-19T11:10:11Z",
+          "updatedAt": "2026-02-19T11:10:11Z"
         }
       ],
       "reviews": []
@@ -3691,7 +3698,7 @@
       "labels": [],
       "body": "This pull request is linked to https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
       "createdAt": "2026-01-15T15:54:20Z",
-      "updatedAt": "2026-02-18T08:12:42Z",
+      "updatedAt": "2026-02-19T10:41:06Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "b3864b23888f0f4af592bb578634cb39ce93a5e5",
@@ -4090,6 +4097,46 @@
               "body": "Italo, thanks for your answer.\nI would like to clarify that the first part of my comment, regarding to the default value \"A\" of carrier-id, is not about the changing of the leaf type from string to a numerical type . \nThe comment is to keep the string type but better change the default string from \"A\" to a numerical string, eg \"1\", because in that way we provide a default value that is valid either the user uses numerical carrier-id or alphanumerical one.\n\nAnother relevant comment / question is the fact that the following sentence has been now removed from  the description of the carrier-id:\n\n_\"Left as default value when MIMO and XPIC are not in use.\"_\n\nA question is **whether the carrier-id transmission is a mandatory function or an optional feature.**\nThe definitions in the model, to my understanding, specify the carrier-id transmission as mandatory and the carrier-id check is just not-used when CT is not in MIMO-group, XPIC-pair, or RLT aggregation of CTs.\nI.e. if the peer system receives a \"carried-id\" and the receiving CT is not in MIMO, XPIC etc then the peer system will not proceed to check the received carrier-id.\nIf this is so then we do not need a specific carrier-id value to be transmitted to indicate to the receiving side that the carrier-id check should not be performed (i.e. transmit default \"A\" as an indication that carrier-id check should not be performed). \n\nThe above was mainly a question for clarification rather than a remark.\n\nThanks again. ",
               "createdAt": "2026-02-18T08:12:42Z",
               "updatedAt": "2026-02-18T08:12:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7j-cku",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T10:24:58Z",
+          "updatedAt": "2026-02-19T10:24:58Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "default value is set to \"A\" in the original, so can't change without losing backward compatibility.  No change at this time since not a big issue.",
+              "createdAt": "2026-02-19T10:24:58Z",
+              "updatedAt": "2026-02-19T10:24:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHLTwws7j-16Z",
+          "commit": {
+            "abbreviatedOid": "e1b8696"
+          },
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T10:41:06Z",
+          "updatedAt": "2026-02-19T10:41:06Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "\"carrier-id\" value is always transmitted.  But the check can be enabled and disable on reception with the far-end-carrier-id-check-enabled leaf.",
+              "createdAt": "2026-02-19T10:41:06Z",
+              "updatedAt": "2026-02-19T10:41:06Z"
             }
           ]
         }
