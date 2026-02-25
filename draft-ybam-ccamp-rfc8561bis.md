@@ -4,7 +4,7 @@ coding: utf-8
 title: "A YANG Data Model for Microwave Radio Link"
 abbrev: "Microwave Radio Link YANG"
 category: std
-docname: draft-ybam-rfc8561bis-latest
+docname: draft-ybam-ccamp-rfc8561bis-latest
 obsoletes: 8561
 ipr:  trust200902
 submissiontype: IETF
