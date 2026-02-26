@@ -1408,6 +1408,8 @@ diagrams is defined in <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]<
         </h3>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-1.4-1">
 <pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 module: ietf-microwave-radio-link
   +--rw radio-link-protection-groups
   |  +--rw protection-group* [name]
@@ -1517,7 +1519,8 @@ module: ietf-microwave-radio-link
     |  +--ro available-min-acm?         identityref
     |  +--ro available-max-acm?         identityref
     |  +--ro acm-profile-list*
-    |          [profile-channel-separation-id profile-coding-modulation-id]
+    |          [profile-channel-separation-id profile-coding-\
+                                                       modulation-id]
     |     +--ro profile-channel-separation-id      uint32
     |     +--ro profile-coding-modulation-id       identityref
     |     +--ro modulation-scheme?                 uint8
@@ -1629,7 +1632,7 @@ module ietf-microwave-radio-link {
      entities in a generic microwave system.
 
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -1647,27 +1650,17 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
- revision 2026-01-15 {
+  revision 2026-02-26 {
     description
-      "Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue";
+      "TBD";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
-
-  revision 2025-10-03 {
+  revision 2019-06-19 {
     description
-      "Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue";
+      "Initial revision.";
     reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-
-  revision 2025-04-04 {
-    description
-      "Draft - Issue #32 Compression,
-               Issue #35 grouping common-microwave-properties,
-               Issue #31 added minimum-nominal-power";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+      "RFC 8561: A YANG Data Model for Microwave Radio Link";
   }
 
   /*
@@ -1766,8 +1759,8 @@ module ietf-microwave-radio-link {
       type string;
       description
         "Descriptive identity of the near-end radio link terminal
-                 transmitted to be used by the far-end RLT for RLT connectivity check.
-                 Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
+         transmitted to be used by the far-end RLT for RLT connectivity check.
+         Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
     }
     leaf far-end-id-check-enabled {
       type boolean;
@@ -1775,17 +1768,16 @@ module ietf-microwave-radio-link {
         "'true' value when the RLT connectivity check is used.
          'false' if the RLT connectivity check is not used.";
     }
-        leaf expected-far-end-id {
-          when "../far-end-id-check-enabled = 'true'";
+    leaf expected-far-end-id {
+      when "../far-end-id-check-enabled = 'true'";
       type string;
       description
         "Descriptive identity of the radio link terminal expected from
          far-end RLT and used for RLT connectivity check (i.e., to
          check that the expected value is the same as the value
          received from the far-end RLT).
-                 By default it is the same as the 'id'.";
+         By default it is the same as the 'id'.";
     }
-
     choice mode-option {
       mandatory true;
       description
@@ -1896,12 +1888,12 @@ module ietf-microwave-radio-link {
         key "name";
         config false;
         description
-        "The list of header compression profiles supported by the
-         RLT.
-         Header compression is typically vendor proprietary and it is
-         assumed there is no ambition to change that. For this reason
-         the list provides only generic attributes to be augmented by
-         vendor with proprietary implementation attributes.";
+          "The list of header compression profiles supported by the
+           RLT.
+           Header compression is typically vendor proprietary and it is
+           assumed there is no ambition to change that. For this reason
+           the list provides only generic attributes to be augmented by
+           vendor with proprietary implementation attributes.";
         leaf name {
           type string;
           description
@@ -1962,24 +1954,23 @@ module ietf-microwave-radio-link {
       default "A";
       description
         "ID of the carrier (e.g., A, B, C, or D) transmitted
-                 to be used in XPIC and MIMO configurations by the far-end
-                 CT for CT connectivity check.";
+         to be used in XPIC and MIMO configurations by the far-end
+         CT for CT connectivity check.";
     }
-        leaf far-end-carrier-id-check-enabled {
+    leaf far-end-carrier-id-check-enabled {
       type boolean;
       description
         "'true' value when the CT connectivity check is used.
          'false' if the CT connectivity check is not used.";
     }
-        leaf expected-far-end-carrier-id {
-          when "../far-end-carrier-id-check-enabled = 'true'";
+    leaf expected-far-end-carrier-id {
+      when "../far-end-carrier-id-check-enabled = 'true'";
       type string;
       description
         "Descriptive identity of the carrier expected from far-end CT (e.g., A, B, C, or D)
          to check that it's connected to the correct near-end CT.
          By default it is the same as the carrier-id.";
     }
-
     leaf tx-enabled {
       type boolean;
       default "false";
@@ -2008,9 +1999,7 @@ module ietf-microwave-radio-link {
       description
         "Shows the operative status of the transmitter.";
     }
-
     uses mw-types:common-microwave-properties;
-
     choice freq-or-distance {
       mandatory true;
       description
@@ -2201,7 +2190,7 @@ module ietf-microwave-radio-link {
              link per link coordination analysis. Its value has to be
              between the 'selected-min-acm' and the
              'selected-max-acm' attribute's values.
-         ";
+            ";
         }
       }
     }
@@ -2789,7 +2778,7 @@ module ietf-interface-protection {
     "This is a YANG module for the entities in
      a generic interface protection mechanism.
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -2807,21 +2796,9 @@ module ietf-interface-protection {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2025-10-03 {
+  revision 2026-02-26 {
     description
-      "Draft - Issue #44 Copyright statement Issue";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-  revision 2024-03-03 {
-    description
-      "Updating reference to RFC XXXX. - pretty printing";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-  revision 2020-10-06 {
-    description
-      "Updating reference to RFC XXXX.";
+      "Canonical Order and copyright updated";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
@@ -3091,7 +3068,7 @@ module ietf-microwave-types {
     "This is a YANG module for the entities in
      a generic interface protection mechanism.
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -3109,23 +3086,19 @@ module ietf-microwave-types {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
- revision 2026-01-15 {
+  revision 2026-02-26 {
     description
-      "Draft - Issue #49 New Coding Modulation value to cover new modulation value Issue";
+      "Coding Modulation value to cover new modulation value.
+       New rlt-mode grouping to remove duplication.
+      ";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
- revision 2025-10-03 {
+  revision 2019-06-19 {
     description
-      "Draft - Issue #44 Copyright statement Issue";
+      "Initial revision.";
     reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-  revision 2025-04-04 {
-    description
-      "Draft - Comression #32, new grouping Issue #35";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+      "RFC 8561: A YANG Data Model for Microwave Radio Link";
   }
 
   /*
@@ -3785,28 +3758,70 @@ protection switch.<a href="#section-5-22" class="pilcrow">¶</a></p>
         </h3>
 <span id="name-10-example"></span><div id="fig-1-plus-0-example">
 <figure id="figure-1">
-          <div class="alignLeft art-ascii-art art-text artwork" id="appendix-B.1-1.1">
-<pre>
-                    /--------- Radio Link ---------\
-                     Near End              Far End
-
-              +---------------+           +---------------+
-              |  Radio Link   |           | Radio Link    |
-              |  Terminal A   |           | Terminal B    |
-              |               |           |               |
-              |               |           |               |
-              | +-----------+ |           | +-----------+ |
-              | |           | | Carrier A | |           | |
-              | |  Carrier  | |&lt;---------&gt;| |  Carrier  | |
-              | |Termination| |           | |Termination| |
-              | |     1     | |           | |     1     | |
-              | +-----------+ |           | +-----------+ |
-              |               |           |               |
-              |               |           |               |
-              +---------------+           +---------------+
-
-        \--- Microwave Node ---/          \--- Microwave Node ---/
-</pre>
+          <div id="appendix-B.1-1.1">
+            <div class="alignLeft art-svg artwork" id="appendix-B.1-1.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="352" width="472" viewBox="0 0 472 352" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 56,80 L 56,288" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 72,240" fill="none" stroke="black"></path>
+                <path d="M 168,160 L 168,240" fill="none" stroke="black"></path>
+                <path d="M 184,80 L 184,288" fill="none" stroke="black"></path>
+                <path d="M 280,80 L 280,288" fill="none" stroke="black"></path>
+                <path d="M 296,160 L 296,240" fill="none" stroke="black"></path>
+                <path d="M 392,160 L 392,240" fill="none" stroke="black"></path>
+                <path d="M 408,80 L 408,288" fill="none" stroke="black"></path>
+                <path d="M 112,32 L 176,32" fill="none" stroke="black"></path>
+                <path d="M 280,32 L 344,32" fill="none" stroke="black"></path>
+                <path d="M 56,80 L 184,80" fill="none" stroke="black"></path>
+                <path d="M 280,80 L 408,80" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 168,160" fill="none" stroke="black"></path>
+                <path d="M 296,160 L 392,160" fill="none" stroke="black"></path>
+                <path d="M 192,192 L 272,192" fill="none" stroke="black"></path>
+                <path d="M 72,240 L 168,240" fill="none" stroke="black"></path>
+                <path d="M 296,240 L 392,240" fill="none" stroke="black"></path>
+                <path d="M 56,288 L 184,288" fill="none" stroke="black"></path>
+                <path d="M 280,288 L 408,288" fill="none" stroke="black"></path>
+                <path d="M 16,320 L 32,320" fill="none" stroke="black"></path>
+                <path d="M 168,320 L 184,320" fill="none" stroke="black"></path>
+                <path d="M 288,320 L 304,320" fill="none" stroke="black"></path>
+                <path d="M 440,320 L 456,320" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="280,192 268,186.4 268,197.6" fill="black" transform="rotate(0,272,192)"></polygon>
+                <polygon class="arrowhead" points="200,192 188,186.4 188,197.6" fill="black" transform="rotate(180,192,192)"></polygon>
+                <g class="text">
+                  <text x="104" y="36">/</text>
+                  <text x="208" y="36">Radio</text>
+                  <text x="252" y="36">Link</text>
+                  <text x="352" y="36">\</text>
+                  <text x="124" y="52">Near</text>
+                  <text x="160" y="52">End</text>
+                  <text x="296" y="52">Far</text>
+                  <text x="328" y="52">End</text>
+                  <text x="96" y="100">Radio</text>
+                  <text x="140" y="100">Link</text>
+                  <text x="312" y="100">Radio</text>
+                  <text x="356" y="100">Link</text>
+                  <text x="108" y="116">Terminal</text>
+                  <text x="152" y="116">A</text>
+                  <text x="324" y="116">Terminal</text>
+                  <text x="368" y="116">B</text>
+                  <text x="224" y="180">Carrier</text>
+                  <text x="264" y="180">A</text>
+                  <text x="120" y="196">Carrier</text>
+                  <text x="344" y="196">Carrier</text>
+                  <text x="120" y="212">Termination</text>
+                  <text x="344" y="212">Termination</text>
+                  <text x="120" y="228">1</text>
+                  <text x="344" y="228">1</text>
+                  <text x="8" y="324">\</text>
+                  <text x="80" y="324">Microwave</text>
+                  <text x="140" y="324">Node</text>
+                  <text x="192" y="324">/</text>
+                  <text x="280" y="324">\</text>
+                  <text x="352" y="324">Microwave</text>
+                  <text x="412" y="324">Node</text>
+                  <text x="464" y="324">/</text>
+                </g>
+              </svg><a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a>
+</div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-10-example" class="selfRef">1+0 Example</a>
@@ -3872,34 +3887,89 @@ protection switch.<a href="#section-5-22" class="pilcrow">¶</a></p>
 <p id="appendix-B.2-1"><a href="#fig-2-plus-0-example" class="auto internal xref">Figure 2</a> shows a 2+0 example.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
 <span id="name-20-example"></span><div id="fig-2-plus-0-example">
 <figure id="figure-2">
-          <div class="alignLeft art-ascii-art art-text artwork" id="appendix-B.2-2.1">
-<pre>
-                    /--------- Radio Link ---------\
-                     Near End              Far End
-
-              +---------------+           +---------------+
-              | Radio Link    |           | Radio Link    |
-              | Terminal A    |           | Terminal B    |
-              |               |           |               |
-              |               |           |               |
-              | +-----------+ |           | +-----------+ |
-              | |           | | Carrier A | |           | |
-              | |  Carrier  | |&lt;---------&gt;| |  Carrier  | |
-              | |Termination| |           | |Termination| |
-              | |     1     | |           | |     1     | |
-              | +-----------+ |           | +-----------+ |
-              |               |           |               |
-              | +-----------+ |           | +-----------+ |
-              | |           | | Carrier B | |           | |
-              | |  Carrier  | |&lt;---------&gt;| |  Carrier  | |
-              | |Termination| |           | |Termination| |
-              | |     2     | |           | |     2     | |
-              | +-----------+ |           | +-----------+ |
-              |               |           |               |
-              +---------------+           +---------------+
-
-        \--- Microwave Node ---/          \--- Microwave Node ---/
-</pre>
+          <div id="appendix-B.2-2.1">
+            <div class="alignLeft art-svg artwork" id="appendix-B.2-2.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="448" width="472" viewBox="0 0 472 448" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 56,80 L 56,384" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 72,240" fill="none" stroke="black"></path>
+                <path d="M 72,272 L 72,352" fill="none" stroke="black"></path>
+                <path d="M 168,160 L 168,240" fill="none" stroke="black"></path>
+                <path d="M 168,272 L 168,352" fill="none" stroke="black"></path>
+                <path d="M 184,80 L 184,384" fill="none" stroke="black"></path>
+                <path d="M 280,80 L 280,384" fill="none" stroke="black"></path>
+                <path d="M 296,160 L 296,240" fill="none" stroke="black"></path>
+                <path d="M 296,272 L 296,352" fill="none" stroke="black"></path>
+                <path d="M 392,160 L 392,240" fill="none" stroke="black"></path>
+                <path d="M 392,272 L 392,352" fill="none" stroke="black"></path>
+                <path d="M 408,80 L 408,384" fill="none" stroke="black"></path>
+                <path d="M 112,32 L 176,32" fill="none" stroke="black"></path>
+                <path d="M 280,32 L 344,32" fill="none" stroke="black"></path>
+                <path d="M 56,80 L 184,80" fill="none" stroke="black"></path>
+                <path d="M 280,80 L 408,80" fill="none" stroke="black"></path>
+                <path d="M 72,160 L 168,160" fill="none" stroke="black"></path>
+                <path d="M 296,160 L 392,160" fill="none" stroke="black"></path>
+                <path d="M 192,192 L 272,192" fill="none" stroke="black"></path>
+                <path d="M 72,240 L 168,240" fill="none" stroke="black"></path>
+                <path d="M 296,240 L 392,240" fill="none" stroke="black"></path>
+                <path d="M 72,272 L 168,272" fill="none" stroke="black"></path>
+                <path d="M 296,272 L 392,272" fill="none" stroke="black"></path>
+                <path d="M 192,304 L 272,304" fill="none" stroke="black"></path>
+                <path d="M 72,352 L 168,352" fill="none" stroke="black"></path>
+                <path d="M 296,352 L 392,352" fill="none" stroke="black"></path>
+                <path d="M 56,384 L 184,384" fill="none" stroke="black"></path>
+                <path d="M 280,384 L 408,384" fill="none" stroke="black"></path>
+                <path d="M 16,416 L 32,416" fill="none" stroke="black"></path>
+                <path d="M 168,416 L 184,416" fill="none" stroke="black"></path>
+                <path d="M 288,416 L 304,416" fill="none" stroke="black"></path>
+                <path d="M 440,416 L 456,416" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="280,304 268,298.4 268,309.6" fill="black" transform="rotate(0,272,304)"></polygon>
+                <polygon class="arrowhead" points="280,192 268,186.4 268,197.6" fill="black" transform="rotate(0,272,192)"></polygon>
+                <polygon class="arrowhead" points="200,304 188,298.4 188,309.6" fill="black" transform="rotate(180,192,304)"></polygon>
+                <polygon class="arrowhead" points="200,192 188,186.4 188,197.6" fill="black" transform="rotate(180,192,192)"></polygon>
+                <g class="text">
+                  <text x="104" y="36">/</text>
+                  <text x="208" y="36">Radio</text>
+                  <text x="252" y="36">Link</text>
+                  <text x="352" y="36">\</text>
+                  <text x="124" y="52">Near</text>
+                  <text x="160" y="52">End</text>
+                  <text x="296" y="52">Far</text>
+                  <text x="328" y="52">End</text>
+                  <text x="88" y="100">Radio</text>
+                  <text x="132" y="100">Link</text>
+                  <text x="312" y="100">Radio</text>
+                  <text x="356" y="100">Link</text>
+                  <text x="100" y="116">Terminal</text>
+                  <text x="144" y="116">A</text>
+                  <text x="324" y="116">Terminal</text>
+                  <text x="368" y="116">B</text>
+                  <text x="224" y="180">Carrier</text>
+                  <text x="264" y="180">A</text>
+                  <text x="120" y="196">Carrier</text>
+                  <text x="344" y="196">Carrier</text>
+                  <text x="120" y="212">Termination</text>
+                  <text x="344" y="212">Termination</text>
+                  <text x="120" y="228">1</text>
+                  <text x="344" y="228">1</text>
+                  <text x="224" y="292">Carrier</text>
+                  <text x="264" y="292">B</text>
+                  <text x="120" y="308">Carrier</text>
+                  <text x="344" y="308">Carrier</text>
+                  <text x="120" y="324">Termination</text>
+                  <text x="344" y="324">Termination</text>
+                  <text x="120" y="340">2</text>
+                  <text x="344" y="340">2</text>
+                  <text x="8" y="420">\</text>
+                  <text x="80" y="420">Microwave</text>
+                  <text x="140" y="420">Node</text>
+                  <text x="192" y="420">/</text>
+                  <text x="280" y="420">\</text>
+                  <text x="352" y="420">Microwave</text>
+                  <text x="412" y="420">Node</text>
+                  <text x="464" y="420">/</text>
+                </g>
+              </svg><a href="#appendix-B.2-2.1.1" class="pilcrow">¶</a>
+</div>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-20-example" class="selfRef">2+0 Example</a>
