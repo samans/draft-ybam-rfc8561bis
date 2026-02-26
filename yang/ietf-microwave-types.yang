@@ -19,7 +19,7 @@ module ietf-microwave-types {
     "This is a YANG module for the entities in
      a generic interface protection mechanism.
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -37,23 +37,19 @@ module ietf-microwave-types {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
- revision 2026-01-15 {
+  revision 2026-02-26 {
     description
-      "Draft - Issue #49 New Coding Modulation value to cover new modulation value Issue";
+      "Coding Modulation value to cover new modulation value.
+       New rlt-mode grouping to remove duplication.
+      ";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
- revision 2025-10-03 {
+  revision 2019-06-19 {
     description
-      "Draft - Issue #44 Copyright statement Issue";
+      "Initial revision.";
     reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-  revision 2025-04-04 {
-    description
-      "Draft - Comression #32, new grouping Issue #35";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+      "RFC 8561: A YANG Data Model for Microwave Radio Link";
   }
 
   /*

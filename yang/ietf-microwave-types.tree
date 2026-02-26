@@ -1,0 +1,12 @@
+module: ietf-microwave-types
+
+  grouping rlt-mode:
+    +-- num-bonded-carriers        uint32
+    +-- num-protecting-carriers    uint32
+  grouping common-microwave-properties:
+    +-- tx-frequency                uint32
+    +--ro actual-rx-frequency?        uint32
+    +-- channel-separation          uint32
+    +--ro actual-transmitted-level?   power
+    +--ro actual-tx-cm?               identityref
+    +--ro actual-snir?                decimal64

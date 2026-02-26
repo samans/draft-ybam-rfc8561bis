@@ -51,7 +51,7 @@ module ietf-microwave-radio-link {
      entities in a generic microwave system.
 
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -69,27 +69,17 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
- revision 2026-01-15 {
+  revision 2026-02-26 {
     description
-      "Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue";
+      "TBD";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
-
-  revision 2025-10-03 {
+  revision 2019-06-19 {
     description
-      "Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue";
+      "Initial revision.";
     reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-
-  revision 2025-04-04 {
-    description
-      "Draft - Issue #32 Compression,
-               Issue #35 grouping common-microwave-properties,
-               Issue #31 added minimum-nominal-power";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
+      "RFC 8561: A YANG Data Model for Microwave Radio Link";
   }
 
   /*
@@ -153,7 +143,7 @@ module ietf-microwave-radio-link {
         " 'true' when the profile can be used to configure the
           reference-modulation in adaptive coding-modulation-mode.
           Otherwise the value is 'false' and the reference-modulation
-          to use cannot be configured 
+          to use cannot be configured
           (it could be selected automatically by the system).
         ";
     }
@@ -187,9 +177,9 @@ module ietf-microwave-radio-link {
     leaf id {
       type string;
       description
-        "Descriptive identity of the near-end radio link terminal 
-		 transmitted to be used by the far-end RLT for RLT connectivity check. 
-		 Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
+        "Descriptive identity of the near-end radio link terminal
+         transmitted to be used by the far-end RLT for RLT connectivity check.
+         Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
     }
     leaf far-end-id-check-enabled {
       type boolean;
@@ -197,17 +187,16 @@ module ietf-microwave-radio-link {
         "'true' value when the RLT connectivity check is used.
          'false' if the RLT connectivity check is not used.";
     }
-	leaf expected-far-end-id {
-	  when "../far-end-id-check-enabled = 'true'";
+    leaf expected-far-end-id {
+      when "../far-end-id-check-enabled = 'true'";
       type string;
       description
-        "Descriptive identity of the radio link terminal expected from 
+        "Descriptive identity of the radio link terminal expected from
          far-end RLT and used for RLT connectivity check (i.e., to
          check that the expected value is the same as the value
          received from the far-end RLT).
-		 By default it is the same as the 'id'.";
+         By default it is the same as the 'id'.";
     }
-	
     choice mode-option {
       mandatory true;
       description
@@ -318,12 +307,12 @@ module ietf-microwave-radio-link {
         key "name";
         config false;
         description
-        "The list of header compression profiles supported by the
-         RLT.
-         Header compression is typically vendor proprietary and it is
-         assumed there is no ambition to change that. For this reason
-         the list provides only generic attributes to be augmented by
-         vendor with proprietary implementation attributes.";
+          "The list of header compression profiles supported by the
+           RLT.
+           Header compression is typically vendor proprietary and it is
+           assumed there is no ambition to change that. For this reason
+           the list provides only generic attributes to be augmented by
+           vendor with proprietary implementation attributes.";
         leaf name {
           type string;
           description
@@ -383,25 +372,24 @@ module ietf-microwave-radio-link {
       type string;
       default "A";
       description
-        "ID of the carrier (e.g., A, B, C, or D) transmitted 
-		 to be used in XPIC and MIMO configurations by the far-end 
-		 CT for CT connectivity check.";
+        "ID of the carrier (e.g., A, B, C, or D) transmitted
+         to be used in XPIC and MIMO configurations by the far-end
+         CT for CT connectivity check.";
     }
-	leaf far-end-carrier-id-check-enabled {
+    leaf far-end-carrier-id-check-enabled {
       type boolean;
       description
         "'true' value when the CT connectivity check is used.
          'false' if the CT connectivity check is not used.";
     }
-	leaf expected-far-end-carrier-id {
-	  when "../far-end-carrier-id-check-enabled = 'true'";
+    leaf expected-far-end-carrier-id {
+      when "../far-end-carrier-id-check-enabled = 'true'";
       type string;
       description
         "Descriptive identity of the carrier expected from far-end CT (e.g., A, B, C, or D)
-         to check that it's connected to the correct near-end CT. 
+         to check that it's connected to the correct near-end CT.
          By default it is the same as the carrier-id.";
     }
-	
     leaf tx-enabled {
       type boolean;
       default "false";
@@ -430,9 +418,7 @@ module ietf-microwave-radio-link {
       description
         "Shows the operative status of the transmitter.";
     }
-
     uses mw-types:common-microwave-properties;
-
     choice freq-or-distance {
       mandatory true;
       description
@@ -615,7 +601,7 @@ module ietf-microwave-radio-link {
           description
             "the reference-modulation is the coding modulation to be
              used in the reference mode, as defined in
-             ETSI EN 302 217-1 V3.2.2 (2020-02). 
+             ETSI EN 302 217-1 V3.2.2 (2020-02).
              The reference mode identifies the operative mode which
              characteristics (i.e. system capacity, spectral
              efficiency class over a given channel separation) are
@@ -623,7 +609,7 @@ module ietf-microwave-radio-link {
              link per link coordination analysis. Its value has to be
              between the 'selected-min-acm' and the
              'selected-max-acm' attribute's values.
-         ";
+            ";
         }
       }
     }

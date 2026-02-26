@@ -299,7 +299,7 @@ In this document, names of data nodes and other data model objects are prefixed 
 ## YANG Tree
 
 ~~~~ ascii-art
-{::include ./trees/ietf-microwave-radio-link.tree}
+{::include-fold ./trees/ietf-microwave-radio-link.tree}
 ~~~~
 {: artwork-name="ietf-microwave-radio-link.tree"}
 
@@ -325,7 +325,7 @@ and {{!RFC7224}}, and it references {{TR102311}}, {{EN302217-1}},
 {{EN301129}}, and {{G.826}}.
 
 ~~~~ yang
-{::include ./ietf-microwave-radio-link.yang}
+{::include yang/ietf-microwave-radio-link.yang}
 ~~~~
 {: sourcecode-markers="true" sourcecode-name="ietf-microwave-radio-link@2025-10-03.yang"}
 
@@ -340,7 +340,7 @@ This module imports modules from {{!RFC8343}}, and it references
 {{G.808.1}}.
 
 ~~~~ yang
-{::include ./ietf-interface-protection.yang}
+{::include yang/ietf-interface-protection.yang}
 ~~~~
 {: sourcecode-markers="true" sourcecode-name="ietf-interface-protection@2025-10-03.yang"}
 
@@ -351,7 +351,7 @@ data modeling language.  These common types are designed to be
 imported by other modules defined in the microwave area.
 
 ~~~~ yang
-{::include ./ietf-microwave-types.yang}
+{::include yang/ietf-microwave-types.yang}
 ~~~~
 {: sourcecode-markers="true" sourcecode-name="ietf-microwave-types@2025-10-03.yang"}
 
@@ -498,7 +498,7 @@ To be added in a future revision of this draft.
 
 ## 1+0 Instance
 
-~~~~ ascii-art
+~~~~ aasvg
 {::include ./figures/1+0-example.txt}
 ~~~~
 {: #fig-1-plus-0-example title="1+0 Example"
@@ -507,7 +507,7 @@ artwork-name="1+0-example.txt"}
 {{fig-1-plus-0-example}} shows a 1+0 example.  The following instance shows the 1+0 configuration of the Near End node.
 
 ~~~~ ascii-art
-{::include ./json/1+0-example.json}
+{::include-fold ./json/1+0-example.json}
 ~~~~
 {: artwork-name="1+0-example.json"}
 
@@ -516,7 +516,7 @@ artwork-name="1+0-example.txt"}
 
 {{fig-2-plus-0-example}} shows a 2+0 example.
 
-~~~~ ascii-art
+~~~~ aasvg
 {::include ./figures/2+0-example.txt}
 ~~~~
 {: #fig-2-plus-0-example title="2+0 Example"
@@ -526,7 +526,7 @@ The following instance shows the 2+0 configuration of the Near End
 node.
 
 ~~~~ ascii-art
-{::include ./json/2+0-example.json}
+{::include-fold ./json/2+0-example.json}
 ~~~~
 {: artwork-name="2+0-example.json"}
 
@@ -536,7 +536,7 @@ The following instance shows the XPIC configuration of the Near End
 node.
 
 ~~~~ ascii-art
-{::include ./json/2+0-xpic-example.json}
+{::include-fold ./json/2+0-xpic-example.json}
 ~~~~
 {: artwork-name="2+0-xpic-example.json"}
 ~~~~

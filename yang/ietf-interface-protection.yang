@@ -24,7 +24,7 @@ module ietf-interface-protection {
     "This is a YANG module for the entities in
      a generic interface protection mechanism.
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -42,21 +42,9 @@ module ietf-interface-protection {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2025-10-03 {
+  revision 2026-02-26 {
     description
-      "Draft - Issue #44 Copyright statement Issue";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-  revision 2024-03-03 {
-    description
-      "Updating reference to RFC XXXX. - pretty printing";
-    reference
-      "RFC XXXX: A YANG Data Model for Microwave Radio Link";
-  }
-  revision 2020-10-06 {
-    description
-      "Updating reference to RFC XXXX.";
+      "Canonical Order and copyright updated";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }
