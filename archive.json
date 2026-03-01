@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T02:44:03.476904+00:00",
+  "timestamp": "2026-03-01T03:14:27.310044+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2404,9 +2404,17 @@
       ],
       "body": "New mail address: danilo.pala@alice.it\n",
       "createdAt": "2026-01-07T18:24:00Z",
-      "updatedAt": "2026-01-15T10:25:19Z",
+      "updatedAt": "2026-02-26T10:57:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "mailto:Danilo.Pala@TechMahindra.com\n\nTech Mahindra",
+          "createdAt": "2026-02-26T10:57:00Z",
+          "updatedAt": "2026-02-26T10:57:00Z"
+        }
+      ]
     },
     {
       "number": 55,
@@ -2434,9 +2442,25 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "[Repository Home](https://github.com/samans/draft-ybam-rfc8561bis/)\n[Editor's Home](https://samans.github.io/draft-ybam-rfc8561bis/ )\n\n2025-02-25\n - Deal with Pull request 1 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete (orange dot to green checkmark)\n - Deal with Pull request 2 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete\n - Issue #50 (Rename the draft) \u2013 done in github and then pulled to local\n   - Github edit of draft-ybam-rfc8561bis.md to rename to draft-ybam-ccamp-rfc8561bis.md\n     - Need to change the docname statement in the markdown file.\n   - Retrieve environment from github\n     - git pull\n     - Fix .gitignore file to ignore\n       - pretty/\n       - old/\n       - *.bash\n  - Fix the tooling on the local git to support the new tooling \u2013 local\n    - Important note: Ubuntu 24.04 LTS is recommended, 20.04 LTS doesn\u2019t have the ruby support needed.\n    - Install ruby\n      - sudo apt install ruby \n    - Install [cabo/kramdown-rfc: An XML2RFC (RFC799x) backend for Thomas Leitner's kramdown markdown parser](https://github.com/cabo/kramdown-rfc)\n      - sudo gem install kramdown-rfc\n    - Install xml2rfc\n      - sudo apt install xml2rfc\n    - Delete \u2018lib/.venv\u2019 from local git repository\n      - Run make which should recreate the \u2018lib/.venv\u2019 environment.\n  - Add compile checks and pretty printing\n    - If environment isn\u2019t configured\u2026\n      - Python3 -m venv ~/venv  ## This creates a virtual environment, put the environment wherever you want (this one is in my home directory and called venv)\n        - source ~/venv/bin/activate  ## This activates the virtural environment\n      - pip3 install setuptools\n      - pip3 install pyang\n\n2025-02-26\n  - Issue #55 (yang revision statements)\n  - Issue #51 (Danilo\u2019s email)\n  - Markdown generation of svg from ascii art\n  - Markdown folding of JSON codes\n  - Generate a new draft\n\nLater\n  - Submit the draft",
+      "body": "[Repository Home](https://github.com/samans/draft-ybam-rfc8561bis/)\n[Editor's Home](https://samans.github.io/draft-ybam-rfc8561bis/ )\n\n2025-02-25\n - Deal with Pull request 1 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete (orange dot to green checkmark)\n - Deal with Pull request 2 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete\n - Issue #50 (Rename the draft) \u2013 done in github and then pulled to local\n   - Github edit of draft-ybam-rfc8561bis.md to rename to draft-ybam-ccamp-rfc8561bis.md\n     - Need to change the docname statement in the markdown file.\n   - Retrieve environment from github\n     - git pull\n     - Fix .gitignore file to ignore\n       - pretty/\n       - old/\n       - *.bash\n  - Fix the tooling on the local git to support the new tooling \u2013 local\n    - Important note: Ubuntu 24.04 LTS is recommended, 20.04 LTS doesn\u2019t have the ruby support needed.\n    - Install ruby\n      - sudo apt install ruby \n    - Install [cabo/kramdown-rfc: An XML2RFC (RFC799x) backend for Thomas Leitner's kramdown markdown parser](https://github.com/cabo/kramdown-rfc)\n      - sudo gem install kramdown-rfc\n    - Install xml2rfc\n      - sudo apt install xml2rfc\n    - Delete \u2018lib/.venv\u2019 from local git repository\n      - Run make which should recreate the \u2018lib/.venv\u2019 environment.\n  - Add compile checks and pretty printing\n    - If environment isn\u2019t configured\u2026\n      - Python3 -m venv ~/venv  ## This creates a virtual environment, put the environment wherever you want (this one is in my home directory and called venv)\n        - source ~/venv/bin/activate  ## This activates the virtural environment\n      - pip3 install setuptools\n      - pip3 install pyang\n\n2025-02-26 (done)\n  - Issue #55 (yang revision statements)\n  - Issue #51 (Danilo\u2019s email)\n  - Markdown generation of svg from ascii art\n    - use ~~~~ aasvg as the instruction for figures to automatically change from ascii art to svg.\n  - Markdown folding\n    - Use ::include for yang (since yang needs to be manually folded)\n    - Use ::include-fold for json and trees\n\n2026-02-27\n  - Create a file with all the revision statements and request comments on what to put there.\n  - Update the compile.bash script to do the diff against old, add context to the diff.\n  - Generate a new draft\n\n2026-03-02\n  - Use \"make next\" to make a versioned folder for idnits checking\n  - Tag the release in github using the draft-name as the tag name and release name (including the version).\n  - Submit the draft",
       "createdAt": "2026-02-25T12:24:27Z",
-      "updatedAt": "2026-02-25T12:24:27Z",
+      "updatedAt": "2026-02-26T12:51:10Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 57,
+      "id": "I_kwDOHLTwws7uF075",
+      "title": "Ethernet loopback for Carrier Termination",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/57",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A new type of loopback on radio signal is requested to redirect the ethernet flows on the Carrier Termination towards client or radio direction.\n\nThe proposal is to add a new leaf 'eth-loop' on CT interface:\n\n```\nleaf eth-loop {\n      type enumeration {\n        enum disabled {\n          description\n            \"Disables the ethernet Loop.\";\n        }\n        enum client {\n          description\n            \"Loops the signal back to the client side.\";\n        }\n        enum radio {\n          description\n            \"Loops the signal back to the radio side.\";\n        }\n      }\n      default \"disabled\";\n      description\n        \"Enable (client/radio) or disable (disabled)\n         the ethernet Loop, which loops the signal back to\n         the client side or the radio side.\";\n    }\n```\n",
+      "createdAt": "2026-02-26T09:56:41Z",
+      "updatedAt": "2026-02-26T09:56:41Z",
       "closedAt": null,
       "comments": []
     }
