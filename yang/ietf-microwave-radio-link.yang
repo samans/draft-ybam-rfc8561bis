@@ -69,7 +69,7 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2026-02-26 {
+  revision 2026-03-02 {
     description
       "TBD";
     reference
@@ -178,8 +178,10 @@ module ietf-microwave-radio-link {
       type string;
       description
         "Descriptive identity of the near-end radio link terminal
-         transmitted to be used by the far-end RLT for RLT connectivity check.
-         Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
+         transmitted to be used by the far-end RLT for RLT
+         connectivity check.
+         Does not need to be configured if RLT connectivity check is
+         not used by the far-end RLT.";
     }
     leaf far-end-id-check-enabled {
       type boolean;
@@ -191,10 +193,10 @@ module ietf-microwave-radio-link {
       when "../far-end-id-check-enabled = 'true'";
       type string;
       description
-        "Descriptive identity of the radio link terminal expected from
-         far-end RLT and used for RLT connectivity check (i.e., to
-         check that the expected value is the same as the value
-         received from the far-end RLT).
+        "Descriptive identity of the radio link terminal expected
+         from far-end RLT and used for RLT connectivity check
+         (i.e., to check that the expected value is the same as the
+         value received from the far-end RLT).
          By default it is the same as the 'id'.";
     }
     choice mode-option {
@@ -309,10 +311,11 @@ module ietf-microwave-radio-link {
         description
           "The list of header compression profiles supported by the
            RLT.
-           Header compression is typically vendor proprietary and it is
-           assumed there is no ambition to change that. For this reason
-           the list provides only generic attributes to be augmented by
-           vendor with proprietary implementation attributes.";
+           Header compression is typically vendor proprietary and it
+           is assumed there is no ambition to change that. For this
+           reason the list provides only generic attributes to be
+           augmented by vendor with proprietary implementation
+           attributes.";
         leaf name {
           type string;
           description
@@ -386,8 +389,9 @@ module ietf-microwave-radio-link {
       when "../far-end-carrier-id-check-enabled = 'true'";
       type string;
       description
-        "Descriptive identity of the carrier expected from far-end CT (e.g., A, B, C, or D)
-         to check that it's connected to the correct near-end CT.
+        "Descriptive identity of the carrier expected from far-end
+         CT (e.g., A, B, C, or D) to check that it's connected to
+         the correct near-end CT.
          By default it is the same as the carrier-id.";
     }
     leaf tx-enabled {
