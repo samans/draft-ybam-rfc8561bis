@@ -1577,7 +1577,7 @@ and therefore are not applicable for RLT and CT.<a href="#section-1.5-3" class="
 and <span>[<a href="#RFC7224" class="cite xref">RFC7224</a>]</span>, and it references <span>[<a href="#TR102311" class="cite xref">TR102311</a>]</span>, <span>[<a href="#EN302217-1" class="cite xref">EN302217-1</a>]</span>,
 <span>[<a href="#EN301129" class="cite xref">EN301129</a>]</span>, and <span>[<a href="#G.826" class="cite xref">G.826</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-2-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-radio-link@2025-10-03.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-radio-link@2026-03-02.yang"
 
 module ietf-microwave-radio-link {
   yang-version 1.1;
@@ -1650,7 +1650,7 @@ module ietf-microwave-radio-link {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2026-02-26 {
+  revision 2026-03-02 {
     description
       "TBD";
     reference
@@ -1759,8 +1759,10 @@ module ietf-microwave-radio-link {
       type string;
       description
         "Descriptive identity of the near-end radio link terminal
-         transmitted to be used by the far-end RLT for RLT connectivity check.
-         Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
+         transmitted to be used by the far-end RLT for RLT
+         connectivity check.
+         Does not need to be configured if RLT connectivity check is
+         not used by the far-end RLT.";
     }
     leaf far-end-id-check-enabled {
       type boolean;
@@ -1772,10 +1774,10 @@ module ietf-microwave-radio-link {
       when "../far-end-id-check-enabled = 'true'";
       type string;
       description
-        "Descriptive identity of the radio link terminal expected from
-         far-end RLT and used for RLT connectivity check (i.e., to
-         check that the expected value is the same as the value
-         received from the far-end RLT).
+        "Descriptive identity of the radio link terminal expected
+         from far-end RLT and used for RLT connectivity check
+         (i.e., to check that the expected value is the same as the
+         value received from the far-end RLT).
          By default it is the same as the 'id'.";
     }
     choice mode-option {
@@ -1890,10 +1892,11 @@ module ietf-microwave-radio-link {
         description
           "The list of header compression profiles supported by the
            RLT.
-           Header compression is typically vendor proprietary and it is
-           assumed there is no ambition to change that. For this reason
-           the list provides only generic attributes to be augmented by
-           vendor with proprietary implementation attributes.";
+           Header compression is typically vendor proprietary and it
+           is assumed there is no ambition to change that. For this
+           reason the list provides only generic attributes to be
+           augmented by vendor with proprietary implementation
+           attributes.";
         leaf name {
           type string;
           description
@@ -1967,8 +1970,9 @@ module ietf-microwave-radio-link {
       when "../far-end-carrier-id-check-enabled = 'true'";
       type string;
       description
-        "Descriptive identity of the carrier expected from far-end CT (e.g., A, B, C, or D)
-         to check that it's connected to the correct near-end CT.
+        "Descriptive identity of the carrier expected from far-end
+         CT (e.g., A, B, C, or D) to check that it's connected to
+         the correct near-end CT.
          By default it is the same as the carrier-id.";
     }
     leaf tx-enabled {
@@ -2750,7 +2754,7 @@ available for other interface types.<a href="#section-3-1" class="pilcrow">¶</a
 <p id="section-3-2">This module imports modules from <span>[<a href="#RFC8343" class="cite xref">RFC8343</a>]</span>, and it references
 <span>[<a href="#G.808.1" class="cite xref">G.808.1</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-3-3">
-<pre>&lt;CODE BEGINS&gt; file "ietf-interface-protection@2025-10-03.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-interface-protection@2026-03-02.yang"
 
 module ietf-interface-protection {
   yang-version 1.1;
@@ -2796,7 +2800,7 @@ module ietf-interface-protection {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2026-02-26 {
+  revision 2026-03-02 {
     description
       "Canonical Order and copyright updated";
     reference
@@ -3045,7 +3049,7 @@ module ietf-interface-protection {
 data modeling language.  These common types are designed to be
 imported by other modules defined in the microwave area.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-4-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-types@2025-10-03.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-microwave-types@2026-03-02.yang"
 
 module ietf-microwave-types {
   yang-version 1.1;
@@ -3086,11 +3090,9 @@ module ietf-microwave-types {
   // replace the revision date with the module publication date
   // the format is (year-month-day)
 
-  revision 2026-02-26 {
+  revision 2026-03-02 {
     description
-      "Coding Modulation value to cover new modulation value.
-       New rlt-mode grouping to remove duplication.
-      ";
+      "TBD";
     reference
       "RFC XXXX: A YANG Data Model for Microwave Radio Link";
   }

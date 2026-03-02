@@ -386,7 +386,7 @@ Table of Contents
    and [RFC7224], and it references [TR102311], [EN302217-1],
    [EN301129], and [G.826].
 
-   <CODE BEGINS> file "ietf-microwave-radio-link@2025-10-03.yang"
+   <CODE BEGINS> file "ietf-microwave-radio-link@2026-03-02.yang"
    module ietf-microwave-radio-link {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-microwave-radio-link";
@@ -458,7 +458,7 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2026-02-26 {
+     revision 2026-03-02 {
        description
          "TBD";
        reference
@@ -567,8 +567,10 @@ Table of Contents
          type string;
          description
            "Descriptive identity of the near-end radio link terminal
-            transmitted to be used by the far-end RLT for RLT connectivity check.
-            Does not need to be configured if RLT connectivity check is not used by the far-end RLT.";
+            transmitted to be used by the far-end RLT for RLT
+            connectivity check.
+            Does not need to be configured if RLT connectivity check is
+            not used by the far-end RLT.";
        }
        leaf far-end-id-check-enabled {
          type boolean;
@@ -580,10 +582,10 @@ Table of Contents
          when "../far-end-id-check-enabled = 'true'";
          type string;
          description
-           "Descriptive identity of the radio link terminal expected from
-            far-end RLT and used for RLT connectivity check (i.e., to
-            check that the expected value is the same as the value
-            received from the far-end RLT).
+           "Descriptive identity of the radio link terminal expected
+            from far-end RLT and used for RLT connectivity check
+            (i.e., to check that the expected value is the same as the
+            value received from the far-end RLT).
             By default it is the same as the 'id'.";
        }
        choice mode-option {
@@ -698,10 +700,11 @@ Table of Contents
            description
              "The list of header compression profiles supported by the
               RLT.
-              Header compression is typically vendor proprietary and it is
-              assumed there is no ambition to change that. For this reason
-              the list provides only generic attributes to be augmented by
-              vendor with proprietary implementation attributes.";
+              Header compression is typically vendor proprietary and it
+              is assumed there is no ambition to change that. For this
+              reason the list provides only generic attributes to be
+              augmented by vendor with proprietary implementation
+              attributes.";
            leaf name {
              type string;
              description
@@ -775,8 +778,9 @@ Table of Contents
          when "../far-end-carrier-id-check-enabled = 'true'";
          type string;
          description
-           "Descriptive identity of the carrier expected from far-end CT (e.g., A, B, C, or D)
-            to check that it's connected to the correct near-end CT.
+           "Descriptive identity of the carrier expected from far-end
+            CT (e.g., A, B, C, or D) to check that it's connected to
+            the correct near-end CT.
             By default it is the same as the carrier-id.";
        }
        leaf tx-enabled {
@@ -1553,7 +1557,7 @@ Table of Contents
    This module imports modules from [RFC8343], and it references
    [G.808.1].
 
-   <CODE BEGINS> file "ietf-interface-protection@2025-10-03.yang"
+   <CODE BEGINS> file "ietf-interface-protection@2026-03-02.yang"
    module ietf-interface-protection {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-interface-protection";
@@ -1598,7 +1602,7 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2026-02-26 {
+     revision 2026-03-02 {
        description
          "Canonical Order and copyright updated";
        reference
@@ -1841,7 +1845,7 @@ Table of Contents
    data modeling language.  These common types are designed to be
    imported by other modules defined in the microwave area.
 
-   <CODE BEGINS> file "ietf-microwave-types@2025-10-03.yang"
+   <CODE BEGINS> file "ietf-microwave-types@2026-03-02.yang"
    module ietf-microwave-types {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-microwave-types";
@@ -1881,11 +1885,9 @@ Table of Contents
      // replace the revision date with the module publication date
      // the format is (year-month-day)
 
-     revision 2026-02-26 {
+     revision 2026-03-02 {
        description
-         "Coding Modulation value to cover new modulation value.
-          New rlt-mode grouping to remove duplication.
-         ";
+         "TBD";
        reference
          "RFC XXXX: A YANG Data Model for Microwave Radio Link";
      }
