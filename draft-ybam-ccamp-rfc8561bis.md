@@ -286,7 +286,7 @@ In this document, names of data nodes and other data model objects are prefixed 
 
 | Prefix   | YANG Module               | Reference
 | mrl      | ietf-microwave-radio-link | This document
-| yang     | ietf-yang-types           | {{!RFC6991}}
+| yang     | ietf-yang-types           | {{!RFC9911}}
 | ianaift  | iana-if-type              | {{IANA-if-type-module}}
 | if       | ietf-interfaces           | {{!RFC8343}}
 | ifprot   | ietf-interface-protection | This document
@@ -320,7 +320,7 @@ and therefore are not applicable for RLT and CT.
 
 # Microwave Radio Link YANG Data Model
 
-This module imports typedefs and modules from {{!RFC6991}}, {{!RFC8343}}
+This module imports typedefs and modules from {{!RFC9911}}, {{!RFC8343}}
 and {{!RFC7224}}, and it references {{TR102311}}, {{EN302217-1}},
 {{EN301129}}, and {{G.826}}.
 

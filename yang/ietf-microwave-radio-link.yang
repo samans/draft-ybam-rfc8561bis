@@ -6,7 +6,7 @@ module ietf-microwave-radio-link {
   import ietf-yang-types {
     prefix yang;
     reference
-      "RFC 6991";
+      "RFC 9911";
   }
   import iana-if-type {
     prefix ianaift;
