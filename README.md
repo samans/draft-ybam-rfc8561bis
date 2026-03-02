@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "A YANG Data Model for Microwave Radio Link".
 
-* [Editor's Copy](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-rfc8561bis.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ybam-rfc8561bis)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ybam-rfc8561bis)
-* [Compare Editor's Copy to Individual Draft](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-rfc8561bis.diff)
+* [Editor's Copy](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-ccamp-rfc8561bis.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ybam-ccamp-rfc8561bis)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ybam-ccamp-rfc8561bis)
+* [Compare Editor's Copy to Individual Draft](https://samans.github.io/draft-ybam-rfc8561bis/#go.draft-ybam-ccamp-rfc8561bis.diff)
 
 
 ## Contributing
