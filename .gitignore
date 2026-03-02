@@ -1,13 +1,11 @@
+*.bash
 *.html
 *.pdf
 *.redxml
 *.swp
 *.txt
 *.upload
-*.bash
 *~
-pretty/
-old/
 .tags
 /*-[0-9][0-9].xml
 /.*.mk
@@ -21,7 +19,10 @@ old/
 /versioned/
 Gemfile.lock
 archive.json
+draft-ybam-ccamp-rfc8561bis.xml
 draft-ybam-rfc8561bis.xml
+old/
 package-lock.json
+pretty/
 report.xml
 !requirements.txt
