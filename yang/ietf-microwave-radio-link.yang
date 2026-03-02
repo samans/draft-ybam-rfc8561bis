@@ -38,7 +38,7 @@ module ietf-microwave-radio-link {
       Xi Li (Xi.Li@neclab.eu)
       Daniela Spreafico (daniela.spreafico@nokia.com)
       Marko Vaupotic (Marko.Vaupotic@aviatnet.com)
-      Danilo Pala (danilo.pala@siaemic.com)";
+      Danilo Pala (danilo.pala@techmahindra.com)";
   description
     "This YANG module defines a YANG data model for control
      and management of radio link interfaces and their

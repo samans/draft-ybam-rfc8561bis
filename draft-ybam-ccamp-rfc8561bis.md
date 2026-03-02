@@ -53,8 +53,8 @@ author:
     email: daniela.spreafico@nokia.com
  -
     fullname: Danilo Pala
-    organization: SIAE
-    email: danilo.pala@saiemic.com
+    organization: Tech Mahindra
+    email: danilo.pala@techmahindra.com
 
 contributor:
  -
