@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-01T03:14:27.310044+00:00",
+  "timestamp": "2026-03-03T02:48:09.423788+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2444,9 +2444,17 @@
       "labels": [],
       "body": "[Repository Home](https://github.com/samans/draft-ybam-rfc8561bis/)\n[Editor's Home](https://samans.github.io/draft-ybam-rfc8561bis/ )\n\n2025-02-25\n - Deal with Pull request 1 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete (orange dot to green checkmark)\n - Deal with Pull request 2 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete\n - Issue #50 (Rename the draft) \u2013 done in github and then pulled to local\n   - Github edit of draft-ybam-rfc8561bis.md to rename to draft-ybam-ccamp-rfc8561bis.md\n     - Need to change the docname statement in the markdown file.\n   - Retrieve environment from github\n     - git pull\n     - Fix .gitignore file to ignore\n       - pretty/\n       - old/\n       - *.bash\n  - Fix the tooling on the local git to support the new tooling \u2013 local\n    - Important note: Ubuntu 24.04 LTS is recommended, 20.04 LTS doesn\u2019t have the ruby support needed.\n    - Install ruby\n      - sudo apt install ruby \n    - Install [cabo/kramdown-rfc: An XML2RFC (RFC799x) backend for Thomas Leitner's kramdown markdown parser](https://github.com/cabo/kramdown-rfc)\n      - sudo gem install kramdown-rfc\n    - Install xml2rfc\n      - sudo apt install xml2rfc\n    - Delete \u2018lib/.venv\u2019 from local git repository\n      - Run make which should recreate the \u2018lib/.venv\u2019 environment.\n  - Add compile checks and pretty printing\n    - If environment isn\u2019t configured\u2026\n      - Python3 -m venv ~/venv  ## This creates a virtual environment, put the environment wherever you want (this one is in my home directory and called venv)\n        - source ~/venv/bin/activate  ## This activates the virtural environment\n      - pip3 install setuptools\n      - pip3 install pyang\n\n2025-02-26 (done)\n  - Issue #55 (yang revision statements)\n  - Issue #51 (Danilo\u2019s email)\n  - Markdown generation of svg from ascii art\n    - use ~~~~ aasvg as the instruction for figures to automatically change from ascii art to svg.\n  - Markdown folding\n    - Use ::include for yang (since yang needs to be manually folded)\n    - Use ::include-fold for json and trees\n\n2026-02-27\n  - Create a file with all the revision statements and request comments on what to put there.\n  - Update the compile.bash script to do the diff against old, add context to the diff.\n  - Generate a new draft\n\n2026-03-02\n  - Use \"make next\" to make a versioned folder for idnits checking\n  - Tag the release in github using the draft-name as the tag name and release name (including the version).\n  - Submit the draft",
       "createdAt": "2026-02-25T12:24:27Z",
-      "updatedAt": "2026-02-26T12:51:10Z",
+      "updatedAt": "2026-03-02T12:23:16Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "### ietf-interface-protection\n```\n  revision 2026-02-26 {\n    description\n      \"Canonical Order and copyright updated\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-10-03 {\n    description\n      \"Draft - Issue #44 Copyright statement Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2024-03-03 {\n    description\n      \"Updating reference to RFC XXXX. - pretty printing\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2020-10-06 {\n    description\n      \"Updating reference to RFC XXXX.\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2019-06-19 {\n    description\n      \"Initial revision.\";\n    reference\n      \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n  }\n```\n\n### ietf-microwave-radio-link\n\n```\n revision 2026-02-26 {\n   description\n     \"TBD\";\n   reference\n     \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n }\n revision 2026-01-15 {\n    description\n      \"Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-10-03 {\n    description\n      \"Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-04-04 {\n    description\n      \"Draft - Issue #32 Compression,\n               Issue #35 grouping common-microwave-properties,\n               Issue #31 added minimum-nominal-power\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2019-06-19 {\n    description\n      \"Initial revision.\";\n    reference\n      \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n  }\n```\n\n### ietf-microwave-types\n\n```\n  revision 2026-02-26 {\n    description\n      \"Coding Modulation value to cover new modulation value.\n       New rlt-mode grouping to remove duplication.\n      \";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-10-03 {\n    description\n      \"Draft - Issue #44 Copyright statement Issue\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2025-04-04 {\n    description\n      \"Draft - Comression #32, new grouping Issue #35\";\n    reference\n      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n  }\n  revision 2019-06-19 {\n    description\n      \"Initial revision.\";\n    reference\n      \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n  }\n```",
+          "createdAt": "2026-03-02T12:23:15Z",
+          "updatedAt": "2026-03-02T12:23:15Z"
+        }
+      ]
     },
     {
       "number": 57,
@@ -2461,6 +2469,54 @@
       "body": "A new type of loopback on radio signal is requested to redirect the ethernet flows on the Carrier Termination towards client or radio direction.\n\nThe proposal is to add a new leaf 'eth-loop' on CT interface:\n\n```\nleaf eth-loop {\n      type enumeration {\n        enum disabled {\n          description\n            \"Disables the ethernet Loop.\";\n        }\n        enum client {\n          description\n            \"Loops the signal back to the client side.\";\n        }\n        enum radio {\n          description\n            \"Loops the signal back to the radio side.\";\n        }\n      }\n      default \"disabled\";\n      description\n        \"Enable (client/radio) or disable (disabled)\n         the ethernet Loop, which loops the signal back to\n         the client side or the radio side.\";\n    }\n```\n",
       "createdAt": "2026-02-26T09:56:41Z",
       "updatedAt": "2026-02-26T09:56:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 58,
+      "id": "I_kwDOHLTwws7vF3g0",
+      "title": "Backward Compatibility Checking",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/58",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Review this:\ncheck BC changes from ietf-microwave-radio-link@2019-06-19:\nietf-microwave-radio-link.yang:1: error: the typedef 'power', defined at old/ietf-microwave-radio-link@2019-06-19.yang:91 is illegally removed\nietf-microwave-radio-link.yang:1: error: the leaf 'mode', defined at old/ietf-microwave-radio-link@2019-06-19.yang:119 is illegally removed\nietf-microwave-radio-link.yang:507: error: the mandatory node minimum-nominal-power is illegally added\nietf-microwave-types.yang:433: error: the base 'mw-types:coding-modulation' is illegally added",
+      "createdAt": "2026-03-02T13:30:36Z",
+      "updatedAt": "2026-03-02T13:30:36Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 59,
+      "id": "I_kwDOHLTwws7vF43t",
+      "title": "Update the Revision Statements",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/59",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "> ### ietf-interface-protection\n> ```\n>   revision 2026-02-26 {\n>     description\n>       \"Canonical Order and copyright updated\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2024-03-03 {\n>     description\n>       \"Updating reference to RFC XXXX. - pretty printing\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2020-10-06 {\n>     description\n>       \"Updating reference to RFC XXXX.\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ```\n> \n> ### ietf-microwave-radio-link\n> \n> ```\n>  revision 2026-02-26 {\n>    description\n>      \"TBD\";\n>    reference\n>      \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>  }\n>  revision 2026-01-15 {\n>     description\n>       \"Draft - Issue #25 radio-signal-id (Trail trace identifier (TTI)) Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Pyang reports warnings about the IETF Trust Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-04-04 {\n>     description\n>       \"Draft - Issue #32 Compression,\n>                Issue #35 grouping common-microwave-properties,\n>                Issue #31 added minimum-nominal-power\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ```\n> \n> ### ietf-microwave-types\n> \n> ```\n>   revision 2026-02-26 {\n>     description\n>       \"Coding Modulation value to cover new modulation value.\n>        New rlt-mode grouping to remove duplication.\n>       \";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-10-03 {\n>     description\n>       \"Draft - Issue #44 Copyright statement Issue\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2025-04-04 {\n>     description\n>       \"Draft - Comression #32, new grouping Issue #35\";\n>     reference\n>       \"RFC XXXX: A YANG Data Model for Microwave Radio Link\";\n>   }\n>   revision 2019-06-19 {\n>     description\n>       \"Initial revision.\";\n>     reference\n>       \"RFC 8561: A YANG Data Model for Microwave Radio Link\";\n>   }\n> ``` \n\n _Originally posted by @samans in [#56](https://github.com/samans/draft-ybam-rfc8561bis/issues/56#issuecomment-3984064041)_",
+      "createdAt": "2026-03-02T13:31:46Z",
+      "updatedAt": "2026-03-02T13:31:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 60,
+      "id": "I_kwDOHLTwws7vIcA7",
+      "title": "Fix md file to get yang trees from yang directory",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/60",
+      "state": "OPEN",
+      "author": "samans",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix the .md file to get yang trees from yang directory and delete the trees directory.\n\nThe trees are generated by the compile.bash script and stored in the yang/ directory.\n",
+      "createdAt": "2026-03-02T15:52:00Z",
+      "updatedAt": "2026-03-02T15:52:00Z",
       "closedAt": null,
       "comments": []
     }
