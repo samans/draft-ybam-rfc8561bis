@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-03T02:48:09.423788+00:00",
+  "timestamp": "2026-03-08T02:47:45.976912+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1362,7 +1362,7 @@
       "id": "I_kwDOHLTwws54THDI",
       "title": "Feature: radio-signal-id (Trail trace identifier (TTI))",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/25",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1375,8 +1375,8 @@
       ],
       "body": "This issue is related to #22 and should address the following ONF parameters:\r\n\r\n\r\n```\r\n +--ro air-interface:supported-radio-signal-id-datatype?            radio-signal-id-datatype-type\tx\r\n +--ro air-interface:supported-radio-signal-id-length?              int16\tx\r\n +--ro air-interface:expected-equals-transmitted-radio-signal-id?   boolean\tx\r\n +--rw air-interface:transmitted-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--rw air-interface:expected-radio-signal-id\tx\r\n |  +--rw air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--rw air-interface:alphanumeric-radio-signal-id?   string\tx\r\n +--ro air-interface:received-radio-signal-id\tx\r\n |  +--ro air-interface:numeric-radio-signal-id?        int32\tx\r\n |  +--ro air-interface:alphanumeric-radio-signal-id?   string\tx\r\n |  +--rw signalling-format?    string\tx\r\n```\r\n\r\n**Feature description.**\r\n\r\nThere should be a to transmit a configurable ID to the receiver. if the receiver detects a mismatch between the received and expected ID an alarm should be raised.\r\n\r\n\r\n**personal remarks:**\r\nThe alarm is also known as \"Trail trace identifier (TTI) mismatch\" in OTN - ITU-T G.709/Section 15.2\r\n\r\nI could not find in IETF a related model\r\n\r\nA similar model can be found in openconfig: https://github.com/openconfig/public/blob/master/release/models/optical-transport/openconfig-terminal-device.yang#L481\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2023-11-30T09:55:44Z",
-      "updatedAt": "2026-01-15T10:15:09Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T10:48:08Z",
+      "closedAt": "2026-03-05T10:48:08Z",
       "comments": [
         {
           "author": "demx8as6",
@@ -1473,16 +1473,14 @@
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "DanielaSpreafico"
+        "samans"
       ],
       "labels": [
-        "Discussion Required",
-        "update yang",
-        "gap analysis"
+        "update yang"
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2025-12-11T10:26:03Z",
+      "updatedAt": "2026-03-05T10:40:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -1526,6 +1524,13 @@
           "body": "On the meeting Dec 11 we concluded that the use case is about the ability to manage multiple receivers (transmitters?) in an SDC configuration.\nSince SDC might have a larger impact on the model than just adding the possibility to enable different receivers individually, there is a need to broaden the discussion and look at the definition of what a CT is, other leafs that might need to be duplicated for each receiver, etc. It was agreed that we proceed with additional input as comments and and discussions on the coming weekly meetings.",
           "createdAt": "2025-12-11T10:26:03Z",
           "updatedAt": "2025-12-11T10:26:03Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "> In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\n> \n> **Proposed solution:**\n> \n> Add in the augmentation to the ietf-interface the following parameters\n> \n> ```\n>   |     +--rw mrl:rx-enabled?                     boolean\n>   |     +--ro mrl:rx-oper-status?                 enumeration\n> ```\n\nThis addition can be made.  The space diversity issue will be moved to a new issue. ",
+          "createdAt": "2026-03-05T10:39:43Z",
+          "updatedAt": "2026-03-05T10:39:43Z"
         }
       ]
     },
@@ -2327,7 +2332,7 @@
       "id": "I_kwDOHLTwws7R33k8",
       "title": "New Coding Modulation value to cover new modulation value.",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/49",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2339,8 +2344,8 @@
       ],
       "body": "On _ietf-microwave-type_ module a new IDENTITY based on coding-modulation IDENTITY is needed to cover the 1/4 bpsk modulation case. ",
       "createdAt": "2025-10-16T09:34:36Z",
-      "updatedAt": "2026-01-15T11:04:04Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T10:48:31Z",
+      "closedAt": "2026-03-05T10:48:31Z",
       "comments": [
         {
           "author": "tkall",
@@ -2363,7 +2368,7 @@
       "id": "I_kwDOHLTwws7ZW3Jb",
       "title": "Rename draft name to target it to CCAMP WG",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/50",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2375,8 +2380,8 @@
       ],
       "body": "Rename the draft as draft-ybam-cccamp-rfc8561bis-00 in the next update",
       "createdAt": "2025-11-20T10:41:27Z",
-      "updatedAt": "2025-12-18T10:18:40Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T10:07:40Z",
+      "closedAt": "2026-03-05T10:07:40Z",
       "comments": [
         {
           "author": "samans",
@@ -2392,7 +2397,7 @@
       "id": "I_kwDOHLTwws7h5HWh",
       "title": "Updating Danilo mail address",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/51",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2404,8 +2409,8 @@
       ],
       "body": "New mail address: danilo.pala@alice.it\n",
       "createdAt": "2026-01-07T18:24:00Z",
-      "updatedAt": "2026-02-26T10:57:00Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T10:07:49Z",
+      "closedAt": "2026-03-05T10:07:49Z",
       "comments": [
         {
           "author": "samans",
@@ -2421,15 +2426,15 @@
       "id": "I_kwDOHLTwws7mPbt4",
       "title": "Clean-up YANG revision statements",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "italobusi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "See the guidelines in [RFC 8407-bis](https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis#name-module-header-meta-and-revi)",
       "createdAt": "2026-01-27T23:08:11Z",
-      "updatedAt": "2026-01-27T23:08:11Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T10:30:32Z",
+      "closedAt": "2026-03-05T10:30:32Z",
       "comments": []
     },
     {
@@ -2437,15 +2442,15 @@
       "id": "I_kwDOHLTwws7txeMV",
       "title": "IETF 125 Cleanup Notes",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/56",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "samans",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "[Repository Home](https://github.com/samans/draft-ybam-rfc8561bis/)\n[Editor's Home](https://samans.github.io/draft-ybam-rfc8561bis/ )\n\n2025-02-25\n - Deal with Pull request 1 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete (orange dot to green checkmark)\n - Deal with Pull request 2 \u2013 done in github\n   - Squash and Merge (because there are multiple commits in the pull request)\n   - Wait for tooling to complete\n - Issue #50 (Rename the draft) \u2013 done in github and then pulled to local\n   - Github edit of draft-ybam-rfc8561bis.md to rename to draft-ybam-ccamp-rfc8561bis.md\n     - Need to change the docname statement in the markdown file.\n   - Retrieve environment from github\n     - git pull\n     - Fix .gitignore file to ignore\n       - pretty/\n       - old/\n       - *.bash\n  - Fix the tooling on the local git to support the new tooling \u2013 local\n    - Important note: Ubuntu 24.04 LTS is recommended, 20.04 LTS doesn\u2019t have the ruby support needed.\n    - Install ruby\n      - sudo apt install ruby \n    - Install [cabo/kramdown-rfc: An XML2RFC (RFC799x) backend for Thomas Leitner's kramdown markdown parser](https://github.com/cabo/kramdown-rfc)\n      - sudo gem install kramdown-rfc\n    - Install xml2rfc\n      - sudo apt install xml2rfc\n    - Delete \u2018lib/.venv\u2019 from local git repository\n      - Run make which should recreate the \u2018lib/.venv\u2019 environment.\n  - Add compile checks and pretty printing\n    - If environment isn\u2019t configured\u2026\n      - Python3 -m venv ~/venv  ## This creates a virtual environment, put the environment wherever you want (this one is in my home directory and called venv)\n        - source ~/venv/bin/activate  ## This activates the virtural environment\n      - pip3 install setuptools\n      - pip3 install pyang\n\n2025-02-26 (done)\n  - Issue #55 (yang revision statements)\n  - Issue #51 (Danilo\u2019s email)\n  - Markdown generation of svg from ascii art\n    - use ~~~~ aasvg as the instruction for figures to automatically change from ascii art to svg.\n  - Markdown folding\n    - Use ::include for yang (since yang needs to be manually folded)\n    - Use ::include-fold for json and trees\n\n2026-02-27\n  - Create a file with all the revision statements and request comments on what to put there.\n  - Update the compile.bash script to do the diff against old, add context to the diff.\n  - Generate a new draft\n\n2026-03-02\n  - Use \"make next\" to make a versioned folder for idnits checking\n  - Tag the release in github using the draft-name as the tag name and release name (including the version).\n  - Submit the draft",
       "createdAt": "2026-02-25T12:24:27Z",
-      "updatedAt": "2026-03-02T12:23:16Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-05T10:31:02Z",
+      "closedAt": "2026-03-05T10:31:02Z",
       "comments": [
         {
           "author": "samans",
@@ -2468,9 +2473,17 @@
       "labels": [],
       "body": "A new type of loopback on radio signal is requested to redirect the ethernet flows on the Carrier Termination towards client or radio direction.\n\nThe proposal is to add a new leaf 'eth-loop' on CT interface:\n\n```\nleaf eth-loop {\n      type enumeration {\n        enum disabled {\n          description\n            \"Disables the ethernet Loop.\";\n        }\n        enum client {\n          description\n            \"Loops the signal back to the client side.\";\n        }\n        enum radio {\n          description\n            \"Loops the signal back to the radio side.\";\n        }\n      }\n      default \"disabled\";\n      description\n        \"Enable (client/radio) or disable (disabled)\n         the ethernet Loop, which loops the signal back to\n         the client side or the radio side.\";\n    }\n```\n",
       "createdAt": "2026-02-26T09:56:41Z",
-      "updatedAt": "2026-02-26T09:56:41Z",
+      "updatedAt": "2026-03-05T10:43:50Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Research whether a way to do this is supported by an existing IETF RFC or Draft.",
+          "createdAt": "2026-03-05T10:43:49Z",
+          "updatedAt": "2026-03-05T10:43:49Z"
+        }
+      ]
     },
     {
       "number": 58,
@@ -2484,9 +2497,17 @@
       "labels": [],
       "body": "Review this:\ncheck BC changes from ietf-microwave-radio-link@2019-06-19:\nietf-microwave-radio-link.yang:1: error: the typedef 'power', defined at old/ietf-microwave-radio-link@2019-06-19.yang:91 is illegally removed\nietf-microwave-radio-link.yang:1: error: the leaf 'mode', defined at old/ietf-microwave-radio-link@2019-06-19.yang:119 is illegally removed\nietf-microwave-radio-link.yang:507: error: the mandatory node minimum-nominal-power is illegally added\nietf-microwave-types.yang:433: error: the base 'mw-types:coding-modulation' is illegally added",
       "createdAt": "2026-03-02T13:30:36Z",
-      "updatedAt": "2026-03-02T13:30:36Z",
+      "updatedAt": "2026-03-05T10:29:12Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "> Review this: check BC changes from ietf-microwave-radio-link@2019-06-19: ietf-microwave-radio-link.yang:1: error: the typedef 'power', defined at old/[ietf-microwave-radio-link@2019-06-19.yang](mailto:ietf-microwave-radio-link@2019-06-19.yang):91 is illegally removed\n\n- Add power back into the ietf-microwave-radio-link module and deprecate it, add a note that the power in ietf-microwave-types modules should be used instead.\n\n> ietf-microwave-radio-link.yang:1: error: the leaf 'mode', defined at old/[ietf-microwave-radio-link@2019-06-19.yang](mailto:ietf-microwave-radio-link@2019-06-19.yang):119 is illegally removed\n\n- semantically the move of mode to a choice is backward compatible at an instance level, not at the schema level.  This was intentional.\n\n> ietf-microwave-radio-link.yang:507: error: the mandatory node minimum-nominal-power is illegally added\n\n- remove mandatory, since we added a default.\n\n> ietf-microwave-types.yang:433: error: the base 'mw-types:coding-modulation' is illegally added\n\n- review again after other changes are made.  Not sure why this is showing an error in the mw-types file.\n\n",
+          "createdAt": "2026-03-05T10:29:11Z",
+          "updatedAt": "2026-03-05T10:29:11Z"
+        }
+      ]
     },
     {
       "number": 59,
@@ -2517,6 +2538,22 @@
       "body": "Fix the .md file to get yang trees from yang directory and delete the trees directory.\n\nThe trees are generated by the compile.bash script and stored in the yang/ directory.\n",
       "createdAt": "2026-03-02T15:52:00Z",
       "updatedAt": "2026-03-02T15:52:00Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 61,
+      "id": "I_kwDOHLTwws7wHaKj",
+      "title": "Space Diversity Combiner (SDC) functionality",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/61",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "If we want to include support for SDC in the standard model, there is (at least) two ways in which we can do that.\n\n1 - Add a new group called sdc-groups, in line with the current structure of xpic-pairs & mimo-groups and where measurements related to each of those functions are put directly under the carrier-termination container, in line with current position of actual-xpi which is a measurement of the xpic performance.\n\n```\n     ...\n     +--rw sdc-groups {sdc}?\n      |   +--rw sdc-group* [name]\n      |       +--rw name                    string\n      |       +--rw members*            if:interface-ref\n\n   augment /if:interfaces/if:interface:\n     +--rw carrier-id?                     string\n     ...\n     +--ro actual-xpi?                     decimal64 {xpic}?  \n     +--ro sdc-status?                    enumeration {sdc}?\n     +--ro sdc-gain?                       decimal64 {sdc}?\n     ...\n```\n\n2 - A a new group called sdc-groups where leafs only relevant for the sdc is included instead of putting them directly on the carrier-termination level. In order to ensure a consistent structure, then the same approach would need to be used for xpic-pairs and mimo-groups which would mean a change compared to the current model. \n\n```\n ...\n  +--rw xpic-pairs {xpic}?\n  |  +--rw xpic-pair* [name]\n  |       +--rw name                                   string\n  |       +--rw enabled?                             boolean\n  |       +--rw member* [interface]\n  |        |   +--rw interface                         if:interface-ref\n  |        |   +--ro actual-xpi?                      decimal64  (moved from carrier-termination container)\n  |       +--rw member-in-external-ne?     string\n  +--rw mimo-groups {mimo}?\n  |    +--rw mimo-group* [name]\n  |         +--rw name                                  string\n  |         +--rw enabled?                            boolean\n  |         +--rw member* [interface]\n  |              +--rw interface                        if:interface-ref\n  |              +--ro actual-spatial-efficiency?   uint8 (possible new leaf)\n  +--rw sdc-groups {sdc}?\n       +--rw sdc-group* [name]\n            +--rw name                                  string\n            +--rw member* [interface]\n                 +--rw interface                        if:interface-ref\n                 +--ro oper-status?                  enumeration\n                 +--ro sdc-gain?                      decimal64\n\n```\nSo two initial questions:\n- Is SDC a function behaving in a similar way across vendors and is it commonly used, and in that case could justify an inclusion in the standard model?\n- Which structure 1 or 2 is the best?\n",
+      "createdAt": "2026-03-05T14:11:30Z",
+      "updatedAt": "2026-03-05T14:14:56Z",
       "closedAt": null,
       "comments": []
     }
