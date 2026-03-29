@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T02:47:45.976912+00:00",
+  "timestamp": "2026-03-29T03:23:38.914796+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1740,7 +1740,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2025-11-20T10:26:45Z",
+      "updatedAt": "2026-03-26T09:30:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -1784,6 +1784,13 @@
           "body": "The schedule draft is now at version -10.  The link to datatracker: https://datatracker.ietf.org/doc/draft-ietf-netmod-schedule-yang/\n",
           "createdAt": "2025-11-20T10:26:45Z",
           "updatedAt": "2025-11-20T10:26:45Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The I-D is now published as [RFC 9922](https://datatracker.ietf.org/doc/html/rfc9922)\n\nThe grouping in section 3.3.2 seems applicable to this requirement",
+          "createdAt": "2026-03-26T09:30:06Z",
+          "updatedAt": "2026-03-26T09:30:06Z"
         }
       ]
     },
