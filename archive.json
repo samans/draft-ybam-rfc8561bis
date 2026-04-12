@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-09T02:56:45.164373+00:00",
+  "timestamp": "2026-04-12T03:33:34.736348+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2560,16 +2560,9 @@
       "labels": [],
       "body": "If we want to include support for SDC in the standard model, there is (at least) two ways in which we can do that.\n\n1 - Add a new group called sdc-groups, in line with the current structure of xpic-pairs & mimo-groups and where measurements related to each of those functions are put directly under the carrier-termination container, in line with current position of actual-xpi which is a measurement of the xpic performance.\n\n```\n     ...\n     +--rw sdc-groups {sdc}?\n      |   +--rw sdc-group* [name]\n      |       +--rw name                    string\n      |       +--rw members*            if:interface-ref\n\n   augment /if:interfaces/if:interface:\n     +--rw carrier-id?                     string\n     ...\n     +--ro actual-xpi?                     decimal64 {xpic}?  \n     +--ro sdc-status?                    enumeration {sdc}?\n     +--ro sdc-gain?                       decimal64 {sdc}?\n     ...\n```\n\n2 - A a new group called sdc-groups where leafs only relevant for the sdc is included instead of putting them directly on the carrier-termination level. In order to ensure a consistent structure, then the same approach would need to be used for xpic-pairs and mimo-groups which would mean a change compared to the current model. \n\n```\n ...\n  +--rw xpic-pairs {xpic}?\n  |  +--rw xpic-pair* [name]\n  |       +--rw name                                   string\n  |       +--rw enabled?                             boolean\n  |       +--rw member* [interface]\n  |        |   +--rw interface                         if:interface-ref\n  |        |   +--ro actual-xpi?                      decimal64  (moved from carrier-termination container)\n  |       +--rw member-in-external-ne?     string\n  +--rw mimo-groups {mimo}?\n  |    +--rw mimo-group* [name]\n  |         +--rw name                                  string\n  |         +--rw enabled?                            boolean\n  |         +--rw member* [interface]\n  |              +--rw interface                        if:interface-ref\n  |              +--ro actual-spatial-efficiency?   uint8 (possible new leaf)\n  +--rw sdc-groups {sdc}?\n       +--rw sdc-group* [name]\n            +--rw name                                  string\n            +--rw member* [interface]\n                 +--rw interface                        if:interface-ref\n                 +--ro oper-status?                  enumeration\n                 +--ro sdc-gain?                      decimal64\n\n```\nSo two initial questions:\n- Is SDC a function behaving in a similar way across vendors and is it commonly used, and in that case could justify an inclusion in the standard model?\n- Which structure 1 or 2 is the best?\n",
       "createdAt": "2026-03-05T14:11:30Z",
-      "updatedAt": "2026-04-07T06:52:17Z",
+      "updatedAt": "2026-04-09T09:43:46Z",
       "closedAt": null,
       "comments": [
-        {
-          "author": "JonasAhl",
-          "authorAssociation": "COLLABORATOR",
-          "body": "Adding a couple of pictures to illustrate how the model could support different deployment cases.\n\n<img width=\"387\" height=\"639\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/63ca43e2-b910-4cb9-8378-1f21b54260f3\" />\n\n<img width=\"503\" height=\"590\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/f93d68cd-29d8-4571-837b-2285acc9dc93\" />",
-          "createdAt": "2026-04-01T12:31:19Z",
-          "updatedAt": "2026-04-01T12:31:19Z"
-        },
         {
           "author": "JonasAhl",
           "authorAssociation": "COLLABORATOR",
