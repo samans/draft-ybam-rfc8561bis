@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-26T03:43:02.360757+00:00",
+  "timestamp": "2026-05-03T03:57:37.989868+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1473,14 +1473,15 @@
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "samans"
+        "mamali68"
       ],
       "labels": [
-        "update yang"
+        "update yang",
+        "agreed"
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2026-03-05T10:40:12Z",
+      "updatedAt": "2026-04-30T09:23:21Z",
       "closedAt": null,
       "comments": [
         {
@@ -4296,6 +4297,63 @@
               "body": "\"carrier-id\" value is always transmitted.  But the check can be enabled and disable on reception with the far-end-carrier-id-check-enabled leaf.",
               "createdAt": "2026-02-19T10:41:06Z",
               "updatedAt": "2026-02-19T10:41:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOHLTwws7XHvDL",
+      "title": "#26 add rx-enabled and rx-oper-status",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/62",
+      "state": "OPEN",
+      "author": "mamali68",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "mamali68"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-04-30T13:31:38Z",
+      "updatedAt": "2026-05-02T09:31:26Z",
+      "baseRepository": "samans/draft-ybam-rfc8561bis",
+      "baseRefName": "main",
+      "baseRefOid": "64085a4d50cd4a0aaa8077f9c589256d24752cc4",
+      "headRepository": "samans/draft-ybam-rfc8561bis",
+      "headRefName": "26-air-interfacereceiver-is-on",
+      "headRefOid": "e43f93fa00466200e4f045477ef5f17a71048d62",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "mamali68",
+          "authorAssociation": "COLLABORATOR",
+          "body": "changes made \r\n\r\n1. Added `leaf rx-enabled` with type boolean\r\n2. Added `leaf rx-oper-status` with type `txrx-oper-status`\r\n3. Added new` typedef txrx-oper-status` with enums off/on/standby\r\n4. changed the type of `leaf tx-oper-status` to the newly defined type `txrx-oper-status`\r\n5. updated the tree ",
+          "createdAt": "2026-04-30T13:34:10Z",
+          "updatedAt": "2026-04-30T13:38:34Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHLTwws77OKz-",
+          "commit": {
+            "abbreviatedOid": "e43f93f"
+          },
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-02T09:31:26Z",
+          "updatedAt": "2026-05-02T09:31:26Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "no comment as the *.tree is generated :)",
+              "createdAt": "2026-05-02T09:31:26Z",
+              "updatedAt": "2026-05-02T09:31:26Z"
             }
           ]
         }
