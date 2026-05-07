@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-03T03:57:37.989868+00:00",
+  "timestamp": "2026-05-07T03:50:23.787717+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -855,7 +855,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-01-16T10:09:50Z",
+      "updatedAt": "2026-05-05T16:08:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -997,6 +997,13 @@
           "body": "Hi all,\nI hope it is OK that I reopen this issue.\nI think Thodoros make a valid point in his comment above and we have looked into to again in a bit more detail.\n\nTypically, as has been mentioned, it is the Tx spectrum mask that will constrain what reference mode that will be granted by a licensing body. The Tx spectrum is not modulation dependent but rather output power limited, i.e. at e.g. 128 QAM whether you fulfill the spectrum mask for SEC 2 or SEC 5L will depend on the output power set.\n\nThe term 'Reference mode'  mentioned before in this conversation, defined in ETSI EN 302 217-1 points to the spectrum efficiency rather than modulation.\nIn the table referenced earlier from ETSI EN 302 217-2 it is specifically stated:\n\"The classes reported in table 0 are for system identification only and will not imply any constraint to the actual\nmodulation format, provided that all the requirements of the selected class are met.\" \n\nAt the time of configuration, in case a certain reference mode has been granted by the licensing body, the system needs an attribute indicating that the power setting will meet the required spectrum mask.\nAs the requirements for spectrum masks in ETSI 302 217-2 all refer to the Spectral Efficiency Class, a more natural configuration parameter is  Spectral Efficiency Class (SEC).\nWhen set by an operator the system should validate that with the output power configured, so that the system will meet the spectrum mask for this SEC at any modulation.\n\nSo our proposal would be to add an attribute called SEC (Spectral Efficiency Class) with the values defined in ETSI 302 217-2 , i.e. 1, 2, 3, 4L, 4H, 5L, 5H, 6L, 6H. 7 and 8.\nAlso, as these requirements for fulfilling the ETSI spectrum mask do not apply for all markets, e.g.  the ANSI standard, there must also be a \u2018Not Applicable\u2019-type of value.\n\n/JonasA\n",
           "createdAt": "2026-01-16T10:09:50Z",
           "updatedAt": "2026-01-16T10:09:50Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Jonas, I understood your point.\nYou are right that , once configured by an operator the attribute , \"the system should validate that with the output power configured, so that the system will meet the spectrum mask for this SEC at any modulation\".\nBut each Spectral Efficiency Class (SEC) reported on Table 0 of ETSI 302-217 is associated to a specific modulation state, \nso configuring a SEC or a reference-modulation provides the same information.\nAnd this last one is more familiar for an operator also with the constraint to have reference modulation in the range of the selected modulation values on which the system has to work.",
+          "createdAt": "2026-05-05T16:08:01Z",
+          "updatedAt": "2026-05-05T16:08:01Z"
         }
       ]
     },
@@ -1481,7 +1488,7 @@
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2026-04-30T09:23:21Z",
+      "updatedAt": "2026-05-05T15:14:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -1532,6 +1539,13 @@
           "body": "> In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\n> \n> **Proposed solution:**\n> \n> Add in the augmentation to the ietf-interface the following parameters\n> \n> ```\n>   |     +--rw mrl:rx-enabled?                     boolean\n>   |     +--ro mrl:rx-oper-status?                 enumeration\n> ```\n\nThis addition can be made.  The space diversity issue will be moved to a new issue. ",
           "createdAt": "2026-03-05T10:39:43Z",
           "updatedAt": "2026-03-05T10:39:43Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Are we sure there are scenarios that allow us to disable the only available receiver?\nBefore to proceed with a pull request to add the attributes agreed better to wait for the final decision on SDC proposal https://github.com/samans/draft-ybam-rfc8561bis/issues/61.",
+          "createdAt": "2026-05-05T15:14:20Z",
+          "updatedAt": "2026-05-05T15:14:20Z"
         }
       ]
     },
@@ -4316,7 +4330,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-04-30T13:31:38Z",
-      "updatedAt": "2026-05-02T09:31:26Z",
+      "updatedAt": "2026-05-05T08:28:15Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "64085a4d50cd4a0aaa8077f9c589256d24752cc4",
