@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-07T03:50:23.787717+00:00",
+  "timestamp": "2026-05-10T03:59:29.687350+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -855,7 +855,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-05-05T16:08:01Z",
+      "updatedAt": "2026-05-07T10:19:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -1004,6 +1004,13 @@
           "body": "Jonas, I understood your point.\nYou are right that , once configured by an operator the attribute , \"the system should validate that with the output power configured, so that the system will meet the spectrum mask for this SEC at any modulation\".\nBut each Spectral Efficiency Class (SEC) reported on Table 0 of ETSI 302-217 is associated to a specific modulation state, \nso configuring a SEC or a reference-modulation provides the same information.\nAnd this last one is more familiar for an operator also with the constraint to have reference modulation in the range of the selected modulation values on which the system has to work.",
           "createdAt": "2026-05-05T16:08:01Z",
           "updatedAt": "2026-05-05T16:08:01Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Suggestion...\n\nReview entire thread and consider how to model precisely what is needed by the standardard regarding what is provided to the operator by the regulator.",
+          "createdAt": "2026-05-07T10:19:44Z",
+          "updatedAt": "2026-05-07T10:19:44Z"
         }
       ]
     },
@@ -1488,7 +1495,7 @@
       ],
       "body": "In the excel spreadsheet line 84 is documented that the ONF air interface supports a boolean to disable/enable the receiver.\r\n\r\n**Proposed solution:**\r\n\r\nAdd in the augmentation to the ietf-interface the following parameters\r\n\r\n```\r\n  |     +--rw mrl:rx-enabled?                     boolean\r\n  |     +--ro mrl:rx-oper-status?                 enumeration\r\n```\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
       "createdAt": "2024-01-17T12:35:30Z",
-      "updatedAt": "2026-05-05T15:14:20Z",
+      "updatedAt": "2026-05-07T09:44:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -1546,6 +1553,13 @@
           "body": "Are we sure there are scenarios that allow us to disable the only available receiver?\nBefore to proceed with a pull request to add the attributes agreed better to wait for the final decision on SDC proposal https://github.com/samans/draft-ybam-rfc8561bis/issues/61.",
           "createdAt": "2026-05-05T15:14:20Z",
           "updatedAt": "2026-05-05T15:14:20Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Wait on pull request #62.\nGet other opinions from equipment vendors.\n\nDo we need to add a feature that indicates a receiver can be enabled/disabled?\nNote that rx-enabled can only be disabled when there is more than one receiver (in certain hardware configurations).  \n\nCreate a grouping that is available when a feature is identified?\n\n",
+          "createdAt": "2026-05-07T09:21:08Z",
+          "updatedAt": "2026-05-07T09:44:02Z"
         }
       ]
     },
