@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-10T03:59:29.687350+00:00",
+  "timestamp": "2026-05-14T04:01:41.958616+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2607,6 +2607,38 @@
           "updatedAt": "2026-04-23T09:25:54Z"
         }
       ]
+    },
+    {
+      "number": 63,
+      "id": "I_kwDOHLTwws8AAAABB9QQ0g",
+      "title": "rlt-mode in conflict with YANG principles",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/63",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "YANG principles state that configuration of one leaf shall not impact the configuration of other leafs, which is the case for rlt-mode and the configuration of the members in carrier-terminations & rlp-groups in a radio-link-terminal. \nrlt-mode is in reality a consequence of the configuration of the members in those two groups and should not be a configurable leaf/container itself.\nOne way to handle this conflict is to remove/deprecate & make rlt-mode optional instead of evolving the configuration of it.\n\n",
+      "createdAt": "2026-05-12T04:53:22Z",
+      "updatedAt": "2026-05-12T04:53:22Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 64,
+      "id": "I_kwDOHLTwws8AAAABB9URuw",
+      "title": "How much node capability/planning data is supposed/realistic to support by YANG models",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/64",
+      "state": "OPEN",
+      "author": "JonasAhl",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm raising this issue now when we have understood the consequences of implementing support for the proposed acm-profile-list in a microwave node.\nOur calculations show that a typical node (with multiple RLTs & CTs) would need to handle 10000-15000 entries in an acm-profile-list and to ensure that we can cover all possible cases we need to dimension the node to handle up to something between 100000 & 200000 entries.\n\nMy question is if YANG models/interfaces are supposed/capable to handle such large amounts of capability/planning data or it that perhaps should be handled in other ways.\n\n",
+      "createdAt": "2026-05-12T05:09:22Z",
+      "updatedAt": "2026-05-12T05:09:37Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
