@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-14T04:01:41.958616+00:00",
+  "timestamp": "2026-05-17T04:06:53.807313+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -4376,13 +4376,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-04-30T13:31:38Z",
-      "updatedAt": "2026-05-05T08:28:15Z",
+      "updatedAt": "2026-05-14T16:43:01Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
-      "baseRefOid": "64085a4d50cd4a0aaa8077f9c589256d24752cc4",
+      "baseRefOid": "f665bc499ce46f356239b7caf4de3db2642973c4",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "26-air-interfacereceiver-is-on",
-      "headRefOid": "e43f93fa00466200e4f045477ef5f17a71048d62",
+      "headRefOid": "36e275a597980dc0fd173da7901a820b5e0deade",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4394,6 +4394,13 @@
           "body": "changes made \r\n\r\n1. Added `leaf rx-enabled` with type boolean\r\n2. Added `leaf rx-oper-status` with type `txrx-oper-status`\r\n3. Added new` typedef txrx-oper-status` with enums off/on/standby\r\n4. changed the type of `leaf tx-oper-status` to the newly defined type `txrx-oper-status`\r\n5. updated the tree ",
           "createdAt": "2026-04-30T13:34:10Z",
           "updatedAt": "2026-04-30T13:38:34Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have fixed the main branch and rebased this branch to resolve some CI/CD errors (due to some changes in the repository template)\r\n\r\nThe issue and work-around are described here:\r\n\r\n[kdrfc cannot find aasvg \u00b7 Issue #516 \u00b7 martinthomson/i-d-template](https://github.com/martinthomson/i-d-template/issues/516)",
+          "createdAt": "2026-05-14T16:42:26Z",
+          "updatedAt": "2026-05-14T16:43:01Z"
         }
       ],
       "reviews": [
