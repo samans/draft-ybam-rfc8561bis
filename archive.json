@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-17T04:06:53.807313+00:00",
+  "timestamp": "2026-05-24T04:17:39.967497+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2620,9 +2620,52 @@
       "labels": [],
       "body": "YANG principles state that configuration of one leaf shall not impact the configuration of other leafs, which is the case for rlt-mode and the configuration of the members in carrier-terminations & rlp-groups in a radio-link-terminal. \nrlt-mode is in reality a consequence of the configuration of the members in those two groups and should not be a configurable leaf/container itself.\nOne way to handle this conflict is to remove/deprecate & make rlt-mode optional instead of evolving the configuration of it.\n\n",
       "createdAt": "2026-05-12T04:53:22Z",
-      "updatedAt": "2026-05-12T04:53:22Z",
+      "updatedAt": "2026-05-21T09:00:50Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On the actual draft rlt-mode is optional.\nWhat is the new proposal to report the actual radio arrangement ?",
+          "createdAt": "2026-05-21T07:28:02Z",
+          "updatedAt": "2026-05-21T07:28:02Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am not sure about \"YANG principles state that configuration of one leaf shall not impact the configuration of other leafs\". YANG provides constructs to define relationships between the configuration of different nodes such as when statements, must statements, or leafref with require-instance true\n\nThe principle is that the configuration state needs to be consistent and there is no need to enforce a specific procedure to change the configuration state A to configuration state B",
+          "createdAt": "2026-05-21T08:20:26Z",
+          "updatedAt": "2026-05-21T08:46:19Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The rlt-mode is currently mandatory. My understanding is that the rtl-mode has impacts on the number of carriers but it provides additional information. For example, if the rlt-mode is 1+1 mode there must be two carriers but if there are two carriers the RLT model can be either 1+1 or 2+0 so the rlt-mode information is needed to disambiguate these two cases.",
+          "createdAt": "2026-05-21T08:46:24Z",
+          "updatedAt": "2026-05-21T08:46:24Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "OK, mandatory because the mode-option, containing rlt-mode,  is mandatory.",
+          "createdAt": "2026-05-21T08:54:12Z",
+          "updatedAt": "2026-05-21T08:54:12Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think rlt-mode only describes a subset of the full configuration and that the combination of other configurable entities is required to describe it in full.\n2+0 = Two carrier-terminations in the RLT\n1+1 = Two carrier-terminations in the RLT, one RLP-group with reference to the two carrier-terminations\n1+1 XPIC = Two carrier-terminations in the RLT, one RLP-group and one xpic-pair with reference to the two carrier-terminations\netc.\nThereby, it is not enough with the rlt-mode to describe the radio arrangement in full. You have to look at included carrier-terminations, RLP-group, XPIC-pair, MIMO-group, etc.\nA configurable rlt-mode does not add any new info. It only increases the complexity of the model.\n",
+          "createdAt": "2026-05-21T08:57:16Z",
+          "updatedAt": "2026-05-21T08:57:16Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@JonasAhl so your point is that the RLT mode information can be understood from the number of carriers, the protection group and XPIC configuration, right?\n\nIf this is the case, I think you are right and the RLT mode information is fully redundant",
+          "createdAt": "2026-05-21T09:00:50Z",
+          "updatedAt": "2026-05-21T09:00:50Z"
+        }
+      ]
     },
     {
       "number": 64,
@@ -2636,7 +2679,38 @@
       "labels": [],
       "body": "I'm raising this issue now when we have understood the consequences of implementing support for the proposed acm-profile-list in a microwave node.\nOur calculations show that a typical node (with multiple RLTs & CTs) would need to handle 10000-15000 entries in an acm-profile-list and to ensure that we can cover all possible cases we need to dimension the node to handle up to something between 100000 & 200000 entries.\n\nMy question is if YANG models/interfaces are supposed/capable to handle such large amounts of capability/planning data or it that perhaps should be handled in other ways.\n\n",
       "createdAt": "2026-05-12T05:09:22Z",
-      "updatedAt": "2026-05-12T05:09:37Z",
+      "updatedAt": "2026-05-21T08:46:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "acm-profile-list is not mandatory.",
+          "createdAt": "2026-05-21T07:29:50Z",
+          "updatedAt": "2026-05-21T07:29:50Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "My question is more about the principles and what type of data is supposed to be supported by NETCONF/YANG based device interfaces. \nWhat is within the scope of device models for other technologies in IETF?\nIs there a practice for how planning data is handled for other technologies?",
+          "createdAt": "2026-05-21T08:46:52Z",
+          "updatedAt": "2026-05-21T08:46:52Z"
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "id": "I_kwDOHLTwws8AAAABC8r8Kw",
+      "title": "Snir and xpi ranges",
+      "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/65",
+      "state": "OPEN",
+      "author": "DanielaSpreafico",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A consideration from Theodoros Kallimanis:\n\nit is about these two leaves:\n\n    leaf actual-snir {\n      type decimal64 {\n        fraction-digits 1;\n        range \"0..99\";\n      }\n      units \"dB\";\n      config false;\n      description\n        \"Actual signal to noise plus the interference ratio\n         (0.1 dB resolution).\";\n    }\n    leaf actual-xpi {\n      if-feature \"xpic\";\n      type decimal64 {\n        fraction-digits 1;\n        range \"0..99\";\n      }\n      units \"dB\";\n      config false;\n      description\n        \"The actual carrier to cross-polar interference.\n         Only valid if XPIC is enabled (0.1 dB resolution).\";\n      reference\n        \"ETSI TR 102 311\";\n    }\n\nIt seems that the range is better to also include negative values to cover cases for example at snir case of a very low signal power when interference+noise is higher than the signal.\n\n\nWhat do you think?",
+      "createdAt": "2026-05-21T08:00:31Z",
+      "updatedAt": "2026-05-21T08:00:31Z",
       "closedAt": null,
       "comments": []
     }
