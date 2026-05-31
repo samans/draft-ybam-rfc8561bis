@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-24T04:17:39.967497+00:00",
+  "timestamp": "2026-05-31T04:40:19.836256+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -105,6 +105,11 @@
     },
     {
       "name": "Wait For Pull Request",
+      "description": null,
+      "color": "aaaaaa"
+    },
+    {
+      "name": "expert review needed",
       "description": null,
       "color": "aaaaaa"
     }
@@ -2616,11 +2621,13 @@
       "state": "OPEN",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "samans"
+      ],
       "labels": [],
       "body": "YANG principles state that configuration of one leaf shall not impact the configuration of other leafs, which is the case for rlt-mode and the configuration of the members in carrier-terminations & rlp-groups in a radio-link-terminal. \nrlt-mode is in reality a consequence of the configuration of the members in those two groups and should not be a configurable leaf/container itself.\nOne way to handle this conflict is to remove/deprecate & make rlt-mode optional instead of evolving the configuration of it.\n\n",
       "createdAt": "2026-05-12T04:53:22Z",
-      "updatedAt": "2026-05-21T09:00:50Z",
+      "updatedAt": "2026-05-28T09:37:32Z",
       "closedAt": null,
       "comments": [
         {
@@ -2664,6 +2671,27 @@
           "body": "@JonasAhl so your point is that the RLT mode information can be understood from the number of carriers, the protection group and XPIC configuration, right?\n\nIf this is the case, I think you are right and the RLT mode information is fully redundant",
           "createdAt": "2026-05-21T09:00:50Z",
           "updatedAt": "2026-05-21T09:00:50Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Yes, that is correct and as you say it is redundant info that can result in conflicting configs.",
+          "createdAt": "2026-05-28T08:40:20Z",
+          "updatedAt": "2026-05-28T08:40:20Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think it could be useful as read-only attributes to know in a simple way, whithout passing all list of carrier termination and groups, all CT involved on RLT.",
+          "createdAt": "2026-05-28T08:51:19Z",
+          "updatedAt": "2026-05-28T08:51:19Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "remove mandatory from the attributes in the grouping.\nadd 'config false' to the container rlt-mode that uses the grouping.\nThe choice should not be mandatory either.  Look into what happens when a choice has one mandatory option and one non-mandatory option.\n\nAction: review the implementation of choice.",
+          "createdAt": "2026-05-28T09:37:23Z",
+          "updatedAt": "2026-05-28T09:37:23Z"
         }
       ]
     },
@@ -2672,15 +2700,15 @@
       "id": "I_kwDOHLTwws8AAAABB9URuw",
       "title": "How much node capability/planning data is supposed/realistic to support by YANG models",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/64",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "I'm raising this issue now when we have understood the consequences of implementing support for the proposed acm-profile-list in a microwave node.\nOur calculations show that a typical node (with multiple RLTs & CTs) would need to handle 10000-15000 entries in an acm-profile-list and to ensure that we can cover all possible cases we need to dimension the node to handle up to something between 100000 & 200000 entries.\n\nMy question is if YANG models/interfaces are supposed/capable to handle such large amounts of capability/planning data or it that perhaps should be handled in other ways.\n\n",
       "createdAt": "2026-05-12T05:09:22Z",
-      "updatedAt": "2026-05-21T08:46:52Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-28T10:02:57Z",
+      "closedAt": "2026-05-28T10:02:56Z",
       "comments": [
         {
           "author": "DanielaSpreafico",
@@ -2695,6 +2723,13 @@
           "body": "My question is more about the principles and what type of data is supposed to be supported by NETCONF/YANG based device interfaces. \nWhat is within the scope of device models for other technologies in IETF?\nIs there a practice for how planning data is handled for other technologies?",
           "createdAt": "2026-05-21T08:46:52Z",
           "updatedAt": "2026-05-21T08:46:52Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Operators are using this data for use-cases other than planning.  There is a potential for a large amount of data, but it is not mandatory.",
+          "createdAt": "2026-05-28T10:02:56Z",
+          "updatedAt": "2026-05-28T10:02:56Z"
         }
       ]
     },
@@ -2707,12 +2742,29 @@
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "expert review needed"
+      ],
       "body": "A consideration from Theodoros Kallimanis:\n\nit is about these two leaves:\n\n    leaf actual-snir {\n      type decimal64 {\n        fraction-digits 1;\n        range \"0..99\";\n      }\n      units \"dB\";\n      config false;\n      description\n        \"Actual signal to noise plus the interference ratio\n         (0.1 dB resolution).\";\n    }\n    leaf actual-xpi {\n      if-feature \"xpic\";\n      type decimal64 {\n        fraction-digits 1;\n        range \"0..99\";\n      }\n      units \"dB\";\n      config false;\n      description\n        \"The actual carrier to cross-polar interference.\n         Only valid if XPIC is enabled (0.1 dB resolution).\";\n      reference\n        \"ETSI TR 102 311\";\n    }\n\nIt seems that the range is better to also include negative values to cover cases for example at snir case of a very low signal power when interference+noise is higher than the signal.\n\n\nWhat do you think?",
       "createdAt": "2026-05-21T08:00:31Z",
-      "updatedAt": "2026-05-21T08:00:31Z",
+      "updatedAt": "2026-05-28T10:12:29Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Reaching out to radio experts and reviewing the contents of ETSI TR 102 311, to determine what a negative value would mean and if that makes sense.",
+          "createdAt": "2026-05-28T09:10:12Z",
+          "updatedAt": "2026-05-28T09:10:12Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "From Nokia radio expert:\n\"It seems difficult be able to measure \"negative\" values \u200b\u200bbecause the modem would not even be able to stand upright\"",
+          "createdAt": "2026-05-28T10:12:29Z",
+          "updatedAt": "2026-05-28T10:12:29Z"
+        }
+      ]
     }
   ],
   "pulls": [
