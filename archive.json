@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-31T04:40:19.836256+00:00",
+  "timestamp": "2026-06-14T04:55:13.475135+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -2627,7 +2627,7 @@
       "labels": [],
       "body": "YANG principles state that configuration of one leaf shall not impact the configuration of other leafs, which is the case for rlt-mode and the configuration of the members in carrier-terminations & rlp-groups in a radio-link-terminal. \nrlt-mode is in reality a consequence of the configuration of the members in those two groups and should not be a configurable leaf/container itself.\nOne way to handle this conflict is to remove/deprecate & make rlt-mode optional instead of evolving the configuration of it.\n\n",
       "createdAt": "2026-05-12T04:53:22Z",
-      "updatedAt": "2026-05-28T09:37:32Z",
+      "updatedAt": "2026-06-11T09:47:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -2692,6 +2692,13 @@
           "body": "remove mandatory from the attributes in the grouping.\nadd 'config false' to the container rlt-mode that uses the grouping.\nThe choice should not be mandatory either.  Look into what happens when a choice has one mandatory option and one non-mandatory option.\n\nAction: review the implementation of choice.",
           "createdAt": "2026-05-28T09:37:23Z",
           "updatedAt": "2026-05-28T09:37:23Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "The information in the current bis for mode and rlt-mode is redundant information.\nStarting from RFC8561:\nKeep the leaf mode and the identity for backward compatibility reasons.  Remove mandatory and set the status to deprecated.\nAdd rlt-mode as a string (config false) populated with the counts from leaf-list carrier-termination and leaf-list protection-group.\n\nImpact on current bis is to remove the choice related to mode and rlt-mode.  Also deprecate the identity for rlt-mode. And remove the rlt-mode grouping from the types module.\n\nThis removes the ability to configure the mode with conflicting information.  Just using the rlt-mode for documentation (config false).",
+          "createdAt": "2026-06-11T09:47:09Z",
+          "updatedAt": "2026-06-11T09:47:09Z"
         }
       ]
     },
@@ -2738,7 +2745,7 @@
       "id": "I_kwDOHLTwws8AAAABC8r8Kw",
       "title": "Snir and xpi ranges",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/65",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
@@ -2747,8 +2754,8 @@
       ],
       "body": "A consideration from Theodoros Kallimanis:\n\nit is about these two leaves:\n\n    leaf actual-snir {\n      type decimal64 {\n        fraction-digits 1;\n        range \"0..99\";\n      }\n      units \"dB\";\n      config false;\n      description\n        \"Actual signal to noise plus the interference ratio\n         (0.1 dB resolution).\";\n    }\n    leaf actual-xpi {\n      if-feature \"xpic\";\n      type decimal64 {\n        fraction-digits 1;\n        range \"0..99\";\n      }\n      units \"dB\";\n      config false;\n      description\n        \"The actual carrier to cross-polar interference.\n         Only valid if XPIC is enabled (0.1 dB resolution).\";\n      reference\n        \"ETSI TR 102 311\";\n    }\n\nIt seems that the range is better to also include negative values to cover cases for example at snir case of a very low signal power when interference+noise is higher than the signal.\n\n\nWhat do you think?",
       "createdAt": "2026-05-21T08:00:31Z",
-      "updatedAt": "2026-05-28T10:12:29Z",
-      "closedAt": null,
+      "updatedAt": "2026-06-11T09:07:45Z",
+      "closedAt": "2026-06-11T09:07:45Z",
       "comments": [
         {
           "author": "samans",
@@ -2763,6 +2770,20 @@
           "body": "From Nokia radio expert:\n\"It seems difficult be able to measure \"negative\" values \u200b\u200bbecause the modem would not even be able to stand upright\"",
           "createdAt": "2026-05-28T10:12:29Z",
           "updatedAt": "2026-05-28T10:12:29Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I got the same response from the Ericsson radio expert.\nIn order to measure the ratio you need a stable main signal and in case of \"negative\" values you wouldn't have that.",
+          "createdAt": "2026-06-11T08:29:56Z",
+          "updatedAt": "2026-06-11T08:29:56Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Microwave experts indicate that negative values for snir and xpi are not appropriate.",
+          "createdAt": "2026-06-11T09:07:45Z",
+          "updatedAt": "2026-06-11T09:07:45Z"
         }
       ]
     }
