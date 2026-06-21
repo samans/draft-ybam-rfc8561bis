@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-14T04:55:13.475135+00:00",
+  "timestamp": "2026-06-21T05:04:10.120455+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -854,13 +854,19 @@
       "state": "OPEN",
       "author": "DanielaSpreafico",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "demx8as6",
+        "italobusi",
+        "niloda",
+        "JonasAhl",
+        "DanielaSpreafico"
+      ],
       "labels": [
         "update yang"
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-05-07T10:19:45Z",
+      "updatedAt": "2026-06-19T12:47:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -1016,6 +1022,13 @@
           "body": "Suggestion...\n\nReview entire thread and consider how to model precisely what is needed by the standardard regarding what is provided to the operator by the regulator.",
           "createdAt": "2026-05-07T10:19:44Z",
           "updatedAt": "2026-05-07T10:19:44Z"
+        },
+        {
+          "author": "demx8as6",
+          "authorAssociation": "COLLABORATOR",
+          "body": "1. I go with any descision of the group ...\n2. ... but if you ask me - I would go with  ETSI EN 302 217 - and shift the \"operator\" view to a GUI or operator-sspecfif view of the configuration. ",
+          "createdAt": "2026-06-19T12:47:07Z",
+          "updatedAt": "2026-06-19T12:47:07Z"
         }
       ]
     },
@@ -4512,7 +4525,7 @@
     {
       "number": 62,
       "id": "PR_kwDOHLTwws7XHvDL",
-      "title": "#26 add rx-enabled and rx-oper-status",
+      "title": "#26 (issue) add rx-enabled and rx-oper-status",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/pull/62",
       "state": "OPEN",
       "author": "mamali68",
@@ -4523,7 +4536,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-04-30T13:31:38Z",
-      "updatedAt": "2026-05-14T16:43:01Z",
+      "updatedAt": "2026-06-18T09:29:56Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "f665bc499ce46f356239b7caf4de3db2642973c4",
@@ -4548,6 +4561,20 @@
           "body": "I have fixed the main branch and rebased this branch to resolve some CI/CD errors (due to some changes in the repository template)\r\n\r\nThe issue and work-around are described here:\r\n\r\n[kdrfc cannot find aasvg \u00b7 Issue #516 \u00b7 martinthomson/i-d-template](https://github.com/martinthomson/i-d-template/issues/516)",
           "createdAt": "2026-05-14T16:42:26Z",
           "updatedAt": "2026-05-14T16:43:01Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Add to the description of rx-enabled to not allow a receiver to be disabled if it is the only receiver.",
+          "createdAt": "2026-06-18T09:21:22Z",
+          "updatedAt": "2026-06-18T09:21:22Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "remove common typedef txrx-oper-status.\r\n\r\nrevert back to oper-status being an specific for rx-oper-status and tx-oper-status (because receivers can't be standby)\r\n\r\nrx-enabled and rx-oper-status remain.  update the rx-enabled description as described above.",
+          "createdAt": "2026-06-18T09:29:55Z",
+          "updatedAt": "2026-06-18T09:29:55Z"
         }
       ],
       "reviews": [
