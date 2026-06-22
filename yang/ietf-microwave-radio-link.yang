@@ -112,29 +112,6 @@ module ietf-microwave-radio-link {
   }
 
   /*
-   * Typedefs
-   */
-
-  typedef txrx-oper-status {
-    type enumeration {
-      enum off {
-        description
-          "Transmitter/receiver is off.";
-      }
-      enum on {
-        description
-          "Transmitter/receiver is on.";
-      }
-      enum standby {
-        description
-          "Transmitter/receiver is in standby.";
-      }
-    }
-    description
-      "type definition to show the operation status of transmitter or receiver";
-  }
-
-  /*
    * Groupings
    */
 
@@ -427,7 +404,20 @@ module ietf-microwave-radio-link {
          disabled.";
     }
     leaf tx-oper-status {
-      type txrx-oper-status;
+      type enumeration {
+        enum off {
+          description
+            "Transmitter is off.";
+        }
+        enum on {
+          description
+            "Transmitter is on.";
+        }
+        enum standby {
+          description
+            "Transmitter is in standby.";
+        }
+      }
       config false;
       description
         "Shows the operative status of the transmitter.";
@@ -439,10 +429,19 @@ module ietf-microwave-radio-link {
         "Disables (false) or enables (true) the receiver.
          Only applicable when the interface is enabled
          (interface:enabled = true); otherwise, it's always
-         disabled.";
+         disabled. It is not allowed to disable a receiver that is the only receiver";
     }
     leaf rx-oper-status {
-      type txrx-oper-status;
+      type enumeration {
+        enum off {
+          description
+            "Receiver is off.";
+        }
+        enum on {
+          description
+            "Receiver is on.";
+        }
+      }
       config false;
       description
         "Shows the operative status of the receiver.";
