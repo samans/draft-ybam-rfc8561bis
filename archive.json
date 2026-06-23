@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-21T05:04:10.120455+00:00",
+  "timestamp": "2026-06-23T04:09:48.103201+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -4536,13 +4536,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-04-30T13:31:38Z",
-      "updatedAt": "2026-06-18T09:29:56Z",
+      "updatedAt": "2026-06-22T15:16:11Z",
       "baseRepository": "samans/draft-ybam-rfc8561bis",
       "baseRefName": "main",
       "baseRefOid": "f665bc499ce46f356239b7caf4de3db2642973c4",
       "headRepository": "samans/draft-ybam-rfc8561bis",
       "headRefName": "26-air-interfacereceiver-is-on",
-      "headRefOid": "36e275a597980dc0fd173da7901a820b5e0deade",
+      "headRefOid": "ae89123c8f1695813ceafbdf45d04ef2900f40fa",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
