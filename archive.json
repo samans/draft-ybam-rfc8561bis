@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-23T04:09:48.103201+00:00",
+  "timestamp": "2026-06-28T04:39:14.909182+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -866,7 +866,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-06-19T12:47:07Z",
+      "updatedAt": "2026-06-25T12:39:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -1029,6 +1029,41 @@
           "body": "1. I go with any descision of the group ...\n2. ... but if you ask me - I would go with  ETSI EN 302 217 - and shift the \"operator\" view to a GUI or operator-sspecfif view of the configuration. ",
           "createdAt": "2026-06-19T12:47:07Z",
           "updatedAt": "2026-06-19T12:47:07Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I support Martin's option 2 above.\nWe are defining a standard model and I think that we should adhere to other standards when available, ETSI 302-217 in this case.\nI agree that operator/vendor specific interpretations or terminology could be supported in operator specific views but should not be introduced directly in the model when a standard definition is available.\n\nI'm also repeating some of the key points from my previous comment:\n\n- The term 'Reference mode' defined in ETSI EN 302 217-1 points to the spectrum efficiency rather than modulation. \n\"The classes reported in table 0 are for system identification only and will not imply any constraint to the actual modulation format, provided that all the requirements of the selected class are met.\"\n\n- The fulfillment of the required spectrum mask is not modulation dependent but rather output power limited\n",
+          "createdAt": "2026-06-25T06:50:17Z",
+          "updatedAt": "2026-06-25T06:50:17Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "With YANG identities it is possible to define identities for standardized values while allowing each vendor to define identities for vendor-specific values",
+          "createdAt": "2026-06-25T09:10:14Z",
+          "updatedAt": "2026-06-25T09:10:14Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Change reference-modulation to spectral-efficiency-class and create a new identity that includes the spectral efficiency classes from the table above.  Naming convention...  _1, _2 etc. \nAI: Jonas to suggest descriptions (since the descriptions in the table are misleading).",
+          "createdAt": "2026-06-25T09:37:36Z",
+          "updatedAt": "2026-06-25T09:37:36Z"
+        },
+        {
+          "author": "mamali68",
+          "authorAssociation": "COLLABORATOR",
+          "body": "my humble 2 cents, spectral efficiency classes vs description. \n\n| Spectral Efficiency Class | Description |\n| --- | --- | \n|  _1 | Interface with **modulation scheme** value 1 |\n|  _2 | Interface with  **modulation scheme** value 2 |\n|  _3 | Interface with **modulation scheme** value 3 |\n| _4L | Interface with **modulation scheme** value 4 |\n| _4H | Interface with **modulation scheme** value 5 |\n| _5L | Interface with **modulation scheme** value 6 |\n| _5H | Interface with **modulation scheme** value 7 |\n| _6L | Interface with **modulation scheme** value 8 |\n| _6H | Interface with **modulation scheme** value 9 |\n|  _7 | Interface with **modulation scheme** value 10 |\n|  _8 | Interface with **modulation scheme** value 11 |\n\n**modulation scheme** defined in `grouping acm-profile` as \n\n```\nleaf modulation-scheme {\n      type uint8;\n      description\n        \"It is the logarithm base two of the number of points in the\n         transmitted constellation.  E.G.:  value would be 2 for\n         4QAM, 10 fo 1024QAM, and 12 for 4096QAM.\";\n    }\n\n\n```\n",
+          "createdAt": "2026-06-25T10:24:09Z",
+          "updatedAt": "2026-06-25T10:24:09Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The definition of a particular SEC is not simple and I think the best is to include a reference to ETSI EN 302 217-2.\n\nA suggestion:\nSee ETSI EN 302 217-2 for a complete definition of Spectrum Efficiency Class xx, including typical modulation format, required minimum Radio Interface Capacity and an associated set of spectral power density masks.",
+          "createdAt": "2026-06-25T12:39:14Z",
+          "updatedAt": "2026-06-25T12:39:14Z"
         }
       ]
     },
