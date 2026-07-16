@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-14T03:15:28.863482+00:00",
+  "timestamp": "2026-07-16T03:21:44.166648+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -866,7 +866,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-07-13T16:45:25Z",
+      "updatedAt": "2026-07-14T08:57:32Z",
       "closedAt": null,
       "comments": [
         {
@@ -1071,6 +1071,13 @@
           "body": "Hi all, \nI'm not convinced on the final conclusion/proposal about removing 'reference-modulation' attribute and introducing the new 'spectral-efficiency-class'.\n\nThe ETSI EN 302 217-1 and ETSI EN 302 217-2 don't state that the configuration of reference-mode is passing through the SEC configuration using the values of the second column of Table 0 (ETSI EN 302 217-2).\nAny identification of a row could be allowed.\nOn same other cases, when the SEC is used, the 'typical modulation' is referred, without changing the meaning and the use of the reference mode/SEC",
           "createdAt": "2026-07-13T16:45:24Z",
           "updatedAt": "2026-07-13T16:45:24Z"
+        },
+        {
+          "author": "tkall",
+          "authorAssociation": "NONE",
+          "body": "Hi all\r\nReading again ETSI EN 302 217-2 and examples there, eg 4.2.3.2. Limits, it\r\nseems to me that the configuration of Reference Mode refers\r\nto SEC Classes.\r\nEg :\r\n\"for a CS = 28 MHz three Reference Mode are declared: Class 2 (e.g. 4QAM,\r\n32 Mbit/s min RIC), Class 4L (e.g. 16QAM, 64 Mbit/s min RIC) and Class 5HB\r\n(e.g. 128QAM, 137 Mbit/s min RIC). \"\r\nIt seems to me then that this may be followed. I.e. model Reference Mode\r\nYANG mode but habe enum values of SEC classes.\r\nHowever, I wanted to mention also the fact  that the manufacturer, not the\r\nuser, declares these reference-modes. It seems then to me that this implies\r\nmodelling\r\nas read-only model leaves.\r\nFurthermore, it looks likely that these declarations should be associated\r\nto CS values (BWs) and should be a list that may include more than one\r\nReference Mode:\r\n\r\n\"For mixed-mode systems, the manufacturer shall declare *which Reference\r\nModes can be supported by the equipment, within each CS* (see example). For\r\neach Reference Mode the equipment shall demonstrate the capability of being\r\ncompliant with the RF spectrum mask associated with the corresponding\r\nsystem parameters and spectral efficiency class (see note 1). Compliance\r\nwith the RF spectrum mask can be jointly verified with the \"dynamic change\r\nof modulation\" requirement in clause 4.2.6.\".\r\n\r\nBest Regards\r\n\r\n\r\n*Theodoros Kallimanis *Principal Engineer (Systems & SW)\r\n\r\nDepartment SSD\r\n________________________________\r\nIntracom Telecom\r\n19.7 km New Road Peania-Markopoulo,\r\n\r\nPeania, GR 19002\r\nt:   +30 6671961\r\nf:   +30 6671446\r\nm: +30 6941636679\r\nemail ***@***.***\r\nwww.intracom-telecom.com\r\n\r\n\r\n\r\n[image: image.png] <http://www.linkedin.com/company/intracom-telecom>[image:\r\nimage.png] <https://www.facebook.com/intracomtelecom>[image: image.png]\r\n<https://x.com/IntracomTelecom>[image: image.png]\r\n<http://www.youtube.com/user/IntracomTelecom>[image: image.png]\r\n<https://www.instagram.com/intracomtelecom/>\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u0394\u03b5\u03c5 13 \u0399\u03bf\u03c5\u03bb 2026 \u03c3\u03c4\u03b9\u03c2 7:45\u202f\u03bc.\u03bc., \u03bf/\u03b7 DanielaSpreafico <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> *DanielaSpreafico* left a comment (samans/draft-ybam-rfc8561bis#16)\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/16#issuecomment-4960372291>\r\n>\r\n> Hi all,\r\n> I'm not convinced on the final conclusion/proposal about removing\r\n> 'reference-modulation' attribute and introducing the new\r\n> 'spectral-efficiency-class'.\r\n>\r\n> The ETSI EN 302 217-1 and ETSI EN 302 217-2 don't state that the\r\n> configuration of reference-mode is passing through the SEC configuration\r\n> using the values of the second column of Table 0 (ETSI EN 302 217-2).\r\n> Any identification of a row could be allowed.\r\n> On same other cases, when the SEC is used, the 'typical modulation' is\r\n> referred, without changing the meaning and the use of the reference mode/SEC\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/16?email_source=notifications&email_token=AAS3DVIEXOMAWQJMTB6CUJD5EUG3XA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTIOJWGAZTOMRSHEY2M4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJLDGN5XXIZLSL5RWY2LDNM#issuecomment-4960372291>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVKNZUX3G4XI55SRWWT5EUG3XAVCNFSNUABFKJSXA33TNF2G64TZHM2DQMJWGIYDCNRSHNEXG43VMU5TCNZQGIZTANJWGE32C5QC>\r\n> .\r\n> Triage notifications, keep track of coding agent tasks and review pull\r\n> requests on the go with GitHub Mobile for iOS\r\n> <https://github.com/notifications/mobile/ios/AAS3DVL3WTFL7SLN3N7H2ET5EUG3XA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTIOJWGAZTOMRSHEY2M4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJKTGN5XXIZLSL5UW64Y>\r\n> and Android\r\n> <https://github.com/notifications/mobile/android/AAS3DVOCCW5DWN45OBUE5MD5EUG3XA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTIOJWGAZTOMRSHEY2M4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJLTGN5XXIZLSL5QW4ZDSN5UWI>.\r\n> Download it today!\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
+          "createdAt": "2026-07-14T08:57:32Z",
+          "updatedAt": "2026-07-14T08:57:32Z"
         }
       ]
     },
