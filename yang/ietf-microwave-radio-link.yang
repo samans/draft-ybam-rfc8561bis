@@ -112,7 +112,7 @@ module ietf-microwave-radio-link {
   }
 
   /*
-   * Typedefs
+   * Groupings
    */
 
   grouping acm-profile {
@@ -421,6 +421,30 @@ module ietf-microwave-radio-link {
       config false;
       description
         "Shows the operative status of the transmitter.";
+    }
+    leaf rx-enabled {
+      type boolean;
+      default "false";
+      description
+        "Disables (false) or enables (true) the receiver.
+         Only applicable when the interface is enabled
+         (interface:enabled = true); otherwise, it's always
+         disabled. It is not allowed to disable a receiver that is the only receiver";
+    }
+    leaf rx-oper-status {
+      type enumeration {
+        enum off {
+          description
+            "Receiver is off.";
+        }
+        enum on {
+          description
+            "Receiver is on.";
+        }
+      }
+      config false;
+      description
+        "Shows the operative status of the receiver.";
     }
     uses mw-types:common-microwave-properties;
     choice freq-or-distance {
