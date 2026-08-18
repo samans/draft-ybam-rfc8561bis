@@ -6,13 +6,13 @@ CCAMP Working Group                                         S. Mansfield
 Internet-Draft                                                  Ericsson
 Obsoletes: 8561 (if approved)                                 J. Ahlberg
 Intended status: Standards Track                             Ericsson AB
-Expires: 14 February 2027                                          M. Ye
+Expires: 19 February 2027                                          M. Ye
                                                      Huawei Technologies
                                                             D. Spreafico
                                                               Nokia - IT
                                                                  D. Pala
                                                            Tech Mahindra
-                                                          13 August 2026
+                                                          18 August 2026
 
 
                A YANG Data Model for Microwave Radio Link
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 February 2027.
+   This Internet-Draft will expire on 19 February 2027.
 
 Copyright Notice
 
@@ -2806,35 +2806,15 @@ Appendix C.  Acknowledgments
    github integration of the kramdown RFC tool and for the aasvg tool
    which is used for the ascii to SVG conversion.
 
+   The authors would like to thank Koji Kawada, Carlos J.  Bernardos,
+   and Marko Vaupotic for their reviews and contributions to previous
+   versions of this work.
+
 Contributors
 
    Italo Busi
    Huawei Technologies
    Email: italo.busi@huawei.com
-
-
-   Koji Kawada
-   NEC Corporation
-   1753, Shimonumabe Nakahara-ku, Kawasaki, Kanagawa
-   211-8666
-   Japan
-   Email: k-kawada@ah.jp.nec.com
-
-
-   Carlos J. Bernardos
-   Universidad Carlos III de Madrid
-   Av. Universidad, 30
-   28911 Leganes, Madrid
-   Spain
-   Email: cjbc@it.uc3m.es
-
-
-   Marko Vaupotic
-   Aviat Networks
-   Motnica 9
-   SI-1236 Trzin-Ljubljana
-   Slovenia
-   Email: Marko.Vaupotic@Aviatnet.com
 
 
    Xi Li
