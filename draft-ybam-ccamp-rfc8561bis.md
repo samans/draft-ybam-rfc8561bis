@@ -62,30 +62,6 @@ contributor:
     organization: Huawei Technologies
     email: italo.busi@huawei.com
  -
-    fullname: Koji Kawada
-    organization: NEC Corporation
-    street: 1753, Shimonumabe Nakahara-ku
-    region: Kawasaki, Kanagawa
-    code: 211-8666
-    country: Japan
-    email: k-kawada@ah.jp.nec.com
- -
-    fullname: Carlos J. Bernardos
-    organization: Universidad Carlos III de Madrid
-    street: Av. Universidad, 30
-    city: Leganes, Madrid
-    code: 28911
-    country: Spain
-    email: cjbc@it.uc3m.es
- -
-    fullname: Marko Vaupotic
-    organization: Aviat Networks
-    street: Motnica 9
-    city: Trzin-Ljubljana
-    code: 1236
-    country: Slovenia
-    email: Marko.Vaupotic@Aviatnet.com
- -
     fullname: Xi Li
     organization: NEC Laboratories Europe
     street: Kurfursten-Anlage 36
@@ -542,4 +518,6 @@ node.
 ~~~~
 
 # Acknowledgments
-   This document was prepared using the kramdown RFC tool written and maintained by Carsten Bormann. Thanks to Martin Thomson for the github integration of the kramdown RFC tool and for the aasvg tool which is used for the ascii to SVG conversion.
+This document was prepared using the kramdown RFC tool written and maintained by Carsten Bormann. Thanks to Martin Thomson for the github integration of the kramdown RFC tool and for the aasvg tool which is used for the ascii to SVG conversion.
+
+The authors would like to thank Koji Kawada, Carlos J. Bernardos, and Marko Vaupotic for their reviews and contributions to previous versions of this work.
