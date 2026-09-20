@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-26T03:39:05.751614+00:00",
+  "timestamp": "2026-09-20T04:36:55.003493+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1857,7 +1857,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2026-07-23T09:40:25Z",
+      "updatedAt": "2026-09-17T11:09:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -1915,6 +1915,20 @@
           "body": "I checked the [RFC 9922](https://datatracker.ietf.org/doc/html/rfc9922) , section 3.3.2 and the grouping 'period-of-time' could be applicable.\nThis grouping defines 2 attributes 'period-start' and a choice to select between 'period-end' or 'duration' attribute.\nOnce configured these attributes ('period-start' is optional and if not provisioned the 'actual' time is taken) what is missing is the status of the maintenance mode, that's the time remaining or the 'period-end' if the 'duration' is selected.\n\nTo use on MW model it is needed to define a container ('maintenance-mode' as proposed by Martin ? ) adding also a ro attribute like 'remaining time' or 'period-end-time' to report the status.",
           "createdAt": "2026-07-23T09:40:25Z",
           "updatedAt": "2026-07-23T09:40:25Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Next week I'll add a proposal adding a new container on the yang model following the discussion on the today meeting.",
+          "createdAt": "2026-09-17T10:04:04Z",
+          "updatedAt": "2026-09-17T10:04:04Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The slides developed during the discussion today: [tx-maintenance-period-00.pptx](https://github.com/user-attachments/files/32334041/tx-maintenance-period-00.pptx)",
+          "createdAt": "2026-09-17T11:09:49Z",
+          "updatedAt": "2026-09-17T11:09:49Z"
         }
       ]
     },
