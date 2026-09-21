@@ -39,12 +39,9 @@ module: ietf-microwave-radio-link
     |        +--rw num-bonded-carriers        uint32
     |        +--rw num-protecting-carriers    uint32
     +--rw carrier-terminations*       if:interface-ref
-    +--rw rlp-groups*
-    |       -> /radio-link-protection-groups/protection-group/name
-    +--rw xpic-pairs*                 -> /xpic-pairs/xpic-pair/name
-    |       {xpic}?
-    +--rw mimo-groups*                -> /mimo-groups/mimo-group/name
-    |       {mimo}?
+    +--rw rlp-groups*                 -> /radio-link-protection-groups/protection-group/name
+    +--rw xpic-pairs*                 -> /xpic-pairs/xpic-pair/name {xpic}?
+    +--rw mimo-groups*                -> /mimo-groups/mimo-group/name {mimo}?
     +--rw tdm-connections* [tdm-type] {tdm}?
     |  +--rw tdm-type           identityref
     |  +--rw tdm-connections    uint16
@@ -60,7 +57,9 @@ module: ietf-microwave-radio-link
     +--rw far-end-carrier-id-check-enabled?   boolean
     +--rw expected-far-end-carrier-id?        string
     +--rw tx-enabled?                         boolean
-    +--ro tx-oper-status?                     enumeration
+    +--ro tx-oper-status?                     txrx-oper-status
+    +--rw rx-enabled?                         boolean
+    +--ro rx-oper-status?                     txrx-oper-status
     +--rw tx-frequency                        uint32
     +--ro actual-rx-frequency?                uint32
     +--rw channel-separation                  uint32
@@ -110,8 +109,7 @@ module: ietf-microwave-radio-link
     |  +--ro maximum-available-power?   mw-types:power
     |  +--ro available-min-acm?         identityref
     |  +--ro available-max-acm?         identityref
-    |  +--ro acm-profile-list*
-    |          [profile-channel-separation-id profile-coding-modulation-id]
+    |  +--ro acm-profile-list* [profile-channel-separation-id profile-coding-modulation-id]
     |     +--ro profile-channel-separation-id      uint32
     |     +--ro profile-coding-modulation-id       identityref
     |     +--ro modulation-scheme?                 uint8
@@ -121,11 +119,11 @@ module: ietf-microwave-radio-link
     |     +--ro max-tx-power?                      mw-types:power
     |     +--ro min-tx-power?                      mw-types:power
     |     +--ro lower-acm-profile-ptr
-    |     |  +--ro profile-coding-modulation-id-ref?    leafref
-    |     |  +--ro profile-channel-separation-id-ref?   leafref
+    |     |  +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
+    |     |  +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
     |     +--ro upper-acm-profile-ptr
-    |        +--ro profile-coding-modulation-id-ref?    leafref
-    |        +--ro profile-channel-separation-id-ref?   leafref
+    |        +--ro profile-coding-modulation-id-ref?    -> ../../../acm-profile-list/profile-coding-modulation-id
+    |        +--ro profile-channel-separation-id-ref?   -> ../../../acm-profile-list[profile-coding-modulation-id=current()/../profile-coding-modulation-id-ref]/profile-channel-separation-id
     +--ro error-performance-statistics
     |  +--ro bbe?   yang:counter32
     |  +--ro es?    yang:counter32
