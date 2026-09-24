@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-20T04:36:55.003493+00:00",
+  "timestamp": "2026-09-24T04:24:42.086550+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -1857,7 +1857,7 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2026-09-17T11:09:49Z",
+      "updatedAt": "2026-09-23T05:28:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -1929,6 +1929,20 @@
           "body": "The slides developed during the discussion today: [tx-maintenance-period-00.pptx](https://github.com/user-attachments/files/32334041/tx-maintenance-period-00.pptx)",
           "createdAt": "2026-09-17T11:09:49Z",
           "updatedAt": "2026-09-17T11:09:49Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is my proposal. Fill free to comment it:\n\n1. .yang section:\n\n`import ietf-schedule  {\n  prefix schedule;\n  reference\n  \"RFC 9922: A Common YANG Data Model for Scheduling\";\n}\n\naugment \"/if:interfaces/if:interface\" {\n    when \"derived-from-or-self(if:type,\"\n       + \"'ianaift:microwaveCarrierTermination')\";\n       [...]\n\n\tcontainer tx-maintenance-mode {\n        description\n          \"xxx\";\n\t\t  \n             uses schedule:period-of-time;\n       \n\t     leaf start-date {\n                type yang:date-and-time;\n                config false;\n                description\n                \"Period start time. \n\t\t\t It report the start of the period, even not configured on 'period-start'.\";\n              }\n\n\t      leaf remaining-duration {\n                 type uint32;\n                 units \"seconds\";\n                 description\n                 \"It is the remaining time till the termination of the actual scheduling,\n\t\t\t  with 'period-end' reached or 'duration' expiration.\";\n                }\n           }\n      }\t\t`\n\n2. .tree associated: \n\n         +--rw tx-maintenance-mode\n         +--rw period-description?     string\n         +--rw period-start?           yang:date-and-time\n         +--rw time-zone-identifier?   sys:timezone-name\n         +--rw (period-type)?\n            +--:(explicit)\n            |  +--rw period-end?       yang:date-and-time\n            +--:(duration)\n               +--rw duration?         duration\n         +--ro start-date?       yang:date-and-time\n         +--ro remaining-duration  uint32\n\n\n\t\t\n ",
+          "createdAt": "2026-09-22T14:31:49Z",
+          "updatedAt": "2026-09-22T14:31:49Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "When reading through the thread of comments I start to wonder what the actual use-case to support is and if the proposed solution addresses it. There are multiple things that someone might want to do during maintenance, Turn of transmitter, create loop-backs, change the the configuration, suppress alarms, do real-time monitoring, etc. The current proposal only addresses one specific item, i.e. disable the transmitter. Is this really what we need? Isn't it enough with the tx-enable leaf?\nI think we need to go back to the use-case and make sure that we all understand/agree on what to support in the model.",
+          "createdAt": "2026-09-23T05:28:20Z",
+          "updatedAt": "2026-09-23T05:28:20Z"
         }
       ]
     },
