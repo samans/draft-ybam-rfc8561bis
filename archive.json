@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-08T05:43:02.285967+00:00",
+  "timestamp": "2026-10-11T05:25:36.388601+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -165,7 +165,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2026-07-16T08:27:30Z",
+      "updatedAt": "2026-10-08T17:44:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -454,6 +454,20 @@
           "body": "What about the status of this issue?\nIs there still interest in updating the model?",
           "createdAt": "2026-07-16T08:27:30Z",
           "updatedAt": "2026-07-16T08:27:30Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "AI to request @italobusi to provide an update on this issue.",
+          "createdAt": "2026-10-08T09:45:34Z",
+          "updatedAt": "2026-10-08T09:45:34Z"
+        },
+        {
+          "author": "italobusi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> AI to request [@italobusi](https://github.com/italobusi) to provide an update on this issue.\n\nI think the status is the same as in https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-3139194191\n\n> The proposal has been agreed in [#2 (comment)](https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2687533886)\n> The YANG code changes still need to be proposed through a PR",
+          "createdAt": "2026-10-08T17:43:07Z",
+          "updatedAt": "2026-10-08T17:44:56Z"
         }
       ]
     },
@@ -873,7 +887,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-07-16T15:48:59Z",
+      "updatedAt": "2026-10-08T09:43:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -1099,6 +1113,13 @@
           "body": "Hello Daniela and all\r\n\r\nMy opinion is that Reference Mode value is a combination of modulation and\r\nair rate that corresponds to a specific SEC value.\r\nThis mode is specified by the manufacturer of the device and is fixed to\r\ndetermine where to perform the licensing tests at this device.\r\nThis was my conclusion by reading the ETSI document.\r\n\r\nAnother point that I had mentioned in my previous email was that it seems\r\nthat ETSI refers to a list of Reference Modes per CS (bw value).\r\nAnyway, all these are my rough interpretations after reading the ETSI\r\ndocument.\r\nDo you think that it may be a good idea to coordinate this issue with the\r\nRadio people. Maybe present our thoughts to the authors of this ETSI\r\nStandard ?\r\n\r\nBest regards\r\nThodoros Kallimanis\r\nPrincipal Engineer (Systems & SW)\r\n\r\nDepartment SSD\r\n________________________________\r\nIntracom Telecom\r\n\r\n\u03a3\u03c4\u03b9\u03c2 \u03a0\u03ad\u03bc, 16 \u0399\u03bf\u03c5\u03bb 2026, 11:25 \u03c0.\u03bc. \u03bf \u03c7\u03c1\u03ae\u03c3\u03c4\u03b7\u03c2 DanielaSpreafico <\r\n***@***.***> \u03ad\u03b3\u03c1\u03b1\u03c8\u03b5:\r\n\r\n> *DanielaSpreafico* left a comment (samans/draft-ybam-rfc8561bis#16)\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/16#issuecomment-4989740358>\r\n>\r\n> Hi all,\r\n> this attribute cannot be read-only because it has to be defined from\r\n> management system to allow the declaration of the value.\r\n> How to do in a differenr way?\r\n> Then I checked internally with radio experts, involved on ETSI ATTM_TM_MWT\r\n> WG, and I received the following informations:\r\n>\r\n>    - setting only the SEC the Reference Mode is not univocally determined\r\n>    because different modulations could be associated to,\r\n>    - it seems that the concept of Spectral Efficiency Class will be\r\n>    removed from the Table 0 in a next delivery of ETSI standard to leave only\r\n>    the 'Reference Modulation Index' and the last column (Description).\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/samans/draft-ybam-rfc8561bis/issues/16?email_source=notifications&email_token=AAS3DVIN6NQFRXXQJ3WP5S35FCGRHA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTIOJYHE3TIMBTGU4KM4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJLDGN5XXIZLSL5RWY2LDNM#issuecomment-4989740358>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAS3DVN3COGSP4UV6V6W7BT5FCGRHAVCNFSNUABFKJSXA33TNF2G64TZHM2DQMJWGIYDCNRSHNEXG43VMU5TCNZQGIZTANJWGE32C5QC>\r\n> .\r\n> Triage notifications, keep track of coding agent tasks and review pull\r\n> requests on the go with GitHub Mobile for iOS\r\n> <https://github.com/notifications/mobile/ios/AAS3DVKEU5ZMWG4WA3LB37D5FCGRHA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTIOJYHE3TIMBTGU4KM4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJKTGN5XXIZLSL5UW64Y>\r\n> and Android\r\n> <https://github.com/notifications/mobile/android/AAS3DVM62F5ACOQJ5XRVPGT5FCGRHA5CNFSNUABFM5UWIORPF5TWS5BNNB2WEL2JONZXKZKDN5WW2ZLOOQXTIOJYHE3TIMBTGU4KM4TFMFZW63VHMNXW23LFNZ2KKZLWMVXHJLTGN5XXIZLSL5QW4ZDSN5UWI>.\r\n> Download it today!\r\n> You are receiving this because you commented.Message ID:\r\n> ***@***.***>\r\n>\r\n",
           "createdAt": "2026-07-16T15:48:59Z",
           "updatedAt": "2026-07-16T15:48:59Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Need to understand the ETSI evolution of the ETSI EN 302 217-2 on Spectral Efficiency Class, specifically related to whether Reference modulation index and Spectral efficiency call will be replaced by the modulation scheme.  Action is to reach out to microwave experts that are familiar with the ETSI document.",
+          "createdAt": "2026-10-08T09:43:01Z",
+          "updatedAt": "2026-10-08T09:43:01Z"
         }
       ]
     },
@@ -1844,7 +1865,7 @@
       "id": "I_kwDOHLTwws59GkUG",
       "title": "air-interface:maintenance-timer",
       "url": "https://github.com/samans/draft-ybam-rfc8561bis/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "demx8as6",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -1857,8 +1878,8 @@
       ],
       "body": "In the excel spreadsheet line 100 is documented that the ONF air interface supports an integer to configure a maintenance window in seconds.\r\n\r\n```\r\n  |\u00a0 +--rw air-interface:maintenance-timer?\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 int32\r\n```\r\n\r\n**Proposed solution**\r\n\r\nAdd in the augmentation to the ietf-interface the following yang leaf:\r\n\r\n```\r\n    leaf maintenance-timer-duration {\r\n      type uint32;\r\n      units \"s\";\r\n      default \"0\";\r\n      description\r\n        \"Maintenance Feature: The duration of existence for any maintenance configuration, such as the loopback feature. A value of '0' indicates that the maintenance timer is deactivated. \";\r\n    }\r\n```",
       "createdAt": "2024-01-24T18:44:44Z",
-      "updatedAt": "2026-10-06T16:08:39Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-08T09:37:05Z",
+      "closedAt": "2026-10-08T09:37:05Z",
       "comments": [
         {
           "author": "demx8as6",
@@ -1950,6 +1971,20 @@
           "body": "I send by email my contribution for the Use case of manual transmitter disabling.",
           "createdAt": "2026-10-06T16:08:39Z",
           "updatedAt": "2026-10-06T16:08:39Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "[tx-timer-period-useCase-00.pptx](https://github.com/user-attachments/files/33196322/tx-timer-period-useCase-00.pptx)\n\nFrom Daniela",
+          "createdAt": "2026-10-08T09:15:44Z",
+          "updatedAt": "2026-10-08T09:15:44Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "This capability is already supported by native NETCONF/YANG 1.1 primitives; therefore, no changes to the model are required to support it.",
+          "createdAt": "2026-10-08T09:37:05Z",
+          "updatedAt": "2026-10-08T09:37:05Z"
         }
       ]
     },
