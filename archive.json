@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-11T05:25:36.388601+00:00",
+  "timestamp": "2026-10-13T06:32:51.689702+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -887,7 +887,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-10-08T09:43:01Z",
+      "updatedAt": "2026-10-12T09:58:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -1120,6 +1120,13 @@
           "body": "Need to understand the ETSI evolution of the ETSI EN 302 217-2 on Spectral Efficiency Class, specifically related to whether Reference modulation index and Spectral efficiency call will be replaced by the modulation scheme.  Action is to reach out to microwave experts that are familiar with the ETSI document.",
           "createdAt": "2026-10-08T09:43:01Z",
           "updatedAt": "2026-10-08T09:43:01Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've received input from representatives working with ETSI EN 302 217-2.\n\nSome key statements:\n\nWe should not use modulation formats as the identifier.\n- The intent of the Reference Modulation Index was to identify the modulation order or number of constellation states, rather than a specific modulation implementation. The modulation formats listed in the table (e.g. 2FSK, 2PSK, 4FSK, 4QAM, 16QAM, 16APSK, etc.) are provided only as examples of implementations belonging to those classes.\n- For example, Reference Modulation Index 2 corresponds to a typical 4-state modulation scheme. The specification cites both 4FSK and 4QAM as examples. Therefore, replacing the identifier \"Reference Modulation Index = 2\" with \"Reference Modulation = 4QAM\" would narrow the meaning from a modulation-order class to a specific modulation format, potentially excluding other implementations that belong to the same class.\n\nTwo options on which identifier to choose.\n- Reference Modulation Index was intended to be the primary technical reference, while the Spectrum Efficiency Class was maintained largely for historical and backward-compatibility reasons.\n- If you already use all the other EN abbreviations, the \"spectral efficiency classes\" seem more appropriate, to me.\n",
+          "createdAt": "2026-10-12T09:58:24Z",
+          "updatedAt": "2026-10-12T09:58:24Z"
         }
       ]
     },
