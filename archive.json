@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-13T06:32:51.689702+00:00",
+  "timestamp": "2026-10-18T04:09:35.665675+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -887,7 +887,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-10-12T09:58:24Z",
+      "updatedAt": "2026-10-16T07:35:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -1127,6 +1127,27 @@
           "body": "I've received input from representatives working with ETSI EN 302 217-2.\n\nSome key statements:\n\nWe should not use modulation formats as the identifier.\n- The intent of the Reference Modulation Index was to identify the modulation order or number of constellation states, rather than a specific modulation implementation. The modulation formats listed in the table (e.g. 2FSK, 2PSK, 4FSK, 4QAM, 16QAM, 16APSK, etc.) are provided only as examples of implementations belonging to those classes.\n- For example, Reference Modulation Index 2 corresponds to a typical 4-state modulation scheme. The specification cites both 4FSK and 4QAM as examples. Therefore, replacing the identifier \"Reference Modulation Index = 2\" with \"Reference Modulation = 4QAM\" would narrow the meaning from a modulation-order class to a specific modulation format, potentially excluding other implementations that belong to the same class.\n\nTwo options on which identifier to choose.\n- Reference Modulation Index was intended to be the primary technical reference, while the Spectrum Efficiency Class was maintained largely for historical and backward-compatibility reasons.\n- If you already use all the other EN abbreviations, the \"spectral efficiency classes\" seem more appropriate, to me.\n",
           "createdAt": "2026-10-12T09:58:24Z",
           "updatedAt": "2026-10-12T09:58:24Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "If the Reference Modulation as coding modulation cannot be selected (as we select for min and max on ACM), I prefer to select the  Reference Modulation Index ",
+          "createdAt": "2026-10-15T08:59:52Z",
+          "updatedAt": "2026-10-15T08:59:52Z"
+        },
+        {
+          "author": "samans",
+          "authorAssociation": "OWNER",
+          "body": "Use the Reference Modulation Index from the ETSI table instead of Spectral Efficiency Class or the Reference Modulation Scheme.\n\nModel Reference Modulation Index as an Integer with range of 1-16.\n\nSo move the reference-modulation-index above the choice of coding-modulation-mode making reference-modulation-index a integer rw leaf with range 1-16 (not mandatory).\n",
+          "createdAt": "2026-10-15T10:21:15Z",
+          "updatedAt": "2026-10-15T10:21:15Z"
+        },
+        {
+          "author": "mamali68",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have checked again with our Regional Regulator Documentation and Colleagues who apply and receive these Certificates. \nthe Spectral Efficiency Class is always a minimum value, infact it always came in Frequency Certificate as greater or equal value to a class specified by  ETSI EN 302 217-2-2 V2.2.0, paragraph 4.2.4.2.1. \nSo i believe the new indicator in the model should also be called `minimum-reference-modulation-index` as this acts as lower limit threshold.",
+          "createdAt": "2026-10-16T07:34:45Z",
+          "updatedAt": "2026-10-16T07:35:03Z"
         }
       ]
     },
