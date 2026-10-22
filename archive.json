@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-18T04:09:35.665675+00:00",
+  "timestamp": "2026-10-22T04:21:02.073159+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -887,7 +887,7 @@
       ],
       "body": "The selection of the Reference Mode as a value of coding-modulation value between the 'selected-min-acm' and the 'selected-max-acm'  is requested to be added as new attribute.\r\nThe attribute's name could be 'reference-cm' under the choice 'coding-modulation-mode/adaptive'  .\r\nAs in the following:\r\n\r\n![image](https://github.com/samans/draft-ybam-rfc8561bis/assets/35307830/08f7942a-a79a-464e-9e1b-3d9284ecef88)\r\n",
       "createdAt": "2023-05-09T15:49:11Z",
-      "updatedAt": "2026-10-16T07:35:03Z",
+      "updatedAt": "2026-10-20T08:42:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -1148,6 +1148,13 @@
           "body": "I have checked again with our Regional Regulator Documentation and Colleagues who apply and receive these Certificates. \nthe Spectral Efficiency Class is always a minimum value, infact it always came in Frequency Certificate as greater or equal value to a class specified by  ETSI EN 302 217-2-2 V2.2.0, paragraph 4.2.4.2.1. \nSo i believe the new indicator in the model should also be called `minimum-reference-modulation-index` as this acts as lower limit threshold.",
           "createdAt": "2026-10-16T07:34:45Z",
           "updatedAt": "2026-10-16T07:35:03Z"
+        },
+        {
+          "author": "JonasAhl",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've received some additional info.\nRMI is not a 1:1 mapping to SEC. SEC includes more info which is required to consider, e.g. which spectrum mask to fulfill. So we are back to SEC as the identifier, I think.\nSee 5LA and 5LB in the table below as an example.\n\n<img width=\"688\" height=\"504\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/0277d92d-c43c-43be-a7ee-a23299bd1045\" />",
+          "createdAt": "2026-10-20T08:42:33Z",
+          "updatedAt": "2026-10-20T08:42:33Z"
         }
       ]
     },
