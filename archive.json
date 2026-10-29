@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-22T04:21:02.073159+00:00",
+  "timestamp": "2026-10-29T05:26:40.557038+00:00",
   "repo": "samans/draft-ybam-rfc8561bis",
   "labels": [
     {
@@ -157,7 +157,8 @@
       "author": "JonasAhl",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "italobusi"
+        "italobusi",
+        "mamali68"
       ],
       "labels": [
         "update yang",
@@ -165,7 +166,7 @@
       ],
       "body": "Consider including support for BCA in the update.\r\nCheck previous discussion on this. See issue #1.",
       "createdAt": "2022-04-21T10:49:05Z",
-      "updatedAt": "2026-10-08T17:44:56Z",
+      "updatedAt": "2026-10-27T13:39:16Z",
       "closedAt": null,
       "comments": [
         {
@@ -468,6 +469,13 @@
           "body": "> AI to request [@italobusi](https://github.com/italobusi) to provide an update on this issue.\n\nI think the status is the same as in https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-3139194191\n\n> The proposal has been agreed in [#2 (comment)](https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2687533886)\n> The YANG code changes still need to be proposed through a PR",
           "createdAt": "2026-10-08T17:43:07Z",
           "updatedAt": "2026-10-08T17:44:56Z"
+        },
+        {
+          "author": "DanielaSpreafico",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I had a last check and from my point of view all is ready or a PR following the proposal on  https://github.com/samans/draft-ybam-rfc8561bis/issues/2#issuecomment-2687533886",
+          "createdAt": "2026-10-27T13:39:16Z",
+          "updatedAt": "2026-10-27T13:39:16Z"
         }
       ]
     },
