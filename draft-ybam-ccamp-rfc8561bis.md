@@ -275,7 +275,7 @@ In this document, names of data nodes and other data model objects are prefixed 
 ## YANG Tree
 
 ~~~~ ascii-art
-{::include-fold ./trees/ietf-microwave-radio-link.tree}
+{::include-fold ./yang/ietf-microwave-radio-link.tree}
 ~~~~
 {: artwork-name="ietf-microwave-radio-link.tree"}
 
